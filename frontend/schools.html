@@ -54,7 +54,7 @@
 </head>
 <body>
         <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero" style="background: linear-gradient(135deg, rgba(17, 42, 102, 0.7) 0%, rgba(30, 91, 168, 0.7) 100%), url('gallery/school.jpg') center/cover no-repeat;">
         <div class="hero-particles" id="particles"></div>
         <div class="hero-container">
             <div class="hero-content">
@@ -155,13 +155,13 @@
                 <!-- Dynamic Filter Section -->
                 <div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
                     <div class="col-12">
-                        <div style="background: linear-gradient(135deg, #191b22 0%, #b86403 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
-                            <h5 style="color: white; margin-bottom: 20px; font-weight: 600;">
+                        <div style="background: linear-gradient(135deg, #6b769c 0%, #bd7524 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                            <h5 style="color: rgb(221, 216, 216); margin-bottom: 20px; font-weight: 600;">
                                 <i class="fas fa-search me-2"></i>Find Your Perfect School
                             </h5>
                             <div class="row g-3">
                                 <div class="col-lg-6">
-                                    <label for="categoryDropdown" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 8px; display: block;">
+                                    <label for="categoryDropdown" style="color: rgba(223, 221, 221, 0.9); font-weight: 600; margin-bottom: 8px; display: block;">
                                         <i class="fas fa-list me-2" style="color: #ffd700;"></i>Filter by Category
                                     </label>
                                     <select id="categoryDropdown" class="form-control" onchange="filterByCategory(this.value)" style="font-size: 0.95rem; padding: 12px; border-radius: 8px; border: 2px solid #e6eef6; transition: all 0.3s ease;">
@@ -169,7 +169,7 @@
                                     </select>
                                 </div>
                                 <div class="col-lg-6">
-                                    <label for="searchSchools" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 8px; display: block;">
+                                    <label for="searchSchools" style="color: rgba(235, 230, 230, 0.9); font-weight: 600; margin-bottom: 8px; display: block;">
                                         <i class="fas fa-magnifying-glass me-2" style="color: #ffd700;"></i>Search Schools
                                     </label>
                                     <input type="text" id="searchSchools" class="form-control" placeholder="Search by name, region..." onkeyup="searchSchools(this.value)" style="font-size: 0.95rem; padding: 12px; border-radius: 8px; border: 2px solid #e6eef6; transition: all 0.3s ease;">
@@ -245,416 +245,225 @@
                 <div class="row" id="schoolProfiles">
                     <!-- Springfield International School -->
                     <div class="col-lg-6 mb-4 school-card" data-category="secondary" data-name="Springfield International School" data-region="Kampala" data-aos="fade-right">
-                        <div class="card-custom">
-                            <div style="position: relative; overflow: hidden;">
-                                <img src="https://via.placeholder.com/600x300/1a237e/ffffff?text=Springfield+School"
-                                    class="card-img-top" alt="Springfield School">
-                                <span class="badge-custom badge-featured"
-                                    style="position: absolute; top: 20px; right: 20px;">Featured</span>
-                            </div>
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-start mb-3">
-                                    <h4>Springfield International School</h4>
-                                    <span class="badge-custom badge-accredited">Accredited</span>
-                                </div>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
-
-                                <div class="rating">
+                        <div class="school-image">
+                            <img src="gallery/sec 4.jpg" alt="Springfield School">
+                            <span class="school-badge">Featured</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Secondary School</p>
+                            <h3 class="school-title">Springfield International School</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Kampala, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
-                                    <span>(4.8 • 245 reviews)</span>
                                 </div>
-
-                                <p>A premier institution offering holistic education from kindergarten to university
-                                    level with state-of-the-art facilities.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Cambridge Curriculum</span>
-                                    <span class="program-tag">IB Diploma</span>
-                                    <span class="program-tag">STEM Programs</span>
-                                    <span class="program-tag">Sports Academy</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-wifi"></i> WiFi Campus</span>
-                                    <span class="facility-tag"><i class="fas fa-flask"></i> Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
-                                    <span class="facility-tag"><i class="fas fa-bus"></i> Transport</span>
-                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Cafeteria</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 700 123 456</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@springfield.edu</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.springfield.edu</p>
-                                </div>
-
-                                <div class="d-flex gap-2">
-                                    <button class="btn-deep-blue" onclick="viewSchoolDetails('springfield')">View
-                                        Details</button>
-                                    <button class="btn-outline" onclick="scheduleTour('springfield')"><i
-                                            class="fas fa-calendar"></i></button>
-                                </div>
+                                <span class="rating-count">(4.8 • 245 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
-
 
                     <!-- Kampala Technical Institute -->
                     <div class="col-lg-6 mb-4 school-card" data-category="technical" data-name="Kampala Technical Institute" data-region="Kampala" data-aos="fade-left">
-                        <div class="card-custom">
-                            <img src="https://via.placeholder.com/600x300/534bae/ffffff?text=Kampala+Tech"
-                                class="card-img-top" alt="Kampala Tech">
-                            <div class="card-body">
-                                <h4>Kampala Technical Institute</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Industrial Area, Kampala
-                                </p>
-
-                                <div class="rating">
+                        <div class="school-image">
+                            <img src="gallery/Technical Institute.jpg" alt="Kampala Tech">
+                            <span class="school-badge">Top Rated</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Technical Institute</p>
+                            <h3 class="school-title">Kampala Technical Institute</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Industrial Area, Kampala
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                    <span>(5.0 • 189 reviews)</span>
                                 </div>
-
-                                <p>Leading technical institution specializing in engineering, IT, and vocational
-                                    training with industry partnerships.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Computer Science</span>
-                                    <span class="program-tag">Electrical Eng.</span>
-                                    <span class="program-tag">Mechanical Eng.</span>
-                                    <span class="program-tag">Civil Eng.</span>
-                                    <span class="program-tag">ICT</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-flask"></i> Modern Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-robot"></i> Robotics</span>
-                                    <span class="facility-tag"><i class="fas fa-tools"></i> Workshops</span>
-                                    <span class="facility-tag"><i class="fas fa-laptop"></i> Computer Labs</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 711 789 012</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@kampaltech.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.kampaltech.ac.ug</p>
-                                </div>
-
-                                <div class="d-flex gap-2">
-                                    <button class="btn-deep-blue" onclick="viewSchoolDetails('kampala-tech')">View
-                                        Details</button>
-                                    <button class="btn-outline" onclick="virtualTour('kampala-tech')"><i
-                                            class="fas fa-vr-cardboard"></i></button>
-                                </div>
+                                <span class="rating-count">(5.0 • 189 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Al-Noor Islamic Academy (Tahfidh) -->
+                    <!-- Al-Noor Islamic Academy -->
                     <div class="col-lg-6 mb-4 school-card" data-category="tahfidh" data-name="Al-Noor Islamic Academy" data-region="Jinja" data-aos="fade-right" data-aos-delay="200">
-                        <div class="card-custom islamic-border">
-                            <div style="position: relative;">
-                                <img src="gallery/student3.jpg"
-                                    class="card-img-top" alt="Al-Noor Islamic Academy">
-                                <span class="badge-custom badge-tahfidh"
-                                    style="position: absolute; top: 20px; left: 20px;">
-                                    <i class="fas fa-mosque me-1"></i>Tahfidh School
-                                </span>
+                        <div class="school-image">
+                            <img src="gallery/ishamic 1.jpg" alt="Al-Noor Islamic Academy">
+                            <span class="school-badge">Tahfidh School</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Islamic School</p>
+                            <h3 class="school-title">Al-Noor Islamic Academy</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Jinja, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <span class="rating-count">(5.0 • 312 reviews)</span>
                             </div>
-                            <div class="card-body">
-                                <h4>Al-Noor Islamic Academy</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Jinja, Uganda</p>
-
-                                <div class="rating">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <span>(5.0 • 312 reviews)</span>
-                                </div>
-
-                                <p>Premier Islamic institution combining Quranic memorization with modern education.
-                                    Certified by the International Islamic Educational Organization.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Tahfidh Quran</span>
-                                    <span class="program-tag">Arabic Studies</span>
-                                    <span class="program-tag">Islamic Sciences</span>
-                                    <span class="program-tag">National Curriculum</span>
-                                    <span class="program-tag">Hifdh Program</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-mosque"></i> Prayer Hall</span>
-                                    <span class="facility-tag"><i class="fas fa-quran"></i> Quran Lab</span>
-                                    <span class="facility-tag"><i class="fas fa-hotel"></i> Boarding</span>
-                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Halal Kitchen</span>
-                                    <span class="facility-tag"><i class="fas fa-swimmer"></i> Boys/Girls
-                                        Facilities</span>
-                                </div>
-
-                                <div class="row mt-3 mb-3">
-                                    <div class="col-6">
-                                        <div class="text-center p-2" style="background: #f5f5f5; border-radius: 10px;">
-                                            <div
-                                                style="font-size: 1.5rem; font-weight: 700; color: var(--islamic-green);">
-                                                30+</div>
-                                            <div style="font-size: 0.8rem;">Huffadh</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-6">
-                                        <div class="text-center p-2" style="background: #f5f5f5; border-radius: 10px;">
-                                            <div
-                                                style="font-size: 1.5rem; font-weight: 700; color: var(--islamic-green);">
-                                                15</div>
-                                            <div style="font-size: 0.8rem;">Quran Teachers</div>
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 722 456 789</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@alnoor.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.alnoor.ac.ug</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('al-noor')">View Details &
-                                    Apply</button>
-                            </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Mbarara Girls High School -->
                     <div class="col-lg-6 mb-4 school-card" data-category="secondary" data-name="Mbarara Girls High School" data-region="Mbarara" data-aos="fade-left" data-aos-delay="200">
-                        <div class="card-custom">
-                            <img src="gallery/it 1.jpg"
-                                class="card-img-top" alt="Mbarara Girls High">
-                            <div class="card-body">
-                                <h4>Mbarara Girls High School</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Mbarara, Uganda</p>
-
-                                <div class="rating">
+                        <div class="school-image">
+                            <img src="gallery/sec 2.jpg" alt="Mbarara Girls High">
+                            <span class="school-badge">Top Rated</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Secondary School</p>
+                            <h3 class="school-title">Mbarara High School</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Mbarara, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                    <span>(5.0 • 456 reviews)</span>
                                 </div>
-
-                                <p>National school of excellence with outstanding academic performance and holistic
-                                    development programs for girls.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">STEM Focus</span>
-                                    <span class="program-tag">Music Program</span>
-                                    <span class="program-tag">Sports Academy</span>
-                                    <span class="program-tag">Leadership</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-flask"></i> Modern Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-music"></i> Music Room</span>
-                                    <span class="facility-tag"><i class="fas fa-bed"></i> Hostels</span>
-                                    <span class="facility-tag"><i class="fas fa-basketball"></i> Sports Complex</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 57 202 1234</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@mbaragirlshs.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.mbaragirlshs.ac.ug</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('mbarara-girls')">View
-                                    Details</button>
+                                <span class="rating-count">(5.0 • 456 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Kampala Primary School -->
                     <div class="col-lg-6 mb-4 school-card" data-category="primary" data-name="Kampala Primary School" data-region="Kampala" data-aos="fade-right">
-                        <div class="card-custom">
-                            <img src="gallery/pri 1.jpg"
-                                class="card-img-top" alt="Kampala Primary School">
-                            <div class="card-body">
-                                <h4>Kampala Primary School</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
-
-                                <div class="rating">
+                        <div class="school-image">
+                            <img src="gallery/pri 1.jpg" alt="Kampala Primary School">
+                            <span class="school-badge">Accredited</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Primary School</p>
+                            <h3 class="school-title">Kampala Primary School</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Kampala, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
-                                    <span>(4.7 • 178 reviews)</span>
                                 </div>
-
-                                <p>Government primary school with quality education and development of all-round skills for students.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">National Curriculum</span>
-                                    <span class="program-tag">Sports</span>
-                                    <span class="program-tag">Music</span>
-                                    <span class="program-tag">Debates</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
-                                    <span class="facility-tag"><i class="fas fa-flask"></i> Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-basketball"></i> Sports</span>
-                                    <span class="facility-tag"><i class="fas fa-bus"></i> Transport</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 703 456 789</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@kampalachild.edu</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.kampalachild.edu</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('kampala-primary')">View Details</button>
+                                <span class="rating-count">(4.7 • 178 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Nairobi Primary Academy -->
-                    <div class="col-lg-6 mb-4 school-card" data-category="primary" data-name="Nairobi Primary Academy" data-region="Nairobi" data-aos="fade-left">
-                        <div class="card-custom">
-                            <img src="gallery/student1.jpg"
-                                class="card-img-top" alt="Nairobi Primary Academy">
-                            <div class="card-body">
-                                <h4>Nairobi Primary Academy</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Jinja, Uganda</p>
-
-                                <div class="rating">
+                    <!-- Jinja Primary Academy -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="primary" data-name="Jinja Primary Academy" data-region="Jinja" data-aos="fade-left">
+                        <div class="school-image">
+                            <img src="gallery/student4.jpg" alt="Jinja Primary Academy">
+                            <span class="school-badge">Featured</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Primary School</p>
+                            <h3 class="school-title">Jinja Primary Academy</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Jinja, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                    <span>(4.9 • 203 reviews)</span>
                                 </div>
-
-                                <p>Private primary academy with Cambridge curriculum and progressive teaching methods.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Cambridge</span>
-                                    <span class="program-tag">STEM</span>
-                                    <span class="program-tag">Languages</span>
-                                    <span class="program-tag">Arts</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-laptop"></i> Computer Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-flask"></i> Science Labs</span>
-                                    <span class="facility-tag"><i class="fas fa-music"></i> Music Room</span>
-                                    <span class="facility-tag"><i class="fas fa-palette"></i> Art Studio</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 712 345 678</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@nairobi-primary.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.nairobi-primary.ac.ug</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('nairobi-primary')">View Details</button>
+                                <span class="rating-count">(4.9 • 203 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Sunshine Kindergarten -->
-                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Sunshine Kindergarten" data-region="Fort Portal" data-aos="fade-right">
-                        <div class="card-custom">
-                            <img src="gallery/kid.jpg"
-                                class="card-img-top" alt="Sunshine Kindergarten">
-                            <div class="card-body">
-                                <h4>Sunshine Kindergarten</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
-
-                                <div class="rating">
+                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Sunshine Kindergarten" data-region="Kampala" data-aos="fade-right">
+                        <div class="school-image">
+                            <img src="gallery/pri 6.jpg" alt="Sunshine Kindergarten">
+                            <span class="school-badge">Popular</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Kindergarten</p>
+                            <h3 class="school-title">Sunshine Kindergarten</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Kampala, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star-half-alt"></i>
-                                    <span>(4.8 • 145 reviews)</span>
                                 </div>
-
-                                <p>Nurturing kindergarten with play-based learning and early childhood development focus.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Play-Based</span>
-                                    <span class="program-tag">Montessori</span>
-                                    <span class="program-tag">Art & Craft</span>
-                                    <span class="program-tag">Music Class</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-child"></i> Play Area</span>
-                                    <span class="facility-tag"><i class="fas fa-palette"></i> Art Room</span>
-                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Cafeteria</span>
-                                    <span class="facility-tag"><i class="fas fa-parent"></i> Parent Space</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 701 234 567</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@sunshinekids.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.sunshinekids.ac.ug</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('sunshine-kg')">View Details</button>
+                                <span class="rating-count">(4.8 • 145 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
 
                     <!-- Little Steps Kindergarten -->
-                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Little Steps Kindergarten" data-region="Entebbe" data-aos="fade-left">
-                        <div class="card-custom">
-                                    <img src="gallery/kid2.jpg"
-                                        class="card-img-top" alt="Little Steps Kindergarten">
-                            <div class="card-body">
-                                <h4>Little Steps Kindergarten</h4>
-                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Mbarara, Uganda</p>
-
-                                <div class="rating">
+                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Little Steps Kindergarten" data-region="Mbarara" data-aos="fade-left">
+                        <div class="school-image">
+                            <img src="gallery/kid 2.jpg" alt="Little Steps Kindergarten">
+                            <span class="school-badge">Top Rated</span>
+                        </div>
+                        <div class="school-content">
+                            <p class="school-category">Kindergarten</p>
+                            <h3 class="school-title">Little Steps Kindergarten</h3>
+                            <p class="school-location">
+                                <i class="fas fa-map-marker-alt"></i> Mbarara, Uganda
+                            </p>
+                            <div class="school-rating">
+                                <div class="stars">
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
                                     <i class="fas fa-star"></i>
-                                    <span>(5.0 • 92 reviews)</span>
                                 </div>
-
-                                <p>Premium kindergarten with smaller class sizes and personalized attention for each child.</p>
-
-                                <div class="program-tags">
-                                    <span class="program-tag">Small Classes</span>
-                                    <span class="program-tag">Bilingual</span>
-                                    <span class="program-tag">Sports</span>
-                                    <span class="program-tag">Storytelling</span>
-                                </div>
-
-                                <div class="facility-tags">
-                                    <span class="facility-tag"><i class="fas fa-child"></i> Safe Play Area</span>
-                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
-                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Healthy Meals</span>
-                                    <span class="facility-tag"><i class="fas fa-bus"></i> Pick & Drop</span>
-                                </div>
-
-                                <div class="contact-info">
-                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 704 567 890</p>
-                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@littlesteps.ac.ug</p>
-                                    <p class="mb-0"><i class="fas fa-globe"></i> www.littlesteps.ac.ug</p>
-                                </div>
-
-                                <button class="btn-deep-blue" onclick="viewSchoolDetails('little-steps-kg')">View Details</button>
+                                <span class="rating-count">(5.0 • 92 reviews)</span>
                             </div>
+                            <a href="#" class="school-link">
+                                View Details <i class="fas fa-arrow-right"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -764,19 +573,106 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <style>
-        /* Enhanced school card styling */
+        /* School card styling - Static */
         .school-card {
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            animation: slideIn 0.5s ease;
+            border-radius: 12px;
+            overflow: hidden;
+            background: rgb(216, 215, 215);
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
         }
 
-        .school-card:hover {
-            transform: translateY(-15px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+        .school-image {
+            position: relative;
+            overflow: hidden;
+            height: 220px;
+        }
+
+        .school-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .school-badge {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: linear-gradient(135deg, #f39c12, #e08e0b);
+            color: rgb(209, 207, 207);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.3);
+        }
+
+        .school-content {
+            padding: 20px;
+        }
+
+        .school-category {
+            font-size: 0.75rem;
+            color: #f39c12;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin: 0 0 8px 0;
+        }
+
+        .school-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: #112a66;
+            margin: 0 0 12px 0;
+            line-height: 1.3;
+        }
+
+        .school-location {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0 0 12px 0;
+        }
+
+        .school-location i {
+            color: #f39c12;
+            margin-right: 6px;
+        }
+
+        .school-rating {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .stars {
+            display: flex;
+            gap: 2px;
+        }
+
+        .stars i {
+            color: #ffc107;
+            font-size: 0.9rem;
+        }
+
+        .rating-count {
+            font-size: 0.85rem;
+            color: #666;
+        }
+
+        .school-link {
+            display: inline-block;
+            color: #f39c12;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .school-link i {
+            margin-left: 6px;
         }
 
         .card-custom {
-            transition: all 0.3s ease;
             border: none;
             border-radius: 15px;
             overflow: hidden;
@@ -796,28 +692,13 @@
             border-radius: 15px;
         }
 
-        .card-custom:hover {
-            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
-        }
-
         .card-img-top {
-            transition: all 0.4s ease;
             height: 250px;
             object-fit: cover;
         }
 
-        .school-card:hover .card-img-top {
-            transform: scale(1.08);
-            filter: brightness(0.9);
-        }
-
         .badge-custom {
-            transition: all 0.3s ease;
             backdrop-filter: blur(10px);
-        }
-
-        .badge-custom:hover {
-            transform: scale(1.1) rotate(5deg);
         }
 
         .program-tag {
@@ -829,13 +710,7 @@
             font-size: 0.8rem;
             margin-right: 8px;
             margin-bottom: 8px;
-            transition: all 0.3s ease;
             cursor: default;
-        }
-
-        .program-tag:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
 
         .facility-tag {
@@ -848,33 +723,16 @@
             margin-right: 8px;
             margin-bottom: 8px;
             border: 1px solid #667eea;
-            transition: all 0.3s ease;
-        }
-
-        .facility-tag:hover {
-            background: #667eea;
-            color: white;
-            transform: translateY(-3px);
         }
 
         .rating {
             margin-bottom: 15px;
-            transition: all 0.3s ease;
         }
 
         .rating i {
             color: #ffc107;
             font-size: 0.95rem;
             margin-right: 2px;
-        }
-
-        .rating:hover i {
-            animation: bounce 0.6s ease infinite;
-        }
-
-        @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-5px); }
         }
 
         .btn-deep-blue {
@@ -884,44 +742,24 @@
             padding: 10px 25px;
             border-radius: 25px;
             font-weight: 600;
-            transition: all 0.3s ease;
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
-        }
-
-        .btn-deep-blue:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
-            color: white;
-            text-decoration: none;
+            cursor: pointer;
         }
 
         .btn-outline-light {
-            border: 2px solid white;
+            border: 2px solid goldenrod;
             color: white;
             background: transparent;
             padding: 10px 25px;
             border-radius: 25px;
             font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-outline-light:hover {
-            background: white;
-            color: #667eea;
-            transform: translateY(-3px);
         }
 
         .contact-info {
-            background: #f8f9fa;
+            background: #e9e9e9;
             padding: 15px;
             border-radius: 10px;
             margin: 15px 0;
-            transition: all 0.3s ease;
-        }
-
-        .contact-info:hover {
-            background: #e9ecef;
-            transform: translateX(5px);
         }
 
         .contact-info i {
@@ -955,10 +793,6 @@
             box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
         }
 
-        .form-control:hover {
-            border-color: #667eea;
-        }
-
         /* Enhanced schools layout */
         .schools-main {
             display: grid;
@@ -969,7 +803,7 @@
 
         .schools-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(2, 1fr);
             gap: 20px;
         }
 
@@ -982,13 +816,7 @@
             overflow: hidden;
             background: white;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease;
             border: 1px solid #e5e7eb;
-        }
-        
-        .card-custom-inner:hover {
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
-            transform: translateY(-4px);
         }
 
         .card-front, .card-back {
@@ -1072,15 +900,7 @@
             font-size: 0.9rem;
             background: white;
             color: #666;
-            transition: all 0.3s ease;
             user-select: none;
-        }
-        
-        .page-item:hover:not(.disabled):not(.ellipsis) {
-            border-color: #667eea;
-            color: #667eea;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
         }
         
         .page-item.active {

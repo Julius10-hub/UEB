@@ -2187,10 +2187,15 @@ footer {
 
         /* Testimonials */
         .testimonials {
+            width: 100%;
+            max-width: none;
+            margin: 0;
             padding: 5rem 0;
             background: var(--deep-blue);
             position: relative;
             overflow: hidden;
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
         }
 
         .testimonials::before {
@@ -3249,10 +3254,15 @@ footer {
 
         /* Testimonials */
         .testimonials {
+            width: 100%;
+            max-width: none;
+            margin: 0;
             padding: 5rem 0;
             background: var(--deep-blue);
             position: relative;
             overflow: hidden;
+            border-top: 2px solid var(--gold);
+            border-bottom: 2px solid var(--gold);
         }
 
         .testimonials::before {
@@ -3287,19 +3297,21 @@ footer {
         }
 
         .testimonial-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            background: #f7fbff;
+            backdrop-filter: none;
             padding: 2rem;
-            border-radius: 2rem;
-            color: var(--white);
+            border-radius: 12px;
+            color: var(--primary);
             transition: all 0.4s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--gold);
+            box-shadow: 0 4px 16px rgba(243, 156, 18, 0.08);
         }
 
         .testimonial-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
-            border-color: var(--orange);
+            background: rgba(247, 250, 255, 0.8);
+            border-color: var(--accent-700);
+            box-shadow: 0 12px 32px rgba(243, 156, 18, 0.15);
         }
 
         .testimonial-quote {
@@ -8283,15 +8295,51 @@ h3 {
 
 /* About Section */
 .about-section {
-    padding: 80px 20px;
-    max-width: var(--container-max);
-    margin: 0 auto;
+    /* full-bleed section: background/border spans viewport, inner .container centers content */
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 60px 0;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    border-left: 0;
+    border-right: 0;
+    background: #ffffff;
+    box-shadow: 0 8px 24px rgba(16, 24, 40, 0.04);
 }
 
 .about-section.alt-bg {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 60px 0;
     background: linear-gradient(135deg, var(--values-surface) 0%, rgba(247, 250, 255, 0.6) 100%);
-    padding: 80px 20px;
-    border-radius: 12px;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    border-left: 0;
+    border-right: 0;
+    box-shadow: 0 10px 30px rgba(16, 24, 40, 0.04);
+}
+
+/* Apply full-bleed golden top/bottom borders to most non-hero sections site-wide */
+section:not(.hero):not(.no-bleed) {
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    padding: 60px 0;
+    border-top: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    background: #ffffff;
+    box-shadow: 0 6px 18px rgba(16, 24, 40, 0.03);
+}
+
+/* Keep inner content centered inside full-bleed sections */
+section .container,
+section .container-fluid {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 /* Features Grid */
@@ -8646,11 +8694,13 @@ h3 {
 
 /* CTA Section */
 .cta-about {
-    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-300) 100%);
+    /* background image with dark overlay for legibility */
+    background: linear-gradient(rgba(10,18,40,0.55), rgba(10,18,40,0.45)), url('../gallery/pri 5.jpg') center/cover no-repeat;
     color: white;
-    padding: 80px 20px;
+    padding: 100px 20px;
     text-align: center;
-    margin-top: 100px;
+    margin-top: 60px;
+    position: relative;
 }
 
 .cta-about h2 {
