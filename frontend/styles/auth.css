@@ -1,0 +1,226 @@
+/* Auth Pages */
+.auth-container {
+    margin-top: 70px;
+    min-height: calc(100vh - 70px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-lg);
+    background: linear-gradient(135deg, #0a2469 0%, var(--gray-50) 100%);
+}
+
+.auth-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: var(--spacing-3xl);
+    box-shadow: var(--shadow-xl);
+    width: 100%;
+    max-width: 450px;
+    animation: slideUp 0.6s ease-out;
+}
+
+.auth-header {
+    text-align: center;
+    margin-bottom: var(--spacing-2xl);
+}
+
+.auth-header h1 {
+    font-size: 2rem;
+    color: var(--gray-900);
+    margin-bottom: var(--spacing-sm);
+}
+
+.auth-header p {
+    color: var(--gray-600);
+    font-size: 1rem;
+    margin: 0;
+}
+
+.auth-form {
+    margin-bottom: var(--spacing-xl);
+}
+
+.form-group {
+    margin-bottom: var(--spacing-lg);
+}
+
+.form-label {
+    display: block;
+    font-weight: 600;
+    margin-bottom: var(--spacing-sm);
+    color: var(--gray-900);
+    font-size: 0.95rem;
+}
+
+.form-input {
+    width: 100%;
+    padding: 0.875rem;
+    border: 2px solid var(--border);
+    border-radius: 6px;
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    color: var(--gray-900);
+    transition: all var(--transition-base);
+    background: var(--white);
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(0, 82, 204, 0.1);
+}
+
+.form-input::placeholder {
+    color: var(--gray-400);
+}
+
+.form-remember {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 0.9rem;
+}
+
+.form-remember label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    margin-bottom: 0;
+}
+
+.form-remember input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.forgot-password {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
+    transition: color var(--transition-base);
+}
+
+.forgot-password:hover {
+    color: var(--primary-dark);
+}
+
+.form-checkbox label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    cursor: pointer;
+    margin-bottom: 0;
+    font-size: 0.95rem;
+    color: var(--gray-700);
+}
+
+.form-checkbox input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.form-checkbox a {
+    color: var(--primary);
+    text-decoration: none;
+    transition: color var(--transition-base);
+}
+
+.form-checkbox a:hover {
+    color: var(--primary-dark);
+}
+
+.form-error {
+    padding: 0.875rem;
+    background-color: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 6px;
+    color: var(--error);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-lg);
+    animation: slideDown 0.3s ease-out;
+}
+
+.form-success {
+    padding: 0.875rem;
+    background-color: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 6px;
+    color: var(--success);
+    font-size: 0.9rem;
+    margin-bottom: var(--spacing-lg);
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.auth-footer {
+    text-align: center;
+    padding-top: var(--spacing-lg);
+    border-top: 1px solid var(--border);
+    color: var(--gray-600);
+    font-size: 0.95rem;
+}
+
+.auth-footer a {
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.auth-footer a:hover {
+    text-decoration: underline;
+}
+
+.test-credentials {
+    margin-top: var(--spacing-xl);
+    padding: var(--spacing-lg);
+    background: #f9fafb;
+    border: 1px dashed var(--accent);
+    border-radius: 6px;
+    font-size: 0.85rem;
+    color: var(--gray-700);
+}
+
+.test-credentials p {
+    margin-bottom: var(--spacing-xs);
+}
+
+.test-credentials code {
+    background: var(--white);
+    padding: 0.25rem 0.5rem;
+    border-radius: 3px;
+    font-family: var(--font-mono);
+    color: var(--primary);
+    font-weight: 500;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .auth-card {
+        padding: var(--spacing-lg);
+        margin: 0 var(--spacing-lg);
+    }
+    
+    .auth-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .form-remember {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: var(--spacing-sm);
+    }
+}

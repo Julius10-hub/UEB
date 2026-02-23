@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Services Dashboard - EduBridge</title>
+    <meta name="description" content="Systems Infrastructure & Services Dashboard">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/admin.css">
+    <style>
+        .dashboard-container {
+            padding: 120px 20px 40px;
+            min-height: 100vh;
+            background: #f5f7fa;
+        }
+
+        .dashboard-header {
+            margin-bottom: 40px;
+        }
+
+        .dashboard-header h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #0a2c4e;
+            margin-bottom: 10px;
+        }
+
+        .dashboard-header p {
+            color: #666;
+            font-size: 16px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            border-left: 4px solid #f39c12;
+            transition: all 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-card.health-good {
+            border-left-color: #27ae60;
+        }
+
+        .stat-card.health-warning {
+            border-left-color: #f39c12;
+        }
+
+        .stat-card.health-critical {
+            border-left-color: #e74c3c;
+        }
+
+        .stat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            font-weight: 500;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #0a2c4e;
+            margin-bottom: 8px;
+        }
+
+        .stat-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        .status-online {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-offline {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .services-section {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+            margin-bottom: 30px;
+        }
+
+        .services-section h2 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #0a2c4e;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #f5f7fa;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+            border-bottom: 1px solid #f5f7fa;
+        }
+
+        .service-item:last-child {
+            border-bottom: none;
+        }
+
+        .service-info {
+            flex: 1;
+        }
+
+        .service-name {
+            font-weight: 600;
+            color: #0a2c4e;
+            margin-bottom: 5px;
+        }
+
+        .service-detail {
+            font-size: 13px;
+            color: #999;
+        }
+
+        .service-status {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .status-badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .badge-success {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .badge-warning {
+            background: #fff3cd;
+            color: #856404;
+        }
+
+        .badge-danger {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            color: #f39c12;
+            cursor: pointer;
+            font-size: 18px;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .action-btn:hover {
+            color: #e67e22;
+        }
+
+        .alert-box {
+            background: linear-gradient(135deg, #fff5e6 0%, #ffe8cc 100%);
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .alert-icon {
+            font-size: 24px;
+            color: #f39c12;
+        }
+
+        .alert-content p {
+            margin: 0;
+            color: #666;
+        }
+
+        .btn-action {
+            padding: 8px 16px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 13px;
+            transition: all 0.3s;
+        }
+
+        .btn-action:hover {
+            background: #e67e22;
+            transform: translateY(-2px);
+        }
+
+        .chart-container {
+            height: 300px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            font-size: 14px;
+        }
+
+        .tabs-menu {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #f5f7fa;
+        }
+
+        .tab-btn {
+            padding: 12px 20px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-weight: 600;
+            color: #999;
+            border-bottom: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .tab-btn.active {
+            color: #f39c12;
+            border-bottom-color: #f39c12;
+        }
+
+        .tab-btn:hover {
+            color: #0a2c4e;
+        }
+
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .services-section {
+                padding: 20px;
+            }
+
+            .service-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+
+            .dashboard-header h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2 line-icon"></i>EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <span id="userEmail" style="padding-right: 20px; color: white;"></span>
+                    </li>
+                    <li class="nav-item">
+                        <button id="logoutBtn" class="btn btn-outline">Logout</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Header -->
+        <div class="dashboard-header">
+            <h1><i class="fas fa-server me-2" style="color: #f39c12;"></i>Services & Infrastructure Dashboard</h1>
+            <p>Monitor system health, manage services, and track platform analytics</p>
+        </div>
+
+        <!-- System Status Alert -->
+        <div class="alert-box">
+            <div class="alert-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <div class="alert-content">
+                <p><strong>All Systems Operational</strong> - Platform running at 99.9% uptime</p>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-grid">
+            <div class="stat-card health-good">
+                <div class="stat-icon">
+                    <i class="fas fa-server" style="color: #27ae60;"></i>
+                </div>
+                <div class="stat-label">API Uptime</div>
+                <div class="stat-value">99.9%</div>
+                <span class="stat-status status-online">Online</span>
+            </div>
+
+            <div class="stat-card health-good">
+                <div class="stat-icon">
+                    <i class="fas fa-database" style="color: #27ae60;"></i>
+                </div>
+                <div class="stat-label">Database Status</div>
+                <div class="stat-value">Healthy</div>
+                <span class="stat-status status-online">Connected</span>
+            </div>
+
+            <div class="stat-card health-good">
+                <div class="stat-icon">
+                    <i class="fas fa-network-wired" style="color: #27ae60;"></i>
+                </div>
+                <div class="stat-label">Network Latency</div>
+                <div class="stat-value">24ms</div>
+                <span class="stat-status status-online">Optimal</span>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-users" style="color: #f39c12;"></i>
+                </div>
+                <div class="stat-label">Active Users</div>
+                <div class="stat-value">2,547</div>
+                <span class="stat-status status-online">Live</span>
+            </div>
+        </div>
+
+        <!-- Services Management -->
+        <div class="services-section">
+            <h2><i class="fas fa-cogs me-2"></i>Services Status</h2>
+            
+            <div class="tabs-menu">
+                <button class="tab-btn active" onclick="switchTab('all')">All Services</button>
+                <button class="tab-btn" onclick="switchTab('running')">Running</button>
+                <button class="tab-btn" onclick="switchTab('alerts')">Alerts</button>
+            </div>
+
+            <div class="service-item">
+                <div class="service-info">
+                    <div class="service-name">API Server</div>
+                    <div class="service-detail">REST API endpoints • Uptime: 99.9%</div>
+                </div>
+                <div class="service-status">
+                    <span class="status-badge badge-success">Running</span>
+                    <button class="action-btn" title="Restart"><i class="fas fa-sync"></i></button>
+                    <button class="action-btn" title="More"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-info">
+                    <div class="service-name">MySQL Database</div>
+                    <div class="service-detail">Primary database • Replication: Active</div>
+                </div>
+                <div class="service-status">
+                    <span class="status-badge badge-success">Running</span>
+                    <button class="action-btn"><i class="fas fa-sync"></i></button>
+                    <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-info">
+                    <div class="service-name">Cache Server (Redis)</div>
+                    <div class="service-detail">In-memory cache • Memory: 2.4GB / 4GB</div>
+                </div>
+                <div class="service-status">
+                    <span class="status-badge badge-success">Running</span>
+                    <button class="action-btn"><i class="fas fa-sync"></i></button>
+                    <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-info">
+                    <div class="service-name">Email Service</div>
+                    <div class="service-detail">SMTP Gateway • Emails sent: 12,450 today</div>
+                </div>
+                <div class="service-status">
+                    <span class="status-badge badge-success">Running</span>
+                    <button class="action-btn"><i class="fas fa-sync"></i></button>
+                    <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+
+            <div class="service-item">
+                <div class="service-info">
+                    <div class="service-name">File Storage</div>
+                    <div class="service-detail">S3-compatible • Used: 145GB / 500GB</div>
+                </div>
+                <div class="service-status">
+                    <span class="status-badge badge-success">Running</span>
+                    <button class="action-btn"><i class="fas fa-sync"></i></button>
+                    <button class="action-btn"><i class="fas fa-ellipsis-v"></i></button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics Section -->
+        <div class="services-section">
+            <h2><i class="fas fa-chart-bar me-2"></i>Platform Analytics</h2>
+            
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h5 style="margin-bottom: 20px;">API Requests (24h)</h5>
+                    <div class="chart-container">
+                        <i class="fas fa-chart-line" style="font-size: 48px; color: #f39c12; opacity: 0.2;"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 style="margin-bottom: 20px;">Database Performance (24h)</h5>
+                    <div class="chart-container">
+                        <i class="fas fa-database" style="font-size: 48px; color: #f39c12; opacity: 0.2;"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6">
+                    <h5 style="margin-bottom: 20px;">User Activity Distribution</h5>
+                    <div class="chart-container">
+                        <i class="fas fa-users" style="font-size: 48px; color: #f39c12; opacity: 0.2;"></i>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5 style="margin-bottom: 20px;">Error Rates (24h)</h5>
+                    <div class="chart-container">
+                        <i class="fas fa-exclamation-circle" style="font-size: 48px; color: #f39c12; opacity: 0.2;"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Logs Section -->
+        <div class="services-section">
+            <h2><i class="fas fa-history me-2"></i>Recent Activity Log</h2>
+            
+            <div style="max-height: 400px; overflow-y: auto;">
+                <table class="table table-hover" style="margin: 0;">
+                    <thead style="position: sticky; top: 0; background: #f9f9f9;">
+                        <tr>
+                            <th style="border: none;">Timestamp</th>
+                            <th style="border: none;">Service</th>
+                            <th style="border: none;">Event</th>
+                            <th style="border: none;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2026-02-22 14:35:22</td>
+                            <td>API Server</td>
+                            <td>Health check passed</td>
+                            <td><span class="badge bg-success">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-22 14:30:15</td>
+                            <td>MySQL Database</td>
+                            <td>Backup completed</td>
+                            <td><span class="badge bg-success">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-22 14:25:08</td>
+                            <td>Cache Server</td>
+                            <td>Memory usage spike detected</td>
+                            <td><span class="badge bg-warning">WARN</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-22 14:20:45</td>
+                            <td>Email Service</td>
+                            <td>Batch email campaign sent</td>
+                            <td><span class="badge bg-success">OK</span></td>
+                        </tr>
+                        <tr>
+                            <td>2026-02-22 14:15:32</td>
+                            <td>API Server</td>
+                            <td>Deployment completed</td>
+                            <td><span class="badge bg-success">OK</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        // Initialize dashboard
+        document.addEventListener('DOMContentLoaded', async () => {
+            const currentUser = await api.getCurrentUser();
+            
+            if (!currentUser || !currentUser.is_systems) {
+                showNotification('⚠️ Access Denied: Systems role required', 'error');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                return;
+            }
+
+            document.getElementById('userEmail').textContent = currentUser.email;
+
+            // Logout handler
+            document.getElementById('logoutBtn').addEventListener('click', async () => {
+                await api.logout();
+                showNotification('✓ Logged out successfully', 'success');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 500);
+            });
+        });
+
+        // Tab switching
+        function switchTab(tab) {
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+
+</html>

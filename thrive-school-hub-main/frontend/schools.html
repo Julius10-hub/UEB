@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Bridge - School Management System</title>
+    <meta name="description"
+        content="EduBridge — connecting students and schools with a clear, modern visual identity inspired by leading university sites.">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- External CSS (embedded for completeness) -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2 line-icon" aria-hidden="true"></i>EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="schools.html">Schools</a></li>
+                    <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bursaries.html">Bursaries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="e-library.html">E-Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item">
+                    <div class="navbar-auth" id="navbarAuth">
+                    <a href="login.html" class="btn btn-outline">Admin</a>
+                   <div class="navbar-user" id="navbarUser" style="display: none;">
+                    <span id="userEmail"></span>
+                    <a href="admin-dashboard.html" id="adminLink" style="display: none;" class="nav-link">Admin</a>
+                    <button id="logoutBtn" class="btn btn-outline">Logout</button>
+                </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Admin / Login Modal -->
+    <div class="modal fade" id="adminModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-lock me-2"></i>Admin Login</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label class="form-label">Username</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label">Password</label>
+                            <input type="password" class="form-control" required>
+                        </div>
+                        <div class="mb-3 form-check">
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+                        </div>
+                        <button type="submit" class="btn-deep-blue w-100">Login to Dashboard</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    Schools in Uganda Education 
+                    <span class="hero-highlight">Bridge</span>
+                </h1>
+                <p class="hero-description">
+                    Explore Uganda's finest educational institutions from Kindergarten to University, including specialized Islamic and Tahfidh school
+                </p>
+                <div class="hero-buttons">
+                    <a href="schools.html" class="btn btn-primary">
+                        Browse Schools <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-light">
+                        Get in Touch <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpath fill='%23f39c12' d='M250,50 L450,200 L450,350 L250,450 L50,350 L50,200 L250,50' opacity='0.1'/%3E%3Ccircle cx='250' cy='250' r='150' fill='%23f39c12' opacity='0.1'/%3E%3C/svg%3E" alt="Hero Illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Quick Access</p>
+                <h2 class="section-title">Find Your <span>Path</span></h2>
+            </div>
+            <div class="quick-grid">
+                <a href="schools.html?level=kindergarten" class="quick-card">
+                    <h3>Kindergarten</h3>
+                    <p>Ages 3-5 • 50+ Schools</p>
+                </a>
+                <a href="schools.html?level=nursery" class="quick-card">
+                    <h3>Nursery</h3>
+                    <p>Ages 2-4 • 45+ Schools</p>
+                </a>
+                <a href="schools.html?level=primary" class="quick-card">
+                    <h3>Primary</h3>
+                    <p>Grade 1-6 • 120+ Schools</p>
+                </a>
+                <a href="schools.html?level=secondary" class="quick-card">
+                    <h3>Secondary</h3>
+                    <p>Form 1-4 • 85+ Schools</p>
+                </a>
+                <a href="schools.html?level=technical" class="quick-card">
+                    <h3>Technical</h3>
+                    <p>Vocational • 30+ Institutes</p>
+                </a>
+                <a href="schools.html?level=university" class="quick-card">
+                    <h3>University</h3>
+                    <p>Bachelor's+ • 25+ Universities</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+        <!-- Schools Section with Enhanced Features -->
+        <section id="schools" class="section-padding">
+            <div class="container-fluid">
+                <h2 class="section-header" data-aos="fade-up">Our Schools</h2>
+
+                <!-- Filter Bar -->
+                <div class="filter-bar" data-aos="fade-up">
+                    <div class="row g-3">
+                        <div class="col-md-4">
+                            <select class="filter-select" id="regionFilter" onchange="filterSchools()">
+                                <option value="">All Regions</option>
+                                <option value="kampala">Kampala</option>
+                                <option value="jinja">Jinja</option>
+                                <option value="mbarara">Mbarara</option>
+                                <option value="fort-portal">Fort Portal</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="filter-select" id="typeFilter" onchange="filterSchools()">
+                                <option value="">All Types</option>
+                                <option value="public">Public</option>
+                                <option value="private">Private</option>
+                                <option value="international">International</option>
+                                <option value="islamic">Islamic</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select class="filter-select" id="sortFilter" onchange="filterSchools()">
+                                <option value="name">Sort by Name</option>
+                                <option value="rating">Sort by Rating</option>
+                                <option value="students">Sort by Size</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Dynamic Filter Section -->
+                <div class="row mb-5" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-12">
+                        <div style="background: linear-gradient(135deg, #191b22 0%, #b86403 100%); padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);">
+                            <h5 style="color: white; margin-bottom: 20px; font-weight: 600;">
+                                <i class="fas fa-search me-2"></i>Find Your Perfect School
+                            </h5>
+                            <div class="row g-3">
+                                <div class="col-lg-6">
+                                    <label for="categoryDropdown" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 8px; display: block;">
+                                        <i class="fas fa-list me-2" style="color: #ffd700;"></i>Filter by Category
+                                    </label>
+                                    <select id="categoryDropdown" class="form-control" onchange="filterByCategory(this.value)" style="font-size: 0.95rem; padding: 12px; border-radius: 8px; border: 2px solid #e6eef6; transition: all 0.3s ease;">
+                                        <option value="">All Categories</option>
+                                    </select>
+                                </div>
+                                <div class="col-lg-6">
+                                    <label for="searchSchools" style="color: rgba(255,255,255,0.9); font-weight: 600; margin-bottom: 8px; display: block;">
+                                        <i class="fas fa-magnifying-glass me-2" style="color: #ffd700;"></i>Search Schools
+                                    </label>
+                                    <input type="text" id="searchSchools" class="form-control" placeholder="Search by name, region..." onkeyup="searchSchools(this.value)" style="font-size: 0.95rem; padding: 12px; border-radius: 8px; border: 2px solid #e6eef6; transition: all 0.3s ease;">
+                                </div>
+                            </div>
+                            <div style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="btn btn-sm" style="background: rgba(255,255,255,0.2); color: white; border: 2px solid white; border-radius: 20px; padding: 6px 15px; transition: all 0.3s ease;" onmouseover="this.style.background='white'; this.style.color='#667eea'" onmouseout="this.style.background='rgba(255,255,255,0.2)'; this.style.color='white'" onclick="document.getElementById('categoryDropdown').value=''; document.getElementById('searchSchools').value=''; filterByCategory('');">Clear Filters</button>
+                                <span id="resultsCount" style="color: white; align-self: center; font-weight: 600;"><i class="fas fa-check-circle me-1" style="color: #90EE90;"></i>Showing all schools</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Admin Panel (for testing - remove in production) -->
+                <div class="row mb-5" style="background: linear-gradient(135deg, #fff3cd 0%, #ffe8a8 100%); padding: 20px; border-radius: 15px; border: 2px solid #ffc107; display: none; box-shadow: 0 5px 15px rgba(255, 193, 7, 0.2);" id="adminTestPanel" data-aos="fade-up" data-aos-delay="150">
+                    <div class="col-12">
+                        <h6 style="color: #856404; margin-bottom: 15px; font-weight: 700;">
+                            <i class="fas fa-cog me-2" style="color: #ff6b6b;"></i>Admin Test Panel - Dynamic Dropdown Demo
+                        </h6>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn btn-sm btn-success" onclick="exampleAddSchool()" style="transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fas fa-plus me-1"></i>Add New School
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="exampleRemoveSchool()" style="transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fas fa-trash me-1"></i>Remove School
+                            </button>
+                            <button class="btn btn-sm btn-info" onclick="showSchoolList()" style="transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fas fa-list me-1"></i>Show School List
+                            </button>
+                            <button class="btn btn-sm btn-secondary" onclick="toggleAdminPanel()" style="transition: all 0.3s ease;" onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                                <i class="fas fa-times me-1"></i>Hide Panel
+                            </button>
+                        </div>
+                        <small style="display: block; margin-top: 10px; color: #856404;">
+                            Try adding or removing schools - the dropdown menu updates automatically!
+                        </small>
+                    </div>
+                </div>
+
+                <!-- Islamic Curriculum Section -->
+                <div class="row mb-5" data-aos="fade-up" data-aos-delay="150">
+                    <div class="col-12">
+                        <div class="islamic-pattern p-4">
+                            <div class="row align-items-center">
+                                <div class="col-md-8">
+                                    <h3 class="text-white mb-3"><i class="fas fa-mosque me-2"></i>Tahfidh & Islamic
+                                        Curriculum</h3>
+                                    <p class="text-white mb-0">Specialized Islamic education with Quran memorization,
+                                        Arabic
+                                        studies, and integrated Islamic sciences. 45+ certified Tahfidh schools across
+                                        Uganda.</p>
+                                </div>
+                                <div class="col-md-4 text-md-end">
+                                    <button class="btn-islamic" onclick="viewIslamicSchools()">View Islamic
+                                        Schools</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Enhanced School Profiles -->
+                <div class="row" id="schoolProfiles">
+                    <!-- Springfield International School -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="secondary" data-name="Springfield International School" data-region="Kampala" data-aos="fade-right">
+                        <div class="card-custom">
+                            <div style="position: relative; overflow: hidden;">
+                                <img src="https://via.placeholder.com/600x300/1a237e/ffffff?text=Springfield+School"
+                                    class="card-img-top" alt="Springfield School">
+                                <span class="badge-custom badge-featured"
+                                    style="position: absolute; top: 20px; right: 20px;">Featured</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-3">
+                                    <h4>Springfield International School</h4>
+                                    <span class="badge-custom badge-accredited">Accredited</span>
+                                </div>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.8 • 245 reviews)</span>
+                                </div>
+
+                                <p>A premier institution offering holistic education from kindergarten to university
+                                    level with state-of-the-art facilities.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Cambridge Curriculum</span>
+                                    <span class="program-tag">IB Diploma</span>
+                                    <span class="program-tag">STEM Programs</span>
+                                    <span class="program-tag">Sports Academy</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-wifi"></i> WiFi Campus</span>
+                                    <span class="facility-tag"><i class="fas fa-flask"></i> Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
+                                    <span class="facility-tag"><i class="fas fa-bus"></i> Transport</span>
+                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Cafeteria</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 700 123 456</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@springfield.edu</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.springfield.edu</p>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button class="btn-deep-blue" onclick="viewSchoolDetails('springfield')">View
+                                        Details</button>
+                                    <button class="btn-outline" onclick="scheduleTour('springfield')"><i
+                                            class="fas fa-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kampala Technical Institute -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="technical" data-name="Kampala Technical Institute" data-region="Kampala" data-aos="fade-left">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/534bae/ffffff?text=Kampala+Tech"
+                                class="card-img-top" alt="Kampala Tech">
+                            <div class="card-body">
+                                <h4>Kampala Technical Institute</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Industrial Area, Kampala
+                                </p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(5.0 • 189 reviews)</span>
+                                </div>
+
+                                <p>Leading technical institution specializing in engineering, IT, and vocational
+                                    training with industry partnerships.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Computer Science</span>
+                                    <span class="program-tag">Electrical Eng.</span>
+                                    <span class="program-tag">Mechanical Eng.</span>
+                                    <span class="program-tag">Civil Eng.</span>
+                                    <span class="program-tag">ICT</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-flask"></i> Modern Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-robot"></i> Robotics</span>
+                                    <span class="facility-tag"><i class="fas fa-tools"></i> Workshops</span>
+                                    <span class="facility-tag"><i class="fas fa-laptop"></i> Computer Labs</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 711 789 012</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@kampaltech.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.kampaltech.ac.ug</p>
+                                </div>
+
+                                <div class="d-flex gap-2">
+                                    <button class="btn-deep-blue" onclick="viewSchoolDetails('kampala-tech')">View
+                                        Details</button>
+                                    <button class="btn-outline" onclick="virtualTour('kampala-tech')"><i
+                                            class="fas fa-vr-cardboard"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Al-Noor Islamic Academy (Tahfidh) -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="tahfidh" data-name="Al-Noor Islamic Academy" data-region="Jinja" data-aos="fade-right" data-aos-delay="200">
+                        <div class="card-custom islamic-border">
+                            <div style="position: relative;">
+                                <img src="https://via.placeholder.com/600x300/2e7d32/ffffff?text=Al-Noor+Islamic+Academy"
+                                    class="card-img-top" alt="Al-Noor Islamic Academy">
+                                <span class="badge-custom badge-tahfidh"
+                                    style="position: absolute; top: 20px; left: 20px;">
+                                    <i class="fas fa-mosque me-1"></i>Tahfidh School
+                                </span>
+                            </div>
+                            <div class="card-body">
+                                <h4>Al-Noor Islamic Academy</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Jinja, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(5.0 • 312 reviews)</span>
+                                </div>
+
+                                <p>Premier Islamic institution combining Quranic memorization with modern education.
+                                    Certified by the International Islamic Educational Organization.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Tahfidh Quran</span>
+                                    <span class="program-tag">Arabic Studies</span>
+                                    <span class="program-tag">Islamic Sciences</span>
+                                    <span class="program-tag">National Curriculum</span>
+                                    <span class="program-tag">Hifdh Program</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-mosque"></i> Prayer Hall</span>
+                                    <span class="facility-tag"><i class="fas fa-quran"></i> Quran Lab</span>
+                                    <span class="facility-tag"><i class="fas fa-hotel"></i> Boarding</span>
+                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Halal Kitchen</span>
+                                    <span class="facility-tag"><i class="fas fa-swimmer"></i> Boys/Girls
+                                        Facilities</span>
+                                </div>
+
+                                <div class="row mt-3 mb-3">
+                                    <div class="col-6">
+                                        <div class="text-center p-2" style="background: #f5f5f5; border-radius: 10px;">
+                                            <div
+                                                style="font-size: 1.5rem; font-weight: 700; color: var(--islamic-green);">
+                                                30+</div>
+                                            <div style="font-size: 0.8rem;">Huffadh</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="text-center p-2" style="background: #f5f5f5; border-radius: 10px;">
+                                            <div
+                                                style="font-size: 1.5rem; font-weight: 700; color: var(--islamic-green);">
+                                                15</div>
+                                            <div style="font-size: 0.8rem;">Quran Teachers</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 722 456 789</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@alnoor.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.alnoor.ac.ug</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('al-noor')">View Details &
+                                    Apply</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mbarara Girls High School -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="secondary" data-name="Mbarara Girls High School" data-region="Mbarara" data-aos="fade-left" data-aos-delay="200">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/00695c/ffffff?text=Mbarara+Girls+High"
+                                class="card-img-top" alt="Mbarara Girls High">
+                            <div class="card-body">
+                                <h4>Mbarara Girls High School</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Mbarara, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(5.0 • 456 reviews)</span>
+                                </div>
+
+                                <p>National school of excellence with outstanding academic performance and holistic
+                                    development programs for girls.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">STEM Focus</span>
+                                    <span class="program-tag">Music Program</span>
+                                    <span class="program-tag">Sports Academy</span>
+                                    <span class="program-tag">Leadership</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-flask"></i> Modern Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-music"></i> Music Room</span>
+                                    <span class="facility-tag"><i class="fas fa-bed"></i> Hostels</span>
+                                    <span class="facility-tag"><i class="fas fa-basketball"></i> Sports Complex</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 57 202 1234</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@mbaragirlshs.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.mbaragirlshs.ac.ug</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('mbarara-girls')">View
+                                    Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Kampala Primary School -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="primary" data-name="Kampala Primary School" data-region="Kampala" data-aos="fade-right">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/1565c0/ffffff?text=Kampala+Primary"
+                                class="card-img-top" alt="Kampala Primary School">
+                            <div class="card-body">
+                                <h4>Kampala Primary School</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.7 • 178 reviews)</span>
+                                </div>
+
+                                <p>Government primary school with quality education and development of all-round skills for students.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">National Curriculum</span>
+                                    <span class="program-tag">Sports</span>
+                                    <span class="program-tag">Music</span>
+                                    <span class="program-tag">Debates</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
+                                    <span class="facility-tag"><i class="fas fa-flask"></i> Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-basketball"></i> Sports</span>
+                                    <span class="facility-tag"><i class="fas fa-bus"></i> Transport</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 703 456 789</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@kampalachild.edu</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.kampalachild.edu</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('kampala-primary')">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Nairobi Primary Academy -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="primary" data-name="Nairobi Primary Academy" data-region="Nairobi" data-aos="fade-left">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/0d47a1/ffffff?text=Nairobi+Primary"
+                                class="card-img-top" alt="Nairobi Primary Academy">
+                            <div class="card-body">
+                                <h4>Nairobi Primary Academy</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Jinja, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(4.9 • 203 reviews)</span>
+                                </div>
+
+                                <p>Private primary academy with Cambridge curriculum and progressive teaching methods.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Cambridge</span>
+                                    <span class="program-tag">STEM</span>
+                                    <span class="program-tag">Languages</span>
+                                    <span class="program-tag">Arts</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-laptop"></i> Computer Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-flask"></i> Science Labs</span>
+                                    <span class="facility-tag"><i class="fas fa-music"></i> Music Room</span>
+                                    <span class="facility-tag"><i class="fas fa-palette"></i> Art Studio</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 712 345 678</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@nairobi-primary.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.nairobi-primary.ac.ug</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('nairobi-primary')">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sunshine Kindergarten -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Sunshine Kindergarten" data-region="Fort Portal" data-aos="fade-right">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/f57c00/ffffff?text=Sunshine+Kindergarten"
+                                class="card-img-top" alt="Sunshine Kindergarten">
+                            <div class="card-body">
+                                <h4>Sunshine Kindergarten</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Kampala, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                    <span>(4.8 • 145 reviews)</span>
+                                </div>
+
+                                <p>Nurturing kindergarten with play-based learning and early childhood development focus.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Play-Based</span>
+                                    <span class="program-tag">Montessori</span>
+                                    <span class="program-tag">Art & Craft</span>
+                                    <span class="program-tag">Music Class</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-child"></i> Play Area</span>
+                                    <span class="facility-tag"><i class="fas fa-palette"></i> Art Room</span>
+                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Cafeteria</span>
+                                    <span class="facility-tag"><i class="fas fa-parent"></i> Parent Space</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 701 234 567</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@sunshinekids.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.sunshinekids.ac.ug</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('sunshine-kg')">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Little Steps Kindergarten -->
+                    <div class="col-lg-6 mb-4 school-card" data-category="kindergarten" data-name="Little Steps Kindergarten" data-region="Entebbe" data-aos="fade-left">
+                        <div class="card-custom">
+                            <img src="https://via.placeholder.com/600x300/e91e63/ffffff?text=Little+Steps+KG"
+                                class="card-img-top" alt="Little Steps Kindergarten">
+                            <div class="card-body">
+                                <h4>Little Steps Kindergarten</h4>
+                                <p class="text-muted"><i class="fas fa-map-marker-alt me-2"></i>Mbarara, Uganda</p>
+
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <span>(5.0 • 92 reviews)</span>
+                                </div>
+
+                                <p>Premium kindergarten with smaller class sizes and personalized attention for each child.</p>
+
+                                <div class="program-tags">
+                                    <span class="program-tag">Small Classes</span>
+                                    <span class="program-tag">Bilingual</span>
+                                    <span class="program-tag">Sports</span>
+                                    <span class="program-tag">Storytelling</span>
+                                </div>
+
+                                <div class="facility-tags">
+                                    <span class="facility-tag"><i class="fas fa-child"></i> Safe Play Area</span>
+                                    <span class="facility-tag"><i class="fas fa-book"></i> Library</span>
+                                    <span class="facility-tag"><i class="fas fa-utensils"></i> Healthy Meals</span>
+                                    <span class="facility-tag"><i class="fas fa-bus"></i> Pick & Drop</span>
+                                </div>
+
+                                <div class="contact-info">
+                                    <p class="mb-2"><i class="fas fa-phone"></i> +256 704 567 890</p>
+                                    <p class="mb-2"><i class="fas fa-envelope"></i> info@littlesteps.ac.ug</p>
+                                    <p class="mb-0"><i class="fas fa-globe"></i> www.littlesteps.ac.ug</p>
+                                </div>
+
+                                <button class="btn-deep-blue" onclick="viewSchoolDetails('little-steps-kg')">View Details</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No Schools Found Message -->
+                <div id="noSchoolsMessage" style="display: none; text-align: center; padding: 60px 20px; color: #999;">
+                    <div style="font-size: 3rem; margin-bottom: 20px;">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3 style="color: #666; margin-bottom: 10px;">No Schools Found</h3>
+                    <p style="margin-bottom: 30px;">We couldn't find any schools in the selected category. Please try another one.</p>
+                    <button class="btn btn-primary" onclick="document.getElementById('categoryDropdown').value = ''; filterByCategory('');">
+                        <i class="fas fa-redo me-2"></i>View All Schools
+                    </button>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination-custom">
+                    <div class="page-item active">1</div>
+                    <div class="page-item">2</div>
+                    <div class="page-item">3</div>
+                    <div class="page-item">4</div>
+                    <div class="page-item">5</div>
+                    <div class="page-item">...</div>
+                    <div class="page-item">10</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer (exactly as provided) -->
+    <footer>
+        <div class="footer-waves">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none"
+                style="width: 100%; height: 50px;">
+                <path fill="#f39c12" fill-opacity="0.1"
+                    d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                </path>
+            </svg>
+        </div>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>eduHUB</h3>
+                <p>Your trusted partner in education since 2020. We connect students with Uganda's finest educational
+                    institutions and resources.</p>
+                <div class="social-links">
+                    <a href="https://www.facebook.com/profile.php?id=61576191012566#"><i
+                            class="fab fa-facebook-f"></i></a>
+                    <a
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fyoutube.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6eoaUGVau149glyugeYF45Zx0q7eqSu0NgAKxlJ7wy33MsLiXp2TxdnnrrtA_aem_GiejR9YaLmEhqxVXOuhVYg&h=ASVhg88P_51A2yAsLvok5TY9hwC-9W5WHG7NmhB5lxywET_mfgmMKt1kbAd_OWKjZf5Fksf0HBP41duSEX-5zYuucaIoAgZXjzcyU_3HQZJUwB5pFdrdnjIdg6luIQpWuNXm"><i
+                            class="fab fa-twitter"></i></a>
+                    <a
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5uQE626CRvPwEgQ7u8L_gGqALO-iGy5u4viooC-YJ-wNY45_h6FJ6xO7sviQ_aem__lBJpvMb0cl-ODVQCkMZlw&h=ASUb1ZK1tKsDE7XdFI9XGORTMSWC6zGmXg4PkcgR_O2wNzeu0GKTT0xYge83k7zpBKA2BU1PhDLVWM38gJEWf2HEAxUSPZUSpyfdY2YeGKtNiBicD5QgksDYmjrrdzoSpwKG"><i
+                            class="fab fa-instagram"></i></a>
+                    <a
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2F%2540ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6bDEkgCfMWUtBQwsgJ7RS_Mu4vpl-kZ4msfywAOYMQj5qEtq__1zqKQxcmcA_aem_VAkH5zhu6CZfNYf_YCchNQ&h=ASV-llKfHAL0Ea4FXmSp8hkrH0s2V9RJUkX7pdNd3KCqFHDn060_E0Pk9qUymw0QPn0Ls-1i5fL8ApkLm5ogUz6Np5WnJTiQnXlDrFPihH2k5QG_lHA7ZFTmUsg4Hy3Ly3QU"><i
+                            class="fab fa-linkedin-in"></i></a>
+                    <a
+                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftiktok.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7b_xNoXH7jnwh61MSXjgRENMQuLiTW7_dRBwR5tCw02oWQ5fbXeRiBv9qQIw_aem_1ltd3OwuOAFMswkV5ceB1w&h=ASX4d5c0GW2crkJp3aMOfZf8Oh1WUY11mBOZD6ixGJQZnUrnx8CwuhrkmT_26ZwkJMW-yydNbd_ZXkq99DU0YirFvpxJq5ah91nGDJboRM9IqIH-Orat71hdzhocL2XESobO"><i
+                            class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="schools.html"><i class="fas fa-chevron-right"></i> Our Schools</a></li>
+                    <li><a href="activities.html"><i class="fas fa-chevron-right"></i> Activities</a></li>
+                    <li><a href="bursaries.html"><i class="fas fa-chevron-right"></i> Bursaries</a></li>
+                    <li><a href="agents.html"><i class="fas fa-chevron-right"></i> Agents</a></li>
+                    <li><a href="e-library.html"><i class="fas fa-chevron-right"></i> E-Library</a></li>
+                    <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Info</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</p>
+                <p><i class="fas fa-phone"></i> +256 700 123456</p>
+                <p><i class="fas fa-envelope"></i> info@eduhub.com</p>
+                <p><i class="fas fa-clock"></i> Mon-Fri: 8am - 6pm</p>
+            </div>
+            <div class="footer-section">
+                <h3>Newsletter</h3>
+                <p>Subscribe for updates on schools and opportunities</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-bottom-content">
+                <div class="footer-bottom-links">
+                    <a href="privacy-policy.html">Privacy & Security Policy</a>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="contact.html">Contact Us</a>
+                </div>
+                <div class="footer-bottom-links">
+                    <a href="about.html">About Us</a>
+                </div>
+            </div>
+            <p>&copy; 2025 eduHUB. All rights reserved. | Designed with <i class="fas fa-heart"
+                    style="color: var(--orange);"></i> for education</p>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <style>
+        /* Enhanced school card styling */
+        .school-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: slideIn 0.5s ease;
+        }
+
+        .school-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15) !important;
+        }
+
+        .card-custom {
+            transition: all 0.3s ease;
+            border: none;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            position: relative;
+        }
+
+        .card-custom::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, transparent 0%, rgba(102, 126, 234, 0.05) 100%);
+            pointer-events: none;
+            border-radius: 15px;
+        }
+
+        .card-custom:hover {
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
+        }
+
+        .card-img-top {
+            transition: all 0.4s ease;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .school-card:hover .card-img-top {
+            transform: scale(1.08);
+            filter: brightness(0.9);
+        }
+
+        .badge-custom {
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .badge-custom:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .program-tag {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .program-tag:hover {
+            transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+
+        .facility-tag {
+            display: inline-block;
+            background: rgba(102, 126, 234, 0.1);
+            color: #667eea;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            margin-right: 8px;
+            margin-bottom: 8px;
+            border: 1px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .facility-tag:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        .rating {
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .rating i {
+            color: #ffc107;
+            font-size: 0.95rem;
+            margin-right: 2px;
+        }
+
+        .rating:hover i {
+            animation: bounce 0.6s ease infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .btn-deep-blue {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border: none;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.3);
+        }
+
+        .btn-deep-blue:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.5);
+            color: white;
+            text-decoration: none;
+        }
+
+        .btn-outline-light {
+            border: 2px solid white;
+            color: white;
+            background: transparent;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-outline-light:hover {
+            background: white;
+            color: #667eea;
+            transform: translateY(-3px);
+        }
+
+        .contact-info {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .contact-info:hover {
+            background: #e9ecef;
+            transform: translateX(5px);
+        }
+
+        .contact-info i {
+            color: #667eea;
+            min-width: 20px;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        .loading {
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        /* Select dropdown enhancement */
+        .form-control:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+        }
+
+        .form-control:hover {
+            border-color: #667eea;
+        }
+    </style>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 1000,
+            once: true,
+            offset: 100
+        });
+
+        // ============================================
+        // DYNAMIC CATEGORY SYSTEM
+        // ============================================
+        
+        // Schools database (this would come from a backend in production)
+        const schoolsDatabase = [
+            { id: 'springfield', name: 'Springfield International School', category: 'secondary', region: 'kampala', type: 'private' },
+            { id: 'kampala-tech', name: 'Kampala Technical Institute', category: 'technical', region: 'kampala', type: 'public' },
+            { id: 'al-noor', name: 'Al-Noor Islamic Academy', category: 'tahfidh', region: 'jinja', type: 'private' },
+            { id: 'mbarara-girls', name: 'Mbarara Girls High School', category: 'secondary', region: 'mbarara', type: 'public' },
+            { id: 'kampala-primary', name: 'Kampala Primary School', category: 'primary', region: 'kampala', type: 'public' },
+            { id: 'nairobi-primary', name: 'Nairobi Primary Academy', category: 'primary', region: 'jinja', type: 'private' },
+            { id: 'sunshine-kindergarten', name: 'Sunshine Kindergarten', category: 'kindergarten', region: 'kampala', type: 'private' },
+            { id: 'little-steps-kg', name: 'Little Steps Kindergarten', category: 'kindergarten', region: 'mbarara', type: 'private' }
+        ];
+
+        // Available categories
+        const availableCategories = {
+            'kindergarten': 'Kindergarten',
+            'primary': 'Primary School',
+            'secondary': 'Secondary School',
+            'technical': 'Technical Institute',
+            'university': 'University',
+            'tahfidh': 'Tahfidh & Islamic School'
+        };
+
+        // Initialize the category dropdown on page load
+        function initializeCategoryDropdown() {
+            const dropdown = document.getElementById('categoryDropdown');
+            const categoriesInUse = getUniqueCategories();
+
+            // Clear existing options (except the first "All Categories" option)
+            dropdown.innerHTML = '<option value="">All Categories</option>';
+
+            // Add only categories that have schools
+            categoriesInUse.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = `${availableCategories[category]} (${getSchoolCountByCategory(category)})`;
+                dropdown.appendChild(option);
+            });
+        }
+
+        // Get unique categories that have schools
+        function getUniqueCategories() {
+            const categories = [...new Set(schoolsDatabase.map(school => school.category))];
+            return categories.sort();
+        }
+
+        // Get count of schools in a category
+        function getSchoolCountByCategory(category) {
+            return schoolsDatabase.filter(school => school.category === category).length;
+        }
+
+        // Get all schools (for display)
+        function getAllSchools() {
+            return schoolsDatabase;
+        }
+
+        // Add a new school (called by admin)
+        function addSchool(schoolData) {
+            schoolsDatabase.push(schoolData);
+            initializeCategoryDropdown(); // Update dropdown
+            console.log(`School added: ${schoolData.name}`);
+            updateSchoolDisplay();
+        }
+
+        // Remove a school (called by admin)
+        function removeSchool(schoolId) {
+            const index = schoolsDatabase.findIndex(s => s.id === schoolId);
+            if (index > -1) {
+                const removedSchool = schoolsDatabase[index];
+                schoolsDatabase.splice(index, 1);
+                initializeCategoryDropdown(); // Update dropdown
+                console.log(`School removed: ${removedSchool.name}`);
+                updateSchoolDisplay();
+            }
+        }
+
+        // Update a school
+        function updateSchool(schoolId, updatedData) {
+            const school = schoolsDatabase.find(s => s.id === schoolId);
+            if (school) {
+                Object.assign(school, updatedData);
+                initializeCategoryDropdown(); // Update dropdown in case category changed
+                console.log(`School updated: ${school.name}`);
+                updateSchoolDisplay();
+            }
+        }
+
+        // Filter schools by category
+        function filterByCategory(category) {
+            const schoolCards = document.querySelectorAll('.school-card');
+            const noSchoolsMessage = document.getElementById('noSchoolsMessage');
+            const searchInput = document.getElementById('searchSchools');
+            const searchValue = searchInput ? searchInput.value.toLowerCase() : '';
+            let visibleCount = 0;
+            let selectedCategoryName = category ? availableCategories[category] : 'All Schools';
+
+            schoolCards.forEach((card, index) => {
+                const cardCategory = card.getAttribute('data-category');
+                const cardName = card.getAttribute('data-name') ? card.getAttribute('data-name').toLowerCase() : '';
+                const cardRegion = card.getAttribute('data-region') ? card.getAttribute('data-region').toLowerCase() : '';
+
+                const matchesCategory = !category || cardCategory === category;
+                const matchesSearch = !searchValue || cardName.includes(searchValue) || cardRegion.includes(searchValue);
+
+                if (matchesCategory && matchesSearch) {
+                    card.style.display = 'block';
+                    card.style.animation = `slideIn 0.5s ease ${index * 0.1}s both`;
+                    visibleCount++;
+                } else {
+                    card.style.display = 'none';
+                    card.style.animation = 'none';
+                }
+            });
+
+            // Show/hide no schools message
+            if (visibleCount === 0) {
+                noSchoolsMessage.style.display = 'block';
+            } else {
+                noSchoolsMessage.style.display = 'none';
+                console.log(`Showing ${visibleCount} school(s) in ${selectedCategoryName}`);
+            }
+
+            // Update results count
+            updateResultsCount(visibleCount);
+
+            // Scroll to schools section
+            document.getElementById('schoolProfiles').scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function searchSchools(searchValue) {
+            const dropdown = document.getElementById('categoryDropdown');
+            const currentCategory = dropdown ? dropdown.value : '';
+            filterByCategory(currentCategory || null);
+        }
+
+        function updateResultsCount(count) {
+            const resultsDisplay = document.getElementById('resultsCount');
+            if (!resultsDisplay) return;
+
+            const schoolsText = count === 1 ? 'school' : 'schools';
+            
+            if (count === 0) {
+                resultsDisplay.innerHTML = `<i class="fas fa-search"></i> No schools found`;
+                resultsDisplay.style.color = '#dc3545';
+            } else {
+                resultsDisplay.innerHTML = `<i class="fas fa-graduation-cap"></i> ${count} ${schoolsText} found`;
+                resultsDisplay.style.color = '#667eea';
+            }
+        }
+
+        // Update the school display based on current filters
+        function updateSchoolDisplay(schools = null) {
+            const schoolCards = document.querySelectorAll('.school-card');
+            const displaySchools = schools || getAllSchools();
+            
+            schoolCards.forEach(card => {
+                const schoolId = card.getAttribute('data-school-id');
+                const shouldShow = !schools || displaySchools.some(s => s.id === schoolId);
+                card.style.display = shouldShow ? 'block' : 'none';
+            });
+
+            if (displaySchools.length === 0) {
+                console.log('No schools to display');
+            } else {
+                console.log(`Displaying ${displaySchools.length} school(s)`);
+            }
+        }
+
+        // ============================================
+        // ADMIN FUNCTIONS (Example Usage)
+        // ============================================
+
+        // Example: Add new school
+        window.exampleAddSchool = function() {
+            const newSchool = {
+                id: 'new-school-' + Date.now(),
+                name: 'New School ' + Date.now(),
+                category: 'primary',
+                region: 'kampala',
+                type: 'private'
+            };
+            addSchool(newSchool);
+            alert('New school added! The dropdown menu has been updated automatically.');
+        };
+
+        // Example: Remove school
+        window.exampleRemoveSchool = function() {
+            if (schoolsDatabase.length > 0) {
+                const schoolId = schoolsDatabase[0].id;
+                removeSchool(schoolId);
+                alert('School removed! The dropdown menu has been updated automatically.');
+            }
+        };
+
+        // Show school list
+        window.showSchoolList = function() {
+            const schoolList = schoolsDatabase.map((s, i) => `${i+1}. ${s.name} (${availableCategories[s.category]})`).join('\n');
+            alert('Current Schools:\n\n' + schoolList);
+        };
+
+        // Toggle admin panel visibility
+        window.toggleAdminPanel = function() {
+            const panel = document.getElementById('adminTestPanel');
+            if (panel) {
+                panel.style.display = panel.style.display === 'none' ? 'block' : 'none';
+            }
+        };
+
+        // Show admin panel (call this from browser console or when admin logs in)
+        window.showAdminPanel = function() {
+            const panel = document.getElementById('adminTestPanel');
+            if (panel) {
+                panel.style.display = 'block';
+                console.log('Admin panel activated! You can now test adding/removing schools.');
+            }
+        };
+
+        // Back to Top Button
+        window.onscroll = function () {
+            if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+                document.getElementById('backToTop').classList.add('show');
+            } else {
+                document.getElementById('backToTop').classList.remove('show');
+            }
+        };
+
+        document.getElementById('backToTop').addEventListener('click', function () {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+
+        // Filter Functions
+        function filterCategory(category) {
+            // Remove active class from all category cards
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            // Add active class to clicked category
+            event.currentTarget.classList.add('active');
+
+            // Here you would implement actual filtering logic
+            console.log('Filtering by category:', category);
+            // Show a message for demo purposes
+            alert(`Filtering by ${category} schools. In a real application, this would show only ${category} schools.`);
+        }
+
+        function filterSchools() {
+            const region = document.getElementById('regionFilter').value;
+            const type = document.getElementById('typeFilter').value;
+            const sort = document.getElementById('sortFilter').value;
+
+            console.log('Filtering by:', { region, type, sort });
+            // Here you would implement actual filtering
+            if (region || type || sort) {
+                alert(`Filtering schools: Region - ${region || 'All'}, Type - ${type || 'All'}, Sort - ${sort}`);
+            }
+        }
+
+        function viewIslamicSchools() {
+            alert('Showing all Islamic and Tahfidh schools. This would filter to show only Islamic institutions.');
+            // Set category active to tahfidh
+            document.querySelectorAll('.category-card').forEach(card => {
+                card.classList.remove('active');
+            });
+            // Find and activate the tahfidh card
+            document.querySelectorAll('.category-card')[6].classList.add('active');
+        }
+
+        // School Action Functions
+        function viewSchoolDetails(schoolId) {
+            alert(`Viewing details for ${schoolId}. This would open a detailed school profile page.`);
+        }
+
+        function scheduleTour(schoolId) {
+            alert(`Scheduling a tour for ${schoolId}. This would open a booking form.`);
+        }
+
+        function virtualTour(schoolId) {
+            alert(`Starting virtual tour for ${schoolId}. This would load a 360° virtual tour.`);
+        }
+
+        // Login Form
+        document.getElementById('loginForm')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Login functionality would be implemented here.');
+            bootstrap.Modal.getInstance(document.getElementById('adminModal')).hide();
+        });
+
+        // Newsletter Form
+        document.querySelector('.newsletter-form')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            alert('Thank you for subscribing to our newsletter!');
+            this.reset();
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function () {
+            const nav = document.getElementById('mainNav');
+            if (window.scrollY > 100) {
+                nav.style.background = 'rgba(10, 44, 78, 0.98)';
+                nav.style.backdropFilter = 'blur(10px)';
+            } else {
+                nav.style.background = 'rgba(10, 44, 78, 0.95)';
+            }
+        });
+
+        // Active navigation highlight
+        const currentLocation = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        navLinks.forEach(link => {
+            if (link.getAttribute('href') === 'schools.html') {
+                link.classList.add('active');
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCategoryDropdown();
+            updateResultsCount(8); // Show initial count of all schools
+            // Show all schools by default
+            const noSchoolsMessage = document.getElementById('noSchoolsMessage');
+            if (noSchoolsMessage) {
+                noSchoolsMessage.style.display = 'none';
+            }
+            console.log('Schools page loaded. Select a category to filter schools.');
+        });
+    </script>
+    <script src="script.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/navbar.js"></script>
+    <script src="js/schools.js"></script>
+</body>
+
+</html>
+
+

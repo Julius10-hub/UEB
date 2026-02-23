@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Bridge - School Management System</title>
+    <meta name="description"
+        content="EduBridge — connecting students and schools with a clear, modern visual identity inspired by leading university sites.">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- External CSS (embedded for completeness) -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/navbar.css">
+    <link rel="stylesheet" href="styles/schools.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2 line-icon" aria-hidden="true"></i>EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="schools.html">Schools</a></li>
+                    <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bursaries.html">Bursaries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="e-library.html">E-Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item">
+                    <div class="navbar-auth" id="navbarAuth">
+                    <a href="login.html" class="btn btn-outline">Sign In</a>
+                </div>
+                <div class="navbar-user" id="navbarUser" style="display: none;">
+                    <span id="userEmail"></span>
+                    <a href="admin-dashboard.html" id="adminLink" style="display: none;" class="nav-link">Admin</a>
+                    <button id="logoutBtn" class="btn btn-outline">Logout</button>
+                </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    <!-- Main Content - Full Width -->
+    <main id="main-content">
+
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-particles" id="particles"></div>
+            <div class="hero-container">
+                <div class="hero-content">
+                    <h1>
+                        Activities Uganda Education 
+                        <span class="hero-highlight">Bridge</span>
+                    </h1>
+                    <p class="hero-description">
+                        Discover educational activities, webinars, and events that enhance learning and engagement for students at all levels.
+                    </p>
+                    <div class="hero-buttons">
+                        <a href="#activities" class="btn btn-primary">
+                            View Activities <i class="fas fa-arrow-right"></i>
+                        </a>
+                        <a href="contact.html" class="btn btn-outline-light">
+                            Register Now <i class="fas fa-pen-fancy"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 500 500'%3E%3Cpath fill='%23f39c12' d='M250,50 L450,200 L450,350 L250,450 L50,350 L50,200 L250,50' opacity='0.1'/%3E%3Ccircle cx='250' cy='250' r='150' fill='%23f39c12' opacity='0.1'/%3E%3C/svg%3E" alt="Activities Illustration">
+                </div>
+            </div>
+        </section>
+
+        <!-- Quick Access Section -->
+        <section class="quick-access">
+            <div class="container">
+                <div class="section-header">
+                    <p class="section-subtitle">Quick Access</p>
+                    <h2 class="section-title">Find Your <span>Path</span></h2>
+                </div>
+                <div class="quick-grid">
+                    <a href="schools.html?level=kindergarten" class="quick-card">
+                        <h3>Kindergarten</h3>
+                        <p>Ages 3-5 • 50+ Schools</p>
+                    </a>
+                    <a href="schools.html?level=nursery" class="quick-card">
+                        <h3>Nursery</h3>
+                        <p>Ages 2-4 • 45+ Schools</p>
+                    </a>
+                    <a href="schools.html?level=primary" class="quick-card">
+                        <h3>Primary</h3>
+                        <p>Grade 1-6 • 120+ Schools</p>
+                    </a>
+                    <a href="schools.html?level=secondary" class="quick-card">
+                        <h3>Secondary</h3>
+                        <p>Form 1-4 • 85+ Schools</p>
+                    </a>
+                    <a href="schools.html?level=technical" class="quick-card">
+                        <h3>Technical</h3>
+                        <p>Vocational • 30+ Institutes</p>
+                    </a>
+                    <a href="schools.html?level=university" class="quick-card">
+                        <h3>University</h3>
+                        <p>Bachelor's+ • 25+ Universities</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Islamic Spotlight -->
+        <div class="full-width-section">
+            <div class="islamic-spotlight">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h3><i class="fas fa-mosque me-2" style="color: var(--orange);"></i>Tahfidh & Islamic Curriculum</h3>
+                        <p class="mb-0">Specialized Islamic education with Quran memorization and Arabic studies. 45+ certified Tahfidh schools across Uganda.</p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <a href="schools.html?category=islamic" class="btn" style="background: var(--orange); color: var(--deep-blue); padding: 10px 25px; border-radius: 50px; text-decoration: none;">View Islamic Schools →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Featured Schools -->
+        <div class="full-width-section">
+            <div class="section-header">
+                <h2><i class="fas fa-star me-2"></i>Featured Schools</h2>
+            </div>
+
+            <div class="schools-grid">
+                <div class="school-card">
+                    <div class="school-image">
+                        <img src="https://via.placeholder.com/400x200/0a2c4e/ffffff?text=Kampala+International" alt="School">
+                        <span class="school-badge">Top Rated</span>
+                    </div>
+                    <div class="school-content">
+                        <h3>Kampala International</h3>
+                        <div class="school-location">
+                            <i class="fas fa-map-marker-alt"></i> Kampala
+                        </div>
+                        <p class="small">Cambridge curriculum from Kindergarten to A-Levels.</p>
+                        <a href="schools.html" class="btn btn-sm" style="color: var(--orange);">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="school-card">
+                    <div class="school-image">
+                        <img src="https://via.placeholder.com/400x200/2e7d32/ffffff?text=Al-Noor+Academy" alt="Islamic School">
+                        <span class="school-badge">Tahfidh</span>
+                    </div>
+                    <div class="school-content">
+                        <h3>Al-Noor Academy</h3>
+                        <div class="school-location">
+                            <i class="fas fa-map-marker-alt"></i> Kampala
+                        </div>
+                        <p class="small">Quran memorization with national curriculum.</p>
+                        <a href="schools.html" class="btn btn-sm" style="color: var(--orange);">View Details →</a>
+                    </div>
+                </div>
+
+                <div class="school-card">
+                    <div class="school-image">
+                        <img src="https://via.placeholder.com/400x200/534bae/ffffff?text=Uganda+Technical" alt="Technical School">
+                        <span class="school-badge">Technical</span>
+                    </div>
+                    <div class="school-content">
+                        <h3>Uganda Technical</h3>
+                        <div class="school-location">
+                            <i class="fas fa-map-marker-alt"></i> Kampala
+                        </div>
+                        <p class="small">Engineering, IT, and vocational training.</p>
+                        <a href="schools.html" class="btn btn-sm" style="color: var(--orange);">View Details →</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Activities Section -->
+        <div class="full-width-section">
+            <div class="activities-grid">
+                <!-- Events -->
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-calendar-alt"></i>
+                        </div>
+                        <h3>Upcoming Events</h3>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="day">15</div>
+                            <div>APR</div>
+                        </div>
+                        <div>
+                            <h5>Open Day - KIS</h5>
+                            <small>10:00 AM, Kampala</small>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div class="timeline-date">
+                            <div class="day">20</div>
+                            <div>APR</div>
+                        </div>
+                        <div>
+                            <h5>STEM Workshop</h5>
+                            <small>9:00 AM, UTC</small>
+                        </div>
+                    </div>
+                    <a href="activities.html" class="btn btn-sm mt-3" style="color: var(--orange);">View All →</a>
+                </div>
+
+                <!-- Jobs -->
+                <div class="activity-card">
+                    <div class="activity-header">
+                        <div class="activity-icon">
+                            <i class="fas fa-briefcase"></i>
+                        </div>
+                        <h3>Job Opportunities</h3>
+                    </div>
+                    <div class="timeline-item">
+                        <div>
+                            <h5>Mathematics Teacher</h5>
+                            <small>Kampala International</small>
+                            <span class="job-tag">Full-time</span>
+                        </div>
+                    </div>
+                    <div class="timeline-item">
+                        <div>
+                            <h5>Quran Teacher</h5>
+                            <small>Al-Noor Academy</small>
+                            <span class="job-tag">Full-time</span>
+                        </div>
+                    </div>
+                    <a href="activities.html" class="btn btn-sm mt-3" style="color: var(--orange);">View All →</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Partners -->
+        <div class="full-width-section">
+            <div class="partners-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-handshake me-2"></i>Our Partners</h2>
+                </div>
+                <div class="partners-grid">
+                    <div class="partner-item">UNEB</div>
+                    <div class="partner-item">Ministry of Education</div>
+                    <div class="partner-item">Cambridge</div>
+                    <div class="partner-item">Pearson</div>
+                    <div class="partner-item">UNESCO</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="full-width-section">
+            <div class="testimonials-section">
+                <div class="section-header">
+                    <h2 style="color: white;"><i class="fas fa-quote-right me-2" style="color: var(--orange);"></i>Success Stories</h2>
+                </div>
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="small">"EduBridge helped us find the perfect Islamic school for our daughter."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h5>Ahmed Mukasa</h5>
+                                <p>Parent</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="small">"Secured a full bursary to study engineering through this platform."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h5>Sarah Nakato</h5>
+                                <p>Student</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote"><i class="fas fa-quote-right"></i></div>
+                        <p class="small">"Excellent platform for education agents. Great tracking tools."</p>
+                        <div class="testimonial-author">
+                            <div class="author-image"><i class="fas fa-user"></i></div>
+                            <div class="author-info">
+                                <h5>John Okello</h5>
+                                <p>Agent</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- CTA Section -->
+        <div class="full-width-section">
+            <div class="cta-section">
+                <h2>Ready to Start Your Journey?</h2>
+                <p>Join thousands of students who found their perfect educational path.</p>
+                <div class="cta-buttons">
+                    <a href="schools.html" class="cta-btn-primary">Explore Schools</a>
+                    <a href="contact.html" class="cta-btn-outline">Contact Us</a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 800, once: true });
+
+        // Back to Top
+        window.onscroll = function() {
+            document.getElementById('backToTop').classList.toggle('show', document.body.scrollTop > 20 || document.documentElement.scrollTop > 20);
+        };
+        document.getElementById('backToTop').addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+
+        // Login Form
+        document.getElementById('loginForm')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Login demo');
+            bootstrap.Modal.getInstance(document.getElementById('adminModal')).hide();
+        });
+
+        // Newsletter
+        document.querySelector('.newsletter-form')?.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for subscribing!');
+            e.target.reset();
+        });
+
+        // Navbar scroll
+        window.addEventListener('scroll', () => {
+            document.getElementById('mainNav').style.background = window.scrollY > 100 ? 'rgba(10, 44, 78, 0.98)' : 'rgba(10, 44, 78, 0.95)';
+        });
+    </script>
+</body>
+
+</html>
+
+

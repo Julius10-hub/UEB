@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edu Bridge - School Management System</title>
+    <meta name="description"
+        content="EduBridge — connecting students and schools with a clear, modern visual identity inspired by leading university sites.">
+    <!-- Google Fonts -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- External CSS (embedded for completeness) -->
+    <link rel="stylesheet" href="styles/style.css">
+</head>
+<header>
+        <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="index.html">
+                <i class="fas fa-graduation-cap me-2 line-icon" aria-hidden="true"></i>EduBridge
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="schools.html">Schools</a></li>
+                    <li class="nav-item"><a class="nav-link" href="activities.html">Activities</a></li>
+                    <li class="nav-item"><a class="nav-link" href="bursaries.html">Bursaries</a></li>
+                    <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
+                    <li class="nav-item"><a class="nav-link" href="e-library.html">E-Library</a></li>
+                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item">
+                <div class="navbar-auth" id="navbarAuth">
+                    <a href="login.html" class="btn btn-primary">Admin</a>
+                </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+<body>
+    <!-- Hero Section -->
+    <section class="hero" style="background: linear-gradient(135deg, rgba(17, 42, 102, 0.7) 0%, rgba(30, 91, 168, 0.7) 100%), url('gallery/image.png') center/cover no-repeat;">
+        <div class="hero-particles" id="particles"></div>
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1>
+                    About EduBridge
+                </h1>
+                <p class="hero-description">
+                    Learn about our mission to empower students and educators through innovative digital solutions.
+                </p>
+                <div class="hero-buttons">
+                    <a href="schools.html" class="btn btn-primary">
+                        Explore Schools <i class="fas fa-arrow-right"></i>
+                    </a>
+                    <a href="contact.html" class="btn btn-outline-light">
+                        Get in Touch <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="quick-access">
+        <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Quick Access</p>
+                <h2 class="section-title">Find Your <span>Path</span></h2>
+            </div>
+            <div class="quick-grid">
+                <a href="schools.html?level=kindergarten" class="quick-card">
+                    <h3>Kindergarten</h3>
+                    <p>Ages 3-5 • 50+ Schools</p>
+                </a>
+                <a href="schools.html?level=nursery" class="quick-card">
+                    <h3>Nursery</h3>
+                    <p>Ages 2-4 • 45+ Schools</p>
+                </a>
+                <a href="schools.html?level=primary" class="quick-card">
+                    <h3>Primary</h3>
+                    <p>Grade 1-6 • 120+ Schools</p>
+                </a>
+                <a href="schools.html?level=secondary" class="quick-card">
+                    <h3>Secondary</h3>
+                    <p>Form 1-4 • 85+ Schools</p>
+                </a>
+                <a href="schools.html?level=technical" class="quick-card">
+                    <h3>Technical</h3>
+                    <p>Vocational • 30+ Institutes</p>
+                </a>
+                <a href="schools.html?level=university" class="quick-card">
+                    <h3>University</h3>
+                    <p>Bachelor's+ • 25+ Universities</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+            <!-- Mission, Vision, Values Section -->
+            <section class="about-section">
+                <div class="container-fluid">
+                    <div class="section-intro">
+                        <h2>Our Purpose & Direction</h2>
+                        <p>At EduBridge, we're guided by a clear mission and a compelling vision for the future of
+                            education in Uganda and beyond.</p>
+                    </div>
+
+                    <div class="row g-4">
+                        <div class="col-lg-4">
+                            <div class="mvv-card">
+                                <h3>
+                                    <span class="icon-mvv"><i class="fas fa-bullseye"></i></span>
+                                    Mission
+                                </h3>
+                                <p>To empower students and schools with modern, accessible digital services that
+                                    simplify school discovery, applications, bursaries, and learning resources.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mvv-card">
+                                <h3>
+                                    <span class="icon-mvv"><i class="fas fa-eye"></i></span>
+                                    Vision
+                                </h3>
+                                <p>To be the trusted national platform for education services, improving outcomes
+                                    through transparency, partnerships, and innovation.</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4">
+                            <div class="mvv-card">
+                                <h3>
+                                    <span class="icon-mvv"><i class="fas fa-heart"></i></span>
+                                    Impact
+                                </h3>
+                                <p>Creating tangible change by removing barriers to education, fostering transparency,
+                                    and building partnerships that strengthen the entire education ecosystem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Core Values Section -->
+            <section class="about-section alt-bg">
+                <div class="container-fluid">
+                    <div class="section-intro">
+                        <h2>Core Values</h2>
+                        <p>These principles guide every decision we make and every service we provide.</p>
+                    </div>
+
+                    <div class="values-grid">
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-unlock"></i></div>
+                            <h4>Access</h4>
+                            <p>Removing barriers for learners to discover quality educational opportunities.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-star"></i></div>
+                            <h4>Quality</h4>
+                            <p>Curating reliable institutions and trusted resources for learning.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-shield-alt"></i></div>
+                            <h4>Integrity</h4>
+                            <p>Securing user data and maintaining transparent processes across our platform.</p>
+                        </div>
+                        <div class="value-item">
+                            <div class="value-icon"><i class="fas fa-handshake"></i></div>
+                            <h4>Collaboration</h4>
+                            <p>Partnering with schools, agents, and communities to strengthen education.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- What We Do Section -->
+            <section class="about-section">
+                <div class="container-fluid">
+                    <div class="section-intro">
+                        <h2>What We Do</h2>
+                        <p>EduBridge provides comprehensive services to transform educational access and outcomes.</p>
+                    </div>
+
+                    <div class="features-grid">
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-school"></i></div>
+                            <div>
+                                <h4>School Discovery</h4>
+                                <p>Curated listings of schools across pre-school to university levels, helping students
+                                    and parents find institutions that match their needs.</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-file-alt"></i></div>
+                            <div>
+                                <h4>Application Support</h4>
+                                <p>Simplified application processes and guidance for students applying to schools and
+                                    institutions.</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-graduation-cap"></i></div>
+                            <div>
+                                <h4>Bursary Programs</h4>
+                                <p>Access to dedicated bursary opportunities and financial support programs for
+                                    deserving students.</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-book"></i></div>
+                            <div>
+                                <h4>E-Library Resources</h4>
+                                <p>Extensive collection of past papers, study guides, and learning materials for
+                                    academic excellence.</p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div>
+                                <h4>Activities & Events</h4>
+                                <p>Educational activities, webinars, and events that enhance learning and engagement.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="feature-block">
+                            <div class="icon"><i class="fas fa-network-wired"></i></div>
+                            <div>
+                                <h4>Agent Network</h4>
+                                <p>Partnership opportunities with education agents who help connect students to
+                                    opportunities.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Leadership Section -->
+            <section class="about-section alt-bg">
+                <div class="container-fluid">
+                    <div class="section-intro">
+                        <h2>Our Leadership Team</h2>
+                        <p>Meet the experienced professionals driving EduBridge's mission to transform education in
+                            Africa.</p>
+                    </div>
+
+                    <div class="leadership-grid">
+                        <div class="team-card">
+                            <div class="team-card-image"><i class="fas fa-user-tie"></i></div>
+                            <div class="team-card-content">
+                                <h4>John Kariuki</h4>
+                                <p class="role">Chief Executive Officer</p>
+                                <p>Visionary leader with 15+ years of experience in education technology and innovation.
+                                    John drives EduBridge's strategic direction and partnerships.</p>
+                                <div class="team-card-social">
+                                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-card-image"><i class="fas fa-user-tie"></i></div>
+                            <div class="team-card-content">
+                                <h4>Sarah Mwangi</h4>
+                                <p class="role">Chief Operating Officer</p>
+                                <p>Operations expert with proven track record in scaling educational platforms across
+                                    East Africa. Sarah ensures seamless execution of EduBridge's initiatives.</p>
+                                <div class="team-card-social">
+                                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="team-card">
+                            <div class="team-card-image"><i class="fas fa-user-tie"></i></div>
+                            <div class="team-card-content">
+                                <h4>David Kipchoge</h4>
+                                <p class="role">Head of Technology</p>
+                                <p>Tech innovator with expertise in building scalable platforms. David leads the
+                                    development of EduBridge's cutting-edge technology infrastructure.</p>
+                                <div class="team-card-social">
+                                    <a href="#" title="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                                    <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+            </section>
+
+            <!-- CTA Section -->
+            <section class="cta-about">
+                <div class="container-fluid">
+                    <h2>Ready to Transform Education?</h2>
+                    <p>Join thousands of students, parents, and educators already using EduBridge to access quality
+                        education and opportunities.</p>
+                    <div class="cta-buttons">
+                        <a href="schools.html" class="btn btn-light-about">Explore Schools</a>
+                        <a href="contact.html" class="btn btn-outline-light">Get in Touch</a>
+                    </div>
+                </div>
+                </section>
+            
+        </main>
+
+        <footer>
+            <div class="footer-waves">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320" preserveAspectRatio="none"
+                    style="width: 100%; height: 50px;">
+                    <path fill="#f39c12" fill-opacity="0.1"
+                        d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,122.7C672,117,768,139,864,154.7C960,171,1056,181,1152,170.7C1248,160,1344,128,1392,112L1440,96L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z">
+                    </path>
+                </svg>
+            </div>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>eduHUB</h3>
+                    <p>Your trusted partner in education since 2020. We connect students with Uganda's finest
+                        educational institutions and resources.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/profile.php?id=61576191012566#"><i
+                                class="fab fa-facebook-f"></i></a>
+                        <a
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fyoutube.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6eoaUGVau149glyugeYF45Zx0q7eqSu0NgAKxlJ7wy33MsLiXp2TxdnnrrtA_aem_GiejR9YaLmEhqxVXOuhVYg&h=ASVhg88P_51A2yAsLvok5TY9hwC-9W5WHG7NmhB5lxywET_mfgmMKt1kbAd_OWKjZf5Fksf0HBP41duSEX-5zYuucaIoAgZXjzcyU_3HQZJUwB5pFdrdnjIdg6luIQpWuNXm"><i
+                                class="fab fa-youtube"></i></a>
+                        <a
+                            href="https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2F%2540ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6bDEkgCfMWUtBQwsgJ7RS_Mu4vpl-kZ4msfywAOYMQj5qEtq__1zqKQxcmcA_aem_VAkH5zhu6CZfNYf_YCchNQ&h=ASV-llKfHAL0Ea4FXmSp8hkrH0s2V9RJUkX7pdNd3KCqFHDn060_E0Pk9qUymw0QPn0Ls-1i5fL8ApkLm5ogUz6Np5WnJTiQnXlDrFPihH2k5QG_lHA7ZFTmUsg4Hy3Ly3QU"><i
+                                class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="fas fa-chevron-right"></i> Home</a></li>
+                        <li><a href="about.html"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                        <li><a href="schools.html"><i class="fas fa-chevron-right"></i> Our Schools</a></li>
+                        <li><a href="activities.html"><i class="fas fa-chevron-right"></i> Activities</a></li>
+                        <li><a href="bursaries.html"><i class="fas fa-chevron-right"></i> Bursaries</a></li>
+                        <li><a href="e-library.html"><i class="fas fa-chevron-right"></i> E-Library</a></li>
+                        <li><a href="contact.html"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> Kampala, Uganda</p>
+                    <p><i class="fas fa-phone"></i> +256 700 123456</p>
+                    <p><i class="fas fa-envelope"></i> ugandaeducationbridge@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Fri: 8am - 6pm</p>
+                </div>
+                <div class="footer-section">
+                    <h3>Newsletter</h3>
+                    <p>Subscribe for updates on schools and opportunities</p>
+                    <form class="newsletter-form"
+                        onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+                        <input type="email" placeholder="Your email" required>
+                        <button type="submit"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <div class="footer-bottom-content">
+                    <div class="footer-bottom-links">
+                        <a href="privacy-policy.html">Privacy & Security Policy</a>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="contact.html">Contact Us</a>
+                    </div>
+                    <div class="footer-bottom-links">
+                        <a href="about.html">About Us</a>
+                    </div>
+                </div>
+                <p>&copy; 2025 eduHUB. All rights reserved. | Designed with <i class="fas fa-heart"
+                        style="color: var(--orange);"></i> for education</p>
+            </div>
+        </footer>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            // Add scroll effect to navbar
+            window.addEventListener('scroll', function () {
+                const navbar = document.getElementById('mainNav');
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+        </script>
+
+        <!-- Chatbot widget (client-side only) -->
+        <div class="chatbot-button" id="chatbotToggle" aria-label="Open chat" title="Chat with us">
+            <div class="chatbot-icon-wrapper">
+                <div class="chatbot-pulse"></div>
+                <i class="fas fa-comment-dots"></i>
+                <span class="chatbot-notification-badge" id="chatbotNotification">1</span>
+            </div>
+            <span class="chatbot-tooltip">Ask us anything</span>
+        </div>
+
+        <div class="chatbot-panel" id="chatbotPanel" role="dialog" aria-labelledby="chatbotTitle">
+            <div class="chatbot-header">
+                <div>
+                    <strong id="chatbotTitle">EduBridge Assistant</strong>
+                    <div class="chatbot-status" aria-live="polite"><i class="fas fa-circle" style="color:#10b981; font-size:0.5rem;"></i> Online</div>
+                </div>
+                <button class="chatbot-close-btn" id="chatbotClose" aria-label="Close chat" title="Close">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+
+            <div class="chatbot-messages" id="chatbotMessages" aria-live="polite" aria-atomic="false">
+                <div class="chatbot-msg bot">
+                    <div class="msg-bubble">👋 Hi! I'm the EduBridge Assistant. How can I help you today?</div>
+                </div>
+                <div class="chatbot-quick-replies" id="quickReplies">
+                    <button class="quick-reply-btn" data-query="schools">🏫 Find Schools</button>
+                    <button class="quick-reply-btn" data-query="bursaries">💰 Bursaries</button>
+                    <button class="quick-reply-btn" data-query="contact">📞 Contact Info</button>
+                    <button class="quick-reply-btn" data-query="hours">🕐 Hours</button>
+                </div>
+            </div>
+
+            <div class="chatbot-input-area">
+                <div class="chatbot-input">
+                    <input type="text" id="chatbotInput" placeholder="Type your message..." aria-label="Type your message" autocomplete="off">
+                    <button class="chatbot-send-btn" id="chatbotSend" aria-label="Send message" title="Send">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+                <div class="chatbot-typing" id="chatbotTyping" style="display:none;">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            // Enhanced Professional EduBridge Chatbot
+            (function () {
+                const toggle = document.getElementById('chatbotToggle');
+                const panel = document.getElementById('chatbotPanel');
+                const closeBtn = document.getElementById('chatbotClose');
+                const sendBtn = document.getElementById('chatbotSend');
+                const input = document.getElementById('chatbotInput');
+                const messages = document.getElementById('chatbotMessages');
+                const typingIndicator = document.getElementById('chatbotTyping');
+                const quickRepliesContainer = document.getElementById('quickReplies');
+                const notificationBadge = document.getElementById('chatbotNotification');
+
+                let hasUnreadMessages = true;
+                let isFirstOpen = true;
+
+                // Knowledge base
+                const knowledge = {
+                    schools: {
+                        keywords: ['schools', 'find schools', 'school', 'list', 'which schools'],
+                        response: 'We partner with top schools across Uganda! 🏫 You can browse all available schools on our Schools page, filter by location, and contact schools directly. Would you like help finding a specific school?'
+                    },
+                    bursaries: {
+                        keywords: ['bursaries', 'bursary', 'scholarship', 'funding', 'financial', 'grant', 'support fund'],
+                        response: '💰 Great news! We have numerous bursaries and scholarships available. Visit our Bursaries page to explore opportunities based on your qualifications and background. Many have no repayment requirements!'
+                    },
+                    contact: {
+                        keywords: ['contact', 'phone', 'email', 'address', 'visit', 'call', 'get in touch'],
+                        response: '📞 **Contact us here:**\n📧 Email: ugandaeducationbridge@gmail.com\n📱 Phone: +256 755 381419\n📍 Location: 123 Education Lane, Kampala, Uganda\n🕐 Hours: Mon-Fri 9am-5pm'
+                    },
+                    hours: {
+                        keywords: ['hours', 'open', 'close', 'time', 'when'],
+                        response: '🕐 **Our Hours:**\nMonday - Friday: 9:00 AM - 5:00 PM\nSaturday: 10:00 AM - 2:00 PM\nSunday: Closed\nWe respond to emails within 24 hours!'
+                    },
+                    activities: {
+                        keywords: ['activities', 'events', 'programs', 'workshops'],
+                        response: '🎯 We organize regular educational programs, workshops, and networking events! Check our Activities page for upcoming events and join our community.'
+                    },
+                    agents: {
+                        keywords: ['agents', 'partner', 'partners', 'representative'],
+                        response: '🤝 Interested in becoming an EduBridge Agent? Visit our Agents page to learn about partnership opportunities and earning potential!'
+                    },
+                    library: {
+                        keywords: ['library', 'e-library', 'ebook', 'book', 'resource', 'study material'],
+                        response: '📚 Our E-Library has tons of educational resources, study guides, and materials! Download what you need for free on the E-Library page.'
+                    },
+                    admin: {
+                        keywords: ['admin', 'login', 'sign in'],
+                        response: '🔐 Admin login is available for authorized staff. Click the "Admin" button in the navigation to access the admin panel.'
+                    }
+                };
+
+                // Default responses for unmatched queries
+                const defaults = [
+                    'That\'s a great question! 🤔 You can also reach us directly at +256 755 381419 or ugandaeducationbridge@gmail.com',
+                    'I appreciate your interest! 😊 For more detailed information, please visit our relevant page or contact us directly.',
+                    'Thanks for asking! 📧 Feel free to reach out to our team for personalized assistance.'
+                ];
+
+                // Hide notification badge
+                function hideNotification() {
+                    notificationBadge.classList.add('hidden');
+                    hasUnreadMessages = false;
+                }
+
+                // Show notification badge
+                function showNotification(count = 1) {
+                    notificationBadge.textContent = count;
+                    notificationBadge.classList.remove('hidden');
+                    hasUnreadMessages = true;
+                }
+
+                function addMessage(text, who) {
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'chatbot-msg ' + who;
+                    const bubble = document.createElement('div');
+                    bubble.className = 'msg-bubble';
+                    bubble.innerHTML = text.replace(/\n/g, '<br>').replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+                    wrapper.appendChild(bubble);
+                    messages.appendChild(wrapper);
+                    messages.scrollTop = messages.scrollHeight;
+                }
+
+                function showTyping() {
+                    typingIndicator.style.display = 'flex';
+                    messages.scrollTop = messages.scrollHeight;
+                }
+
+                function hideTyping() {
+                    typingIndicator.style.display = 'none';
+                }
+
+                function generateReply(userInput) {
+                    const input_lower = userInput.toLowerCase().trim();
+
+                    // Check against knowledge base
+                    for (const [key, data] of Object.entries(knowledge)) {
+                        if (data.keywords.some(keyword => input_lower.includes(keyword))) {
+                            return data.response;
+                        }
+                    }
+
+                    // Default response
+                    return defaults[Math.floor(Math.random() * defaults.length)];
+                }
+
+                function botReply(text) {
+                    showTyping();
+                    setTimeout(() => {
+                        hideTyping();
+                        addMessage(generateReply(text), 'bot');
+                        // Remove quick replies after first message
+                        if (quickRepliesContainer && quickRepliesContainer.parentElement) {
+                            quickRepliesContainer.style.opacity = '0';
+                            setTimeout(() => {
+                                quickRepliesContainer.style.display = 'none';
+                            }, 300);
+                        }
+                    }, 600 + Math.random() * 400);
+                }
+
+                function sendQuery() {
+                    const text = input.value.trim();
+                    if (!text) return;
+
+                    addMessage(text, 'user');
+                    input.value = '';
+                    input.focus();
+                    botReply(text);
+                }
+
+                // Quick reply button handlers
+                document.querySelectorAll('.quick-reply-btn').forEach(btn => {
+                    btn.addEventListener('click', function() {
+                        const query = this.getAttribute('data-query');
+                        addMessage('🏫 ' + this.textContent.trim(), 'user');
+                        setTimeout(() => {
+                            botReply(query);
+                        }, 300);
+                    });
+                });
+
+                // Main event listeners
+                toggle.addEventListener('click', () => {
+                    panel.classList.toggle('show');
+                    if (panel.classList.contains('show')) {
+                        hideNotification();
+                        input.focus();
+                        
+                        // Show welcome hint on first open
+                        if (isFirstOpen) {
+                            setTimeout(() => {
+                                addMessage('💡 **Pro Tip:** Try clicking the quick reply buttons below to get instant answers!', 'bot');
+                                isFirstOpen = false;
+                            }, 800);
+                        }
+                    }
+                });
+
+                closeBtn.addEventListener('click', () => {
+                    panel.classList.remove('show');
+                    toggle.focus();
+                });
+
+                sendBtn.addEventListener('click', sendQuery);
+                input.addEventListener('keydown', function (e) {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                        e.preventDefault();
+                        sendQuery();
+                    }
+                });
+
+                // Accessibility: ESC to close
+                document.addEventListener('keydown', function (e) {
+                    if (e.key === 'Escape' && panel.classList.contains('show')) {
+                        panel.classList.remove('show');
+                        toggle.focus();
+                    }
+                });
+
+                // Optional: Show notification after 10 seconds if user hasn't opened chat
+                setTimeout(() => {
+                    if (!panel.classList.contains('show')) {
+                        showNotification(1);
+                    }
+                }, 10000);
+            })();
+        </script>
+
+        <!-- AOS (Animate On Scroll) Library -->
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init({
+                duration: 800,
+                once: true,
+                easing: 'ease-out-cubic'
+            });
+        </script>
+
+        <!-- Value Items Interactive Script -->
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                const valueItems = document.querySelectorAll('.value-item');
+                
+                // Add data-aos attributes for animation on scroll
+                valueItems.forEach((item, index) => {
+                    item.setAttribute('data-aos', 'fade-up');
+                    item.setAttribute('data-aos-delay', index * 100);
+                });
+                
+                // Icon pulse animation on hover
+                valueItems.forEach(item => {
+                    const icon = item.querySelector('.value-icon');
+                    
+                    item.addEventListener('mouseenter', function() {
+                        if (icon) {
+                            icon.style.animation = 'iconPulse 0.6s ease-out';
+                        }
+                    });
+                    
+                    item.addEventListener('mouseleave', function() {
+                        if (icon) {
+                            icon.style.animation = 'none';
+                        }
+                    });
+                    
+                    // Add click event for additional interactivity
+                    item.addEventListener('click', function() {
+                        const title = this.querySelector('h4').textContent;
+                        console.log('Value item clicked: ' + title);
+                        this.style.animation = 'iconBounce 0.6s ease-out';
+                        setTimeout(() => {
+                            this.style.animation = 'none';
+                        }, 600);
+                    });
+                });
+            });
+        </script>
+
+        <!-- Animation Keyframes -->
+        <style>
+            @keyframes iconPulse {
+                0% {
+                    box-shadow: 0 8px 24px rgba(243, 156, 18, 0.25);
+                }
+                50% {
+                    box-shadow: 0 12px 40px rgba(243, 156, 18, 0.4);
+                }
+                100% {
+                    box-shadow: 0 12px 36px rgba(243, 156, 18, 0.35);
+                }
+            }
+
+            @keyframes iconBounce {
+                0%, 100% {
+                    transform: scale(1.15) rotate(8deg);
+                }
+                50% {
+                    transform: scale(1.25) rotate(16deg);
+                }
+            }
+        </style>
+
+        <script src="script.js"></script>
+    </body>
+
+</html>
