@@ -561,6 +561,7 @@
                 </div>
 
                 <!-- Continuous marquee only -->
+<<<<<<< HEAD
                 <div class="marquee-container">
                     <div class="marquee">
                         <div class="marquee-content">
@@ -578,6 +579,21 @@
                                 <img src="gallery/logo.jpeg" alt="logo" class="sponsor-logo">
                             </div>
                         </div>
+=======
+                <div class="partners-marquee" aria-label="Partners">
+                    <div class="marquee-track">
+                        
+                        <div class="partner-item">Cambridge</div>
+                        <div class="partner-item">Pearson</div>
+                        <div class="partner-item">UNESCO</div>
+                        <div class="partner-item">UNEB</div>
+                        <div class="partner-item">Ministry of Education</div>
+                        <div class="partner-item"><img src="gallery/logo1.png" alt="logo1"></div>
+                        <div class="partner-item"><img src="gallery/logo2.png" alt="logo2"></div>
+                        <div class="partner-item">Cambridge</div>
+                        <div class="partner-item">Pearson</div>
+                        <div class="partner-item">UNESCO</div>
+>>>>>>> 187b34230cfdd21ae06535affeb7d0d43e2e1504
                     </div>
                 </div>
         </div>
@@ -596,12 +612,30 @@
                 border-radius: 15px;
                 padding: 35px 25px;
                 text-align: center;
+<<<<<<< HEAD
                 transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
                 position: relative;
                 overflow: hidden;
                 border: 1px solid rgba(30, 91, 168, 0.1);
                 box-shadow: 0 8px 25px rgba(30, 91, 168, 0.08);
                 cursor: pointer;
+=======
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .partners-marquee .partner-item:has(img) {
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .partners-marquee .partner-item img {
+                max-width: 100%;
+                max-height: 80px;
+                object-fit: contain;
+>>>>>>> 187b34230cfdd21ae06535affeb7d0d43e2e1504
             }
 
             .feature-block::before {

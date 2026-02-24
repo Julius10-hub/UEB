@@ -1,5 +1,6 @@
 // Schools page functionality
 let allSchools = [];
+let broadcastChannel = null;
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -8,11 +9,100 @@ document.addEventListener('DOMContentLoaded', async () => {
         
         // Setup event listeners
         setupFilterListeners();
+        
+        // Setup real-time listeners for new schools
+        setupRealtimeListeners();
     } catch (error) {
         console.error('Error loading schools:', error);
         showErrorMessage();
     }
 });
+
+// Setup real-time listeners for school additions from admin dashboard
+function setupRealtimeListeners() {
+    // Use Broadcast Channel API if available (modern browsers)
+    if (typeof BroadcastChannel !== 'undefined') {
+        try {
+            broadcastChannel = new BroadcastChannel('edubridge_schools');
+            broadcastChannel.addEventListener('message', (event) => {
+                if (event.data.type === 'SCHOOL_ADDED') {
+                    handleNewSchool(event.data.school);
+                }
+            });
+        } catch (error) {
+            console.log('Broadcast Channel setup failed, using fallback method');
+            setupLocalStorageListener();
+        }
+    } else {
+        // Fallback for older browsers using localStorage events
+        setupLocalStorageListener();
+    }
+    
+    // Also listen for custom document events
+    document.addEventListener('schoolAdded', (event) => {
+        handleNewSchool(event.detail.school);
+    });
+}
+
+// Fallback listener using localStorage events
+function setupLocalStorageListener() {
+    window.addEventListener('storage', (event) => {
+        if (event.key === 'edubridge_last_school_added' && event.newValue) {
+            try {
+                const data = JSON.parse(event.newValue);
+                handleNewSchool(data.school);
+            } catch (error) {
+                console.error('Error parsing new school data:', error);
+            }
+        }
+    });
+}
+
+// Handle newly added school with professional animation
+function handleNewSchool(school) {
+    if (!school || !school.id) return;
+    
+    // Check if school already exists
+    const exists = allSchools.find(s => s.id === school.id);
+    if (exists) return;
+    
+    // Add the new school to the beginning of the array for prominence
+    allSchools.unshift(school);
+    
+    // Reapply current filters if any
+    applyFilters();
+    
+    // Show notification
+    showNewSchoolNotification(school);
+}
+
+// Display professional notification for new school
+function showNewSchoolNotification(school) {
+    const container = document.getElementById('schoolsContainer');
+    const notificationDiv = document.createElement('div');
+    notificationDiv.className = 'school-notification-banner';
+    notificationDiv.innerHTML = `
+        <div class="notification-content">
+            <div class="notification-icon">✨</div>
+            <div class="notification-text">
+                <strong>${escapeHtml(school.name)}</strong> has been added to our platform
+            </div>
+            <button class="notification-close" onclick="this.parentElement.parentElement.remove()">&times;</button>
+        </div>
+    `;
+    
+    if (container && container.parentElement) {
+        container.parentElement.insertBefore(notificationDiv, container);
+        
+        // Auto-remove after 5 seconds
+        setTimeout(() => {
+            if (notificationDiv.parentElement) {
+                notificationDiv.classList.add('fade-out');
+                setTimeout(() => notificationDiv.remove(), 300);
+            }
+        }, 5000);
+    }
+}
 
 async function loadSchools() {
     const container = document.getElementById('schoolsContainer');

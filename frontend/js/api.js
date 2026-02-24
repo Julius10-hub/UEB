@@ -1,6 +1,16 @@
 // API Configuration
 const API_BASE_URL = 'http://localhost:5000/api';
 
+// Helper function to get authorization headers with Bearer token
+function getAuthHeaders() {
+    const token = localStorage.getItem('token');
+    const headers = { 'Content-Type': 'application/json' };
+    if (token) {
+        headers['Authorization'] = `Bearer ${token}`;
+    }
+    return headers;
+}
+
 // API Handlers
 const api = {
     // Authentication
@@ -45,6 +55,8 @@ const api = {
         if (email === 'admin@thrive.com' && password === 'admin123') {
             const user = { email, name: 'Admin', role: 'admin', is_admin: true, is_systems: false };
             localStorage.setItem('cpace_user', JSON.stringify(user));
+            // Store demo token
+            localStorage.setItem('token', 'demo-admin-token-' + Date.now());
             return { success: true, user };
         }
 
@@ -52,6 +64,7 @@ const api = {
         if (email === 'systems@thrive.com' && password === 'systems123') {
             const user = { email, name: 'Systems Manager', role: 'systems', is_admin: false, is_systems: true };
             localStorage.setItem('cpace_user', JSON.stringify(user));
+            localStorage.setItem('token', 'demo-systems-token-' + Date.now());
             return { success: true, user };
         }
         
@@ -67,6 +80,7 @@ const api = {
                 is_systems: found.role === 'systems'
             };
             localStorage.setItem('cpace_user', JSON.stringify(user));
+            localStorage.setItem('token', 'demo-user-token-' + Date.now());
             return { success: true, user };
         }
         
@@ -82,6 +96,10 @@ const api = {
             if (data.user) {
                 data.user.is_admin = data.user.is_admin || false;
                 data.user.is_systems = data.user.is_systems || false;
+                // Save token if backend provides one
+                if (data.token) {
+                    localStorage.setItem('token', data.token);
+                }
             }
             return data;
         } catch (error) {
@@ -91,11 +109,19 @@ const api = {
 
     async logout() {
         localStorage.removeItem('cpace_user');
+        localStorage.removeItem('token');
         
         // Try backend if available
         try {
+            const token = localStorage.getItem('token');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+            
             const response = await fetch(`${API_BASE_URL}/auth/logout`, {
                 method: 'POST',
+                headers: headers,
                 credentials: 'include'
             });
             return await response.json();
@@ -166,12 +192,30 @@ const api = {
     },
 
     async createSchool(schoolData) {
+        const token = localStorage.getItem('token');
+        if (!token) {
+            return { error: 'Authentication required. Please log in first.' };
+        }
+        
         const response = await fetch(`${API_BASE_URL}/schools`, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
             body: JSON.stringify(schoolData)
         });
+        
+        if (response.status === 401) {
+            localStorage.removeItem('token');
+            localStorage.removeItem('cpace_user');
+            return { error: 'Unauthorized - Session expired. Please log in again.' };
+        }
+        
+        if (response.status === 403) {
+            return { error: 'Forbidden - You do not have permission to add schools.' };
+        }
+        
         return await response.json();
     },
 
