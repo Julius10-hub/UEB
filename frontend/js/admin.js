@@ -7,13 +7,20 @@ document.addEventListener('DOMContentLoaded', async () => {
         return;
     }
     
+    // Setup real-time broadcasting
+    setupSchoolBroadcasting();
+    
     // Load dashboard data
     await loadStats();
     await loadSchools();
     await loadSuggestions();
     
-    // Setup form handler
+    // Setup form handler  
     setupFormHandlers();
+
+    // Wire quick action Add School button (if present)
+    const addSchoolBtn = document.getElementById('addSchoolBtn');
+    if (addSchoolBtn) addSchoolBtn.addEventListener('click', () => openModal('schoolModal'));
 });
 
 async function loadStats() {
@@ -83,7 +90,23 @@ async function loadSuggestions() {
 function showCreateSchoolForm() {
     const modal = document.getElementById('schoolModal');
     modal.style.display = 'flex';
-    document.getElementById('addSchoolForm').reset();
+    // Reset the school form if it exists
+    const form = document.getElementById('schoolForm');
+    if (form) form.reset();
+}
+
+// Generic open modal helper used by markup and buttons
+function openModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (!modal) return;
+    modal.style.display = 'flex';
+    // If opening school modal, reset form and title
+    if (modalId === 'schoolModal') {
+        const form = document.getElementById('schoolForm');
+        if (form) form.reset();
+        const titleEl = document.getElementById('schoolModalTitle');
+        if (titleEl) titleEl.textContent = 'Add New School';
+    }
 }
 
 function closeModal(modalId) {
@@ -98,32 +121,99 @@ function navigateTo(sectionId) {
 }
 
 function setupFormHandlers() {
-    document.getElementById('addSchoolForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
+    // Removed - using handleSchoolSubmit instead
+}
+
+// Handle comprehensive school form submission
+async function handleSchoolSubmit(event) {
+    event.preventDefault();
+    
+    const form = event.target;
+    const formData = new FormData(form);
+    
+    // Build school data from form
+    const schoolData = {
+        name: formData.get('name'),
+        location: formData.get('location'),
+        city: formData.get('city'),
+        country: formData.get('country'),
+        category: formData.get('category'),
+        description: formData.get('description'),
+        long_description: formData.get('long_description'),
+        established: formData.get('established') ? parseInt(formData.get('established')) : null,
+        students: formData.get('students') ? parseInt(formData.get('students')) : 0,
+        faculty: formData.get('faculty') ? parseInt(formData.get('faculty')) : 0,
+        contact_email: formData.get('contact_email'),
+        contact_phone: formData.get('contact_phone'),
+        website: formData.get('website'),
+        meta_keywords: formData.get('meta_keywords'),
+        meta_description: formData.get('meta_description'),
+        programs: formData.get('programs_text') 
+            ? formData.get('programs_text').split(',').map(p => p.trim()).filter(p => p)
+            : []
+    };
+    
+    try {
+        // Show loading state
+        const submitBtn = form.querySelector('button[type="submit"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Saving...';
+        submitBtn.disabled = true;
         
-        const formData = new FormData(e.target);
-        const schoolData = {
-            name: formData.get('name'),
-            location: formData.get('location'),
-            category: formData.get('category'),
-            description: formData.get('description'),
-            students: parseInt(formData.get('students')) || 0,
-            programs: []
-        };
+        // Submit to API
+        const result = await api.createSchool(schoolData);
         
-        try {
-            const result = await api.createSchool(schoolData);
-            if (result.error) {
-                showNotification(result.error, 'error');
-            } else {
-                showNotification('School added successfully!', 'success');
-                closeModal('schoolModal');
+        if (result.error) {
+            showNotification('Error: ' + result.error, 'error');
+        } else {
+            showNotification('School added successfully!', 'success');
+            
+            // Broadcast to all tabs
+            if (window.schoolUpdateChannel) {
+                window.schoolUpdateChannel.postMessage({
+                    type: 'schoolAdded',
+                    school: result.school || result,
+                    timestamp: new Date().toISOString()
+                });
+            }
+            
+            // Close modal and reload
+            closeModal('schoolModal');
+            form.reset();
+            await loadSchools();
+        }
+    } catch (error) {
+        console.error('School submission error:', error);
+        showNotification('Error adding school: ' + error.message, 'error');
+    } finally {
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    }
+}
+
+// Setup real-time broadcast channel for school updates
+function setupSchoolBroadcasting() {
+    try {
+        window.schoolUpdateChannel = new BroadcastChannel('school-updates');
+        
+        window.schoolUpdateChannel.onmessage = async (event) => {
+            const { type, school, timestamp } = event.data;
+            
+            console.log('Received school update:', type, school);
+            
+            if (type === 'schoolAdded' || type === 'schoolUpdated') {
+                // Reload schools list
+                await loadSchools();
+            } else if (type === 'schoolDeleted') {
+                // Reload schools list
                 await loadSchools();
             }
-        } catch (error) {
-            showNotification('Error adding school', 'error');
-        }
-    });
+        };
+        
+        console.log('School broadcast channel established');
+    } catch (error) {
+        console.warn('Broadcast Channel not supported, real-time updates disabled:', error);
+    }
 }
 
 function editSchool(schoolId) {
