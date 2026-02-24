@@ -2,33 +2,438 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edu Bridge - School Management System</title>
-    <meta name="description"
-        content="EduBridge — connecting students and schools with a clear, modern visual identity inspired by leading university sites.">
-    <!-- Google Fonts -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Edu Bridge - Feedback & Suggestions</title>
+    <meta name="description" content="Share your feedback with EduBridge — help us improve education for Uganda">
+    <!-- Google Fonts & UI libraries to match the main site -->
     <link
-        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&family=Roboto:wght@300;400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&family=Roboto:wght@300;400;500;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- AOS Animation Library -->
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <!-- External CSS (embedded for completeness) -->
     <link rel="stylesheet" href="styles/style.css">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/navbar.css">
+    <style>
+        :root {
+            --primary: #f39c12;
+            --secondary: #3498db;
+            --success: #27ae60;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --info: #3498db;
+            --light: #ecf0f1;
+            --dark: #2c3e50;
+            --white: #ffffff;
+            --gray-light: #f8f9fa;
+            --gray-medium: #bdc3c7;
+            --gray-dark: #34495e;
+            --border-radius: 12px;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding-top: 80px;
+            color: var(--dark);
+        }
+
+        main.auth-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: calc(100vh - 80px);
+            padding: 40px 20px;
+        }
+
+        .auth-card {
+            background: var(--white);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            padding: 60px 40px;
+            max-width: 600px;
+            width: 100%;
+            animation: slideUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .auth-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .auth-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .auth-header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 15px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .auth-header p {
+            font-size: 1.1rem;
+            color: var(--gray-dark);
+            font-weight: 500;
+        }
+
+        .auth-form {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            position: relative;
+        }
+
+        .form-label {
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-label i {
+            color: var(--primary);
+            font-size: 0.9rem;
+        }
+
+        .form-input {
+            padding: 14px 18px;
+            border: 2px solid #e0e0e0;
+            border-radius: var(--border-radius);
+            font-family: inherit;
+            font-size: 1rem;
+            color: var(--dark);
+            background: var(--gray-light);
+            transition: var(--transition);
+            position: relative;
+            z-index: 1;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(243, 156, 18, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .form-input::placeholder {
+            color: #999;
+        }
+
+        .form-input:valid {
+            border-color: var(--success);
+        }
+
+        .form-input:invalid:not(:placeholder-shown) {
+            border-color: var(--danger);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 150px;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: var(--gray-medium);
+            margin-top: -5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .form-group:focus-within .form-hint {
+            opacity: 1;
+        }
+
+        .form-error-message {
+            font-size: 0.85rem;
+            color: var(--danger);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: -5px;
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .form-input:invalid:not(:placeholder-shown) ~ .form-error-message {
+            opacity: 1;
+        }
+
+        .character-count {
+            font-size: 0.8rem;
+            color: var(--gray-medium);
+            text-align: right;
+            margin-top: -8px;
+        }
+
+        .character-count.warning {
+            color: var(--warning);
+        }
+
+        #successContainer {
+            display: none;
+        }
+
+        #errorContainer {
+            display: none;
+        }
+
+        .form-success, .form-error {
+            padding: 16px 20px;
+            border-radius: var(--border-radius);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 500;
+            animation: slideDown 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-success {
+            background: rgba(39, 174, 96, 0.1);
+            border-left: 4px solid var(--success);
+            color: var(--success);
+        }
+
+        .form-error {
+            background: rgba(231, 76, 60, 0.1);
+            border-left: 4px solid var(--danger);
+            color: var(--danger);
+        }
+
+        .btn-wrapper {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border: none;
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary) 0%, #e67e22 100%);
+            color: var(--white);
+            flex: 1;
+            box-shadow: 0 8px 20px rgba(243, 156, 18, 0.3);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(243, 156, 18, 0.4);
+        }
+
+        .btn-primary:active:not(:disabled) {
+            transform: translateY(0);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+            flex: 1;
+        }
+
+        .btn-secondary:hover {
+            background: #d5dbdb;
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: var(--white);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .char-icons {
+            display: flex;
+            gap: 8px;
+            margin-top: 15px;
+            padding: 12px;
+            background: var(--gray-light);
+            border-radius: var(--border-radius);
+        }
+
+        .char-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: var(--white);
+            border: 2px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            cursor: default;
+        }
+
+        .char-icon:hover {
+            border-color: var(--primary);
+            background: rgba(243, 156, 18, 0.05);
+            transform: translateY(-3px);
+        }
+
+        .input-group-icon {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-group-icon .form-input {
+            padding-left: 45px;
+        }
+
+        .input-group-icon i {
+            position: absolute;
+            left: 15px;
+            color: var(--gray-medium);
+            pointer-events: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .input-group-icon .form-input:focus ~ i,
+        .input-group-icon .form-input:valid ~ i {
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .auth-card {
+                padding: 40px 25px;
+            }
+
+            .auth-header h1 {
+                font-size: 2rem;
+            }
+
+            .btn-wrapper {
+                flex-direction: column;
+            }
+
+            .char-icons {
+                flex-wrap: wrap;
+            }
+        }
+
+        @media (max-width: 480px) {
+            main.auth-container {
+                padding: 20px 15px;
+            }
+
+            .auth-card {
+                padding: 30px 20px;
+                border-radius: 16px;
+            }
+
+            .auth-header {
+                margin-bottom: 30px;
+            }
+
+            .auth-header h1 {
+                font-size: 1.7rem;
+            }
+
+            .auth-header p {
+                font-size: 1rem;
+            }
+
+            .form-input {
+                padding: 12px 15px;
+                font-size: 16px;
+            }
+        }
+    </style>
 </head>
-<header>
-        <!-- Navigation Bar -->
+
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
         <div class="container-fluid">
-            <a class="navbar-brand" href="index.html">
-                <i class="fas fa-graduation-cap me-2 line-icon" aria-hidden="true"></i>EduBridge
-            </a>
+            <a class="navbar-brand" href="index.html"><i class="fas fa-graduation-cap me-2 line-icon"
+                    aria-hidden="true"></i>EduBridge</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,66 +446,143 @@
                     <li class="nav-item"><a class="nav-link" href="bursaries.html">Bursaries</a></li>
                     <li class="nav-item"><a class="nav-link" href="agents.html">Agents</a></li>
                     <li class="nav-item"><a class="nav-link" href="e-library.html">E-Library</a></li>
-                    <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
                     <li class="nav-item">
-                 <div class="navbar-auth" id="navbarAuth">
-                    <a href="login.html" class="btn btn-primary">Admin</a>
+                <div class="navbar-auth" id="navbarAuth">
+                    <a href="login.html" class="btn btn-primary">Admin Login</a>
                 </div>
+                <div class="navbar-user" id="navbarUser" style="display: none;">
+                    <span id="userEmail"></span>
+                    <a href="admin-dashboard.html" id="adminLink" style="display: none;" class="nav-link">Admin</a>
+                    <button id="logoutBtn" class="btn btn-outline">Logout</button>
+                </div>
+                        </a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-</header>
-<body>
 
     <main class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
-                <h1>Send Us Your Feedback</h1>
-                <p>Help us improve Thrive School Hub with your suggestions</p>
+                <h1><i class="fas fa-lightbulb"></i> Share Your Feedback</h1>
+                <p>Help us create an even better experience for education in Uganda</p>
             </div>
 
             <form id="suggestionForm" class="auth-form">
                 <div id="successContainer"></div>
                 <div id="errorContainer"></div>
 
+                <!-- Name Field -->
                 <div class="form-group">
-                    <label for="name" class="form-label">Your Name</label>
-                    <input 
-                        type="text" 
-                        id="name" 
-                        class="form-input" 
-                        placeholder="Your full name"
-                        required
-                    >
+                    <label for="name" class="form-label">
+                        <i class="fas fa-user"></i> Your Name
+                    </label>
+                    <div class="input-group-icon">
+                        <input 
+                            type="text" 
+                            id="name" 
+                            class="form-input" 
+                            placeholder="Your full name"
+                            minlength="2"
+                            maxlength="100"
+                            required
+                        >
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <small class="form-hint">
+                        <i class="fas fa-info-circle"></i> Required to identify your feedback
+                    </small>
+                    <small class="form-error-message">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid name (2-100 characters)
+                    </small>
                 </div>
 
+                <!-- Email Field -->
                 <div class="form-group">
-                    <label for="email" class="form-label">Email Address</label>
-                    <input 
-                        type="email" 
-                        id="email" 
-                        class="form-input" 
-                        placeholder="your@email.com"
-                        required
-                    >
+                    <label for="email" class="form-label">
+                        <i class="fas fa-envelope"></i> Email Address
+                    </label>
+                    <div class="input-group-icon">
+                        <input 
+                            type="email" 
+                            id="email" 
+                            class="form-input" 
+                            placeholder="your.email@example.com"
+                            required
+                        >
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <small class="form-hint">
+                        <i class="fas fa-info-circle"></i> We'll use this to follow up with you
+                    </small>
+                    <small class="form-error-message">
+                        <i class="fas fa-exclamation-circle"></i> Please enter a valid email address
+                    </small>
                 </div>
 
+                <!-- Suggestion Type (Optional) -->
                 <div class="form-group">
-                    <label for="message" class="form-label">Your Suggestion</label>
+                    <label for="type" class="form-label">
+                        <i class="fas fa-tag"></i> Feedback Type (Optional)
+                    </label>
+                    <select id="type" class="form-input">
+                        <option value="">Select a category...</option>
+                        <option value="bug">🐛 Report a Bug</option>
+                        <option value="feature">✨ Feature Request</option>
+                        <option value="improvement">🚀 UI/UX Improvement</option>
+                        <option value="content">📚 Content Suggestion</option>
+                        <option value="general">💬 General Feedback</option>
+                    </select>
+                    <small class="form-hint">
+                        <i class="fas fa-info-circle"></i> Help us categorize your feedback
+                    </small>
+                </div>
+
+                <!-- Message Field with Character Count -->
+                <div class="form-group">
+                    <label for="message" class="form-label">
+                        <i class="fas fa-comment"></i> Your Feedback
+                    </label>
                     <textarea 
                         id="message" 
                         class="form-input" 
-                        placeholder="Share your ideas and feedback..."
-                        style="min-height: 150px;"
+                        placeholder="Share your ideas, suggestions, or feedback in detail. Be as specific as possible..."
+                        minlength="10"
+                        maxlength="2000"
                         required
                     ></textarea>
+                    <div class="character-count">
+                        <span id="charCount">0</span>/2000 characters
+                    </div>
+                    <small class="form-hint">
+                        <i class="fas fa-info-circle"></i> Minimum 10 characters for meaningful feedback
+                    </small>
+                    <small class="form-error-message">
+                        <i class="fas fa-exclamation-circle"></i> Please provide feedback (10-2000 characters)
+                    </small>
                 </div>
 
-                <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
-                    Submit Suggestion
-                </button>
+                <!-- Quick Icons for Common Emojis -->
+                <div class="char-icons">
+                    <div class="char-icon" onclick="addEmoji('👍')" title="Thumbs up">👍</div>
+                    <div class="char-icon" onclick="addEmoji('❤️')" title="Like">❤️</div>
+                    <div class="char-icon" onclick="addEmoji('💡')" title="Idea">💡</div>
+                    <div class="char-icon" onclick="addEmoji('⭐')" title="Star">⭐</div>
+                    <div class="char-icon" onclick="addEmoji('🎯')" title="Target">🎯</div>
+                    <div class="char-icon" onclick="addEmoji('🙏')" title="Thank you">🙏</div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="btn-wrapper">
+                    <button type="reset" class="btn btn-secondary">
+                        <i class="fas fa-redo"></i> Clear
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-paper-plane"></i> Submit Feedback
+                    </button>
+                </div>
             </form>
         </div>
     </main>
@@ -168,39 +650,159 @@
                     style="color: var(--orange);"></i> for education</p>
         </div>
     </footer>
+
+    <script src="js/api.js"></script>
+    <script src="js/navbar.js"></script>
     <script>
+        // Character counter for feedback message
+        const messageInput = document.getElementById('message');
+        const charCount = document.getElementById('charCount');
+        
+        messageInput.addEventListener('input', (e) => {
+            charCount.textContent = e.target.value.length;
+            const count = e.target.value.length;
+            
+            if (count > 1700) {
+                charCount.parentElement.classList.add('warning');
+            } else {
+                charCount.parentElement.classList.remove('warning');
+            }
+        });
+
+        // Add emoji to message
+        function addEmoji(emoji) {
+            const textarea = document.getElementById('message');
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const text = textarea.value;
+            
+            textarea.value = text.substring(0, start) + ' ' + emoji + ' ' + text.substring(end);
+            textarea.selectionStart = textarea.selectionEnd = start + emoji.length + 2;
+            
+            // Update character count
+            charCount.textContent = textarea.value.length;
+            textarea.focus();
+            
+            // Trigger input event for validation
+            textarea.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+
+        // Form submission with enhanced validation
         document.getElementById('suggestionForm').addEventListener('submit', async (e) => {
             e.preventDefault();
             
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const message = document.getElementById('message').value;
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const message = document.getElementById('message').value.trim();
+            const type = document.getElementById('type').value;
             const successContainer = document.getElementById('successContainer');
             const errorContainer = document.getElementById('errorContainer');
             const submitBtn = e.target.querySelector('button[type="submit"]');
             
             successContainer.innerHTML = '';
             errorContainer.innerHTML = '';
+
+            // Validation
+            if (!name || name.length < 2) {
+                errorContainer.innerHTML = '<div class="form-error"><i class="fas fa-exclamation-circle"></i> Please enter a valid name</div>';
+                errorContainer.style.display = 'block';
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                errorContainer.innerHTML = '<div class="form-error"><i class="fas fa-exclamation-circle"></i> Please enter a valid email address</div>';
+                errorContainer.style.display = 'block';
+                return;
+            }
+
+            if (!message || message.length < 10) {
+                errorContainer.innerHTML = '<div class="form-error"><i class="fas fa-exclamation-circle"></i> Please provide feedback (minimum 10 characters)</div>';
+                errorContainer.style.display = 'block';
+                return;
+            }
+
             submitBtn.disabled = true;
+            const originalContent = submitBtn.innerHTML;
             submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
             
             try {
-                const result = await api.createSuggestion(name, email, message);
+                // Create enhanced suggestion payload
+                const suggestionData = {
+                    name,
+                    email,
+                    message: `[${type || 'General'}] ${message}`,
+                    category: type || 'general',
+                    timestamp: new Date().toISOString()
+                };
+
+                const result = await api.createSuggestion(name, email, suggestionData.message);
                 
                 if (result.error) {
-                    errorContainer.innerHTML = `<div class="form-error">${result.error}</div>`;
+                    errorContainer.innerHTML = `<div class="form-error"><i class="fas fa-exclamation-circle"></i> ${result.error}</div>`;
+                    errorContainer.style.display = 'block';
                 } else {
-                    successContainer.innerHTML = '<div class="form-success">Thank you! Your suggestion has been submitted successfully.</div>';
+                    successContainer.innerHTML = `
+                        <div class="form-success">
+                            <i class="fas fa-check-circle"></i>
+                            <div>
+                                <strong>Thank you!</strong> Your feedback has been submitted successfully. We'll review it and consider your suggestions for improving Thrive School Hub.
+                            </div>
+                        </div>
+                    `;
+                    successContainer.style.display = 'block';
                     e.target.reset();
-                    showNotification('Suggestion submitted successfully!', 'success');
+                    charCount.textContent = '0';
+                    
+                    // Show notification
+                    if (typeof showNotification !== 'undefined') {
+                        showNotification('Feedback submitted successfully! 🎉', 'success');
+                    }
+
+                    // Scroll to success message
+                    successContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                 }
             } catch (error) {
-                errorContainer.innerHTML = '<div class="form-error">An error occurred. Please try again.</div>';
+                console.error('Submission error:', error);
+                errorContainer.innerHTML = `<div class="form-error"><i class="fas fa-exclamation-circle"></i> An error occurred. Please try again later.</div>`;
+                errorContainer.style.display = 'block';
             } finally {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Submit Suggestion';
+                submitBtn.innerHTML = originalContent;
+            }
+        });
+
+        // Clear button reset handler
+        document.getElementById('suggestionForm').addEventListener('reset', () => {
+            charCount.textContent = '0';
+            document.getElementById('successContainer').innerHTML = '';
+            document.getElementById('errorContainer').innerHTML = '';
+        });
+
+        // Real-time validation feedback
+        const inputs = document.querySelectorAll('.form-input');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.value && !this.checkValidity()) {
+                    this.classList.add('error');
+                } else {
+                    this.classList.remove('error');
+                }
+            });
+
+            input.addEventListener('input', function() {
+                if (this.value && this.checkValidity()) {
+                    this.classList.remove('error');
+                }
+            });
+        });
+
+        // Smooth scroll on page load
+        window.addEventListener('load', () => {
+            const form = document.getElementById('suggestionForm');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth' });
             }
         });
     </script>
 </body>
-</html>
+</htm
