@@ -305,6 +305,83 @@
                 </div>
             </section>
 
+            <!-- Partners -->
+        <div class="full-width-section">
+            <div class="partners-section">
+                <div class="section-header">
+                    <h2><i class="fas fa-handshake me-2"></i>Our Partners</h2>
+                </div>
+
+                <!-- Continuous marquee only -->
+                <div class="partners-marquee" aria-label="Partners">
+                    <div class="marquee-track">
+                        <div class="partner-item">UNEB</div>
+                        <div class="partner-item">Ministry of Education</div>
+                        <div class="partner-item">Cambridge</div>
+                        <div class="partner-item">Pearson</div>
+                        <div class="partner-item">UNESCO</div>
+                        <div class="partner-item">UNEB</div>
+                        <div class="partner-item">Ministry of Education</div>
+                        <div class="partner-item">Cambridge</div>
+                        <div class="partner-item">Pearson</div>
+                        <div class="partner-item">UNESCO</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <style>
+            /* Partners carousel + marquee styles */
+            .partners-carousel .partner-item,
+            .partners-marquee .partner-item {
+                background: #fff;
+                color: var(--deep-blue, #112a66);
+                padding: 18px 26px;
+                border-radius: 10px;
+                box-shadow: 0 8px 20px rgba(16, 185, 129, 0.06);
+                font-weight: 700;
+                min-width: 180px;
+                text-align: center;
+            }
+
+            .partners-carousel .carousel-item {
+                padding: 20px 0;
+            }
+
+            /* Marquee: continuous horizontal scroll */
+            .partners-marquee {
+                overflow: hidden;
+                width: 100%;
+                margin-top: 18px;
+                display: block;
+            }
+
+            .marquee-track {
+                display: flex;
+                gap: 24px;
+                align-items: center;
+                animation: marquee 18s linear infinite;
+            }
+
+            .partners-marquee:hover .marquee-track {
+                animation-play-state: paused;
+            }
+
+            @keyframes marquee {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-40%); }
+            }
+
+            /* Responsive tweaks */
+            @media (max-width: 768px) {
+                .partners-carousel .partner-item,
+                .partners-marquee .partner-item { min-width: 140px; padding: 12px 16px; }
+                .marquee-track { animation-duration: 14s; }
+            }
+        </style>
+
+        <!-- No carousel JS needed for marquee -->
+
             <!-- CTA Section -->
             <div
                 style="background: linear-gradient(135deg, var(--orange), #e08e0b); border-radius: 30px; padding: 40px; margin: 50px 0; text-align: center; color: var(--deep-blue);">
