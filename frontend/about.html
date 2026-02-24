@@ -315,13 +315,14 @@
                 <!-- Continuous marquee only -->
                 <div class="partners-marquee" aria-label="Partners">
                     <div class="marquee-track">
-                        <div class="partner-item">UNEB</div>
-                        <div class="partner-item">Ministry of Education</div>
+                        
                         <div class="partner-item">Cambridge</div>
                         <div class="partner-item">Pearson</div>
                         <div class="partner-item">UNESCO</div>
                         <div class="partner-item">UNEB</div>
                         <div class="partner-item">Ministry of Education</div>
+                        <div class="partner-item"><img src="gallery/logo1.png" alt="logo1"></div>
+                        <div class="partner-item"><img src="gallery/logo2.png" alt="logo2"></div>
                         <div class="partner-item">Cambridge</div>
                         <div class="partner-item">Pearson</div>
                         <div class="partner-item">UNESCO</div>
@@ -342,6 +343,21 @@
                 font-weight: 700;
                 min-width: 180px;
                 text-align: center;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .partners-marquee .partner-item:has(img) {
+                background: transparent;
+                box-shadow: none;
+                padding: 0;
+            }
+
+            .partners-marquee .partner-item img {
+                max-width: 100%;
+                max-height: 80px;
+                object-fit: contain;
             }
 
             .partners-carousel .carousel-item {
