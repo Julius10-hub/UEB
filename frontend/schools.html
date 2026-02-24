@@ -500,6 +500,91 @@
             </div>
             </div>
         </section>
+
+        <!-- School Detail Modal -->
+        <div id="schoolDetailPanel" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 10000; overflow-y: auto; padding: 20px;">
+            <div style="background: white; max-width: 800px; margin: 40px auto; border-radius: 16px; overflow: hidden; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+                <!-- Close Button -->
+                <button id="detailCloseBtn" style="position: absolute; top: 20px; right: 20px; background: #f39c12; border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- School Image -->
+                <div id="detailMedia" style="width: 100%; height: 300px; background: #eee; overflow: hidden;">
+                    <img src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                </div>
+
+                <!-- School Details -->
+                <div style="padding: 40px;">
+                    <h1 id="detailName" style="font-size: 2.2rem; color: #112a66; margin: 0 0 12px 0; font-weight: 800;">School Name</h1>
+                    <p id="detailMeta" style="color: #f39c12; font-size: 1rem; margin: 0 0 20px 0; font-weight: 600;">
+                        <i class="fas fa-graduation-cap" style="margin-right: 8px;"></i><span id="detailCategory">Category</span> • 
+                        <i class="fas fa-map-marker-alt" style="margin-right: 8px;"></i><span id="detailLocation">Location</span>
+                    </p>
+
+                    <!-- School Information Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
+                        <!-- Location -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #f39c12;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">📍 Full Location</p>
+                            <p id="detailFullLocation" style="margin: 8px 0 0 0; font-size: 1rem; color: #333; font-weight: 500;">Location Address</p>
+                        </div>
+
+                        <!-- Students -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #10b981;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">👥 Student Population</p>
+                            <p id="detailStudents" style="margin: 8px 0 0 0; font-size: 1rem; color: #333; font-weight: 500;">0 Students</p>
+                        </div>
+
+                        <!-- Email -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #3b82f6;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">✉️ Email</p>
+                            <p id="detailEmail" style="margin: 8px 0 0 0; font-size: 0.95rem; color: #3b82f6; word-break: break-all;">
+                                <a id="detailEmailLink" href="" style="color: #3b82f6; text-decoration: none;">email@school.com</a>
+                            </p>
+                        </div>
+
+                        <!-- Phone -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #8b5cf6;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">☎️ Phone</p>
+                            <p id="detailPhone" style="margin: 8px 0 0 0; font-size: 0.95rem; color: #8b5cf6;">
+                                <a id="detailPhoneLink" href="" style="color: #8b5cf6; text-decoration: none;">+256 700 000 000</a>
+                            </p>
+                        </div>
+
+                        <!-- Verification Status -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #06b6d4;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">✅ Verification Status</p>
+                            <p id="detailVerified" style="margin: 8px 0 0 0; font-size: 1rem; color: #333; font-weight: 500;">Verified</p>
+                        </div>
+
+                        <!-- Active Status -->
+                        <div style="padding: 15px; background: #f8f9fa; border-radius: 10px; border-left: 4px solid #ec4899;">
+                            <p style="margin: 0; color: #666; font-size: 0.9rem; font-weight: 600;">📋 Status</p>
+                            <p id="detailActive" style="margin: 8px 0 0 0; font-size: 1rem; color: #333; font-weight: 500;">Active</p>
+                        </div>
+                    </div>
+
+                    <!-- Description -->
+                    <div style="margin: 30px 0; padding: 20px; background: #f0f7ff; border-radius: 10px; border-left: 4px solid #3b82f6;">
+                        <h3 style="margin: 0 0 12px 0; color: #112a66; font-size: 1.1rem;">About This School</h3>
+                        <p id="detailDescription" style="margin: 0; color: #555; line-height: 1.6;">
+                            A trusted educational institution providing quality education and comprehensive student development.
+                        </p>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap;">
+                        <button style="flex: 1; min-width: 150px; padding: 12px 24px; background: linear-gradient(135deg, #f39c12, #e08e0b); color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;" onclick="scheduleTourDetail()">
+                            <i class="fas fa-calendar-check" style="margin-right: 8px;"></i>Schedule Tour
+                        </button>
+                        <button style="flex: 1; min-width: 150px; padding: 12px 24px; background: #112a66; color: white; border: none; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 1rem; transition: all 0.3s ease;" onclick="startVirtualTour()">
+                            <i class="fas fa-video" style="margin-right: 8px;"></i>Virtual Tour
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 <body>
 
@@ -515,7 +600,7 @@
         </div>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>eduHUB</h3>
+                <h3>eduBridge</h3>
                 <p>Your trusted partner in education since 2020. We connect students with Uganda's finest educational
                     institutions and resources.</p>
                 <div class="social-links">
@@ -524,15 +609,11 @@
                     <a
                         href="https://l.facebook.com/l.php?u=https%3A%2F%2Fyoutube.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6eoaUGVau149glyugeYF45Zx0q7eqSu0NgAKxlJ7wy33MsLiXp2TxdnnrrtA_aem_GiejR9YaLmEhqxVXOuhVYg&h=ASVhg88P_51A2yAsLvok5TY9hwC-9W5WHG7NmhB5lxywET_mfgmMKt1kbAd_OWKjZf5Fksf0HBP41duSEX-5zYuucaIoAgZXjzcyU_3HQZJUwB5pFdrdnjIdg6luIQpWuNXm"><i
                             class="fab fa-twitter"></i></a>
-                    <a
-                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5uQE626CRvPwEgQ7u8L_gGqALO-iGy5u4viooC-YJ-wNY45_h6FJ6xO7sviQ_aem__lBJpvMb0cl-ODVQCkMZlw&h=ASUb1ZK1tKsDE7XdFI9XGORTMSWC6zGmXg4PkcgR_O2wNzeu0GKTT0xYge83k7zpBKA2BU1PhDLVWM38gJEWf2HEAxUSPZUSpyfdY2YeGKtNiBicD5QgksDYmjrrdzoSpwKG"><i
-                            class="fab fa-instagram"></i></a>
+
                     <a
                         href="https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2F%2540ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6bDEkgCfMWUtBQwsgJ7RS_Mu4vpl-kZ4msfywAOYMQj5qEtq__1zqKQxcmcA_aem_VAkH5zhu6CZfNYf_YCchNQ&h=ASV-llKfHAL0Ea4FXmSp8hkrH0s2V9RJUkX7pdNd3KCqFHDn060_E0Pk9qUymw0QPn0Ls-1i5fL8ApkLm5ogUz6Np5WnJTiQnXlDrFPihH2k5QG_lHA7ZFTmUsg4Hy3Ly3QU"><i
                             class="fab fa-linkedin-in"></i></a>
-                    <a
-                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftiktok.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7b_xNoXH7jnwh61MSXjgRENMQuLiTW7_dRBwR5tCw02oWQ5fbXeRiBv9qQIw_aem_1ltd3OwuOAFMswkV5ceB1w&h=ASX4d5c0GW2crkJp3aMOfZf8Oh1WUY11mBOZD6ixGJQZnUrnx8CwuhrkmT_26ZwkJMW-yydNbd_ZXkq99DU0YirFvpxJq5ah91nGDJboRM9IqIH-Orat71hdzhocL2XESobO"><i
-                            class="fab fa-youtube"></i></a>
+a>
                 </div>
             </div>
             <div class="footer-section">
@@ -576,7 +657,7 @@
                     <a href="about.html">About Us</a>
                 </div>
             </div>
-            <p>&copy; 2025 eduHUB. All rights reserved. | Designed with <i class="fas fa-heart"
+            <p>&copy; 2026 eduBridge. All rights reserved. | Designed with <i class="fas fa-heart"
                     style="color: var(--orange);"></i> for education</p>
         </div>
     </footer>
@@ -1843,20 +1924,94 @@
         function showDetail(school) {
             const panel = document.getElementById('schoolDetailPanel');
             const schoolIndex = schoolsDatabase.indexOf(school);
-            document.getElementById('detailName').textContent = school.name;
-            document.getElementById('detailMeta').textContent = `${availableCategories[school.category] || school.category} • ${school.region}`;
-            document.getElementById('detailDescription').textContent = `A trusted institution located in ${school.region}. Click schedule to book a visit or start a virtual tour.`;
-            document.getElementById('detailMedia').innerHTML = `<img src="${getSchoolImage(school, schoolIndex)}" alt="${school.name}">`;
-            document.getElementById('detailContact').innerHTML = `<strong>Contact:</strong> admissions@${school.id}.edu • +256 700 000 ${Math.floor(Math.random()*900+100)}`;
+            
+            // Populate all school information
+            document.getElementById('detailName').textContent = school.name || 'School Name';
+            document.getElementById('detailCategory').textContent = availableCategories[school.category] || school.category || 'Unknown';
+            document.getElementById('detailLocation').textContent = school.city || school.region || 'Location';
+            
+            // Full location details
+            document.getElementById('detailFullLocation').textContent = school.location || school.city || school.region || 'Location not specified';
+            
+            // Student count
+            document.getElementById('detailStudents').textContent = (school.students ? `${school.students} Students` : 'Student count not specified');
+            
+            // Contact Email
+            const email = school.contact_email || `admissions@${school.id || 'school'}.edu`;
+            document.getElementById('detailEmail').innerHTML = `<a id="detailEmailLink" href="mailto:${email}" style="color: #3b82f6; text-decoration: none;">${email}</a>`;
+            
+            // Contact Phone
+            const phone = school.contact_phone || `+256 700 000 ${Math.floor(Math.random()*900+100)}`;
+            document.getElementById('detailPhone').innerHTML = `<a id="detailPhoneLink" href="tel:${phone}" style="color: #8b5cf6; text-decoration: none;">${phone}</a>`;
+            
+            // Verification Status
+            document.getElementById('detailVerified').textContent = school.is_verified ? '✅ Verified' : '⏳ Pending Verification';
+            document.getElementById('detailVerified').style.color = school.is_verified ? '#10b981' : '#f59e0b';
+            
+            // Active Status
+            document.getElementById('detailActive').textContent = school.is_active ? '✅ Active' : '⏸️ Inactive';
+            document.getElementById('detailActive').style.color = school.is_active ? '#10b981' : '#ef4444';
+            
+            // Description
+            const description = school.description || `A trusted educational institution located in ${school.city || school.region}. This ${school.category} offers quality education and comprehensive student development programs.`;
+            document.getElementById('detailDescription').textContent = description;
+            
+            // School image
+            const imgSrc = school.image || getSchoolImage(school, schoolIndex);
+            document.getElementById('detailMedia').innerHTML = `<img src="${imgSrc}" alt="${school.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            
+            // Store current school for tour booking
+            window.currentDetailSchool = school;
+            
+            // Show panel
             panel.style.display = 'block';
             panel.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
 
         document.getElementById('detailCloseBtn')?.addEventListener('click', () => {
             const panel = document.getElementById('schoolDetailPanel');
             panel.style.display = 'none';
             panel.setAttribute('aria-hidden','true');
+            document.body.style.overflow = 'auto'; // Restore scroll
         });
+
+        // Close panel when clicking outside of it
+        document.getElementById('schoolDetailPanel')?.addEventListener('click', (e) => {
+            if (e.target.id === 'schoolDetailPanel') {
+                document.getElementById('schoolDetailPanel').style.display = 'none';
+                document.getElementById('schoolDetailPanel').setAttribute('aria-hidden','true');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close panel with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const panel = document.getElementById('schoolDetailPanel');
+                if (panel && panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                    panel.setAttribute('aria-hidden','true');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        function scheduleTourDetail() {
+            const school = window.currentDetailSchool;
+            if (school) {
+                alert(`Scheduling a tour for ${school.name}. In a real app, this would open a booking form or send an inquiry email.`);
+                // In production, you could redirect to a booking form or show a modal
+            }
+        }
+
+        function startVirtualTour() {
+            const school = window.currentDetailSchool;
+            if (school) {
+                alert(`Starting virtual tour for ${school.name}. In a real app, this would load a 360° virtual tour or video walkthrough.`);
+                // In production, you could embed a virtual tour viewer here
+            }
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {
