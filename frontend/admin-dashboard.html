@@ -389,103 +389,229 @@
         .alert-success { background: #88ddb1; color: #065f46; border-left: 4px solid #10b981; }
         .alert-error { background: #88ddb1; color: #7f1d1d; border-left: 4px solid #ef4444; }
         .alert-info { background: #88ddb1; color: #0c2d6b; border-left: 4px solid #3b82f6; }
-        
-        /* File upload styles */
+
+        /* File Upload Styles */
         .file-upload-group {
-            margin-bottom: 20px;
+            margin-bottom: 24px;
         }
-        .file-upload-group label {
+
+        .file-upload-label {
             display: block;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
             font-weight: 600;
             color: #0d3b66;
             font-size: 14px;
         }
-        .file-input-wrapper {
+
+        .file-upload-area {
+            border: 2px dashed #10b981;
+            border-radius: 12px;
+            padding: 24px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(16, 185, 129, 0.03);
             position: relative;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            overflow: hidden;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
         }
-        .file-input-wrapper input[type="file"] {
+
+        .file-upload-area:hover {
+            border-color: #059669;
+            background: rgba(16, 185, 129, 0.08);
+            transform: translateY(-2px);
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(16, 185, 129, 0.1);
+        }
+
+        .file-upload-area:focus {
+            outline: 2px solid #10b981;
+            outline-offset: 2px;
+        }
+
+        .file-upload-area:active {
+            transform: translateY(0);
+        }
+
+        .file-upload-area.dragover {
+            border-color: #0d3b66;
+            background: rgba(13, 59, 102, 0.1);
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.2);
+        }
+
+        .file-upload-area input[type="file"] {
             display: none;
         }
-        .file-input-label {
-            padding: 12px 20px;
-            background: #f8fafc;
-            border: 2px dashed #10b981;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            color: #10b981;
-            transition: 0.2s;
-            flex: 1;
-            text-align: center;
-        }
-        .file-input-label:hover {
-            background: #e8f5f0;
-            border-color: #059669;
-        }
-        .file-name-display {
-            font-size: 13px;
+
+        .file-upload-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
             color: #64748b;
         }
-        .preview-section {
-            margin-top: 16px;
-            padding: 16px;
-            background: #f8fafc;
-            border-radius: 8px;
-            border: 1px solid #e2e8f0;
+
+        .file-upload-placeholder i {
+            font-size: 2.5rem;
+            color: #10b981;
         }
-        .preview-section h4 {
-            margin: 0 0 12px 0;
-            font-size: 13px;
-            font-weight: 600;
+
+        .file-upload-text {
+            font-weight: 500;
             color: #0d3b66;
+            cursor: pointer;
         }
-        .preview-grid {
+
+        .file-upload-text span {
+            color: #10b981;
+            font-weight: 700;
+            text-decoration: underline;
+        }
+
+        .file-upload-text small {
+            display: block;
+            font-size: 0.85rem;
+            color: #94a3b8;
+            margin-top: 4px;
+            cursor: pointer;
+        }
+
+        .file-upload-area:hover .file-upload-text span {
+            text-decoration-style: dotted;
+        }
+
+        .file-preview-container {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-            gap: 8px;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
         }
-        .preview-item {
+
+        .file-preview-item {
             position: relative;
-            width: 80px;
-            height: 80px;
-            border-radius: 6px;
+            border-radius: 8px;
             overflow: hidden;
-            background: white;
-            border: 1px solid #e2e8f0;
+            background: #f8fafc;
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: slideIn 0.3s ease;
         }
-        .preview-item img {
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        .file-preview-item img,
+        .file-preview-item video {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
-        .preview-item video {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+
+        .file-preview-item.placeholder {
+            background: #e2e8f0;
+            color: #94a3b8;
+            font-size: 0.9rem;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
         }
-        .preview-remove {
+
+        .file-remove-btn {
             position: absolute;
-            top: 2px;
-            right: 2px;
+            top: 4px;
+            right: 4px;
             background: rgba(239, 68, 68, 0.9);
-            color: white;
             border: none;
-            border-radius: 50%;
-            width: 20px;
-            height: 20px;
-            font-size: 12px;
+            color: white;
+            width: 28px;
+            height: 28px;
+            border-radius: 4px;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: 0.2s;
+            font-size: 1rem;
+            opacity: 0;
+            transition: opacity 0.2s ease;
         }
-        .preview-remove:hover {
+
+        .file-preview-item:hover .file-remove-btn {
+            opacity: 1;
+        }
+
+        .file-remove-btn:hover {
             background: rgba(239, 68, 68, 1);
+        }
+
+        .logo-preview {
+            position: relative;
+            width: 120px;
+            height: 120px;
+            border-radius: 12px;
+            overflow: hidden;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 12px;
+        }
+
+        .logo-preview img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-preview.empty {
+            border: 2px dashed #cbd5e0;
+            color: #94a3b8;
+            font-size: 2.5rem;
+        }
+
+        .file-count-badge {
+            display: inline-block;
+            background: #10b981;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-left: 8px;
+        }
+
+        .modal-content {
+            max-height: 85vh;
+            overflow-y: auto;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .modal-content::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.02);
+        }
+
+        .modal-content::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 3px;
+        }
+
+        .modal-content::-webkit-scrollbar-thumb:hover {
+            background: rgba(16, 185, 129, 0.5);
         }
     </style>
 </head>
@@ -758,7 +884,14 @@
             </div>
         </div>
 
-
+        <footer>
+            <div class="footer-content">
+                <div class="footer-section"><h3>EduBridge Uganda</h3><p>Supporting Ugandan education</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
+                <div class="footer-section"><h3>Contact</h3><p>Kampala, Uganda</p><p>admin@edubridge.ug</p><p>Tel: +256 700 123456</p></div>
+                <div class="footer-section"><h3>UNEB resources</h3><p>UCE & UACE past papers</p></div>
+            </div>
+            <div class="footer-bottom"><p>© 2025 EduBridge Uganda · built for local schools</p></div>
+        </footer>
     </div>
 </div>
 
@@ -770,6 +903,7 @@
                 <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
             </div>
             <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')">
+                <!-- Basic Information -->
                 <div class="form-row">
                     <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" required></div>
                     <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" required><option value="">Select</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical</option><option value="University">University</option></select></div>
@@ -780,54 +914,55 @@
                 </div>
                 <div class="form-row"><div class="form-group"><label for="schoolEmail">Email</label><input type="email" id="schoolEmail"></div><div class="form-group"><label for="schoolPhone">Phone</label><input type="tel" id="schoolPhone"></div></div>
                 <div class="form-group"><label for="schoolAddress">Address</label><input type="text" id="schoolAddress"></div>
-                
-                <!-- UPLOAD SECTION: Logo, Images, Videos -->
-                <h3 style="margin-top: 28px; margin-bottom: 16px; font-size: 16px; font-weight: 700; color: #0d3b66; display: flex; align-items: center; gap: 8px;">
-                    <i class="fas fa-cloud-upload-alt"></i> Media Uploads
-                </h3>
-                
-                <!-- Logo Upload -->
+
+                <!-- School Logo Upload -->
                 <div class="file-upload-group">
-                    <label>School Logo</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="schoolLogo" accept="image/*">
-                        <label for="schoolLogo" class="file-input-label"><i class="fas fa-image"></i> Choose Logo</label>
-                        <span class="file-name-display" id="logoFileName"></span>
+                    <label class="file-upload-label"><i class="fas fa-image"></i> School Logo</label>
+                    <div class="file-upload-area" id="logoUploadArea" ondrop="handleDrop(event, 'schoolLogo')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                        <input type="file" id="schoolLogo" accept="image/*" onchange="handleFileSelect(event, 'schoolLogo')">
+                        <div class="file-upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="file-upload-text">
+                                Drag & drop logo or <span style="color: #10b981; font-weight: 700;">click to browse</span>
+                                <small>PNG, JPG, GIF (Max 5MB)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div id="logoPreview" class="preview-section" style="display: none;">
-                        <h4>Logo Preview</h4>
-                        <img id="logoPreviewImg" src="" alt="Logo" style="max-width: 150px; max-height: 150px; border-radius: 6px;">
-                    </div>
+                    <div class="logo-preview empty" id="logoPreview"><i class="fas fa-image"></i></div>
                 </div>
-                
-                <!-- Images Upload -->
+
+                <!-- School Images Upload -->
                 <div class="file-upload-group">
-                    <label>School Images (Multiple)</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="schoolImages" accept="image/*" multiple>
-                        <label for="schoolImages" class="file-input-label"><i class="fas fa-images"></i> Add Images</label>
-                        <span class="file-name-display" id="imagesFileName"></span>
+                    <label class="file-upload-label"><i class="fas fa-images"></i> School Images <span class="file-count-badge" id="imagesCount">0</span></label>
+                    <div class="file-upload-area" id="imagesUploadArea" ondrop="handleDrop(event, 'schoolImages')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                        <input type="file" id="schoolImages" accept="image/*" multiple onchange="handleFileSelect(event, 'schoolImages')">
+                        <div class="file-upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="file-upload-text">
+                                Drag & drop images or <span style="color: #10b981; font-weight: 700;">click to browse</span>
+                                <small>PNG, JPG, GIF (Max 10MB per file, up to 5 images)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div id="imagesPreview" class="preview-section" style="display: none;">
-                        <h4>Image Previews</h4>
-                        <div class="preview-grid" id="imagesPreviewGrid"></div>
-                    </div>
+                    <div class="file-preview-container" id="imagesPreview"></div>
                 </div>
-                
-                <!-- Videos Upload -->
+
+                <!-- School Videos Upload -->
                 <div class="file-upload-group">
-                    <label>School Videos (Multiple)</label>
-                    <div class="file-input-wrapper">
-                        <input type="file" id="schoolVideos" accept="video/*" multiple>
-                        <label for="schoolVideos" class="file-input-label"><i class="fas fa-video"></i> Add Videos</label>
-                        <span class="file-name-display" id="videosFileName"></span>
+                    <label class="file-upload-label"><i class="fas fa-video"></i> School Videos <span class="file-count-badge" id="videosCount">0</span></label>
+                    <div class="file-upload-area" id="videosUploadArea" ondrop="handleDrop(event, 'schoolVideos')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
+                        <input type="file" id="schoolVideos" accept="video/*" multiple onchange="handleFileSelect(event, 'schoolVideos')">
+                        <div class="file-upload-placeholder">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <div class="file-upload-text">
+                                Drag & drop videos or <span style="color: #10b981; font-weight: 700;">click to browse</span>
+                                <small>MP4, WebM, OGG (Max 50MB per file, up to 3 videos)</small>
+                            </div>
+                        </div>
                     </div>
-                    <div id="videosPreview" class="preview-section" style="display: none;">
-                        <h4>Video Previews</h4>
-                        <div class="preview-grid" id="videosPreviewGrid"></div>
-                    </div>
+                    <div class="file-preview-container" id="videosPreview"></div>
                 </div>
-                
+
                 <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button><button type="submit" class="btn-submit">Add School</button></div>
             </form>
         </div>
@@ -933,6 +1068,7 @@
         <div class="footer-bottom"><p>© 2025 EduBridge Uganda · built for local schools</p></div>
     </footer>
 </div>
+
 <script src="js/api.js"></script>
 <script>
     // ===== DATA ARRAYS =====
@@ -957,7 +1093,235 @@
         setupEventListeners();
         attachHeaderInteractions();
         updateStatsAndCalculations();
+        initializeFileUploadAreas();
     });
+
+    // ===== FILE UPLOAD HANDLERS =====
+    // Initialize file upload areas
+    function initializeFileUploadAreas() {
+        window.schoolLogoData = null;
+        window.schoolImagesData = [];
+        window.schoolVideosData = [];
+        
+        // Mapping of upload area IDs to file input IDs
+        const areaToInputMap = {
+            'logoUploadArea': 'schoolLogo',
+            'imagesUploadArea': 'schoolImages',
+            'videosUploadArea': 'schoolVideos'
+        };
+        
+        // Add click handlers to upload areas
+        Object.entries(areaToInputMap).forEach(([areaId, inputId]) => {
+            const area = document.getElementById(areaId);
+            if (area) {
+                area.addEventListener('click', (e) => {
+                    // Don't trigger if clicking on the actual file input
+                    if (e.target.tagName === 'INPUT') return;
+                    document.getElementById(inputId).click();
+                });
+                // Add keyboard accessibility
+                area.setAttribute('role', 'button');
+                area.setAttribute('tabindex', '0');
+                area.addEventListener('keydown', (e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        document.getElementById(inputId).click();
+                    }
+                });
+            }
+        });
+    }
+
+    function handleDragOver(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.add('dragover');
+    }
+
+    function handleDragLeave(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.remove('dragover');
+    }
+
+    function handleDrop(e, inputId) {
+        e.preventDefault();
+        e.stopPropagation();
+        e.currentTarget.classList.remove('dragover');
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const fileInput = document.getElementById(inputId);
+            fileInput.files = files;
+            handleFileSelect({ target: { files } }, inputId);
+        }
+    }
+
+    function handleFileSelect(e, inputId) {
+        const files = Array.from(e.target.files);
+        if (!files.length) return;
+
+        if (inputId === 'schoolLogo') {
+            handleLogoUpload(files[0]);
+        } else if (inputId === 'schoolImages') {
+            handleImagesUpload(files);
+        } else if (inputId === 'schoolVideos') {
+            handleVideosUpload(files);
+        }
+    }
+
+    function handleLogoUpload(file) {
+        if (!validateFileType(file, ['image'])) {
+            alert('Please upload a valid image file (PNG, JPG, GIF)');
+            return;
+        }
+        if (!validateFileSize(file, 5)) {
+            alert('Logo size must not exceed 5MB');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            window.schoolLogoData = e.target.result;
+            updateFilePreview('schoolLogo', e.target.result);
+        };
+        reader.readAsDataURL(file);
+    }
+
+    function handleImagesUpload(files) {
+        const validFiles = [];
+        for (let file of files) {
+            if (!validateFileType(file, ['image'])) {
+                alert(`${file.name}: Invalid file type. Please upload images only.`);
+                continue;
+            }
+            if (!validateFileSize(file, 10)) {
+                alert(`${file.name}: Size exceeds 10MB limit`);
+                continue;
+            }
+            if (window.schoolImagesData.length + validFiles.length >= 5) {
+                alert('Maximum 5 images allowed');
+                break;
+            }
+            validFiles.push(file);
+        }
+
+        validFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                window.schoolImagesData.push(e.target.result);
+                updateFilesPreview('schoolImages', window.schoolImagesData);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function handleVideosUpload(files) {
+        const validFiles = [];
+        for (let file of files) {
+            if (!validateFileType(file, ['video'])) {
+                alert(`${file.name}: Invalid file type. Please upload videos only.`);
+                continue;
+            }
+            if (!validateFileSize(file, 50)) {
+                alert(`${file.name}: Size exceeds 50MB limit`);
+                continue;
+            }
+            if (window.schoolVideosData.length + validFiles.length >= 3) {
+                alert('Maximum 3 videos allowed');
+                break;
+            }
+            validFiles.push(file);
+        }
+
+        validFiles.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                window.schoolVideosData.push(e.target.result);
+                updateFilesPreview('schoolVideos', window.schoolVideosData);
+            };
+            reader.readAsDataURL(file);
+        });
+    }
+
+    function validateFileType(file, types) {
+        return types.some(type => file.type.startsWith(type));
+    }
+
+    function validateFileSize(file, maxMB) {
+        return file.size <= maxMB * 1024 * 1024;
+    }
+
+    function updateFilePreview(inputId, data) {
+        const previews = {
+            'schoolLogo': 'logoPreview'
+        };
+        const previewId = previews[inputId];
+        if (!previewId) return;
+
+        const preview = document.getElementById(previewId);
+        if (data) {
+            preview.innerHTML = `<img src="${data}" alt="Logo preview">`;
+            preview.classList.remove('empty');
+        } else {
+            preview.innerHTML = '<i class="fas fa-image"></i>';
+            preview.classList.add('empty');
+        }
+    }
+
+    function updateFilesPreview(inputId, dataArray) {
+        const previews = {
+            'schoolImages': 'imagesPreview',
+            'schoolVideos': 'videosPreview'
+        };
+        const previewContainerId = previews[inputId];
+        if (!previewContainerId) return;
+
+        const container = document.getElementById(previewContainerId);
+        const countBadgeId = inputId === 'schoolImages' ? 'imagesCount' : 'videosCount';
+        const countBadge = document.getElementById(countBadgeId);
+        
+        if (countBadge) countBadge.textContent = dataArray.length;
+
+        if (dataArray.length === 0) {
+            container.innerHTML = '';
+            return;
+        }
+
+        container.innerHTML = dataArray.map((data, idx) => {
+            const isVideo = inputId === 'schoolVideos';
+            return `
+                <div class="file-preview-item">
+                    ${isVideo ? `<video src="${data}" controls></video>` : `<img src="${data}" alt="Preview ${idx + 1}">`}
+                    <button type="button" class="file-remove-btn" onclick="removeFile('${inputId}', ${idx})" title="Remove"><i class="fas fa-times"></i></button>
+                </div>
+            `;
+        }).join('');
+    }
+
+    function removeFile(inputId, index) {
+        if (inputId === 'schoolImages') {
+            window.schoolImagesData.splice(index, 1);
+            updateFilesPreview('schoolImages', window.schoolImagesData);
+        } else if (inputId === 'schoolVideos') {
+            window.schoolVideosData.splice(index, 1);
+            updateFilesPreview('schoolVideos', window.schoolVideosData);
+        }
+    }
+
+    function resetFileUploads() {
+        window.schoolLogoData = null;
+        window.schoolImagesData = [];
+        window.schoolVideosData = [];
+        
+        document.getElementById('schoolLogo').value = '';
+        document.getElementById('schoolImages').value = '';
+        document.getElementById('schoolVideos').value = '';
+        
+        updateFilePreview('schoolLogo', null);
+        updateFilesPreview('schoolImages', []);
+        updateFilesPreview('schoolVideos', []);
+    }
 
     function checkAdminAccess() {
         try {
@@ -1101,127 +1465,30 @@
     function openModal(type) {
         editingId[type] = null;
         editingSectionType = type;
-        const form = document.getElementById(`${type}Form`);
+        const formId = getFormId(type);
+        const modalId = getModalId(type);
+        const form = document.getElementById(formId);
         if (form) form.reset();
         
-        // Reset file upload previews for schools
+        // Reset file uploads for schools
         if (type === 'schools') {
-            document.getElementById('logoFileName').textContent = '';
-            document.getElementById('logoPreview').style.display = 'none';
-            document.getElementById('imagesFileName').textContent = '';
-            document.getElementById('imagesPreview').style.display = 'none';
-            document.getElementById('imagesPreviewGrid').innerHTML = '';
-            document.getElementById('videosFileName').textContent = '';
-            document.getElementById('videosPreview').style.display = 'none';
-            document.getElementById('videosPreviewGrid').innerHTML = '';
+            resetFileUploads();
+            const titleEl = document.getElementById('schoolModalTitle');
+            if (titleEl) titleEl.textContent = 'Add New School';
         }
         
-        document.getElementById(`${type}Modal`).classList.add('show');
+        const modalEl = document.getElementById(modalId);
+        if (modalEl) {
+            modalEl.classList.add('show');
+        } else {
+            console.error(`Modal not found: ${modalId}`);
+        }
     }
 
     function closeModal(modalId) {
-        document.getElementById(modalId).classList.remove('show');
+        const modalEl = document.getElementById(modalId);
+        if (modalEl) modalEl.classList.remove('show');
         editingSectionType = null;
-    }
-
-    // ===== FILE UPLOAD HANDLERS FOR SCHOOL MODAL =====
-    document.addEventListener('DOMContentLoaded', () => {
-        // Logo file upload handler
-        const logoInput = document.getElementById('schoolLogo');
-        if (logoInput) {
-            logoInput.addEventListener('change', (e) => {
-                const file = e.target.files[0];
-                if (file) {
-                    document.getElementById('logoFileName').textContent = file.name;
-                    const reader = new FileReader();
-                    reader.onload = (event) => {
-                        const preview = document.getElementById('logoPreview');
-                        const img = document.getElementById('logoPreviewImg');
-                        img.src = event.target.result;
-                        preview.style.display = 'block';
-                    };
-                    reader.readAsDataURL(file);
-                }
-            });
-        }
-
-        // Images file upload handler (multiple)
-        const imagesInput = document.getElementById('schoolImages');
-        if (imagesInput) {
-            imagesInput.addEventListener('change', (e) => {
-                const files = Array.from(e.target.files);
-                if (files.length > 0) {
-                    document.getElementById('imagesFileName').textContent = `${files.length} image(s) selected`;
-                    const grid = document.getElementById('imagesPreviewGrid');
-                    grid.innerHTML = '';
-                    
-                    files.forEach((file, index) => {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            const item = document.createElement('div');
-                            item.className = 'preview-item';
-                            item.innerHTML = `
-                                <img src="${event.target.result}" alt="Image preview">
-                                <button type="button" class="preview-remove" onclick="removeImagePreview(this)" data-index="${index}">&times;</button>
-                            `;
-                            grid.appendChild(item);
-                        };
-                        reader.readAsDataURL(file);
-                    });
-                    
-                    document.getElementById('imagesPreview').style.display = 'block';
-                }
-            });
-        }
-
-        // Videos file upload handler (multiple)
-        const videosInput = document.getElementById('schoolVideos');
-        if (videosInput) {
-            videosInput.addEventListener('change', (e) => {
-                const files = Array.from(e.target.files);
-                if (files.length > 0) {
-                    document.getElementById('videosFileName').textContent = `${files.length} video(s) selected`;
-                    const grid = document.getElementById('videosPreviewGrid');
-                    grid.innerHTML = '';
-                    
-                    files.forEach((file, index) => {
-                        const reader = new FileReader();
-                        reader.onload = (event) => {
-                            const item = document.createElement('div');
-                            item.className = 'preview-item';
-                            item.innerHTML = `
-                                <video src="${event.target.result}" controls style="width: 100%; height: 100%; object-fit: cover;"></video>
-                                <button type="button" class="preview-remove" onclick="removeVideoPreview(this)" data-index="${index}">&times;</button>
-                            `;
-                            grid.appendChild(item);
-                        };
-                        reader.readAsDataURL(file);
-                    });
-                    
-                    document.getElementById('videosPreview').style.display = 'block';
-                }
-            });
-        }
-    });
-
-    function removeImagePreview(btn) {
-        btn.parentElement.remove();
-        const grid = document.getElementById('imagesPreviewGrid');
-        if (grid.children.length === 0) {
-            document.getElementById('imagesPreview').style.display = 'none';
-            document.getElementById('schoolImages').value = '';
-            document.getElementById('imagesFileName').textContent = '';
-        }
-    }
-
-    function removeVideoPreview(btn) {
-        btn.parentElement.remove();
-        const grid = document.getElementById('videosPreviewGrid');
-        if (grid.children.length === 0) {
-            document.getElementById('videosPreview').style.display = 'none';
-            document.getElementById('schoolVideos').value = '';
-            document.getElementById('videosFileName').textContent = '';
-        }
     }
 
     function editItem(id, type) {
@@ -1229,8 +1496,21 @@
         if (!item) return;
         editingId[type] = id;
         editingSectionType = type;
+        
+        // Update modal title for schools
+        if (type === 'schools') {
+            const titleEl = document.getElementById('schoolModalTitle');
+            if (titleEl) titleEl.textContent = 'Edit School';
+        }
+        
         populateForm(type, item);
-        document.getElementById(`${type}Modal`).classList.add('show');
+        const modalId = getModalId(type);
+        const modalEl = document.getElementById(modalId);
+        if (modalEl) {
+            modalEl.classList.add('show');
+        } else {
+            console.error(`Modal not found: ${modalId}`);
+        }
     }
 
     function populateForm(type, item) {
@@ -1243,6 +1523,15 @@
                 document.getElementById('schoolEmail').value = item.contact_email || '';
                 document.getElementById('schoolPhone').value = item.contact_phone || '';
                 document.getElementById('schoolAddress').value = item.address || '';
+                
+                // Restore file previews
+                window.schoolLogoData = item.logo || null;
+                window.schoolImagesData = item.images || [];
+                window.schoolVideosData = item.videos || [];
+                
+                updateFilePreview('schoolLogo', window.schoolLogoData);
+                updateFilesPreview('schoolImages', window.schoolImagesData);
+                updateFilesPreview('schoolVideos', window.schoolVideosData);
             },
             events: () => {
                 document.getElementById('eventName').value = item.name;
@@ -1305,7 +1594,10 @@
                 students: parseInt(document.getElementById('schoolStudents').value) || 0,
                 contact_email: document.getElementById('schoolEmail').value,
                 contact_phone: document.getElementById('schoolPhone').value,
-                address: document.getElementById('schoolAddress').value
+                address: document.getElementById('schoolAddress').value,
+                logo: window.schoolLogoData || null,
+                images: window.schoolImagesData || [],
+                videos: window.schoolVideosData || []
             }),
             events: () => ({
                 name: document.getElementById('eventName').value,
@@ -1361,98 +1653,6 @@
         const data = (extractors[type] || (() => ({})))();
         const id = editingId[type];
         
-        // Special handling for schools with file uploads
-        if (type === 'schools') {
-            try {
-                const formData = new FormData();
-                
-                // Add form fields
-                formData.append('name', data.name);
-                formData.append('category', data.category);
-                formData.append('district', data.district);
-                formData.append('students', data.students);
-                formData.append('contact_email', data.contact_email);
-                formData.append('contact_phone', data.contact_phone);
-                formData.append('address', data.address);
-                
-                // Add files if selected
-                const logoFile = document.getElementById('schoolLogo').files[0];
-                if (logoFile) {
-                    formData.append('logo', logoFile);
-                }
-                
-                const imagesFiles = document.getElementById('schoolImages').files;
-                for (let i = 0; i < imagesFiles.length; i++) {
-                    formData.append('images', imagesFiles[i]);
-                }
-                
-                const videosFiles = document.getElementById('schoolVideos').files;
-                for (let i = 0; i < videosFiles.length; i++) {
-                    formData.append('videos', videosFiles[i]);
-                }
-                
-                // Attempt to send to backend API
-                const apiEndpoint = id ? `/api/schools/${id}` : '/api/schools';
-                const method = id ? 'PUT' : 'POST';
-                
-                try {
-                    const response = await fetch(apiEndpoint, {
-                        method: method,
-                        body: formData,
-                        credentials: 'include'
-                    });
-                    
-                    if (!response.ok) {
-                        throw new Error(`API error: ${response.status}`);
-                    }
-                    
-                    const result = await response.json();
-                    
-                    // Update local data
-                    if (id) {
-                        const idx = schoolsData.findIndex(i => i.id === id);
-                        if (idx >= 0) {
-                            schoolsData[idx] = { ...schoolsData[idx], ...result };
-                            showAlert('schools', `✓ School updated!`, 'success');
-                        }
-                    } else {
-                        schoolsData.push(result);
-                        showAlert('schools', `✓ School added!`, 'success');
-                    }
-                } catch (apiError) {
-                    console.log('API not available, using local storage:', apiError);
-                    
-                    // Fallback: Store locally with file references
-                    if (id) {
-                        const idx = schoolsData.findIndex(i => i.id === id);
-                        if (idx >= 0) {
-                            schoolsData[idx] = { id, ...data, logo: logoFile ? logoFile.name : null, images_count: imagesFiles.length, videos_count: videosFiles.length };
-                            showAlert('schools', `✓ School updated (local)!`, 'success');
-                        }
-                    } else {
-                        const newId = Math.max(...schoolsData.map(i => i.id || 0), 0) + 1;
-                        schoolsData.push({ 
-                            id: newId, 
-                            ...data, 
-                            logo: logoFile ? logoFile.name : null,
-                            images_count: imagesFiles.length,
-                            videos_count: videosFiles.length
-                        });
-                        showAlert('schools', `✓ School added (local)!`, 'success');
-                    }
-                }
-                
-                saveDataToStorage('schools');
-                closeModal('schoolsModal');
-                loadData('schools');
-                return;
-            } catch (error) {
-                showAlert('schools', `✗ Error: ${error.message}`, 'error');
-                return;
-            }
-        }
-        
-        // Standard handling for other types (no files)
         if (id) {
             const idx = window[`${type}Data`].findIndex(i => i.id === id);
             if (idx >= 0) {
@@ -1466,7 +1666,8 @@
         }
 
         saveDataToStorage(type);
-        closeModal(`${type}Modal`);
+        if (type === 'schools') resetFileUploads();
+        closeModal(getModalId(type));
         loadData(type);
     }
 
@@ -1490,6 +1691,42 @@
     }
 
     // ===== EVENT LISTENERS & UI =====
+    // Singular/Plural mapping for button and modal IDs
+    const singularMap = {
+        'schools': 'school',
+        'events': 'event',
+        'jobs': 'job',
+        'bursaries': 'bursary',
+        'agents': 'agent',
+        'papers': 'paper',
+        'suggestions': 'suggestion',
+        'users': 'user'
+    };
+
+    const modalIdMap = {
+        'schools': 'schoolModal',      // singular
+        'events': 'eventsModal',       // plural
+        'jobs': 'jobsModal',           // plural
+        'bursaries': 'bursariesModal', // plural
+        'agents': 'agentsModal',       // plural
+        'papers': 'papersModal',       // plural
+        'suggestions': 'suggestionsModal', // plural
+        'users': 'usersModal'          // plural
+    };
+
+    function getSingular(plural) {
+        return singularMap[plural] || plural.slice(0, -1);
+    }
+
+    function getModalId(type) {
+        return modalIdMap[type] || `${type}Modal`;
+    }
+
+    function getFormId(type) {
+        const singular = getSingular(type);
+        return `${singular}Form`;
+    }
+
     function setupEventListeners() {
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
@@ -1506,10 +1743,16 @@
             });
         });
 
-        // Add buttons
+        // Add buttons - use correct singular form for IDs
         ['schools', 'events', 'jobs', 'bursaries', 'agents', 'papers', 'suggestions', 'users'].forEach(type => {
-            const btn = document.getElementById(`add${type.charAt(0).toUpperCase() + type.slice(1, -1)}Btn`);
-            if (btn) btn.addEventListener('click', () => openModal(type));
+            const singular = getSingular(type);
+            const btnId = `add${singular.charAt(0).toUpperCase() + singular.slice(1)}Btn`;
+            const btn = document.getElementById(btnId);
+            if (btn) {
+                btn.addEventListener('click', () => openModal(type));
+            } else {
+                console.warn(`Button not found: ${btnId}`);
+            }
         });
 
         // Refresh
