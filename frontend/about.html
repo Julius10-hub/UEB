@@ -99,6 +99,10 @@
                     <p>Form 1-4 • 85+ Schools</p>
                 </div>
                 <div class="quick-card">
+                    <h3>Tahfidh</h3>
+                    <p>Islamic Studies • 85+ Schools</p>
+                </div>
+                <div class="quick-card">
                     <h3>Technical</h3>
                     <p>Vocational • 30+ Institutes</p>
                 </div>
@@ -144,6 +148,225 @@
                                 </h3>
                                 <p>Creating tangible change by removing barriers to education, fostering transparency,
                                     and building partnerships that strengthen the entire education ecosystem.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </section>
+
+            <style>
+                /* Impact stats styling */
+                .impact-stats-section {
+                    padding: 50px 0 30px;
+                    background: linear-gradient(180deg, rgba(17,42,102,0.03), rgba(30,91,168,0.02));
+                    margin-top: 30px;
+                }
+
+                .stats-content {
+                    position: relative;
+                    z-index: 2;
+                    max-width: 1100px;
+                    margin: 0 auto;
+                    text-align: center;
+                    padding: 30px 20px;
+                }
+
+                .stats-header h2 {
+                    font-size: 2rem;
+                    color: var(--deep-blue, #112a66);
+                    margin-bottom: 6px;
+                }
+
+                .stats-header p {
+                    color: #51668f;
+                    margin-bottom: 24px;
+                }
+
+                .stats-grid {
+                    display: grid;
+                    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+                    gap: 18px;
+                    align-items: stretch;
+                }
+
+                .stat-card {
+                    background: white;
+                    padding: 18px 16px;
+                    border-radius: 14px;
+                    box-shadow: 0 8px 30px rgba(17,42,102,0.06);
+                    display: flex;
+                    gap: 14px;
+                    align-items: center;
+                    transition: transform 0.35s ease, box-shadow 0.35s ease;
+                }
+
+                .stat-card:hover {
+                    transform: translateY(-8px);
+                    box-shadow: 0 20px 50px rgba(17,42,102,0.12);
+                }
+
+                .stat-icon {
+                    width: 68px;
+                    height: 68px;
+                    border-radius: 12px;
+                    background: linear-gradient(135deg, rgba(243,156,18,0.12), rgba(30,91,168,0.06));
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    font-size: 28px;
+                    color: var(--orange, #f39c12);
+                    flex-shrink:0;
+                }
+
+                .stat-content {
+                    text-align: left;
+                    width: 100%;
+                }
+
+                .stat-number {
+                    font-size: 1.6rem;
+                    font-weight: 800;
+                    color: var(--deep-blue, #112a66);
+                    margin: 0;
+                }
+
+                .stat-label {
+                    margin: 4px 0 8px;
+                    color: #6b7b98;
+                    font-size: 0.9rem;
+                }
+
+                .stat-bar {
+                    height: 8px;
+                    background: rgba(17,42,102,0.06);
+                    border-radius: 6px;
+                    overflow: hidden;
+                }
+
+                .stat-fill {
+                    height: 100%;
+                    background: linear-gradient(90deg, var(--orange, #f39c12), #e08e0b);
+                    width: 0%;
+                    transition: width 1.4s cubic-bezier(.2,.9,.2,1);
+                }
+
+                /* Background decorative blur */
+                .stats-background { position: absolute; inset: 0; z-index:1; pointer-events:none; }
+                .stats-blur { position: absolute; width: 60%; height: 120%; right: -10%; top: -10%; background: radial-gradient(circle at 30% 30%, rgba(243,156,18,0.12), transparent 30%); filter: blur(48px); }
+
+                @media (max-width: 700px) {
+                    .stat-card { flex-direction: row; gap: 12px; }
+                    .stat-icon { width: 56px; height: 56px; font-size: 22px; }
+                }
+            </style>
+
+            <script>
+                // Animated counter and progress fill when visible
+                (function() {
+                    function animateStats() {
+                        const counters = document.querySelectorAll('.stat-number');
+                        counters.forEach(counter => {
+                            const target = +counter.getAttribute('data-target');
+                            const duration = 1500;
+                            const start = 0;
+                            const startTime = performance.now();
+
+                            function step(now) {
+                                const progress = Math.min((now - startTime) / duration, 1);
+                                const value = Math.floor(progress * (target - start) + start);
+                                counter.textContent = value.toLocaleString();
+                                if (progress < 1) requestAnimationFrame(step);
+                            }
+
+                            requestAnimationFrame(step);
+                        });
+
+                        // Animate stat-fill widths
+                        document.querySelectorAll('.stat-fill').forEach(fill => {
+                            const w = fill.style.width || fill.getAttribute('data-width') || '60%';
+                            // small timeout to allow CSS transitions
+                            setTimeout(() => { fill.style.width = w; }, 120);
+                        });
+                    }
+
+                    // Use IntersectionObserver to trigger when visible
+                    const el = document.querySelector('.impact-stats-section');
+                    if (!el) return;
+                    const obs = new IntersectionObserver((entries, observer) => {
+                        entries.forEach(entry => {
+                            if (entry.isIntersecting) {
+                                animateStats();
+                                observer.disconnect();
+                            }
+                        });
+                    }, { threshold: 0.3 });
+
+                    obs.observe(el);
+                })();
+            </script>
+            <!-- Eye-Catching Impact Statistics Section -->
+            <section class="impact-stats-section">
+                <div class="container-fluid">
+                    <div class="stats-background">
+                        <div class="stats-blur"></div>
+                    </div>
+                    <div class="stats-content">
+                        <div class="stats-header">
+                            <h2>Our Impact By The Numbers</h2>
+                            <p>Transforming education across Africa through technology and partnerships</p>
+                        </div>
+                        <div class="stats-grid">
+                            <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
+                                <div class="stat-icon">
+                                    <i class="fas fa-school"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="500">0</h3>
+                                    <p class="stat-label">Schools Partnered</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: 85%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card" data-aos="fade-up" data-aos-delay="100">
+                                <div class="stat-icon">
+                                    <i class="fas fa-users"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="50000">0</h3>
+                                    <p class="stat-label">Active Students</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: 92%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card" data-aos="fade-up" data-aos-delay="200">
+                                <div class="stat-icon">
+                                    <i class="fas fa-piggy-bank"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="25">0</h3>
+                                    <p class="stat-label">Million Bursaries Disbursed</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: 78%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="stat-card" data-aos="fade-up" data-aos-delay="300">
+                                <div class="stat-icon">
+                                    <i class="fas fa-handshake"></i>
+                                </div>
+                                <div class="stat-content">
+                                    <h3 class="stat-number" data-target="200">0</h3>
+                                    <p class="stat-label">Education Agents</p>
+                                    <div class="stat-bar">
+                                        <div class="stat-fill" style="width: 88%;"></div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -197,7 +420,7 @@
 </section>
 
             <!-- What We Do Section -->
-            <section class="about-section">
+            <section class="about-section" id="whatWeDoSection">
                 <div class="container-fluid">
                     <div class="section-intro">
                         <h2>What We Do</h2>
@@ -205,43 +428,48 @@
                     </div>
 
                     <div class="features-grid">
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="0">
+                            <div class="feature-icon"><i class="fas fa-search"></i></div>
+                            <div class="feature-content">
                                 <h4>School Discovery</h4>
                                 <p>Curated listings of schools across pre-school to university levels, helping students
                                     and parents find institutions that match their needs.</p>
                             </div>
                         </div>
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="100">
+                            <div class="feature-icon"><i class="fas fa-file-alt"></i></div>
+                            <div class="feature-content">
                                 <h4>Application Support</h4>
                                 <p>Simplified application processes and guidance for students applying to schools and
                                     institutions.</p>
                             </div>
                         </div>
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="200">
+                            <div class="feature-icon"><i class="fas fa-piggy-bank"></i></div>
+                            <div class="feature-content">
                                 <h4>Bursary Programs</h4>
                                 <p>Access to dedicated bursary opportunities and financial support programs for
                                     deserving students.</p>
                             </div>
                         </div>
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="300">
+                            <div class="feature-icon"><i class="fas fa-book"></i></div>
+                            <div class="feature-content">
                                 <h4>E-Library Resources</h4>
                                 <p>Extensive collection of past papers, study guides, and learning materials for
                                     academic excellence.</p>
                             </div>
                         </div>
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="400">
+                            <div class="feature-icon"><i class="fas fa-calendar-alt"></i></div>
+                            <div class="feature-content">
                                 <h4>Activities & Events</h4>
-                                <p>Educational activities, webinars, and events that enhance learning and engagement.
-                                </p>
+                                <p>Educational activities, webinars, and events that enhance learning and engagement.</p>
                             </div>
                         </div>
-                        <div class="feature-block">
-                            <div>
+                        <div class="feature-block" data-aos="fade-up" data-aos-delay="500">
+                            <div class="feature-icon"><i class="fas fa-handshake"></i></div>
+                            <div class="feature-content">
                                 <h4>Agent Network</h4>
                                 <p>Partnership opportunities with education agents who help connect students to
                                     opportunities.</p>
@@ -314,67 +542,343 @@
 
                 <!-- Continuous marquee only -->
                 <div class="marquee-container">
-                <div class="marquee">
-                    <div class="marquee-content">
-                        <div class="marquee-item">
-                            <img src="gallery/logo2.png" alt="logo2"
-                                class="sponsor-logo">
-                        </div>
-                        <div class="marquee-item">
-                            <img src="gallery/logo.jpeg" alt="logo" class="sponsor-logo">
-                        </div>
-                        <div class="marquee-item">
-                            <img src="gallery/deep shit.png" alt="DeepShift" class="sponsor-logo">
+                    <div class="marquee">
+                        <div class="marquee-content">
+                            <div class="marquee-item">
+                                <img src="gallery/logo2.png" alt="logo2" class="sponsor-logo">
+                            </div>
+                            <div class="marquee-item">
+                                <img src="gallery/logo.jpeg" alt="logo" class="sponsor-logo">
+                            </div>
+                            <!-- Duplicated for seamless loop -->
+                            <div class="marquee-item">
+                                <img src="gallery/logo2.png" alt="logo2" class="sponsor-logo">
+                            </div>
+                            <div class="marquee-item">
+                                <img src="gallery/logo.jpeg" alt="logo" class="sponsor-logo">
+                            </div>
                         </div>
                     </div>
-                </div>   
-            </div>
+                </div>
         </div>
 
         <style>
-            /* Partners carousel + marquee styles */
-            .partners-carousel .partner-item,
-            .partners-marquee .partner-item {
-                background: #fff;
-                color: var(--deep-blue, #112a66);
-                padding: 18px 26px;
-                border-radius: 10px;
-                box-shadow: 0 8px 20px rgba(16, 185, 129, 0.06);
-                font-weight: 700;
-                min-width: 180px;
-                text-align: center;
+            /* What We Do Section - Feature Blocks */
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 50px;
             }
 
+            .feature-block {
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+                border-radius: 15px;
+                padding: 35px 25px;
+                text-align: center;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                position: relative;
+                overflow: hidden;
+                border: 1px solid rgba(30, 91, 168, 0.1);
+                box-shadow: 0 8px 25px rgba(30, 91, 168, 0.08);
+                cursor: pointer;
+            }
 
-            /* Marquee: continuous horizontal scroll */
-            .partners-marquee {
+            .feature-block::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.1), transparent);
+                transition: left 0.6s ease;
+            }
+
+            .feature-block:hover::before {
+                left: 100%;
+            }
+
+            .feature-block:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 20px 50px rgba(30, 91, 168, 0.15);
+                border-color: rgba(243, 156, 18, 0.3);
+                background: linear-gradient(135deg, #ffffff 0%, #fff5e6 100%);
+            }
+
+            .feature-icon {
+                font-size: 50px;
+                color: var(--orange, #f39c12);
+                margin-bottom: 20px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 90px;
+                height: 90px;
+                background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(243, 156, 18, 0.05));
+                border-radius: 50%;
+                transition: all 0.4s ease;
+                position: relative;
+            }
+
+            .feature-icon::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(243, 156, 18, 0.2) 0%, transparent 70%);
+                animation: pulse-icon 2s ease-in-out infinite;
+            }
+
+            .feature-icon i {
+                position: relative;
+                z-index: 1;
+            }
+
+            .feature-block:hover .feature-icon {
+                transform: scale(1.15) rotateZ(10deg);
+                background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(243, 156, 18, 0.1));
+                box-shadow: 0 10px 30px rgba(243, 156, 18, 0.2);
+            }
+
+            .feature-content {
+                transition: all 0.3s ease;
+            }
+
+            .feature-block h4 {
+                color: var(--deep-blue, #112a66);
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin: 15px 0;
+                transition: color 0.3s ease;
+            }
+
+            .feature-block:hover h4 {
+                color: var(--orange, #f39c12);
+            }
+
+            .feature-block p {
+                color: #666;
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin: 0;
+                transition: color 0.3s ease;
+            }
+
+            .feature-block:hover p {
+                color: #555;
+            }
+
+            @keyframes pulse-icon {
+                0%, 100% { 
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.2);
+                    opacity: 0.5;
+                }
+            }
+
+            /* Marquee Container */
+            .marquee-container {
                 overflow: hidden;
                 width: 100%;
-                margin-top: 18px;
-                display: block;
+                padding: 30px 0;
             }
 
-            .marquee-track {
+            .marquee {
+                width: 100%;
+            }
+
+            .marquee-content {
                 display: flex;
-                gap: 24px;
+                gap: 60px;
                 align-items: center;
-                animation: marquee 18s linear infinite;
+                justify-content: center;
+                animation: scroll 20s linear infinite;
             }
 
-            .partners-marquee:hover .marquee-track {
-                animation-play-state: paused;
+            .marquee-item {
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
             }
 
-            @keyframes marquee {
+            /* Sponsor logo sizing */
+            .sponsor-logo {
+                max-width: 120px;
+                height: auto;
+                max-height: 80px;
+                object-fit: contain;
+                filter: brightness(0.95);
+                transition: filter 0.3s ease;
+            }
+
+            .marquee-item:hover .sponsor-logo {
+                filter: brightness(1.1);
+            }
+
+            @keyframes scroll {
                 0% { transform: translateX(0); }
-                100% { transform: translateX(-40%); }
+                100% { transform: translateX(-50%); }
+            }
+
+            .marquee-container:hover .marquee-content {
+                animation-play-state: paused;
             }
 
             /* Responsive tweaks */
             @media (max-width: 768px) {
-                .partners-carousel .partner-item,
-                .partners-marquee .partner-item { min-width: 140px; padding: 12px 16px; }
-                .marquee-track { animation-duration: 14s; }
+                .sponsor-logo {
+                    max-width: 90px;
+                    max-height: 60px;
+                }
+                .marquee-content {
+                    gap: 40px;
+                    animation-duration: 15s;
+                }
+
+                .feature-block {
+                    padding: 25px 15px;
+                }
+
+                .feature-icon {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 35px;
+                }
+
+                .features-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+            }
+        </style>
+
+        <script>
+            // Feature blocks interactive effects
+            document.addEventListener('DOMContentLoaded', function() {
+                const featureBlocks = document.querySelectorAll('.feature-block');
+
+                featureBlocks.forEach((block, index) => {
+                    // Add staggered animation on page load
+                    block.style.animationDelay = (index * 0.1) + 's';
+
+                    // Add click interaction for mobile/tablet
+                    block.addEventListener('click', function() {
+                        // Remove active state from siblings
+                        featureBlocks.forEach(b => b.classList.remove('active'));
+                        // Add active state to clicked block
+                        this.classList.add('active');
+                    });
+
+                    // Ripple effect on click
+                    block.addEventListener('click', function(e) {
+                        const ripple = document.createElement('span');
+                        ripple.className = 'ripple';
+                        const rect = this.getBoundingClientRect();
+                        const size = Math.max(rect.width, rect.height);
+                        const x = e.clientX - rect.left - size / 2;
+                        const y = e.clientY - rect.top - size / 2;
+
+                        ripple.style.width = ripple.style.height = size + 'px';
+                        ripple.style.left = x + 'px';
+                        ripple.style.top = y + 'px';
+                        
+                        this.appendChild(ripple);
+                        
+                        setTimeout(() => ripple.remove(), 600);
+                    });
+                });
+            });
+        </script>
+
+        <style>
+            /* Ripple effect for feature blocks */
+            .feature-block {
+                position: relative;
+            }
+
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(243, 156, 18, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s ease-out;
+                pointer-events: none;
+            }
+
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        </style>
+
+        <style>
+            /* Marquee Container */
+            .marquee-container {
+                overflow: hidden;
+                width: 100%;
+                padding: 30px 0;
+            }
+
+            .marquee {
+                width: 100%;
+            }
+
+            .marquee-content {
+                display: flex;
+                gap: 60px;
+                align-items: center;
+                justify-content: center;
+                animation: scroll 20s linear infinite;
+            }
+
+            .marquee-item {
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Sponsor logo sizing */
+            .sponsor-logo {
+                max-width: 120px;
+                height: auto;
+                max-height: 80px;
+                object-fit: contain;
+                filter: brightness(0.95);
+                transition: filter 0.3s ease;
+            }
+
+            .marquee-item:hover .sponsor-logo {
+                filter: brightness(1.1);
+            }
+
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            .marquee-container:hover .marquee-content {
+                animation-play-state: paused;
+            }
+
+            /* Responsive tweaks */
+            @media (max-width: 768px) {
+                .sponsor-logo {
+                    max-width: 90px;
+                    max-height: 60px;
+                }
+                .marquee-content {
+                    gap: 40px;
+                    animation-duration: 15s;
+                }
             }
         </style>
 
