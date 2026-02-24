@@ -717,7 +717,7 @@
             <!-- quick actions -->
             <h2 class="section-title">Quick actions</h2>
             <div class="quick-actions">
-                <button class="quick-action-btn" onclick="alert('Add school (Ugandan district)')"><i class="fas fa-plus"></i> Add School</button>
+                <button class="quick-action-btn" onclick="openModal('schoolModal')"><i class="fas fa-plus"></i> Add School</button>
                 <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
             </div>
 
@@ -1323,13 +1323,18 @@
         updateFilesPreview('schoolVideos', []);
     }
 
-    function checkAdminAccess() {
+    async function checkAdminAccess() {
         try {
-            const userStr = localStorage.getItem('cpace_user');
-            if (userStr) {
-                const user = JSON.parse(userStr);
-                if (user.is_admin || user.role === 'admin') return user;
+            // First try to get user from API (backend authentication)
+            const user = await api.getCurrentUser();
+            
+            if (user && (user.is_admin || user.role === 'admin')) {
+                console.log('✓ Admin authenticated:', user.name || user.email);
+                return user;
             }
+            
+            // If no valid admin user, they must log in
+            console.log('✗ Admin access denied or not authenticated');
             return null;
         } catch (error) {
             console.error('Auth check error:', error);
@@ -1586,18 +1591,38 @@
 
     async function handleSubmit(event, type) {
         event.preventDefault();
+        
+        // For schools, check authentication first
+        if (type === 'schools') {
+            const currentUser = await api.getCurrentUser();
+            if (!currentUser) {
+                showAlert(type, `✗ Authentication required. Please log in first.`, 'danger');
+                // Redirect to login
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 1500);
+                return;
+            }
+            
+            if (!currentUser.is_admin) {
+                showAlert(type, `✗ Admin access required to add schools.`, 'danger');
+                return;
+            }
+        }
+        
         const extractors = {
             schools: () => ({
                 name: document.getElementById('schoolName').value,
                 category: document.getElementById('schoolCategory').value,
-                district: document.getElementById('schoolDistrict').value,
+                city: document.getElementById('schoolDistrict').value,
+                location: document.getElementById('schoolDistrict').value + ', Uganda', // Full location
                 students: parseInt(document.getElementById('schoolStudents').value) || 0,
                 contact_email: document.getElementById('schoolEmail').value,
                 contact_phone: document.getElementById('schoolPhone').value,
-                address: document.getElementById('schoolAddress').value,
-                logo: window.schoolLogoData || null,
-                images: window.schoolImagesData || [],
-                videos: window.schoolVideosData || []
+                country: 'Uganda',
+                established: new Date().getFullYear(),
+                programs: [],
+                description: ''
             }),
             events: () => ({
                 name: document.getElementById('eventName').value,
@@ -1653,22 +1678,103 @@
         const data = (extractors[type] || (() => ({})))();
         const id = editingId[type];
         
-        if (id) {
-            const idx = window[`${type}Data`].findIndex(i => i.id === id);
-            if (idx >= 0) {
-                window[`${type}Data`][idx] = { ...window[`${type}Data`][idx], ...data };
-                showAlert(type, `✓ ${type.slice(0,-1)} updated!`, 'success');
+        // For schools, save to backend API with authentication
+        if (type === 'schools') {
+            try {
+                showAlert(type, `⏳ Creating school...`, 'info');
+                const response = await api.createSchool(data);
+                
+                if (response.error) {
+                    if (response.error.includes('Unauthorized') || response.error.includes('401')) {
+                        showAlert(type, `✗ Authentication failed. Please log in again.`, 'danger');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 1500);
+                    } else if (response.error.includes('forbidden') || response.error.includes('403')) {
+                        showAlert(type, `✗ You don't have permission to add schools.`, 'danger');
+                    } else {
+                        showAlert(type, `✗ Error: ${response.error}`, 'danger');
+                    }
+                    return;
+                }
+                
+                if (response.school) {
+                    showAlert(type, `✓ School added successfully!`, 'success');
+                    broadcastNewSchool(response.school);
+                } else {
+                    showAlert(type, `✗ Unexpected response from server.`, 'danger');
+                    return;
+                }
+            } catch (error) {
+                console.error('Error creating school:', error);
+                showAlert(type, `✗ Network error: ${error.message}`, 'danger');
+                return;
             }
         } else {
-            const newId = Math.max(...window[`${type}Data`].map(i => i.id || 0), 0) + 1;
-            window[`${type}Data`].push({ id: newId, ...data });
-            showAlert(type, `✓ ${type.slice(0,-1)} added!`, 'success');
+            // For other types, use localStorage
+            if (id) {
+                const idx = window[`${type}Data`].findIndex(i => i.id === id);
+                if (idx >= 0) {
+                    window[`${type}Data`][idx] = { ...window[`${type}Data`][idx], ...data };
+                    showAlert(type, `✓ ${type.slice(0,-1)} updated!`, 'success');
+                }
+            } else {
+                const newId = Math.max(...window[`${type}Data`].map(i => i.id || 0), 0) + 1;
+                const newItem = { id: newId, ...data };
+                window[`${type}Data`].push(newItem);
+                showAlert(type, `✓ ${type.slice(0,-1)} added!`, 'success');
+            }
+            saveDataToStorage(type);
         }
 
-        saveDataToStorage(type);
         if (type === 'schools') resetFileUploads();
         closeModal(getModalId(type));
-        loadData(type);
+        if (type !== 'schools') loadData(type);
+    }
+
+    // Broadcast new school to other pages using Broadcast Channel API
+    function broadcastNewSchool(school) {
+        try {
+            // Use Broadcast Channel API if available (modern browsers)
+            if (typeof BroadcastChannel !== 'undefined') {
+                const channel = new BroadcastChannel('edubridge_schools');
+                channel.postMessage({
+                    type: 'SCHOOL_ADDED',
+                    school: {
+                        id: school.id,
+                        name: school.name,
+                        category: school.category,
+                        city: school.city,
+                        location: school.location,
+                        students: school.students,
+                        contact_email: school.contact_email,
+                        contact_phone: school.contact_phone
+                    },
+                    timestamp: Date.now()
+                });
+                channel.close();
+            }
+        } catch (error) {
+            console.log('Broadcast Channel not available, using localStorage fallback');
+        }
+        
+        // Also dispatch a custom event for internal listeners
+        document.dispatchEvent(new CustomEvent('schoolAdded', { detail: { school } }));
+        
+        // Trigger localStorage event for same-window listeners
+        localStorage.setItem('edubridge_last_school_added', JSON.stringify({
+            school: {
+                id: school.id,
+                name: school.name,
+                category: school.category,
+                city: school.city,
+                location: school.location,
+                students: school.students,
+                contact_email: school.contact_email,
+                contact_phone: school.contact_phone
+            },
+            timestamp: Date.now()
+        }));
     }
 
     async function deleteItem(id, type) {
