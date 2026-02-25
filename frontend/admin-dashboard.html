@@ -717,7 +717,7 @@
             <!-- quick actions -->
             <h2 class="section-title">Quick actions</h2>
             <div class="quick-actions">
-                <button class="quick-action-btn" onclick="openModal('schoolModal')"><i class="fas fa-plus"></i> Add School</button>
+                <button class="quick-action-btn" data-modal-target="schools"><i class="fas fa-plus"></i> Add School</button>
                 <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
             </div>
 
@@ -736,7 +736,7 @@
         <div id="schools-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Schools Management</h2>
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="document.getElementById('schoolModal').style.display='flex'; const f=document.getElementById('schoolForm'); if(f) f.reset();">
+                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" data-modal-target="schools">
                     <i class="fas fa-plus"></i> Add School
                 </button>
             </div>
@@ -1897,6 +1897,14 @@
             } else {
                 console.warn(`Button not found: ${btnId}`);
             }
+        });
+
+        // Also bind any element using data-modal-target attribute (safer than inline onclicks)
+        document.querySelectorAll('[data-modal-target]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const target = el.getAttribute('data-modal-target');
+                if (target) openModal(target);
+            });
         });
 
         // Refresh
