@@ -717,11 +717,7 @@
             <!-- quick actions -->
             <h2 class="section-title">Quick actions</h2>
             <div class="quick-actions">
-<<<<<<< HEAD
-                <button class="quick-action-btn" onclick="openModal('schools')"><i class="fas fa-plus"></i> Add School</button>
-=======
-                <button class="quick-action-btn" data-modal-target="schools"><i class="fas fa-plus"></i> Add School</button>
->>>>>>> fe3d860a795a48585fb0b20f286a2896154e6081
+                <button class="quick-action-btn" onclick="openSchoolModal()"><i class="fas fa-plus"></i> Add School</button>
                 <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
             </div>
 
@@ -740,11 +736,7 @@
         <div id="schools-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Schools Management</h2>
-<<<<<<< HEAD
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;">
-=======
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" data-modal-target="schools">
->>>>>>> fe3d860a795a48585fb0b20f286a2896154e6081
+                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="openSchoolModal()">
                     <i class="fas fa-plus"></i> Add School
                 </button>
             </div>
@@ -1422,6 +1414,43 @@
         updateFilesPreview('schoolImages', []);
         updateFilesPreview('schoolVideos', []);
     }
+
+    // Helper to open the School modal reliably and reset form/files
+    function openSchoolModal() {
+        const modal = document.getElementById('schoolModal');
+        if (!modal) return console.error('schoolModal not found');
+        // Use .show class where styles expect it
+        modal.classList.add('show');
+        const form = document.getElementById('schoolForm');
+        if (form) form.reset();
+        if (typeof resetFileUploads === 'function') resetFileUploads();
+        const titleEl = document.getElementById('schoolModalTitle');
+        if (titleEl) titleEl.textContent = 'Add New School';
+    }
+
+    // Ensure modal trigger buttons are wired reliably
+    document.addEventListener('DOMContentLoaded', function () {
+        // Buttons with data-modal-target attribute
+        document.querySelectorAll('[data-modal-target]').forEach(btn => {
+            btn.addEventListener('click', function () {
+                const t = this.dataset.modalTarget;
+                if (t === 'schools') {
+                    openSchoolModal();
+                } else if (typeof openModal === 'function') {
+                    openModal(t);
+                }
+            });
+        });
+
+        // Fallback: ensure #addSchoolBtn opens the school modal
+        const addBtn = document.getElementById('addSchoolBtn');
+        if (addBtn) {
+            addBtn.addEventListener('click', function (e) {
+                e.preventDefault();
+                openSchoolModal();
+            });
+        }
+    });
 
     async function checkAdminAccess() {
         try {
