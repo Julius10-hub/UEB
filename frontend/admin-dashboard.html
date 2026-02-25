@@ -753,8 +753,7 @@
                                 <th>District</th>
                                 <th>Students</th>
                                 <th>Email</th>
-                                <th>Actions</th>
-                                <th>images</th>
+                                <th>Actions</
                                     
                             </tr>
                         </thead>
@@ -895,118 +894,72 @@
     </div>
 </div>
 
-    <!-- School Modal -->
+  
+    <!-- Events Modal -->
+    <!-- Schools Modal -->
     <div id="schoolModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header">
-                <h2 id="schoolModalTitle">Add New School</h2>
-                <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
-            </div>
-            <form id="schoolForm" onsubmit="handleSchoolSubmit(event)">
-                <!-- BASIC INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Basic Information</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" name="name" required></div>
-                        <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" name="category" required><option value="">Select Category</option><option value="Kindergarten">Kindergarten</option><option value="Tahfidh">Tahfidh</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical/Vocational</option><option value="University">University</option></select></div>
+            <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
+            <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')">
+                <div class="form-row">
+                    <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" required></div>
+                    <div class="form-group"><label for="schoolCategory">Category</label>
+                        <select id="schoolCategory">
+                            <option value="Primary">Primary</option>
+                            <option value="Secondary">Secondary</option>
+                            <option value="Mixed">Mixed</option>
+                            <option value="Technical">Technical</option>
+                        </select>
                     </div>
-                </fieldset>
+                </div>
 
-                <!-- LOCATION INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Location</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolLocation">Location/District *</label><input type="text" id="schoolLocation" name="location" placeholder="e.g., Kampala" required></div>
-                        <div class="form-group"><label for="schoolCity">City</label><input type="text" id="schoolCity" name="city" placeholder="e.g., Kampala City"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolCountry">Country</label><input type="text" id="schoolCountry" name="country" value="Uganda" placeholder="Uganda"></div>
-                    </div>
-                </fieldset>
+                <div class="form-row">
+                    <div class="form-group"><label for="schoolDistrict">District *</label><input type="text" id="schoolDistrict" required></div>
+                    <div class="form-group"><label for="schoolStudents">Students (est)</label><input type="number" id="schoolStudents"></div>
+                </div>
 
-                <!-- SCHOOL DETAILS -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">School Details</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolEstablished">Year Established</label><input type="number" id="schoolEstablished" name="established" placeholder="e.g., 1995" min="1900" max="2100"></div>
-                        <div class="form-group"><label for="schoolStudents">Number of Students</label><input type="number" id="schoolStudents" name="students" placeholder="0" min="0"></div>
-                        <div class="form-group"><label for="schoolFaculty">Number of Teachers/Faculty</label><input type="number" id="schoolFaculty" name="faculty" placeholder="0" min="0"></div>
-                    </div>
-                </fieldset>
+                <div class="form-row">
+                    <div class="form-group"><label for="schoolEmail">Contact Email</label><input type="email" id="schoolEmail"></div>
+                    <div class="form-group"><label for="schoolPhone">Contact Phone</label><input type="tel" id="schoolPhone"></div>
+                </div>
 
-                <!-- CONTACT INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Contact Information</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolEmail">Email</label><input type="email" id="schoolEmail" name="contact_email" placeholder="info@school.edu"></div>
-                        <div class="form-group"><label for="schoolPhone">Phone</label><input type="tel" id="schoolPhone" name="contact_phone" placeholder="+256 XXX XXX XXX"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolWebsite">Website</label><input type="url" id="schoolWebsite" name="website" placeholder="https://www.school.edu"></div>
-                    </div>
-                </fieldset>
+                <div class="form-group"><label for="schoolAddress">Address</label><input type="text" id="schoolAddress"></div>
 
-                <!-- DESCRIPTION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">About School</legend>
-                    <div class="form-group"><label for="schoolDescription">Short Description</label><textarea id="schoolDescription" name="description" style="resize: vertical; min-height: 80px; max-height: 200px;" placeholder="Brief overview of the school..."></textarea></div>
-                    <div class="form-group"><label for="schoolLongDescription">Detailed Description</label><textarea id="schoolLongDescription" name="long_description" style="resize: vertical; min-height: 120px; max-height: 300px;" placeholder="Detailed information about school facilities, achievements, programs, etc..."></textarea></div>
-                    <div class="form-group"><label for="schoolPrograms">Academic Programs (comma-separated)</label><input type="text" id="schoolPrograms" name="programs_text" placeholder="Mathematics, Science, Languages, Arts..."></div>
-                </fieldset>
-
-                <!-- META INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">SEO & Metadata</legend>
-                    <div class="form-group"><label for="schoolKeywords">Meta Keywords</label><input type="text" id="schoolKeywords" name="meta_keywords" placeholder="keywords, for, search, engines"></div>
-                    <div class="form-group"><label for="schoolMetaDesc">Meta Description</label><textarea id="schoolMetaDesc" name="meta_description" style="resize: vertical; min-height: 60px; max-height: 120px;" placeholder="Brief description for search engines and social media..."></textarea></div>
-                </fieldset>
-
-                <!-- MEDIA & BRANDING -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">School Media</legend>
-                    
-                    <!-- School Logo Upload -->
-                    <div class="file-upload-group">
-                        <label class="file-upload-label"><i class="fas fa-image"></i> School Logo</label>
-                        <div class="file-upload-area" id="logoUploadArea" ondrop="handleDrop(event, 'schoolLogo')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                            <input type="file" id="schoolLogo" name="logo" accept="image/*" onchange="handleFileSelect(event, 'schoolLogo')">
-                            <div class="file-upload-placeholder">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <div class="file-upload-text">
-                                    Drag & drop logo or <span style="color: #10b981; font-weight: 700;">click to browse</span>
-                                    <small>PNG, JPG, GIF (Max 5MB)</small>
-                                </div>
-                            </div>
+                <div class="form-row">
+                    <div class="form-group file-upload-group">
+                        <label class="file-upload-label">Logo</label>
+                        <div id="logoUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolLogo').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolLogo')">
+                            <div class="file-upload-placeholder"><i class="fas fa-image"></i><div class="file-upload-text">Click or drop to upload logo</div></div>
+                            <input type="file" id="schoolLogo" accept="image/*" onchange="handleFileSelect(event, 'schoolLogo')">
                         </div>
                         <div class="logo-preview empty" id="logoPreview"><i class="fas fa-image"></i></div>
                     </div>
 
-                    <!-- School Images Upload -->
-                    <div class="file-upload-group">
-                        <label class="file-upload-label"><i class="fas fa-images"></i> School Images <span class="file-count-badge" id="imagesCount">0</span></label>
-                        <div class="file-upload-area" id="imagesUploadArea" ondrop="handleDrop(event, 'schoolImages')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                            <input type="file" id="schoolImages" name="images" accept="image/*" multiple onchange="handleFileSelect(event, 'schoolImages')">
-                            <div class="file-upload-placeholder">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <div class="file-upload-text">
-                                    Drag & drop images or <span style="color: #10b981; font-weight: 700;">click to browse</span>
-                                    <small>PNG, JPG, GIF (Max 10MB per file, up to 5 images)</small>
-                                </div>
-                            </div>
+                    <div class="form-group file-upload-group">
+                        <label class="file-upload-label">Images <span id="imagesCount" class="file-count-badge">0</span></label>
+                        <div id="imagesUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolImages').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolImages')">
+                            <div class="file-upload-placeholder"><i class="fas fa-images"></i><div class="file-upload-text">Click or drop images (max 5)</div></div>
+                            <input type="file" id="schoolImages" accept="image/*" multiple onchange="handleFileSelect(event, 'schoolImages')">
                         </div>
-                        <div class="file-preview-container" id="imagesPreview"></div>
+                        <div id="imagesPreview" class="file-preview-container"></div>
                     </div>
-                </fieldset>
-
-                <div class="modal-footer">
-                    <button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button>
-                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Save School</button>
                 </div>
+
+                <div class="form-row">
+                    <div class="form-group file-upload-group">
+                        <label class="file-upload-label">Videos <span id="videosCount" class="file-count-badge">0</span></label>
+                        <div id="videosUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolVideos').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolVideos')">
+                            <div class="file-upload-placeholder"><i class="fas fa-video"></i><div class="file-upload-text">Click or drop videos (max 3)</div></div>
+                            <input type="file" id="schoolVideos" accept="video/*" multiple onchange="handleFileSelect(event, 'schoolVideos')">
+                        </div>
+                        <div id="videosPreview" class="file-preview-container"></div>
+                    </div>
+                </div>
+
+                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button><button type="submit" class="btn-submit">Add School</button></div>
             </form>
         </div>
     </div>
-
-    <!-- Events Modal -->
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
