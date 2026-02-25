@@ -717,7 +717,7 @@
             <!-- quick actions -->
             <h2 class="section-title">Quick actions</h2>
             <div class="quick-actions">
-                <button class="quick-action-btn" onclick="openModal('schoolModal')"><i class="fas fa-plus"></i> Add School</button>
+                <button class="quick-action-btn" onclick="openModal('schools')"><i class="fas fa-plus"></i> Add School</button>
                 <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
             </div>
 
@@ -736,7 +736,7 @@
         <div id="schools-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Schools Management</h2>
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="document.getElementById('schoolModal').style.display='flex'; const f=document.getElementById('schoolForm'); if(f) f.reset();">
+                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;">
                     <i class="fas fa-plus"></i> Add School
                 </button>
             </div>
@@ -1531,6 +1531,16 @@
     function closeModal(modalId) {
         const modalEl = document.getElementById(modalId);
         if (modalEl) modalEl.classList.remove('show');
+
+        // If closing the school modal, ensure form and file previews are reset
+        if (modalId === 'schoolModal') {
+            const form = document.getElementById('schoolForm');
+            if (form) form.reset();
+            if (typeof resetFileUploads === 'function') resetFileUploads();
+            const titleEl = document.getElementById('schoolModalTitle');
+            if (titleEl) titleEl.textContent = 'Add New School';
+        }
+
         editingSectionType = null;
     }
 

@@ -19,9 +19,19 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <!-- External CSS (embedded for completeness) -->
     <link rel="stylesheet" href="styles/style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+    </script>
+    <script type="text/javascript">
+        (function () {
+            emailjs.init({
+                publicKey: "1Eo0OwXu0pYdT88OH",
+            });
+        })();
+    </script>
+    <script src="script.js"></script>
 </head>
 <header>
-        <!-- Navigation Bar -->
+    <!-- Navigation Bar -->
     <nav class="navbar navbar-expand-lg navbar-custom fixed-top" id="mainNav">
         <div class="container-fluid">
             <a class="navbar-brand" href="index.html">
@@ -41,32 +51,35 @@
                     <li class="nav-item"><a class="nav-link" href="e-library.html">E-Library</a></li>
                     <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
                     <li class="nav-item">
-                <div class="navbar-auth" id="navbarAuth">
-                    <a href="login.html" class="btn btn-primary">Admin</a>
-                </div>
+                        <div class="navbar-auth" id="navbarAuth">
+                            <a href="login.html" class="btn btn-primary">Admin</a>
+                        </div>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </header>
+
 <body>
     <!-- Hero Section -->
-    <section class="hero" style="background: linear-gradient(135deg, rgba(17, 42, 102, 0.7) 0%, rgba(30, 91, 168, 0.7) 100%), url('gallery/ishamic.jpg') center/cover no-repeat;">
+    <section class="hero"
+        style="background: linear-gradient(135deg, rgba(17, 42, 102, 0.7) 0%, rgba(30, 91, 168, 0.7) 100%), url('gallery/ishamic.jpg') center/cover no-repeat;">
         <div class="hero-particles" id="particles"></div>
         <div class="hero-container">
             <div class="hero-content">
                 <h1>
-                    Bursaries Uganda Education 
+                    Bursaries Uganda Education
                     <span>Bridge</span>
                 </h1>
                 <p class="hero-description">
-                Unlock your educational potential with our comprehensive financial support programs. We're committed to making quality education accessible to all deserving students.
+                    Unlock your educational potential with our comprehensive financial support programs. We're committed
+                    to making quality education accessible to all deserving students.
                 </p>
                 <div class="hero-buttons">
-                        <a href="#bursaries" class="btn btn-primary">
-                            Apply Now <i class="fas fa-arrow-right"></i>
-                        </a>>
+                    <a href="#bursaries" class="btn btn-primary">
+                        Apply Now <i class="fas fa-arrow-right"></i>
+                    </a>>
                     <a href="contact.html" class="btn btn-outline-light">
                         Learn More <i class="fas fa-envelope"></i>
                     </a>
@@ -75,433 +88,433 @@
         </div>
     </section>
     <!-- Main Content -->
-        <!-- Quick Access Section -->
-        <section class="quick-access">
-            <div class="container">
-                <div class="section-header">
-                    <p class="section-subtitle">Quick Access</p>
-                    <h2 class="section-title">Find Your <span>Path</span></h2>
-                </div>
-                <div class="quick-grid">
-                    <a href="schools.html?level=kindergarten" class="quick-card">
-                        <h3>Kindergarten</h3>
-                        <p>Ages 3-5 • 50+ Schools</p>
-                    </a>
-                    <a href="schools.html?level=nursery" class="quick-card">
-                        <h3>Nursery</h3>
-                        <p>Ages 2-4 • 45+ Schools</p>
-                    </a>
-                    <a href="schools.html?level=primary" class="quick-card">
-                        <h3>Primary</h3>
-                        <p>Grade 1-6 • 120+ Schools</p>
-                    </a>
-                    <a href="schools.html?level=secondary" class="quick-card">
-                        <h3>Secondary</h3>
-                        <p>Form 1-4 • 85+ Schools</p>
-                    </a>
-                    <a href="schools.html?level=technical" class="quick-card">
-                        <h3>Technical</h3>
-                        <p>Vocational • 30+ Institutes</p>
-                    </a>
-                    <a href="schools.html?level=university" class="quick-card">
-                        <h3>University</h3>
-                        <p>Bachelor's+ • 25+ Universities</p>
-                    </a>
-                </div>
-            </div>
-        </section>
-
+    <!-- Quick Access Section -->
+    <section class="quick-access">
         <div class="container">
+            <div class="section-header">
+                <p class="section-subtitle">Quick Access</p>
+                <h2 class="section-title">Find Your <span>Path</span></h2>
+            </div>
+            <div class="quick-grid">
+                <a href="schools.html?level=kindergarten" class="quick-card">
+                    <h3>Kindergarten</h3>
+                    <p>Ages 3-5 • 50+ Schools</p>
+                </a>
+                <a href="schools.html?level=nursery" class="quick-card">
+                    <h3>Nursery</h3>
+                    <p>Ages 2-4 • 45+ Schools</p>
+                </a>
+                <a href="schools.html?level=primary" class="quick-card">
+                    <h3>Primary</h3>
+                    <p>Grade 1-6 • 120+ Schools</p>
+                </a>
+                <a href="schools.html?level=secondary" class="quick-card">
+                    <h3>Secondary</h3>
+                    <p>Form 1-4 • 85+ Schools</p>
+                </a>
+                <a href="schools.html?level=technical" class="quick-card">
+                    <h3>Technical</h3>
+                    <p>Vocational • 30+ Institutes</p>
+                </a>
+                <a href="schools.html?level=university" class="quick-card">
+                    <h3>University</h3>
+                    <p>Bachelor's+ • 25+ Universities</p>
+                </a>
+            </div>
+        </div>
+    </section>
 
-            <!-- Bursary Types Grid -->
-            <div class="bursary-grid">
-                <!-- Half Bursary Card -->
-                <div class="bursary-card">
-                    <div class="bursary-header">
-                        <i class="fas fa-star"></i>
-                        <h3>Half Bursary</h3>
-                    </div>
-                    <div class="bursary-amount">
-                        UGX 2,000,000
-                    </div>
-                    <div class="bursary-body">
-                        <ul class="bursary-features">
-                            <li><i class="fas fa-check-circle"></i> Covers 50% of tuition fees</li>
-                            <li><i class="fas fa-check-circle"></i> Open to all academic levels</li>
-                            <li><i class="fas fa-check-circle"></i> Minimum grade: B average</li>
-                            <li><i class="fas fa-check-circle"></i> Renewable annually</li>
-                            <li><i class="fas fa-check-circle"></i> Includes mentorship program</li>
-                        </ul>
-                    </div>
-                    <div class="bursary-footer">
-                        <button class="btn btn-primary"
-                            style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
-                            onclick="applyNow('half')">Apply Now</button>
-                    </div>
+    <div class="container">
+
+        <!-- Bursary Types Grid -->
+        <div class="bursary-grid">
+            <!-- Half Bursary Card -->
+            <div class="bursary-card">
+                <div class="bursary-header">
+                    <i class="fas fa-star"></i>
+                    <h3>Half Bursary</h3>
                 </div>
-
-                <!-- Full Bursary Card -->
-                <div class="bursary-card">
-                    <div class="bursary-header">
-                        <i class="fas fa-crown"></i>
-                        <h3>Full Bursary</h3>
-                    </div>
-                    <div class="bursary-amount">
-                        UGX 8,000,000
-                    </div>
-                    <div class="bursary-body">
-                        <ul class="bursary-features">
-                            <li><i class="fas fa-check-circle"></i> Full tuition coverage</li>
-                            <li><i class="fas fa-check-circle"></i> Includes book allowance</li>
-                            <li><i class="fas fa-check-circle"></i> Minimum grade: A- average</li>
-                            <li><i class="fas fa-check-circle"></i> Leadership opportunities</li>
-                            <li><i class="fas fa-check-circle"></i> Internship placement</li>
-                        </ul>
-                    </div>
-                    <div class="bursary-footer">
-                        <button class="btn btn-primary"
-                            style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
-                            onclick="applyNow('full')">Apply Now</button>
-                    </div>
+                <div class="bursary-amount">
+                    UGX 2,000,000
                 </div>
-
-                <!-- Special Needs Bursary -->
-                <div class="bursary-card">
-                    <div class="bursary-header">
-                        <i class="fas fa-heart"></i>
-                        <h3>Special Needs</h3>
-                    </div>
-                    <div class="bursary-amount">
-                        UGX 6,000,000
-                    </div>
-                    <div class="bursary-body">
-                        <ul class="bursary-features">
-                            <li><i class="fas fa-check-circle"></i> For students with disabilities</li>
-                            <li><i class="fas fa-check-circle"></i> Assistive technology included</li>
-                            <li><i class="fas fa-check-circle"></i> Personalized support</li>
-                            <li><i class="fas fa-check-circle"></i> Transportation allowance</li>
-                            <li><i class="fas fa-check-circle"></i> Caregiver support</li>
-                        </ul>
-                    </div>
-                    <div class="bursary-footer">
-                        <button class="btn btn-primary"
-                            style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
-                            onclick="applyNow('special')">Apply Now</button>
-                    </div>
+                <div class="bursary-body">
+                    <ul class="bursary-features">
+                        <li><i class="fas fa-check-circle"></i> Covers 50% of tuition fees</li>
+                        <li><i class="fas fa-check-circle"></i> Open to all academic levels</li>
+                        <li><i class="fas fa-check-circle"></i> Minimum grade: B average</li>
+                        <li><i class="fas fa-check-circle"></i> Renewable annually</li>
+                        <li><i class="fas fa-check-circle"></i> Includes mentorship program</li>
+                    </ul>
+                </div>
+                <div class="bursary-footer">
+                    <button class="btn btn-primary"
+                        style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
+                        onclick="applyNow('half')">Apply Now</button>
                 </div>
             </div>
 
-            <!-- Application Form -->
-            <div class="form-container">
-                <h2><i class="fas fa-file-signature me-3"></i>Bursary Application Form</h2>
-                <form id="bursaryForm">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-calendar"></i> Date of Birth</label>
-                            <input type="date" class="form-control" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-envelope"></i> Email Address</label>
-                            <input type="email" class="form-control" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-phone"></i> Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="+256 XXX XXX XXX" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-id-card"></i> ID/Passport Number</label>
-                            <input type="text" class="form-control" placeholder="Enter your ID number" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-school"></i> Current School</label>
-                            <input type="text" class="form-control" placeholder="Name of your school" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-layer-group"></i> School Level</label>
-                            <select class="form-control" required>
-                                <option value="">Select level</option>
-                                <option>Kindergarten</option>
-                                <option>Primary School</option>
-                                <option>Secondary School</option>
-                                <option>Technical/Vocational</option>
-                                <option>University</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-graduation-cap"></i> Current Grade/Form</label>
-                            <select class="form-control" required>
-                                <option value="">Select</option>
-                                <option>Grade 4</option>
-                                <option>Grade 5</option>
-                                <option>Grade 6</option>
-                                <option>Form 1</option>
-                                <option>Form 2</option>
-                                <option>Form 3</option>
-                                <option>Form 4</option>
-                                <option>Year 1 University</option>
-                                <option>Year 2 University</option>
-                                <option>Year 3 University</option>
-                                <option>Year 4 University</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-trophy"></i> Bursary Type</label>
-                            <select class="form-control" id="bursaryType" required>
-                                <option value="">Select bursary type</option>
-                                <option value="half">Half Bursary (2,000,000 UGX)</option>
-                                <option value="full">Full Bursary (8,000,000 UGX)</option>
-                                <option value="special">Special Needs Bursary (6,000,000 UGX)</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-chart-line"></i> Average Grade</label>
-                            <select class="form-control" required>
-                                <option value="">Select grade</option>
-                                <option>A (80-100%)</option>
-                                <option>B (65-79%)</option>
-                                <option>C (50-64%)</option>
-                                <option>D (40-49%)</option>
-                                <option>Below D</option>
-                            </select>
-                        </div>
-                    </div>
+            <!-- Full Bursary Card -->
+            <div class="bursary-card">
+                <div class="bursary-header">
+                    <i class="fas fa-crown"></i>
+                    <h3>Full Bursary</h3>
+                </div>
+                <div class="bursary-amount">
+                    UGX 8,000,000
+                </div>
+                <div class="bursary-body">
+                    <ul class="bursary-features">
+                        <li><i class="fas fa-check-circle"></i> Full tuition coverage</li>
+                        <li><i class="fas fa-check-circle"></i> Includes book allowance</li>
+                        <li><i class="fas fa-check-circle"></i> Minimum grade: A- average</li>
+                        <li><i class="fas fa-check-circle"></i> Leadership opportunities</li>
+                        <li><i class="fas fa-check-circle"></i> Internship placement</li>
+                    </ul>
+                </div>
+                <div class="bursary-footer">
+                    <button class="btn btn-primary"
+                        style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
+                        onclick="applyNow('full')">Apply Now</button>
+                </div>
+            </div>
 
+            <!-- Special Needs Bursary -->
+            <div class="bursary-card">
+                <div class="bursary-header">
+                    <i class="fas fa-heart"></i>
+                    <h3>Special Needs</h3>
+                </div>
+                <div class="bursary-amount">
+                    UGX 6,000,000
+                </div>
+                <div class="bursary-body">
+                    <ul class="bursary-features">
+                        <li><i class="fas fa-check-circle"></i> For students with disabilities</li>
+                        <li><i class="fas fa-check-circle"></i> Assistive technology included</li>
+                        <li><i class="fas fa-check-circle"></i> Personalized support</li>
+                        <li><i class="fas fa-check-circle"></i> Transportation allowance</li>
+                        <li><i class="fas fa-check-circle"></i> Caregiver support</li>
+                    </ul>
+                </div>
+                <div class="bursary-footer">
+                    <button class="btn btn-primary"
+                        style="background: var(--deep-blue); border: none; padding: 10px 30px; border-radius: 50px;"
+                        onclick="applyNow('special')">Apply Now</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Application Form -->
+        <div class="form-container">
+            <h2><i class="fas fa-file-signature me-3"></i>Bursary Application Form</h2>
+            <form id="bursaryForm">
+                <div class="form-grid">
                     <div class="form-group">
-                        <label><i class="fas fa-file-alt"></i> Statement of Need</label>
-                        <textarea class="form-control" rows="5"
-                            placeholder="Explain why you deserve this bursary, your academic achievements, and your future goals..."
-                            required></textarea>
+                        <label><i class="fas fa-user"></i> Full Name</label>
+                        <input id="name" type="text" class="form-control" placeholder="Enter your full name" required>
                     </div>
-
                     <div class="form-group">
-                        <label><i class="fas fa-file-upload"></i> Required Documents</label>
-                        <div class="file-upload" onclick="document.getElementById('fileInput').click()">
-                            <input type="file" id="fileInput" multiple style="display: none;" required>
-                            <i class="fas fa-cloud-upload-alt"></i>
-                            <p>Click to upload or drag and drop</p>
-                            <small>Upload: Birth Certificate, Latest Report Card, Recommendation Letter, ID
-                                Photo</small>
-                        </div>
+                        <label><i class="fas fa-calendar"></i> Date of Birth</label>
+                        <input id="dob" type="date" class="form-control" required>
                     </div>
-
-                    <div class="form-check mb-3">
-                        <input type="checkbox" class="form-check-input" id="terms" required>
-                        <label class="form-check-label" for="terms">
-                            I confirm that all information provided is true and accurate. I understand that providing
-                            false information may lead to disqualification.
-                        </label>
+                    <div class="form-group">
+                        <label><i class="fas fa-envelope"></i> Email Address</label>
+                        <input id="email" type="email" class="form-control" placeholder="your@email.com" required>
                     </div>
-
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane me-2"></i>Submit Application
-                    </button>
-                </form>
-            </div>
-
-            <!-- Recent Applications -->
-            <div class="recent-applications">
-                <div class="recent-header">
-                    <h3><i class="fas fa-history me-2"></i>Recent Applications</h3>
-                    <a href="#" style="color: var(--orange); text-decoration: none;">View All <i
-                            class="fas fa-arrow-right ms-2"></i></a>
+                    <div class="form-group">
+                        <label><i class="fas fa-phone"></i> Phone Number</label>
+                        <input id="phone" type="tel" class="form-control" placeholder="+256 XXX XXX XXX" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-id-card"></i> ID/Passport Number</label>
+                        <input id="number" type="text" class="form-control" placeholder="Enter your ID number" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-school"></i> Current School</label>
+                        <input id="address" type="text" class="form-control" placeholder="Name of your school" required>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-layer-group"></i> School Level</label>
+                        <select id="school" class="form-control" required>
+                            <option value="">Select level</option>
+                            <option>Kindergarten</option>
+                            <option>Primary School</option>
+                            <option>Secondary School</option>
+                            <option>Technical/Vocational</option>
+                            <option>University</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-graduation-cap"></i> Current Grade/Form</label>
+                        <select id="grade" class="form-control" required>
+                            <option value="">Select</option>
+                            <option>Grade 4</option>
+                            <option>Grade 5</option>
+                            <option>Grade 6</option>
+                            <option>Form 1</option>
+                            <option>Form 2</option>
+                            <option>Form 3</option>
+                            <option>Form 4</option>
+                            <option>Year 1 University</option>
+                            <option>Year 2 University</option>
+                            <option>Year 3 University</option>
+                            <option>Year 4 University</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-trophy"></i> Bursary Type</label>
+                        <select class="form-control" id="bursary" required>
+                            <option value="">Select bursary type</option>
+                            <option value="half">Half Bursary (2,000,000 UGX)</option>
+                            <option value="full">Full Bursary (8,000,000 UGX)</option>
+                            <option value="special">Special Needs Bursary (6,000,000 UGX)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label><i class="fas fa-chart-line"></i> Average Grade</label>
+                        <select id="average" class="form-control" required>
+                            <option value="">Select grade</option>
+                            <option>A (80-100%)</option>
+                            <option>B (65-79%)</option>
+                            <option>C (50-64%)</option>
+                            <option>D (40-49%)</option>
+                            <option>Below D</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="table-container">
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Application ID</th>
-                                <th>Applicant</th>
-                                <th>Bursary Type</th>
-                                <th>School Level</th>
-                                <th>Date Applied</th>
-                                <th>Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td><strong>#B2025001</strong></td>
-                                <td>John Kamau</td>
-                                <td>Full Bursary</td>
-                                <td>Secondary (Form 4)</td>
-                                <td>2025-04-01</td>
-                                <td><span class="status-badge status-pending">Under Review</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>#B2025002</strong></td>
-                                <td>Mary Auma</td>
-                                <td>Half Bursary</td>
-                                <td>University (Year 2)</td>
-                                <td>2025-03-30</td>
-                                <td><span class="status-badge status-approved">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>#B2025003</strong></td>
-                                <td>Peter Mwangi</td>
-                                <td>Special Needs</td>
-                                <td>Primary (Grade 6)</td>
-                                <td>2025-03-28</td>
-                                <td><span class="status-badge status-approved">Approved</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>#B2025004</strong></td>
-                                <td>Sarah Chebet</td>
-                                <td>Full Bursary</td>
-                                <td>Secondary (Form 3)</td>
-                                <td>2025-03-27</td>
-                                <td><span class="status-badge status-pending">Document Verification</span></td>
-                            </tr>
-                            <tr>
-                                <td><strong>#B2025005</strong></td>
-                                <td>James Omondi</td>
-                                <td>Half Bursary</td>
-                                <td>Technical (Year 1)</td>
-                                <td>2025-03-25</td>
-                                <td><span class="status-badge status-rejected">Incomplete</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
 
-            <!-- Testimonials -->
-            <div class="testimonials-section">
-                <h3 style="text-align: center; color: var(--deep-blue); font-weight: 700; margin-bottom: 40px;">
-                    <i class="fas fa-quote-right me-2" style="color: var(--orange);"></i>Success Stories
-                </h3>
-                <div class="row">
-                    <div class="col-md-4 mb-4">
-                        <div class="testimonial-card">
-                            <p>"The full bursary I received through EduPortal changed my life. I'm now in my final year
-                                of medicine at Makerere University, with dreams of becoming a surgeon."</p>
-                            <div class="testimonial-author">
-                                <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=MK" alt="Mary">
-                                <div>
-                                    <h5>Mary Kemunto</h5>
-                                    <p>Medical Student, UoN</p>
-                                </div>
+                <div class="form-group">
+                    <label><i class="fas fa-file-alt"></i> Statement of Need</label>
+                    <textarea id="statement" class="form-control" rows="5"
+                        placeholder="Explain why you deserve this bursary, your academic achievements, and your future goals..."
+                        required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label><i class="fas fa-file-upload"></i> Required Documents</label>
+                    <div class="file-upload" onclick="document.getElementById('fileInput').click()">
+                        <input type="file" id="fileInput" multiple style="display: none;" required>
+                        <i class="fas fa-cloud-upload-alt"></i>
+                        <p>Click to upload or drag and drop</p>
+                        <small>Upload: Birth Certificate, Latest Report Card, Recommendation Letter, ID
+                            Photo</small>
+                    </div>
+                </div>
+
+                <div class="form-check mb-3">
+                    <input type="checkbox" class="form-check-input" id="terms" required>
+                    <label class="form-check-label" for="terms">
+                        I confirm that all information provided is true and accurate. I understand that providing
+                        false information may lead to disqualification.
+                    </label>
+                </div>
+
+                <button type="submit" class="btn-submit" onclick="sendmail()">
+                    <i class="fas fa-paper-plane me-2"></i>Submit Application
+                </button>
+            </form>
+        </div>
+
+        <!-- Recent Applications -->
+        <div class="recent-applications">
+            <div class="recent-header">
+                <h3><i class="fas fa-history me-2"></i>Recent Applications</h3>
+                <a href="#" style="color: var(--orange); text-decoration: none;">View All <i
+                        class="fas fa-arrow-right ms-2"></i></a>
+            </div>
+            <div class="table-container">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Application ID</th>
+                            <th>Applicant</th>
+                            <th>Bursary Type</th>
+                            <th>School Level</th>
+                            <th>Date Applied</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#B2025001</strong></td>
+                            <td>John Kamau</td>
+                            <td>Full Bursary</td>
+                            <td>Secondary (Form 4)</td>
+                            <td>2025-04-01</td>
+                            <td><span class="status-badge status-pending">Under Review</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#B2025002</strong></td>
+                            <td>Mary Auma</td>
+                            <td>Half Bursary</td>
+                            <td>University (Year 2)</td>
+                            <td>2025-03-30</td>
+                            <td><span class="status-badge status-approved">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#B2025003</strong></td>
+                            <td>Peter Mwangi</td>
+                            <td>Special Needs</td>
+                            <td>Primary (Grade 6)</td>
+                            <td>2025-03-28</td>
+                            <td><span class="status-badge status-approved">Approved</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#B2025004</strong></td>
+                            <td>Sarah Chebet</td>
+                            <td>Full Bursary</td>
+                            <td>Secondary (Form 3)</td>
+                            <td>2025-03-27</td>
+                            <td><span class="status-badge status-pending">Document Verification</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#B2025005</strong></td>
+                            <td>James Omondi</td>
+                            <td>Half Bursary</td>
+                            <td>Technical (Year 1)</td>
+                            <td>2025-03-25</td>
+                            <td><span class="status-badge status-rejected">Incomplete</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- Testimonials -->
+        <div class="testimonials-section">
+            <h3 style="text-align: center; color: var(--deep-blue); font-weight: 700; margin-bottom: 40px;">
+                <i class="fas fa-quote-right me-2" style="color: var(--orange);"></i>Success Stories
+            </h3>
+            <div class="row">
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"The full bursary I received through EduPortal changed my life. I'm now in my final year
+                            of medicine at Makerere University, with dreams of becoming a surgeon."</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=MK" alt="Mary">
+                            <div>
+                                <h5>Mary Kemunto</h5>
+                                <p>Medical Student, UoN</p>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="testimonial-card">
-                            <p>"As a student with a physical disability, the Special Needs bursary provided not just
-                                funds but also assistive technology that made learning accessible. Grateful!"</p>
-                            <div class="testimonial-author">
-                                <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=JO" alt="James">
-                                <div>
-                                    <h5>James Otieno</h5>
-                                    <p>Engineering Student</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-md-4 mb-4">
-                        <div class="testimonial-card">
-                            <p>"The half bursary helped me complete my secondary education with excellent grades. Now
-                                I'm mentoring other students to apply for the same opportunity."</p>
-                            <div class="testimonial-author">
-                                <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=AW" alt="Aisha">
-                                <div>
-                                    <h5>Aisha Wanjiku</h5>
-                                    <p>University Scholar</p>
-                                </div>
+                </div>
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"As a student with a physical disability, the Special Needs bursary provided not just
+                            funds but also assistive technology that made learning accessible. Grateful!"</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=JO" alt="James">
+                            <div>
+                                <h5>James Otieno</h5>
+                                <p>Engineering Student</p>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-
-            <!-- FAQ Section -->
-            <div class="faq-section">
-                <h3><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h3>
-                <div class="faq-item">
-                    <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>Who is eligible to apply for bursaries?</span>
-                    </div>
-                    <div class="collapse show" id="faq1">
-                        <div class="faq-answer">
-                            Ugandan students enrolled in recognized educational institutions from Kindergarten to
-                            University level are eligible. Specific requirements vary by bursary type, including
-                            academic performance and financial need.
+                <div class="col-md-4 mb-4">
+                    <div class="testimonial-card">
+                        <p>"The half bursary helped me complete my secondary education with excellent grades. Now
+                            I'm mentoring other students to apply for the same opportunity."</p>
+                        <div class="testimonial-author">
+                            <img src="https://via.placeholder.com/50x50/0a2c4e/ffffff?text=AW" alt="Aisha">
+                            <div>
+                                <h5>Aisha Wanjiku</h5>
+                                <p>University Scholar</p>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>What documents do I need to apply?</span>
-                    </div>
-                    <div class="collapse" id="faq2">
-                        <div class="faq-answer">
-                            You'll need: Birth Certificate or ID, latest academic report cards, recommendation letter
-                            from your school, passport-sized photo, and a written statement of need. Additional
-                            documents may be requested based on your situation.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>How long does the application process take?</span>
-                    </div>
-                    <div class="collapse" id="faq3">
-                        <div class="faq-answer">
-                            Applications are reviewed within 2-3 weeks. Shortlisted candidates may be called for an
-                            interview. Final decisions are communicated via email and SMS within 30 days of application
-                            deadline.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>Can I apply for multiple bursaries?</span>
-                    </div>
-                    <div class="collapse" id="faq4">
-                        <div class="faq-answer">
-                            You may only apply for one bursary per academic year. Choose the one that best matches your
-                            needs and qualifications. Multiple applications will be automatically disqualified.
-                        </div>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq5">
-                        <i class="fas fa-chevron-down"></i>
-                        <span>How is the bursary money disbursed?</span>
-                    </div>
-                    <div class="collapse" id="faq5">
-                        <div class="faq-answer">
-                            Funds are disbursed directly to the educational institution on behalf of the student,
-                            ensuring they are used for tuition and approved educational expenses. Book allowances are
-                            provided as vouchers.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Emergency Contact Banner -->
-            <div
-                style="background: linear-gradient(135deg, var(--orange), #e08e0b); border-radius: 20px; padding: 30px; margin-top: 50px; color: var(--deep-blue);">
-                <div class="row align-items-center">
-                    <div class="col-md-8">
-                        <h4 style="font-weight: 700;"><i class="fas fa-phone-alt me-2"></i>Need Urgent Assistance?</h4>
-                        <p class="mb-0">Our bursary support team is here to help. Contact us for any questions or
-                            assistance with your application.</p>
-                    </div>
-                    <div class="col-md-4 text-md-end">
-                        <a href="tel:+256700123456"
-                            style="background: var(--deep-blue); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block;">
-                            <i class="fas fa-headset me-2"></i>Call Support
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <!-- FAQ Section -->
+        <div class="faq-section">
+            <h3><i class="fas fa-question-circle me-2"></i>Frequently Asked Questions</h3>
+            <div class="faq-item">
+                <div class="faq-question" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Who is eligible to apply for bursaries?</span>
+                </div>
+                <div class="collapse show" id="faq1">
+                    <div class="faq-answer">
+                        Ugandan students enrolled in recognized educational institutions from Kindergarten to
+                        University level are eligible. Specific requirements vary by bursary type, including
+                        academic performance and financial need.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>What documents do I need to apply?</span>
+                </div>
+                <div class="collapse" id="faq2">
+                    <div class="faq-answer">
+                        You'll need: Birth Certificate or ID, latest academic report cards, recommendation letter
+                        from your school, passport-sized photo, and a written statement of need. Additional
+                        documents may be requested based on your situation.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>How long does the application process take?</span>
+                </div>
+                <div class="collapse" id="faq3">
+                    <div class="faq-answer">
+                        Applications are reviewed within 2-3 weeks. Shortlisted candidates may be called for an
+                        interview. Final decisions are communicated via email and SMS within 30 days of application
+                        deadline.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq4">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>Can I apply for multiple bursaries?</span>
+                </div>
+                <div class="collapse" id="faq4">
+                    <div class="faq-answer">
+                        You may only apply for one bursary per academic year. Choose the one that best matches your
+                        needs and qualifications. Multiple applications will be automatically disqualified.
+                    </div>
+                </div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question collapsed" data-bs-toggle="collapse" data-bs-target="#faq5">
+                    <i class="fas fa-chevron-down"></i>
+                    <span>How is the bursary money disbursed?</span>
+                </div>
+                <div class="collapse" id="faq5">
+                    <div class="faq-answer">
+                        Funds are disbursed directly to the educational institution on behalf of the student,
+                        ensuring they are used for tuition and approved educational expenses. Book allowances are
+                        provided as vouchers.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Emergency Contact Banner -->
+        <div
+            style="background: linear-gradient(135deg, var(--orange), #e08e0b); border-radius: 20px; padding: 30px; margin-top: 50px; color: var(--deep-blue);">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h4 style="font-weight: 700;"><i class="fas fa-phone-alt me-2"></i>Need Urgent Assistance?</h4>
+                    <p class="mb-0">Our bursary support team is here to help. Contact us for any questions or
+                        assistance with your application.</p>
+                </div>
+                <div class="col-md-4 text-md-end">
+                    <a href="tel:+256700123456"
+                        style="background: var(--deep-blue); color: white; padding: 15px 30px; border-radius: 50px; text-decoration: none; font-weight: 600; display: inline-block;">
+                        <i class="fas fa-headset me-2"></i>Call Support
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
     </main>
     <!-- Footer -->
     <footer>
@@ -573,12 +586,11 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Form submission handler
+        <script>
+        // Form submission handler — delegate to sendmail()
         document.getElementById('bursaryForm')?.addEventListener('submit', function (e) {
             e.preventDefault();
-            alert('Thank you for your application! We will review it and contact you within 2-3 weeks.');
-            this.reset();
+            sendmail();
         });
 
         // Login form handler
@@ -603,7 +615,7 @@
                     break;
             }
             alert(message);
-            document.getElementById('bursaryType').value = type;
+            document.getElementById('bursary').value = type;
             document.querySelector('.form-container').scrollIntoView({ behavior: 'smooth' });
         }
 
@@ -639,4 +651,5 @@
         });
     </script>
 </body>
+
 </html>
