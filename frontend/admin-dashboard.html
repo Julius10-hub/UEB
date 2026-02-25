@@ -1428,30 +1428,6 @@
         if (titleEl) titleEl.textContent = 'Add New School';
     }
 
-    // Ensure modal trigger buttons are wired reliably
-    document.addEventListener('DOMContentLoaded', function () {
-        // Buttons with data-modal-target attribute
-        document.querySelectorAll('[data-modal-target]').forEach(btn => {
-            btn.addEventListener('click', function () {
-                const t = this.dataset.modalTarget;
-                if (t === 'schools') {
-                    openSchoolModal();
-                } else if (typeof openModal === 'function') {
-                    openModal(t);
-                }
-            });
-        });
-
-        // Fallback: ensure #addSchoolBtn opens the school modal
-        const addBtn = document.getElementById('addSchoolBtn');
-        if (addBtn) {
-            addBtn.addEventListener('click', function (e) {
-                e.preventDefault();
-                openSchoolModal();
-            });
-        }
-    });
-
     async function checkAdminAccess() {
         try {
             // First try to get user from API (backend authentication)
