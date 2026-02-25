@@ -754,7 +754,7 @@
                                 <th>Students</th>
                                 <th>Email</th>
                                 <th>Actions</th>
-                                <th></th>
+                                <th>images</th>
                                     
                             </tr>
                         </thead>
@@ -908,7 +908,7 @@
                     <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Basic Information</legend>
                     <div class="form-row">
                         <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" name="name" required></div>
-                        <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" name="category" required><option value="">Select Category</option><option value="Kindergarten">Kindergarten</option><option value="Nursery">Nursery</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical/Vocational</option><option value="University">University</option></select></div>
+                        <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" name="category" required><option value="">Select Category</option><option value="Kindergarten">Kindergarten</option><option value="Tahfidh">Tahfidh</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical/Vocational</option><option value="University">University</option></select></div>
                     </div>
                 </fieldset>
 
@@ -1133,6 +1133,60 @@
         updateStatsAndCalculations();
         initializeFileUploadAreas();
     });
+
+    // ===== GLOBAL MODAL & NOTIFICATION HELPERS =====
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            if (modalId === 'schoolModal') {
+                const form = document.getElementById('schoolForm');
+                if (form) form.reset();
+            }
+        }
+    }
+
+    function showNotification(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            z-index: 10000;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+        
+        if (type === 'success') {
+            toast.style.backgroundColor = '#10b981';
+            toast.style.color = 'white';
+        } else if (type === 'error') {
+            toast.style.backgroundColor = '#ef4444';
+            toast.style.color = 'white';
+        } else {
+            toast.style.backgroundColor = '#3b82f6';
+            toast.style.color = 'white';
+        }
+        
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
 
     // ===== FILE UPLOAD HANDLERS =====
     // Initialize file upload areas
