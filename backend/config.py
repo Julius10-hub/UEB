@@ -37,10 +37,10 @@ class DevelopmentConfig(Config):
     DEBUG = True
     SESSION_COOKIE_SECURE = False
     
-    # MySQL Development Database
+    # Use SQLite for easier development (no MySQL setup required)
     SQLALCHEMY_DATABASE_URI = os.getenv(
         'DATABASE_URL',
-        'mysql+pymysql://root:@localhost/thrive_school_dev'
+        'sqlite:///thrive_school_dev.db'
     )
     
     # CORS for development

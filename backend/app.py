@@ -10,9 +10,9 @@ import os
 from pathlib import Path
 import logging
 
-from config import get_config
-from models import db, User, School, Event, Job, Bursary, Agent, PastPaper, Suggestion
-from routes import register_blueprints
+from .config import get_config
+from .models import db, User, School, Event, Job, Bursary, Agent, PastPaper, Suggestion
+from .routes import register_blueprints
 
 
 def create_app(config=None):

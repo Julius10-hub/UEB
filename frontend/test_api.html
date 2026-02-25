@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Test - Schools</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .success { color: #28a745; }
+        .error { color: #dc3545; }
+        .info { color: #0066cc; }
+        h1 { color: #333; }
+        .school-list {
+            list-style: none;
+            padding: 0;
+        }
+        .school-item {
+            padding: 10px;
+            margin: 10px 0;
+            background: #f9f9f9;
+            border-left: 4px solid #0066cc;
+        }
+        button {
+            background: #0066cc;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        button:hover { background: #0052a3; }
+    </style>
+</head>
+<body>
+    <h1>API Integration Test</h1>
+    
+    <div class="card">
+        <h2>Test Status</h2>
+        <p id="status" class="info">Loading...</p>
+    </div>
+
+    <div class="card">
+        <h2>Schools in Database</h2>
+        <button onclick="loadSchools()">Load Schools</button>
+        <div id="schoolsContainer"></div>
+    </div>
+
+    <div class="card">
+        <h2>Add Test School</h2>
+        <button onclick="addTestSchool()">Add Test School</button>
+        <p id="addResult"></p>
+    </div>
+
+    <script>
+        const API_BASE_URL = 'http://localhost:5000/api';
+
+        // Set up demo admin token in localStorage
+        function setupToken() {
+            const token = `demo-admin-token-${Date.now()}`;
+            localStorage.setItem('token', token);
+            console.log('Token set:', token);
+        }
+
+        // Get auth headers with Bearer token
+        function getAuthHeaders() {
+            const token = localStorage.getItem('token');
+            const headers = { 'Content-Type': 'application/json' };
+            if (token) {
+                headers['Authorization'] = `Bearer ${token}`;
+            }
+            return headers;
+        }
+
+        // Load and display schools
+        async function loadSchools() {
+            try {
+                const response = await fetch(`${API_BASE_URL}/schools`);
+                const data = await response.json();
+                
+                if (Array.isArray(data)) {
+                    const schools = data;
+                    displaySchools(schools);
+                } else if (data.schools) {
+                    displaySchools(data.schools);
+                }
+            } catch (error) {
+                document.getElementById('schoolsContainer').innerHTML = 
+                    `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+
+        function displaySchools(schools) {
+            const container = document.getElementById('schoolsContainer');
+            if (!schools || schools.length === 0) {
+                container.innerHTML = '<p>No schools found</p>';
+                return;
+            }
+
+            const html = schools.map(school => `
+                <div class="school-item">
+                    <strong>${school.name}</strong><br>
+                    Location: ${school.location}<br>
+                    Students: ${school.students || 'N/A'}<br>
+                    Category: ${school.category || 'N/A'}
+                </div>
+            `).join('');
+            container.innerHTML = html;
+        }
+
+        // Add a test school
+        async function addTestSchool() {
+            try {
+                const schoolData = {
+                    name: `Test School ${Date.now()}`,
+                    location: "Test Location",
+                    category: "secondary",
+                    students: 800,
+                    website: "https://test.school"
+                };
+
+                const response = await fetch(`${API_BASE_URL}/schools`, {
+                    method: 'POST',
+                    headers: getAuthHeaders(),
+                    body: JSON.stringify(schoolData)
+                });
+
+                const result = await response.json();
+                
+                if (response.ok) {
+                    document.getElementById('addResult').innerHTML = 
+                        `<p class="success">School added successfully! ID: ${result.school?.id || 'N/A'}</p>`;
+                    loadSchools(); // Refresh list
+                } else {
+                    document.getElementById('addResult').innerHTML = 
+                        `<p class="error">Error: ${result.error || 'Unknown error'}</p>`;
+                }
+            } catch (error) {
+                document.getElementById('addResult').innerHTML = 
+                    `<p class="error">Error: ${error.message}</p>`;
+            }
+        }
+
+        // Initialize on page load
+        window.addEventListener('load', () => {
+            setupToken();
+            
+            // Check if backend is alive
+            fetch(`${API_BASE_URL}/schools`)
+                .then(() => {
+                    document.getElementById('status').className = 'success';
+                    document.getElementById('status').textContent = 
+                        'Backend is responding! Schools can be fetched.';
+                })
+                .catch(() => {
+                    document.getElementById('status').className = 'error';
+                    document.getElementById('status').textContent = 
+                        'ERROR: Cannot connect to backend. Make sure Flask server is running on port 5000.';
+                });
+            
+            loadSchools();
+        });
+    </script>
+</body>
+</html>

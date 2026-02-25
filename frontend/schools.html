@@ -500,6 +500,161 @@
             </div>
             </div>
         </section>
+
+        <!-- School Detail Modal -->
+        <div id="schoolDetailPanel" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 10000; overflow-y: auto; padding: 20px;">
+            <div style="background: white; max-width: 1000px; margin: 40px auto; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 80px rgba(0,0,0,0.4);">
+                <!-- Close Button -->
+                <button id="detailCloseBtn" style="position: absolute; top: 20px; right: 20px; background: #f39c12; border: none; color: white; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; font-size: 24px; z-index: 10001; display: flex; align-items: center; justify-content: center;">
+                    <i class="fas fa-times"></i>
+                </button>
+
+                <!-- School Image/Logo -->
+                <div id="detailMedia" style="width: 100%; height: 320px; background: linear-gradient(135deg, #f39c12, #e08e0b); overflow: hidden; display: flex; align-items: center; justify-content: center;">
+                    <img id="detailModalImage" src="" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+                    <i class="fas fa-school" style="font-size: 100px; color: rgba(255,255,255,0.3); display: none;"></i>
+                </div>
+
+                <!-- School Details -->
+                <div style="padding: 40px;">
+                    <!-- Header -->
+                    <div style="margin-bottom: 30px;">
+                        <h1 id="detailName" style="font-size: 2.4rem; color: #0d3b66; margin: 0 0 12px 0; font-weight: 800;">School Name</h1>
+                        <p style="color: #f39c12; font-size: 1.1rem; margin: 0; font-weight: 600; display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                            <span><i class="fas fa-graduation-cap" style="margin-right: 6px;"></i><span id="detailCategory">Category</span></span>
+                            <span style="color: #94a3b8;">•</span>
+                            <span><i class="fas fa-map-marker-alt" style="margin-right: 6px;"></i><span id="detailLocation">Location</span></span>
+                            <span style="color: #94a3b8;">•</span>
+                            <span id="detailVerifiedBadge" style="color: #10b981;"><i class="fas fa-check-circle" style="margin-right: 6px;"></i>Verified</span>
+                        </p>
+                    </div>
+
+                    <!-- Key Information Grid -->
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin: 30px 0; padding: 20px; background: #f8fafc; border-radius: 12px; border: 1px solid #e2e8f0;">
+                        <!-- Year Established -->
+                        <div style="text-align: center; padding: 15px;">
+                            <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Year Established</p>
+                            <p id="detailEstablished" style="margin: 8px 0 0 0; font-size: 1.3rem; color: #0d3b66; font-weight: 700;">-</p>
+                        </div>
+
+                        <!-- Students -->
+                        <div style="text-align: center; padding: 15px;">
+                            <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Students</p>
+                            <p id="detailStudents" style="margin: 8px 0 0 0; font-size: 1.3rem; color: #10b981; font-weight: 700;">0</p>
+                        </div>
+
+                        <!-- Teachers -->
+                        <div style="text-align: center; padding: 15px;">
+                            <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Faculty</p>
+                            <p id="detailFaculty" style="margin: 8px 0 0 0; font-size: 1.3rem; color: #3b82f6; font-weight: 700;">0</p>
+                        </div>
+
+                        <!-- Rating -->
+                        <div style="text-align: center; padding: 15px;">
+                            <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600; text-transform: uppercase;">Rating</p>
+                            <p id="detailRating" style="margin: 8px 0 0 0; font-size: 1.3rem; color: #fbbf24; font-weight: 700;">0.0★</p>
+                        </div>
+                    </div>
+
+                    <!-- About Section -->
+                    <div style="margin: 30px 0;">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0d3b66; margin: 0 0 12px 0;">
+                            <i class="fas fa-info-circle" style="margin-right: 8px; color: #f39c12;"></i>About This School
+                        </h3>
+                        <p id="detailDescription" style="margin: 0; color: #475569; line-height: 1.8; font-size: 0.95rem;">
+                            School description will appear here...
+                        </p>
+                    </div>
+
+                    <!-- Detailed Description (if available) -->
+                    <div id="detailLongDescSection" style="margin: 30px 0; padding: 20px; background: #f0f7ff; border-radius: 12px; border-left: 4px solid #3b82f6; display: none;">
+                        <h3 style="font-size: 1.1rem; font-weight: 700; color: #0d3b66; margin: 0 0 12px 0;">
+                            <i class="fas fa-book" style="margin-right: 8px; color: #3b82f6;"></i>Detailed Information
+                        </h3>
+                        <p id="detailLongDesc" style="margin: 0; color: #555; line-height: 1.7; font-size: 0.95rem;">
+                            Detailed information about the school...
+                        </p>
+                    </div>
+
+                    <!-- Programs Section -->
+                    <div id="detailProgramsSection" style="margin: 30px 0; display: none;">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0d3b66; margin: 0 0 12px 0;">
+                            <i class="fas fa-list-ul" style="margin-right: 8px; color: #10b981;"></i>Academic Programs
+                        </h3>
+                        <div id="detailPrograms" style="display: flex; flex-wrap: wrap; gap: 10px;"></div>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div style="margin: 30px 0; padding: 20px; background: #f1f5f9; border-radius: 12px;">
+                        <h3 style="font-size: 1.3rem; font-weight: 700; color: #0d3b66; margin: 0 0 16px 0;">
+                            <i class="fas fa-phone" style="margin-right: 8px; color: #8b5cf6;"></i>Contact Information
+                        </h3>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px;">
+                            <!-- City -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">City</p>
+                                <p id="detailCity" style="margin: 6px 0 0 0; font-size: 0.95rem; color: #333;"><i class="fas fa-city" style="margin-right: 6px; color: #f39c12;"></i>Not specified</p>
+                            </div>
+
+                            <!-- Country -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Country</p>
+                                <p id="detailCountry" style="margin: 6px 0 0 0; font-size: 0.95rem; color: #333;"><i class="fas fa-globe" style="margin-right: 6px; color: #06b6d4;"></i>Uganda</p>
+                            </div>
+
+                            <!-- Email -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Email</p>
+                                <p style="margin: 6px 0 0 0; font-size: 0.95rem; color: #3b82f6;">
+                                    <a id="detailEmailLink" href="" style="color: #3b82f6; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-envelope"></i><span id="detailEmail">Not provided</span>
+                                    </a>
+                                </p>
+                            </div>
+
+                            <!-- Phone -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Phone</p>
+                                <p style="margin: 6px 0 0 0; font-size: 0.95rem; color: #8b5cf6;">
+                                    <a id="detailPhoneLink" href="" style="color: #8b5cf6; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-phone"></i><span id="detailPhone">Not provided</span>
+                                    </a>
+                                </p>
+                            </div>
+
+                            <!-- Website -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Website</p>
+                                <p style="margin: 6px 0 0 0; font-size: 0.95rem; color: #06b6d4;">
+                                    <a id="detailWebsiteLink" href="" target="_blank" style="color: #06b6d4; text-decoration: none; display: flex; align-items: center; gap: 6px;">
+                                        <i class="fas fa-globe"></i><span id="detailWebsite">Not provided</span>
+                                    </a>
+                                </p>
+                            </div>
+
+                            <!-- Location -->
+                            <div>
+                                <p style="margin: 0; color: #94a3b8; font-size: 0.85rem; font-weight: 600;">Location/District</p>
+                                <p id="detailFullLocation" style="margin: 6px 0 0 0; font-size: 0.95rem; color: #333;"><i class="fas fa-map-pin" style="margin-right: 6px; color: #ef4444;"></i>Not specified</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Action Buttons -->
+                    <div style="display: flex; gap: 12px; margin-top: 40px; flex-wrap: wrap;">
+                        <button style="flex: 1; min-width: 160px; padding: 14px 28px; background: linear-gradient(135deg, #f39c12, #e08e0b); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="scheduleTourDetail()">
+                            <i class="fas fa-calendar-check"></i>Schedule Tour
+                        </button>
+                        <button style="flex: 1; min-width: 160px; padding: 14px 28px; background: linear-gradient(135deg, #0d3b66, #1a5a8f); color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="startVirtualTour()">
+                            <i class="fas fa-video"></i>Virtual Tour
+                        </button>
+                        <button style="flex: 1; min-width: 160px; padding: 14px 28px; background: #10b981; color: white; border: none; border-radius: 10px; font-weight: 600; cursor: pointer; font-size: 0.95rem; transition: all 0.3s ease; display: flex; align-items: center; justify-content: center; gap: 8px;" onclick="applyToSchool()">
+                            <i class="fas fa-user-plus"></i>Apply Here
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
     </main>
 <body>
 
@@ -515,7 +670,7 @@
         </div>
         <div class="footer-content">
             <div class="footer-section">
-                <h3>eduHUB</h3>
+                <h3>eduBridge</h3>
                 <p>Your trusted partner in education since 2020. We connect students with Uganda's finest educational
                     institutions and resources.</p>
                 <div class="social-links">
@@ -524,15 +679,11 @@
                     <a
                         href="https://l.facebook.com/l.php?u=https%3A%2F%2Fyoutube.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6eoaUGVau149glyugeYF45Zx0q7eqSu0NgAKxlJ7wy33MsLiXp2TxdnnrrtA_aem_GiejR9YaLmEhqxVXOuhVYg&h=ASVhg88P_51A2yAsLvok5TY9hwC-9W5WHG7NmhB5lxywET_mfgmMKt1kbAd_OWKjZf5Fksf0HBP41duSEX-5zYuucaIoAgZXjzcyU_3HQZJUwB5pFdrdnjIdg6luIQpWuNXm"><i
                             class="fab fa-twitter"></i></a>
-                    <a
-                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Fwww.instagram.com%2Fugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR5uQE626CRvPwEgQ7u8L_gGqALO-iGy5u4viooC-YJ-wNY45_h6FJ6xO7sviQ_aem__lBJpvMb0cl-ODVQCkMZlw&h=ASUb1ZK1tKsDE7XdFI9XGORTMSWC6zGmXg4PkcgR_O2wNzeu0GKTT0xYge83k7zpBKA2BU1PhDLVWM38gJEWf2HEAxUSPZUSpyfdY2YeGKtNiBicD5QgksDYmjrrdzoSpwKG"><i
-                            class="fab fa-instagram"></i></a>
+
                     <a
                         href="https://l.facebook.com/l.php?u=https%3A%2F%2Fx.com%2F%2540ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR6bDEkgCfMWUtBQwsgJ7RS_Mu4vpl-kZ4msfywAOYMQj5qEtq__1zqKQxcmcA_aem_VAkH5zhu6CZfNYf_YCchNQ&h=ASV-llKfHAL0Ea4FXmSp8hkrH0s2V9RJUkX7pdNd3KCqFHDn060_E0Pk9qUymw0QPn0Ls-1i5fL8ApkLm5ogUz6Np5WnJTiQnXlDrFPihH2k5QG_lHA7ZFTmUsg4Hy3Ly3QU"><i
                             class="fab fa-linkedin-in"></i></a>
-                    <a
-                        href="https://l.facebook.com/l.php?u=https%3A%2F%2Ftiktok.com%2F%40ugandaeducationbridge%3Ffbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBEwTHQ1QXBUblRxcDBsQW5wQ3NydGMGYXBwX2lkEDIyMjAzOTE3ODgyMDA4OTIAAR7b_xNoXH7jnwh61MSXjgRENMQuLiTW7_dRBwR5tCw02oWQ5fbXeRiBv9qQIw_aem_1ltd3OwuOAFMswkV5ceB1w&h=ASX4d5c0GW2crkJp3aMOfZf8Oh1WUY11mBOZD6ixGJQZnUrnx8CwuhrkmT_26ZwkJMW-yydNbd_ZXkq99DU0YirFvpxJq5ah91nGDJboRM9IqIH-Orat71hdzhocL2XESobO"><i
-                            class="fab fa-youtube"></i></a>
+a>
                 </div>
             </div>
             <div class="footer-section">
@@ -576,7 +727,7 @@
                     <a href="about.html">About Us</a>
                 </div>
             </div>
-            <p>&copy; 2025 eduHUB. All rights reserved. | Designed with <i class="fas fa-heart"
+            <p>&copy; 2026 eduBridge. All rights reserved. | Designed with <i class="fas fa-heart"
                     style="color: var(--orange);"></i> for education</p>
         </div>
     </footer>
@@ -1218,17 +1369,27 @@
             // Listen for Broadcast Channel messages (works across tabs)
             if (typeof BroadcastChannel !== 'undefined') {
                 try {
-                    const channel = new BroadcastChannel('edubridge_schools');
+                    // Connect to school-updates channel (same as admin dashboard)
+                    const channel = new BroadcastChannel('school-updates');
                     channel.addEventListener('message', (event) => {
-                        if (event.data.type === 'SCHOOL_ADDED') {
-                            handleNewSchoolFromDashboard(event.data.school);
+                        console.log('Received broadcast message:', event.data);
+                        const { type, school, timestamp } = event.data;
+                        
+                        if (type === 'schoolAdded' || type === 'schoolUpdated') {
+                            handleNewSchoolFromDashboard(school);
+                        } else if (type === 'schoolDeleted') {
+                            handleSchoolDeleted(school.id);
                         }
                     });
+                    
+                    window.schoolsUpdateChannel = channel;
+                    console.log('Connected to school-updates broadcast channel');
                 } catch (error) {
-                    console.log('Broadcast Channel not available, using fallback');
+                    console.log('Broadcast Channel initialization failed:', error);
                     setupStorageListener();
                 }
             } else {
+                console.log('BroadcastChannel API not available, using localStorage fallback');
                 setupStorageListener();
             }
         }
@@ -1236,18 +1397,30 @@
         // Fallback: Listen for localStorage changes (works same-tab and some cross-tab scenarios)
         function setupStorageListener() {
             window.addEventListener('storage', (event) => {
-                if (event.key === 'edubridge_last_school_added' && event.newValue) {
+                if (event.key === 'edubridge_school_updated') {
                     try {
                         const data = JSON.parse(event.newValue);
-                        handleNewSchoolFromDashboard(data.school);
+                        if (data.type === 'added') {
+                            handleNewSchoolFromDashboard(data.school);
+                        } else if (data.type === 'deleted') {
+                            handleSchoolDeleted(data.schoolId);
+                        }
                     } catch (error) {
-                        console.error('Error parsing new school data:', error);
+                        console.error('Error parsing school update:', error);
                     }
                 }
             });
         }
 
-        // Handle newly added school from dashboard
+        // Handle school deletion
+        function handleSchoolDeleted(schoolId) {
+            schoolsDatabase = schoolsDatabase.filter(s => s.id !== schoolId);
+            filterAndDisplaySchools();
+            updateResultsCount(schoolsDatabase.length);
+            console.log('School removed:', schoolId);
+        }
+
+        // Handle newly added or updated school from dashboard
         function handleNewSchoolFromDashboard(newSchool) {
             if (!newSchool || !newSchool.name) return;
 
@@ -1843,20 +2016,146 @@
         function showDetail(school) {
             const panel = document.getElementById('schoolDetailPanel');
             const schoolIndex = schoolsDatabase.indexOf(school);
-            document.getElementById('detailName').textContent = school.name;
-            document.getElementById('detailMeta').textContent = `${availableCategories[school.category] || school.category} • ${school.region}`;
-            document.getElementById('detailDescription').textContent = `A trusted institution located in ${school.region}. Click schedule to book a visit or start a virtual tour.`;
-            document.getElementById('detailMedia').innerHTML = `<img src="${getSchoolImage(school, schoolIndex)}" alt="${school.name}">`;
-            document.getElementById('detailContact').innerHTML = `<strong>Contact:</strong> admissions@${school.id}.edu • +256 700 000 ${Math.floor(Math.random()*900+100)}`;
+            
+            // === BASIC INFORMATION ===
+            document.getElementById('detailName').textContent = school.name || 'School Name';
+            document.getElementById('detailCategory').textContent = availableCategories[school.category] || school.category || 'Unknown';
+            document.getElementById('detailLocation').textContent = school.city || school.location || school.region || 'Location';
+            
+            // === YEAR ESTABLISHED ===
+            document.getElementById('detailEstablished').textContent = school.established || '—';
+            
+            // === STUDENT COUNT ===
+            document.getElementById('detailStudents').textContent = school.students ? school.students.toLocaleString() : '0';
+            
+            // === FACULTY COUNT ===
+            document.getElementById('detailFaculty').textContent = school.faculty ? school.faculty.toLocaleString() : '0';
+            
+            // === RATING ===
+            const rating = school.rating ? parseFloat(school.rating).toFixed(1) : '0.0';
+            document.getElementById('detailRating').textContent = rating + '★';
+            
+            // === FULL LOCATION ===
+            const fullLocation = [school.location, school.city, school.country].filter(Boolean).join(', ') || 'Location not specified';
+            document.getElementById('detailFullLocation').textContent = fullLocation;
+            
+            // === CITY ===
+            document.getElementById('detailCity').innerHTML = `<i class="fas fa-city" style="margin-right: 6px; color: #f39c12;"></i>${school.city || 'Not specified'}`;
+            
+            // === COUNTRY ===
+            document.getElementById('detailCountry').innerHTML = `<i class="fas fa-globe" style="margin-right: 6px; color: #06b6d4;"></i>${school.country || 'Uganda'}`;
+            
+            // === CONTACT EMAIL ===
+            const email = school.contact_email || `admissions@${school.name.toLowerCase().replace(/\\s+/g, '')}.edu`;
+            document.getElementById('detailEmail').textContent = email;
+            document.getElementById('detailEmailLink').href = `mailto:${email}`;
+            
+            // === CONTACT PHONE ===
+            const phone = school.contact_phone || '+256 700 000 000';
+            document.getElementById('detailPhone').textContent = phone;
+            document.getElementById('detailPhoneLink').href = `tel:${phone}`;
+            
+            // === WEBSITE ===
+            if (school.website) {
+                document.getElementById('detailWebsite').textContent = school.website.replace(/^https?:\/\//, '');
+                document.getElementById('detailWebsiteLink').href = school.website;
+                document.getElementById('detailWebsiteLink').style.display = 'flex';
+            } else {
+                document.getElementById('detailWebsiteLink').style.display = 'none';
+            }
+            
+            // === VERIFICATION BADGE ===
+            const verifiedBadge = document.getElementById('detailVerifiedBadge');
+            if (school.is_verified) {
+                verifiedBadge.innerHTML = '<i class="fas fa-check-circle" style="margin-right: 6px;"></i>Verified';
+                verifiedBadge.style.color = '#10b981';
+            } else {
+                verifiedBadge.innerHTML = '<i class="fas fa-clock" style="margin-right: 6px;"></i>Pending Verification';
+                verifiedBadge.style.color = '#f59e0b';
+            }
+            
+            // === SHORT DESCRIPTION ===
+            const description = school.description || 
+                `A trusted ${school.category || 'educational'} institution located in ${school.city || school.location}. This school offers quality education and comprehensive student development programs suited to the needs of modern learners.`;
+            document.getElementById('detailDescription').textContent = description;
+            
+            // === DETAILED DESCRIPTION ===
+            if (school.long_description) {
+                document.getElementById('detailLongDescSection').style.display = 'block';
+                document.getElementById('detailLongDesc').textContent = school.long_description;
+            } else {
+                document.getElementById('detailLongDescSection').style.display = 'none';
+            }
+            
+            // === PROGRAMS ===
+            if (school.programs && Array.isArray(school.programs) && school.programs.length > 0) {
+                document.getElementById('detailProgramsSection').style.display = 'block';
+                const programsContainer = document.getElementById('detailPrograms');
+                programsContainer.innerHTML = school.programs.map(prog => `
+                    <span style="display: inline-block; padding: 8px 16px; background: #10b981; color: white; border-radius: 20px; font-size: 0.85rem; font-weight: 600;">
+                        <i class="fas fa-book-open" style="margin-right: 4px;"></i>${prog}
+                    </span>
+                `).join('');
+            } else {
+                document.getElementById('detailProgramsSection').style.display = 'none';
+            }
+            
+            // === SCHOOL IMAGE ===
+            const imgSrc = school.image || getSchoolImage(school, schoolIndex);
+            document.getElementById('detailMedia').innerHTML = `<img src="${imgSrc}" alt="${school.name}" style="width: 100%; height: 100%; object-fit: cover;">`;
+            
+            // Store current school for tour booking
+            window.currentDetailSchool = school;
+            
+            // Show panel
             panel.style.display = 'block';
             panel.setAttribute('aria-hidden','false');
+            document.body.style.overflow = 'hidden'; // Prevent background scroll
         }
 
         document.getElementById('detailCloseBtn')?.addEventListener('click', () => {
             const panel = document.getElementById('schoolDetailPanel');
             panel.style.display = 'none';
             panel.setAttribute('aria-hidden','true');
+            document.body.style.overflow = 'auto'; // Restore scroll
         });
+
+        // Close panel when clicking outside of it
+        document.getElementById('schoolDetailPanel')?.addEventListener('click', (e) => {
+            if (e.target.id === 'schoolDetailPanel') {
+                document.getElementById('schoolDetailPanel').style.display = 'none';
+                document.getElementById('schoolDetailPanel').setAttribute('aria-hidden','true');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Close panel with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                const panel = document.getElementById('schoolDetailPanel');
+                if (panel && panel.style.display === 'block') {
+                    panel.style.display = 'none';
+                    panel.setAttribute('aria-hidden','true');
+                    document.body.style.overflow = 'auto';
+                }
+            }
+        });
+
+        function scheduleTourDetail() {
+            const school = window.currentDetailSchool;
+            if (school) {
+                alert(`Scheduling a tour for ${school.name}. In a real app, this would open a booking form or send an inquiry email.`);
+                // In production, you could redirect to a booking form or show a modal
+            }
+        }
+
+        function startVirtualTour() {
+            const school = window.currentDetailSchool;
+            if (school) {
+                alert(`Starting virtual tour for ${school.name}. In a real app, this would load a 360° virtual tour or video walkthrough.`);
+                // In production, you could embed a virtual tour viewer here
+            }
+        }
 
         // Initialize on page load
         document.addEventListener('DOMContentLoaded', async function() {

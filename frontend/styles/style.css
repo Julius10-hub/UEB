@@ -13915,3 +13915,279 @@ h1, h2, h3, h4, h5, h6 {
         font-size: 30px;
     }
 }
+
+            /* What We Do Section - Feature Blocks */
+            .features-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 30px;
+                margin-top: 50px;
+            }
+
+            .feature-block {
+                background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
+                border-radius: 15px;
+                padding: 35px 25px;
+                text-align: center;
+                transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+                position: relative;
+                overflow: hidden;
+                border: 1px solid rgba(30, 91, 168, 0.1);
+                box-shadow: 0 8px 25px rgba(30, 91, 168, 0.08);
+                cursor: pointer;
+            }
+
+            .feature-block::before {
+                content: '';
+                position: absolute;
+                top: 0;
+                left: -100%;
+                width: 100%;
+                height: 100%;
+                background: linear-gradient(90deg, transparent, rgba(243, 156, 18, 0.1), transparent);
+                transition: left 0.6s ease;
+            }
+
+            .feature-block:hover::before {
+                left: 100%;
+            }
+
+            .feature-block:hover {
+                transform: translateY(-15px) scale(1.02);
+                box-shadow: 0 20px 50px rgba(30, 91, 168, 0.15);
+                border-color: rgba(243, 156, 18, 0.3);
+                background: linear-gradient(135deg, #ffffff 0%, #fff5e6 100%);
+            }
+
+            .feature-icon {
+                font-size: 50px;
+                color: var(--orange, #f39c12);
+                margin-bottom: 20px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                width: 90px;
+                height: 90px;
+                background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(243, 156, 18, 0.05));
+                border-radius: 50%;
+                transition: all 0.4s ease;
+                position: relative;
+            }
+
+            .feature-icon::before {
+                content: '';
+                position: absolute;
+                width: 100%;
+                height: 100%;
+                border-radius: 50%;
+                background: radial-gradient(circle, rgba(243, 156, 18, 0.2) 0%, transparent 70%);
+                animation: pulse-icon 2s ease-in-out infinite;
+            }
+
+            .feature-icon i {
+                position: relative;
+                z-index: 1;
+            }
+
+            .feature-block:hover .feature-icon {
+                transform: scale(1.15) rotateZ(10deg);
+                background: linear-gradient(135deg, rgba(243, 156, 18, 0.2), rgba(243, 156, 18, 0.1));
+                box-shadow: 0 10px 30px rgba(243, 156, 18, 0.2);
+            }
+
+            .feature-content {
+                transition: all 0.3s ease;
+            }
+
+            .feature-block h4 {
+                color: var(--deep-blue, #112a66);
+                font-size: 1.3rem;
+                font-weight: 700;
+                margin: 15px 0;
+                transition: color 0.3s ease;
+            }
+
+            .feature-block:hover h4 {
+                color: var(--orange, #f39c12);
+            }
+
+            .feature-block p {
+                color: #666;
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin: 0;
+                transition: color 0.3s ease;
+            }
+
+            .feature-block:hover p {
+                color: #555;
+            }
+
+            @keyframes pulse-icon {
+                0%, 100% { 
+                    transform: scale(1);
+                    opacity: 1;
+                }
+                50% {
+                    transform: scale(1.2);
+                    opacity: 0.5;
+                }
+            }
+
+            /* Marquee Container */
+            .marquee-container {
+                overflow: hidden;
+                width: 100%;
+                padding: 30px 0;
+            }
+
+            .marquee {
+                width: 100%;
+            }
+
+            .marquee-content {
+                display: flex;
+                gap: 60px;
+                align-items: center;
+                justify-content: center;
+                animation: scroll 20s linear infinite;
+            }
+
+            .marquee-item {
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Sponsor logo sizing */
+            .sponsor-logo {
+                max-width: 120px;
+                height: auto;
+                max-height: 80px;
+                object-fit: contain;
+                filter: brightness(0.95);
+                transition: filter 0.3s ease;
+            }
+
+            .marquee-item:hover .sponsor-logo {
+                filter: brightness(1.1);
+            }
+
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            .marquee-container:hover .marquee-content {
+                animation-play-state: paused;
+            }
+
+            /* Responsive tweaks */
+            @media (max-width: 768px) {
+                .sponsor-logo {
+                    max-width: 90px;
+                    max-height: 60px;
+                }
+                .marquee-content {
+                    gap: 40px;
+                    animation-duration: 15s;
+                }
+
+                .feature-block {
+                    padding: 25px 15px;
+                }
+
+                .feature-icon {
+                    width: 70px;
+                    height: 70px;
+                    font-size: 35px;
+                }
+
+                .features-grid {
+                    grid-template-columns: 1fr;
+                    gap: 20px;
+                }
+            }
+
+             /* Ripple effect for feature blocks */
+            .feature-block {
+                position: relative;
+            }
+
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(243, 156, 18, 0.6);
+                transform: scale(0);
+                animation: ripple-animation 0.6s ease-out;
+                pointer-events: none;
+            }
+
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+            
+            /* Marquee Container */
+            .marquee-container {
+                overflow: hidden;
+                width: 100%;
+                padding: 30px 0;
+            }
+
+            .marquee {
+                width: 100%;
+            }
+
+            .marquee-content {
+                display: flex;
+                gap: 60px;
+                align-items: center;
+                justify-content: center;
+                animation: scroll 20s linear infinite;
+            }
+
+            .marquee-item {
+                flex-shrink: 0;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            /* Sponsor logo sizing */
+            .sponsor-logo {
+                max-width: 120px;
+                height: auto;
+                max-height: 80px;
+                object-fit: contain;
+                filter: brightness(0.95);
+                transition: filter 0.3s ease;
+            }
+
+            .marquee-item:hover .sponsor-logo {
+                filter: brightness(1.1);
+            }
+
+            @keyframes scroll {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-50%); }
+            }
+
+            .marquee-container:hover .marquee-content {
+                animation-play-state: paused;
+            }
+
+            /* Responsive tweaks */
+            @media (max-width: 768px) {
+                .sponsor-logo {
+                    max-width: 90px;
+                    max-height: 60px;
+                }
+                .marquee-content {
+                    gap: 40px;
+                    animation-duration: 15s;
+                }
+            }
