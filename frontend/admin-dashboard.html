@@ -124,8 +124,16 @@
         .header-sub { font-size:0.9rem; color:#64748b; margin-top:6px; }
         .header-controls { display:flex; align-items:center; gap:12px; }
         .search-wrapper { position:relative; display:flex; align-items:center; }
-        .search-wrapper input { width:320px; padding:10px 40px 10px 14px; border-radius:12px; border:1px solid #e2e8f0; background:white; box-shadow:0 6px 18px rgba(16,185,129,0.04); transition:0.18s; }
+        .search-wrapper input { width:320px; max-width:100%; min-width:0; padding:10px 40px 10px 14px; border-radius:12px; border:1px solid #e2e8f0; background:white; box-shadow:0 6px 18px rgba(16,185,129,0.04); transition:0.18s; box-sizing:border-box; }
         .search-wrapper input:focus { outline:none; transform:translateY(-2px); box-shadow:0 12px 30px rgba(16,185,129,0.08); }
+        .admin-header { width:100%; box-sizing:border-box; }
+        @media (max-width: 900px) {
+            .admin-header { flex-direction:column; align-items:flex-start; gap:12px; padding:12px 16px; }
+            .header-controls { width:100%; display:flex; flex-wrap:wrap; gap:8px; }
+            .search-wrapper { flex:1; width:100%; }
+            .search-wrapper input { width:100%; max-width:100%; }
+            .admin-main { padding:20px; }
+        }
         .search-wrapper button { position:absolute; right:6px; background:transparent; border:none; color:#64748b; cursor:pointer; font-size:0.95rem; }
         .date-range { display:flex; align-items:center; gap:8px; background:transparent; }
         .date-range input { border:1px solid #e2e8f0; padding:8px 10px; border-radius:8px; }
@@ -674,28 +682,8 @@
 
         <!-- DASHBOARD (active) with UGANDAN stats -->
         <div id="dashboard-section" class="section-content active">
-            <!-- STATS CARDS (Ugandan data) -->
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-label">Schools</div><div class="stat-value" id="totalSchools">0</div><div class="stat-change"><i class="fas fa-arrow-up"></i> <span id="schoolGrowth">+3 districts</span></div></div>
-                <div class="stat-card"><div class="stat-label">Students (est)</div><div class="stat-value" id="totalStudents">0</div><div class="stat-change"><span id="studentGrowth">+7.2%</span></div></div>
-                <div class="stat-card"><div class="stat-label">Avg students / school</div><div class="stat-value" id="avgStudents">0</div><div class="stat-change"><span id="avgStudentsChange">—</span></div></div>
-                <div class="stat-card"><div class="stat-label">Upcoming events (30d)</div><div class="stat-value" id="upcomingEvents">0</div><div class="stat-change"><span id="upcomingDesc">Next 30 days</span></div></div>
-                <div class="stat-card"><div class="stat-label">Total events</div><div class="stat-value" id="totalEvents">0</div><div class="stat-change"><span id="eventGrowth">+2 this term</span></div></div>
-                <div class="stat-card"><div class="stat-label">Jobs</div><div class="stat-value" id="totalJobs">0</div><div class="stat-change"><span id="openJobs">open</span></div></div>
-                <div class="stat-card"><div class="stat-label">Active agents</div><div class="stat-value" id="activeAgents">0</div><div class="stat-change"><span id="agentGrowth">+3</span></div></div>
-                <div class="stat-card"><div class="stat-label">Bursaries</div><div class="stat-value" id="totalBursaries">0</div><div class="stat-change">UGX <span id="bursaryTotal">0</span></div></div>
-                <div class="stat-card"><div class="stat-label">Avg bursary (UGX)</div><div class="stat-value" id="avgBursary">0</div><div class="stat-change"><span id="bursaryChange">—</span></div></div>
-                <div class="stat-card"><div class="stat-label">Papers</div><div class="stat-value" id="totalPapers">0</div><div class="stat-change"><span id="paperGrowth">+8 resources</span></div></div>
-                <div class="stat-card"><div class="stat-label">Users</div><div class="stat-value" id="totalUsers">0</div><div class="stat-change"><span id="userGrowth">+1</span></div></div>
-                <div class="stat-card"><div class="stat-label">Suggestions (open)</div><div class="stat-value" id="suggestionsPending">0</div><div class="stat-change"><span id="suggestionChange">—</span></div></div>
-            </div>
-
-            <!-- GRAPHS SECTION (with Ugandan labels) -->
-            <div class="charts-grid">
-                <div class="chart-card">
-                    <h3><i class="fas fa-chart-pie"></i> Schools by district</h3>
-                    <div class="chart-container"><canvas id="categoryPieChart"></canvas></div>
-                </div>
+              <!-- GRAPHS SECTION (with Ugandan labels) -->
+            <div class="charts-grid" style="display:grid !important;">
                 <div class="chart-card">
                     <h3><i class="fas fa-chart-bar"></i> New schools per term</h3>
                     <div class="chart-container"><canvas id="growthBarChart"></canvas></div>
@@ -710,16 +698,6 @@
                 </div>
             </div>
 
-            <!-- category breakdown (Ugandan districts) -->
-            <h2 class="section-title">Schools by district (detail)</h2>
-            <div class="category-breakdown" id="categoryBreakdown"></div>
-
-            <!-- quick actions -->
-            <h2 class="section-title">Quick actions</h2>
-            <div class="quick-actions">
-                <button class="quick-action-btn" onclick="openSchoolModal()"><i class="fas fa-plus"></i> Add School</button>
-                <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
-            </div>
 
             <!-- info box with live UGX calculations -->
             <div class="info-box" id="liveCalculations">
@@ -883,16 +861,7 @@
             </div>
         </div>
 
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section"><h3>EduBridge Uganda</h3><p>Supporting Ugandan education</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
-                <div class="footer-section"><h3>Contact</h3><p>Kampala, Uganda</p><p>admin@edubridge.ug</p><p>Tel: +256 700 123456</p></div>
-                <div class="footer-section"><h3>UNEB resources</h3><p>UCE & UACE past papers</p></div>
-            </div>
-            <div class="footer-bottom"><p>© 2025 EduBridge Uganda · built for local schools</p></div>
-        </footer>
-    </div>
-</div>
+
 
   
     <!-- Events Modal -->
@@ -2095,6 +2064,7 @@
 
         // PIE / DOUGHNUT: refined style with cutout and smooth hover
         const pieCtx = document.getElementById('categoryPieChart');
+        const extraPieCtx = document.getElementById('additionalPieChart');
         if (pieCtx) {
             const labels = Object.keys(districtCount);
             const values = Object.values(districtCount);

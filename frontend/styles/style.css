@@ -11197,17 +11197,19 @@ select {
 }
 
 .btn-back-home.back-bg {
-    background: rgba(255, 255, 255, 0.15);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: #1e5ba8;
+    border: 2px solid #f39c12;
+    color: white;
 }
 
 .btn-back-home.back-bg:hover {
-    background: rgba(255, 255, 255, 0.25);
+    background: #154a88;
     transform: translateX(4px);
+    color: white;
 }
 
 .btn-back-home.visible-btn {
-    display: none;
+    display: inline-flex;
 }
 
 /* Responsive Contact Layout */
