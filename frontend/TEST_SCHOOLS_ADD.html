@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>School Add Feature - Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 { color: #0d3b66; margin-bottom: 30px; }
+        .section {
+            background: #f8fafc;
+            border-left: 4px solid #10b981;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+        }
+        .section h2 {
+            color: #112a66;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+        }
+        .test-item {
+            padding: 12px;
+            margin: 8px 0;
+            background: white;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .test-item.pass {
+            border-left: 3px solid #10b981;
+            color: #059669;
+        }
+        .test-item.fail {
+            border-left: 3px solid #ef4444;
+            color: #dc2626;
+        }
+        .test-item.pending {
+            border-left: 3px solid #f59e0b;
+            color: #d97706;
+        }
+        .badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        .badge.pass {
+            background: #d1fae5;
+            color: #047857;
+        }
+        .badge.fail {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+        .badge.pending {
+            background: #fef3c7;
+            color: #92400e;
+        }
+        code {
+            background: #f1f5f9;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+        .cta {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+            font-size: 1rem;
+        }
+        .cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>EduBridge Schools Add Feature - Testing</h1>
+        
+        <div class="section">
+            <h2>What Was Fixed</h2>
+            <div class="test-item pass">
+                <span class="badge pass">FIXED</span>
+                <strong>Form Submission Handler</strong>
+                <p>Changed from non-existent <code>handleSchoolSubmit()</code> to <code>handleSubmit(event, 'schools')</code></p>
+            </div>
+            <div class="test-item pass">
+                <span class="badge pass">FIXED</span>
+                <strong>School Data Extraction</strong>
+                <p>Updated all form field IDs to match your HTML form inputs</p>
+            </div>
+            <div class="test-item pass">
+                <span class="badge pass">FIXED</span>
+                <strong>Real-Time Broadcasting</strong>
+                <p>Fixed broadcast channel names and message types for cross-page communication</p>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Frontend Changes Made</h2>
+            <p><strong>File:</strong> <code>admin-dashboard.html</code></p>
+            <ul style="margin-left: 20px; margin-top: 10px; line-height: 1.8;">
+                <li><strong>Line 905:</strong> Form submission handler fixed</li>
+                <li><strong>Lines 1650-1668:</strong> School data extractor updated with correct field IDs</li>
+                <li><strong>Lines 1779-1821:</strong> Broadcast function updated with correct channel names</li>
+            </ul>
+        </div>
+
+        <div class="section">
+            <h2>Testing Checklist</h2>
+            <div class="test-item pending">
+                <span class="badge pending">TODO</span>
+                <div>
+                    <strong>Start Backend Server</strong>
+                    <p style="margin-top: 8px; color: #666;">Run: <code>python app.py</code></p>
+                </div>
+            </div>
+            <div class="test-item pending">
+                <span class="badge pending">TODO</span>
+                <div>
+                    <strong>Login to Admin Dashboard</strong>
+                    <p style="margin-top: 8px; color: #666;">Email: <code>admin@thrive.com</code> | Password: <code>admin123</code></p>
+                </div>
+            </div>
+            <div class="test-item pending">
+                <span class="badge pending">TODO</span>
+                <div>
+                    <strong>Add a Test School</strong>
+                    <p style="margin-top: 8px; color: #666;">Fill form and click "Save School" button</p>
+                </div>
+            </div>
+            <div class="test-item pending">
+                <span class="badge pending">TODO</span>
+                <div>
+                    <strong>Verify on Schools Page</strong>
+                    <p style="margin-top: 8px; color: #666;">Open schools.html and check if new school appears instantly</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>How the Flow Works Now</h2>
+            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0; margin-top: 12px;">
+                <ol style="margin-left: 20px; line-height: 2;">
+                    <li><strong>User fills school form</strong> in admin dashboard</li>
+                    <li><strong>Form validates</strong> and extracts data from inputs</li>
+                    <li><strong>Data is sent to backend</strong> via POST /api/schools</li>
+                    <li><strong>Backend creates school</strong> in MySQL database</li>
+                    <li><strong>Backend returns school object</strong> with new ID</li>
+                    <li><strong>broadcastNewSchool()</strong> broadcasts via BroadcastChannel</li>
+                    <li><strong>Schools page receives message</strong> automatically</li>
+                    <li><strong>New school is added</strong> to the displayed list</li>
+                    <li><strong>Page updates instantly</strong> without requiring refresh!</li>
+                </ol>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>Field Mapping</h2>
+            <p>The form now correctly sends all fields to the backend:</p>
+            <table style="width: 100%; border-collapse: collapse; margin-top: 12px;">
+                <thead>
+                    <tr style="background: #e2e8f0;">
+                        <th style="padding: 10px; text-align: left; border: 1px solid #cbd5e0">Form Field</th>
+                        <th style="padding: 10px; text-align: left; border: 1px solid #cbd5e0">Database Field</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolName</td><td style="padding: 10px;">name</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolCategory</td><td style="padding: 10px;">category</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolCity</td><td style="padding: 10px;">city</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolLocation</td><td style="padding: 10px;">location</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolStudents</td><td style="padding: 10px;">students</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolFaculty</td><td style="padding: 10px;">faculty</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolEmail</td><td style="padding: 10px;">contact_email</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolPhone</td><td style="padding: 10px;">contact_phone</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolWebsite</td><td style="padding: 10px;">website</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolDescription</td><td style="padding: 10px;">description</td></tr>
+                    <tr style="border: 1px solid #e2e8f0;"><td style="padding: 10px;">schoolLongDescription</td><td style="padding: 10px;">long_description</td></tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="section">
+            <h2>Troubleshooting</h2>
+            <div style="background: white; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                <p><strong>Q: I see "Unauthorized" message</strong></p>
+                <p style="margin-left: 20px; color: #666; margin-top: 8px;">A: Make sure you logged in as admin. Check that token is saved in localStorage.</p>
+                
+                <p style="margin-top: 16px;"><strong>Q: School doesn't appear on schools page</strong></p>
+                <p style="margin-left: 20px; color: #666; margin-top: 8px;">A: Open the schools.html AFTER adding the school. Check browser console for errors.</p>
+                
+                <p style="margin-top: 16px;"><strong>Q: Form doesn't submit</strong></p>
+                <p style="margin-left: 20px; color: #666; margin-top: 8px;">A: Make sure all required fields are filled. Check that the backend API is running.</p>
+                
+                <p style="margin-top: 16px;"><strong>Q: Can I test without the backend?</strong></p>
+                <p style="margin-left: 20px; color: #666; margin-top: 8px;">A: The form requires a backend. Make sure Flask app is running on localhost:5000.</p>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin-top: 40px;">
+            <p style="color: #666; margin-bottom: 20px;">Ready to test? Start the backend and follow the checklist above!</p>
+            <button class="cta" onclick="window.location.href='../admin-dashboard.html'">Go to Admin Dashboard</button>
+            <button class="cta" style="margin-left: 10px; background: #0d3b66;" onclick="window.location.href='../schools.html'">Go to Schools Page</button>
+        </div>
+    </div>
+</body>
+</html>
