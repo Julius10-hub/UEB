@@ -60,6 +60,10 @@
         </div>
     </nav>
 </header>
+<br>
+<br>
+<br>
+
 <body>
     <!-- Hero Section -->
     <section class="hero" style="background: linear-gradient(135deg, rgba(17, 42, 102, 0.7) 0%, rgba(30, 91, 168, 0.7) 100%), url('gallery/pri 5.jpg') center/cover no-repeat;">
@@ -96,12 +100,6 @@
                     <a class="quick-link" href="schools.html?level=kindergarten">
                         <h3>Kindergarten</h3>
                         <p>Ages 3-5 • 50+ Schools</p>
-                    </a>
-                </div>
-                <div class="quick-card">
-                    <a class="quick-link" href="schools.html?level=nursery">
-                        <h3>Nursery</h3>
-                        <p>Ages 2-4 • 45+ Schools</p>
                     </a>
                 </div>
                 <div class="quick-card">
@@ -349,7 +347,7 @@
                         <div class="stats-grid">
                             <div class="stat-card" data-aos="fade-up" data-aos-delay="0">
                                 <div class="stat-icon">
-                                    <i class="fas fa-school"></i>
+                                    <img src="gallery/activity.jpg" alt="Schools" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">
                                 </div>
                                 <div class="stat-content">
                                     <h3 class="stat-number" data-target="500">0</h3>
@@ -594,9 +592,9 @@
 
             <!-- CTA Section -->
             <div
-                style="background: linear-gradient(135deg, var(--orange), #070246); border-radius: 30px; padding: 40px; margin: 50px 0; text-align: center; color: var(--deep-blue);">
-                <h3 style="font-size: 2rem; font-weight: 800; margin-bottom: 20px;">Ready to Transform Education?</h3>
-                <p style="font-size: 1.2rem; margin-bottom: 30px;">Join thousands of students, parents, and educators already using EduBridge to access quality
+                style="background: linear-gradient(135deg, var(--orange), #070246); border-radius: 30px; padding: 40px; margin: 50px 0; text-align: center; color: white;">
+                <h3 style="font-size: 2rem; font-weight: 800; margin-bottom: 20px; color: white;">Ready to Transform Education?</h3>
+                <p style="font-size: 1.2rem; margin-bottom: 30px; color: white;">Join thousands of students, parents, and educators already using EduBridge to access quality
                         education and opportunities.</p>
                 <div class="cta-buttons">
                         <a href="schools.html" class="btn btn-light-about">Explore Schools</a>
@@ -790,9 +788,9 @@
 
                 // Default responses for unmatched queries
                 const defaults = [
-                    'That\'s a great question! 🤔 You can also reach us directly at +256 755 381419 or ugandaeducationbridge@gmail.com',
-                    'I appreciate your interest! 😊 For more detailed information, please visit our relevant page or contact us directly.',
-                    'Thanks for asking! 📧 Feel free to reach out to our team for personalized assistance.'
+                    'That\'s a great question! You can also reach us directly at +256 755 381419 or ugandaeducationbridge@gmail.com',
+                    'I appreciate your interest! For more detailed information, please visit our relevant page or contact us directly.',
+                    'Thanks for asking! Feel free to reach out to our team for personalized assistance.'
                 ];
 
                 // Hide notification badge
@@ -888,7 +886,7 @@
                         // Show welcome hint on first open
                         if (isFirstOpen) {
                             setTimeout(() => {
-                                addMessage('💡 **Pro Tip:** Try clicking the quick reply buttons below to get instant answers!', 'bot');
+                                addMessage(' **Pro Tip:** Try clicking the quick reply buttons below to get instant answers!', 'bot');
                                 isFirstOpen = false;
                             }, 800);
                         }
