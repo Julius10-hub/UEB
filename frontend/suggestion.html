@@ -687,22 +687,20 @@
             textarea.dispatchEvent(new Event('input', { bubbles: true }));
         }
 
-        // Form submission with enhanced validation
-        document.getElementById('suggestionForm').addEventListener('submit', async (e) => {
+        // Form submission now sends the feedback via WhatsApp
+        document.getElementById('suggestionForm').addEventListener('submit', (e) => {
             e.preventDefault();
             
             const name = document.getElementById('name').value.trim();
             const email = document.getElementById('email').value.trim();
             const message = document.getElementById('message').value.trim();
-            const type = document.getElementById('type').value;
-            const successContainer = document.getElementById('successContainer');
+            const type = document.getElementById('type').value || 'General';
             const errorContainer = document.getElementById('errorContainer');
-            const submitBtn = e.target.querySelector('button[type="submit"]');
             
-            successContainer.innerHTML = '';
             errorContainer.innerHTML = '';
+            errorContainer.style.display = 'none';
 
-            // Validation
+            // Basic validation
             if (!name || name.length < 2) {
                 errorContainer.innerHTML = '<div class="form-error"><i class="fas fa-exclamation-circle"></i> Please enter a valid name</div>';
                 errorContainer.style.display = 'block';
@@ -721,54 +719,17 @@
                 return;
             }
 
-            submitBtn.disabled = true;
-            const originalContent = submitBtn.innerHTML;
-            submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
-            
-            try {
-                // Create enhanced suggestion payload
-                const suggestionData = {
-                    name,
-                    email,
-                    message: `[${type || 'General'}] ${message}`,
-                    category: type || 'general',
-                    timestamp: new Date().toISOString()
-                };
+            // Build WhatsApp link
+            const waNumber = '256700420516';
+            const text = `Name: ${name}\nEmail: ${email}\nType: ${type}\nFeedback: ${message}`;
+            const waLink = `https://wa.me/${waNumber}?text=${encodeURIComponent(text)}`;
 
-                const result = await api.createSuggestion(name, email, suggestionData.message);
-                
-                if (result.error) {
-                    errorContainer.innerHTML = `<div class="form-error"><i class="fas fa-exclamation-circle"></i> ${result.error}</div>`;
-                    errorContainer.style.display = 'block';
-                } else {
-                    successContainer.innerHTML = `
-                        <div class="form-success">
-                            <i class="fas fa-check-circle"></i>
-                            <div>
-                                <strong>Thank you!</strong> Your feedback has been submitted successfully. We'll review it and consider your suggestions for improving Thrive School Hub.
-                            </div>
-                        </div>
-                    `;
-                    successContainer.style.display = 'block';
-                    e.target.reset();
-                    charCount.textContent = '0';
-                    
-                    // Show notification
-                    if (typeof showNotification !== 'undefined') {
-                        showNotification('Feedback submitted successfully! 🎉', 'success');
-                    }
+            // Open WhatsApp chat in new tab/window
+            window.open(waLink, '_blank');
 
-                    // Scroll to success message
-                    successContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                }
-            } catch (error) {
-                console.error('Submission error:', error);
-                errorContainer.innerHTML = `<div class="form-error"><i class="fas fa-exclamation-circle"></i> An error occurred. Please try again later.</div>`;
-                errorContainer.style.display = 'block';
-            } finally {
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = originalContent;
-            }
+            // reset the form and counter
+            e.target.reset();
+            document.getElementById('charCount').textContent = '0';
         });
 
         // Clear button reset handler
