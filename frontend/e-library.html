@@ -59,8 +59,7 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1>
-                E-Library Uganda Education
-                    <span class="hero-highlight">Bridge</span>
+                E-Library EduBridge
                 </h1>
                 <p class="hero-description">
                 Access our extensive collection of past papers, study guides, and learning materials for academic excellence at all levels.
@@ -130,27 +129,6 @@
                         </div>
                     </div>
                     <div class="feature-block">
-                        <div class="icon"><i class="fas fa-book-open"></i></div>
-                        <div>
-                            <h4>Study Guides</h4>
-                            <p>Comprehensive study materials and revision guides for all subjects.</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
-                        <div class="icon"><i class="fas fa-video"></i></div>
-                        <div>
-                            <h4>Video Lessons</h4>
-                            <p>Interactive video tutorials covering key topics and difficult concepts.</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
-                        <div class="icon"><i class="fas fa-notes-medical"></i></div>
-                        <div>
-                            <h4>Lecture Notes</h4>
-                            <p>Organized notes from experienced educators across all subjects.</p>
-                        </div>
-                    </div>
-                    <div class="feature-block">
                         <div class="icon"><i class="fas fa-question-circle"></i></div>
                         <div>
                             <h4>Practice Questions</h4>
@@ -168,15 +146,105 @@
             </div>
         </section>
 
-        <!-- CTA Section -->
-        <section class="cta-about">
+        <!-- Past Papers Search Container -->
+        <section class="about-section" style="padding: 60px 0; background: #f7f9fc;">
             <div class="container-fluid">
-                <h2>Start Learning Today</h2>
-                <p>Join thousands of students accessing quality learning materials and excelling in their studies.</p>
-                <div class="cta-buttons">
-                    <a href="contact.html" class="btn btn-light-about">Get Started</a>
-                    <a href="about.html" class="btn btn-outline-light">Learn More</a>
+                <div class="section-intro">
+                    <h2>Find Past Papers</h2>
+                    <p>Search our comprehensive database to find the papers you need</p>
                 </div>
+
+                <div style="background: white; padding: 40px; border-radius: 12px; border: 3px solid #f39c12; box-shadow: 0 8px 16px rgba(0,0,0,0.1); max-width: 900px; margin: 0 auto;">
+                    <form id="pastPapersSearch" style="display: flex; flex-direction: column; gap: 20px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 15px;">
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #1e5ba8; margin-bottom: 8px;">
+                                    <i class="fas fa-graduation-cap" style="color: #f39c12;"></i> Level
+                                </label>
+                                <select name="level" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                                    <option value="">Select Level</option>
+                                    <option value="primary">Primary</option>
+                                    <option value="secondary">Secondary</option>
+                                </select>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #1e5ba8; margin-bottom: 8px;">
+                                    <i class="fas fa-book" style="color: #f39c12;"></i> Subject
+                                </label>
+                                <select name="subject" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                                    <option value="">Select Subject</option>
+                                    <option value="mathematics">Mathematics</option>
+                                    <option value="english">English</option>
+                                    <option value="science">Science</option>
+                                    <option value="history">History</option>
+                                    <option value="geography">Geography</option>
+                                    <option value="biology">Biology</option>
+                                    <option value="chemistry">Chemistry</option>
+                                    <option value="physics">Physics</option>
+                                    <option value="sst">SST</option>
+                                    <option value="islamic">Islamic Studies</option>
+                                    <option value="cre">CRE</option>   
+
+                                </select>
+                            </div>
+
+                            <div>
+                                <label style="display: block; font-weight: 600; color: #1e5ba8; margin-bottom: 8px;">
+                                    <i class="fas fa-calendar" style="color: #f39c12;"></i> Year
+                                </label>
+                                <select name="year" style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                                    <option value="">Select Year</option>
+                                    <option value="2026">2026</option>
+                                    <option value="2025">2025</option>
+                                    <option value="2024">2024</option>
+                                    <option value="2023">2023</option>
+                                    <option value="2022">2022</option>
+                                    <option value="2021">2021</option>
+                                    <option value="2020">2020</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div>
+                            <label style="display: block; font-weight: 600; color: #1e5ba8; margin-bottom: 8px;">
+                                <i class="fas fa-search" style="color: #f39c12;"></i> Search by Paper Name
+                            </label>
+                            <input type="text" name="keyword" placeholder="Enter paper name or keywords..." style="width: 100%; padding: 12px; border: 2px solid #ddd; border-radius: 6px; font-size: 14px;">
+                        </div>
+
+                        <div style="display: flex; gap: 10px; justify-content: center;">
+                            <button type="submit" style="background: #1e5ba8; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px;">
+                                <i class="fas fa-search"></i> Search Papers
+                            </button>
+                            <button type="reset" style="background: #f39c12; color: white; border: none; padding: 12px 30px; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 15px;">
+                                <i class="fas fa-redo"></i> Clear
+                            </button>
+                        </div>
+                    </form>
+                    <div id="searchResults" style="margin-top: 20px; display: none;">
+                        <div id="resultsContent"></div>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <p style="color: #666; font-size: 14px;">
+                        <i class="fas fa-info-circle" style="color: #f39c12;"></i>
+                        <strong>Database contains:</strong> 100+ papers | 15+ subjects | All levels covered | Free downloads
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Call to Action -->
+        <section style="padding: 40px 20px; background: white; color: #333; text-align: center;">
+            <div class="container" style="background: linear-gradient(135deg, #1e5ba8 0%, #1a4d94 100%); border: 3px solid #f39c12; border-radius: 20px; padding: 40px 30px; backdrop-filter: blur(10px);">
+                <h3 style="font-size: 28px; margin-bottom: 15px; color: white;">Ready to Prepare?</h3>
+                <p style="font-size: 16px; margin-bottom: 25px; color: white;">Access our complete past papers database now for free!</p>
+                <a href="past_papers.html" class="btn btn-warning" style="background: #1a1713; border-color: #12f35d; color: #ca7008; font-weight: 600;">
+                    <i class="fas fa-file-pdf"></i> Browse Past Papers Now
+                </a>
+                <p style="margin-top: 20px; font-size: 14px; opacity: 0.9; color: white;">Need help? <a href="contact.html" style="color: #f39c12; text-decoration: underline;">Contact our support team</a></p>
             </div>
         </section>
     </main>
@@ -254,6 +322,88 @@
                 navbar.classList.add('scrolled');
             } else {
                 navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Past Papers Search Handler
+        const searchForm = document.getElementById('pastPapersSearch');
+        const searchResults = document.getElementById('searchResults');
+        const resultsContent = document.getElementById('resultsContent');
+
+        searchForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const level = document.querySelector('select[name="level"]').value;
+            const subject = document.querySelector('select[name="subject"]').value;
+            const year = document.querySelector('select[name="year"]').value;
+            const keyword = document.querySelector('input[name="keyword"]').value;
+            
+            // Validate at least one field is filled
+            if (!level && !subject && !year && !keyword) {
+                alert('Please select at least one search criterion');
+                return;
+            }
+            
+            // Show loading state
+            resultsContent.innerHTML = '<div style="text-align: center; padding: 20px;"><i class="fas fa-spinner fa-spin" style="font-size: 24px; color: #1e5ba8;"></i> Searching database...</div>';
+            searchResults.style.display = 'block';
+            
+            try {
+                // Build query string
+                const queryParams = new URLSearchParams();
+                if (level) queryParams.append('level', level);
+                if (subject) queryParams.append('subject', subject);
+                if (year) queryParams.append('year', year);
+                if (keyword) queryParams.append('keyword', keyword);
+                
+                // Call API endpoint
+                const response = await fetch(`/api/past_papers?${queryParams.toString()}`, {
+                    method: 'GET',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Search failed');
+                }
+                
+                const data = await response.json();
+                
+                // Display results
+                if (data.papers && data.papers.length > 0) {
+                    let resultsHTML = `<div style="padding: 20px; background: #f7f9fc; border-radius: 8px;">`;
+                    resultsHTML += `<h5 style="color: #1e5ba8; margin-bottom: 15px;"><i class="fas fa-file-pdf" style="color: #f39c12;"></i> Found ${data.papers.length} paper(s)</h5>`;
+                    resultsHTML += `<div style="display: grid; gap: 10px;">`;
+                    
+                    data.papers.forEach(paper => {
+                        resultsHTML += `
+                            <div style="background: white; padding: 15px; border-left: 4px solid #f39c12; border-radius: 4px;">
+                                <h6 style="color: #1e5ba8; margin: 0 0 8px 0;">${paper.title || 'Untitled'}</h6>
+                                <p style="margin: 0 0 8px 0; color: #666; font-size: 13px;">
+                                    <strong>Level:</strong> ${paper.level || 'N/A'} | 
+                                    <strong>Subject:</strong> ${paper.subject || 'N/A'} | 
+                                    <strong>Year:</strong> ${paper.year || 'N/A'}
+                                </p>
+                                <a href="${paper.download_url || '#'}" class="btn btn-sm" style="background: #1e5ba8; color: white; text-decoration: none; padding: 6px 12px; border-radius: 4px; font-size: 12px;">
+                                    <i class="fas fa-download"></i> Download
+                                </a>
+                            </div>
+                        `;
+                    });
+                    resultsHTML += `</div></div>`;
+                    resultsContent.innerHTML = resultsHTML;
+                } else {
+                    resultsContent.innerHTML = `<div style="background: #fff3cd; padding: 15px; border-radius: 6px; color: #856404; text-align: center;">
+                        <i class="fas fa-info-circle"></i> No papers found matching your criteria. Try different search options.
+                    </div>`;
+                }
+            } catch (error) {
+                resultsContent.innerHTML = `<div style="background: #f8d7da; padding: 15px; border-radius: 6px; color: #721c24; text-align: center;">
+                    <i class="fas fa-exclamation-circle"></i> Error searching database. Please try again later.
+                </div>`;
+                console.error('Search error:', error);
             }
         });
     </script>
