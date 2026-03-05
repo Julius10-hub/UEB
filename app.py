@@ -6,6 +6,8 @@ World-class backend with MySQL integration
 from flask import Flask, jsonify, send_from_directory, send_file
 from dotenv import load_dotenv
 from flask_cors import CORS
+from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
 import os
 from pathlib import Path
 import logging
@@ -57,6 +59,25 @@ def create_app(config=None):
     
     # Register frontend routes
     register_frontend_routes(app)
+
+    # Health check endpoint (database connectivity)
+    @app.route('/health')
+    def health_check():
+        try:
+            # run a lightweight DB query
+            result = None
+            try:
+                result = db.session.execute(text('SELECT 1')).scalar()
+            except Exception:
+                # fallback to engine execution if session unavailable
+                result = db.engine.execute(text('SELECT 1')).scalar()
+
+            if result in (1, '1', True):
+                return jsonify({'status': 'ok', 'db': 'connected'}), 200
+            return jsonify({'status': 'ok', 'db': 'unknown', 'result': str(result)}), 200
+        except Exception as e:
+            app.logger.exception('Health check failed')
+            return jsonify({'status': 'error', 'db': str(e)}), 500
     
     # Create database tables
     with app.app_context():

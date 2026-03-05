@@ -621,6 +621,113 @@
         .modal-content::-webkit-scrollbar-thumb:hover {
             background: rgba(16, 185, 129, 0.5);
         }
+
+        /* Enhanced Form Styling */
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-content form input[type="text"],
+        .modal-content form input[type="email"],
+        .modal-content form input[type="tel"],
+        .modal-content form input[type="number"],
+        .modal-content form select {
+            padding: 12px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: Inter, sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .modal-content form input[type="text"]:focus,
+        .modal-content form input[type="email"]:focus,
+        .modal-content form input[type="tel"]:focus,
+        .modal-content form input[type="number"]:focus,
+        .modal-content form select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .modal-content form input::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-file-input {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .form-file-input input[type="file"] {
+            display: none;
+        }
+
+        .form-file-label {
+            display: inline-block;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .form-file-label:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+            color: #10b981;
+        }
+
+        .file-name-display {
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .form-row-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal-content form button[type="submit"] {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .modal-content form button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-content form button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body>
@@ -869,63 +976,68 @@
     <div id="schoolModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
-            <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')">
-                <div class="form-row">
-                    <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" required></div>
-                    <div class="form-group"><label for="schoolCategory">Category</label>
-                        <select id="schoolCategory">
-                            <option value="Primary">Primary</option>
-                            <option value="Secondary">Secondary</option>
-                            <option value="Mixed">Mixed</option>
-                            <option value="Technical">Technical</option>
-                        </select>
+            <form id="schoolForm" method="POST" action="/add_school" enctype="multipart/form-data" onsubmit="handleSchoolSubmit(event)">
+                <!-- Basic Info Row -->
+                <div class="form-row-wrap">
+                    <input type="text" name="schoolName" id="schoolName" placeholder="School Name *" required>
+                    <select name="schoolCategory" id="schoolCategory" required>
+                        <option value="">Category</option>
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="Mixed">Mixed</option>
+                        <option value="Technical">Technical</option>
+                    </select>
+                </div>
+
+                <!-- Location -->                <div class="form-row-wrap">
+                    <input type="text" name="schoolDistrict" id="schoolDistrict" placeholder="District *" required>
+                    <input type="number" name="schoolStudents" id="schoolStudents" placeholder="Est. Students">
+                </div>
+
+                <!-- Contact Info -->
+                <div class="form-row-wrap">
+                    <input type="email" name="schoolEmail" id="schoolEmail" placeholder="Email">
+                    <input type="tel" name="schoolPhone" id="schoolPhone" placeholder="Phone">
+                </div>
+
+                <!-- Address -->
+                <input type="text" name="schoolAddress" id="schoolAddress" placeholder="Address">
+
+                <!-- File Uploads -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <!-- Logo Upload -->
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Logo</label>
+                    <div class="form-file-input">
+                        <label for="schoolLogo" class="form-file-label"><i class="fas fa-image" style="margin-right: 8px;"></i> Click to upload logo</label>
+                        <input type="file" id="schoolLogo" name="schoolLogo" accept="image/*" onchange="handleFileInput(event, 'logoName')">
+                        <div id="logoName" class="file-name-display"></div>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group"><label for="schoolDistrict">District *</label><input type="text" id="schoolDistrict" required></div>
-                    <div class="form-group"><label for="schoolStudents">Students (est)</label><input type="number" id="schoolStudents"></div>
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group"><label for="schoolEmail">Contact Email</label><input type="email" id="schoolEmail"></div>
-                    <div class="form-group"><label for="schoolPhone">Contact Phone</label><input type="tel" id="schoolPhone"></div>
-                </div>
-
-                <div class="form-group"><label for="schoolAddress">Address</label><input type="text" id="schoolAddress"></div>
-
-                <div class="form-row">
-                    <div class="form-group file-upload-group">
-                        <label class="file-upload-label">Logo</label>
-                        <div id="logoUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolLogo').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolLogo')">
-                            <div class="file-upload-placeholder"><i class="fas fa-image"></i><div class="file-upload-text">Click or drop to upload logo</div></div>
-                            <input type="file" id="schoolLogo" accept="image/*" onchange="handleFileSelect(event, 'schoolLogo')">
-                        </div>
-                        <div class="logo-preview empty" id="logoPreview"><i class="fas fa-image"></i></div>
-                    </div>
-
-                    <div class="form-group file-upload-group">
-                        <label class="file-upload-label">Images <span id="imagesCount" class="file-count-badge">0</span></label>
-                        <div id="imagesUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolImages').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolImages')">
-                            <div class="file-upload-placeholder"><i class="fas fa-images"></i><div class="file-upload-text">Click or drop images (max 5)</div></div>
-                            <input type="file" id="schoolImages" accept="image/*" multiple onchange="handleFileSelect(event, 'schoolImages')">
-                        </div>
-                        <div id="imagesPreview" class="file-preview-container"></div>
+                <!-- Images Upload -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Images (max 5)</label>
+                    <div class="form-file-input">
+                        <label for="schoolImages" class="form-file-label"><i class="fas fa-images" style="margin-right: 8px;"></i> Click or drag to upload images</label>
+                        <input type="file" id="schoolImages" name="schoolImages" accept="image/*" multiple onchange="handleFileInput(event, 'imagesName')">
+                        <div id="imagesName" class="file-name-display"></div>
                     </div>
                 </div>
 
-                <div class="form-row">
-                    <div class="form-group file-upload-group">
-                        <label class="file-upload-label">Videos <span id="videosCount" class="file-count-badge">0</span></label>
-                        <div id="videosUploadArea" class="file-upload-area" tabindex="0" role="button" onclick="document.getElementById('schoolVideos').click()" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'schoolVideos')">
-                            <div class="file-upload-placeholder"><i class="fas fa-video"></i><div class="file-upload-text">Click or drop videos (max 3)</div></div>
-                            <input type="file" id="schoolVideos" accept="video/*" multiple onchange="handleFileSelect(event, 'schoolVideos')">
-                        </div>
-                        <div id="videosPreview" class="file-preview-container"></div>
+                <!-- Videos Upload -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Videos (max 3)</label>
+                    <div class="form-file-input">
+                        <label for="schoolVideos" class="form-file-label"><i class="fas fa-video" style="margin-right: 8px;"></i> Click or drag to upload videos</label>
+                        <input type="file" id="schoolVideos" name="schoolVideos" accept="video/*" multiple onchange="handleFileInput(event, 'videosName')">
+                        <div id="videosName" class="file-name-display"></div>
                     </div>
                 </div>
 
-                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button><button type="submit" class="btn-submit">Add School</button></div>
+                <div class="modal-footer" style="margin-top: 24px;">
+                    <button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button>
+                    <button type="submit" class="btn-submit"><i class="fas fa-plus" style="margin-right: 8px;"></i>Add School</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1071,8 +1183,16 @@
             if (modalId === 'schoolModal') {
                 const form = document.getElementById('schoolForm');
                 if (form) form.reset();
+                // Clear file displays
+                document.getElementById('logoName').textContent = '';
+                document.getElementById('imagesName').textContent = '';
+                document.getElementById('videosName').textContent = '';
             }
         }
+    }
+
+    function openSchoolModal() {
+        openModal('schoolModal');
     }
 
     function showNotification(message, type = 'info') {
@@ -1111,8 +1231,75 @@
     }
 
     // ===== FILE UPLOAD HANDLERS =====
-    // Initialize file upload areas
-    function initializeFileUploadAreas() {
+    // Handle file input changes and display file names
+    function handleFileInput(event, displayId) {
+        const files = event.target.files;
+        const displayElement = document.getElementById(displayId);
+        
+        if (files.length === 0) {
+            displayElement.textContent = '';
+            return;
+        }
+
+        if (files.length === 1) {
+            displayElement.textContent = `✓ ${files[0].name} (${formatFileSize(files[0].size)})`;
+        } else {
+            displayElement.textContent = `✓ ${files.length} files selected`;
+        }
+    }
+
+    // Format file size for display
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    }
+
+    // Handle School Form Submission
+    function handleSchoolSubmit(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const schoolName = document.getElementById('schoolName').value.trim();
+        const schoolDistrict = document.getElementById('schoolDistrict').value.trim();
+        const schoolCategory = document.getElementById('schoolCategory').value;
+
+        // Validation
+        if (!schoolName) {\n            showNotification('Please enter school name', 'error');
+            return;
+        }
+
+        if (!schoolDistrict) {
+            showNotification('Please enter district', 'error');
+            return;
+        }
+
+        if (!schoolCategory) {
+            showNotification('Please select category', 'error');
+            return;
+        }
+
+        // Validate file counts
+        const imagesInput = document.getElementById('schoolImages');
+        const videosInput = document.getElementById('schoolVideos');
+
+        if (imagesInput.files.length > 5) {
+            showNotification('Maximum 5 images allowed', 'error');
+            return;
+        }
+
+        if (videosInput.files.length > 3) {
+            showNotification('Maximum 3 videos allowed', 'error');
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = form.querySelector('button[type=\"submit\"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class=\"loading\" style=\"display:inline-block; margin-right:8px;\"></span>Adding...';\n\n        // Submit form\n        setTimeout(() => {\n            form.submit();\n        }, 300);\n    }\n\n    // Initialize file upload areas\n    function initializeFileUploadAreas() {
         window.schoolLogoData = null;
         window.schoolImagesData = [];
         window.schoolVideosData = [];
