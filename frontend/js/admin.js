@@ -37,27 +37,31 @@ async function loadStats() {
 async function loadSchools() {
     try {
         const schools = await api.getSchools();
-        const container = document.getElementById('schoolsList');
+        const tableBody = document.getElementById('schoolsTableBody');
         
         if (!schools || schools.length === 0) {
-            container.innerHTML = '<p>No schools found.</p>';
+            tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; padding: 40px;">No schools found. Add one to get started.</td></tr>';
             return;
         }
         
-        container.innerHTML = schools.map(school => `
-            <div class="admin-item">
-                <div class="admin-item-content">
-                    <h3>${school.name}</h3>
-                    <p>📍 ${school.location} | 👥 ${school.students} students | 📚 ${school.category}</p>
-                </div>
-                <div class="admin-item-actions">
+        tableBody.innerHTML = schools.map(school => `
+            <tr>
+                <td><strong>${school.name || 'N/A'}</strong></td>
+                <td>${school.category || 'N/A'}</td>
+                <td>${school.location || 'N/A'}</td>
+                <td>${school.students || 0}</td>
+                <td>${school.contact_email || 'N/A'}</td>
+                <td>
                     <button class="btn btn-outline btn-small" onclick="editSchool(${school.id})">Edit</button>
                     <button class="btn btn-secondary btn-small" onclick="deleteSchool(${school.id})">Delete</button>
-                </div>
-            </div>
+                </td>
+                <td></td>
+            </tr>
         `).join('');
     } catch (error) {
         console.error('Error loading schools:', error);
+        const tableBody = document.getElementById('schoolsTableBody');
+        if (tableBody) tableBody.innerHTML = '<tr><td colspan="7" style="text-align: center; color: red;">Error loading schools</td></tr>';
     }
 }
 
@@ -165,6 +169,8 @@ async function handleSchoolSubmit(event) {
         
         if (result.error) {
             showNotification('Error: ' + result.error, 'error');
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
         } else {
             showNotification('School added successfully!', 'success');
             
@@ -177,15 +183,21 @@ async function handleSchoolSubmit(event) {
                 });
             }
             
-            // Close modal and reload
-            closeModal('schoolModal');
+            // Reset form and close modal
             form.reset();
+            submitBtn.innerHTML = originalText;
+            submitBtn.disabled = false;
+            
+            // Close modal
+            const modal = document.getElementById('schoolModal');
+            if (modal) modal.style.display = 'none';
+            
+            // Reload schools list
             await loadSchools();
         }
     } catch (error) {
         console.error('School submission error:', error);
         showNotification('Error adding school: ' + error.message, 'error');
-    } finally {
         submitBtn.innerHTML = originalText;
         submitBtn.disabled = false;
     }
@@ -224,6 +236,48 @@ function deleteSchool(schoolId) {
     if (confirm('Are you sure you want to delete this school?')) {
         showNotification('Delete functionality coming soon', 'info');
     }
+}
+
+// Helper: Close modal
+function closeModal(modalId) {
+    const modal = document.getElementById(modalId);
+    if (modal) modal.style.display = 'none';
+}
+
+// Helper: Show notification toast
+function showNotification(message, type = 'info') {
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        padding: 15px 20px;
+        border-radius: 8px;
+        font-weight: 500;
+        z-index: 10000;
+        max-width: 400px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    `;
+    
+    if (type === 'success') {
+        toast.style.backgroundColor = '#10b981';
+        toast.style.color = 'white';
+    } else if (type === 'error') {
+        toast.style.backgroundColor = '#ef4444';
+        toast.style.color = 'white';
+    } else {
+        toast.style.backgroundColor = '#3b82f6';
+        toast.style.color = 'white';
+    }
+    
+    toast.innerHTML = message;
+    document.body.appendChild(toast);
+    
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transition = 'opacity 0.3s';
+        setTimeout(() => toast.remove(), 300);
+    }, 4000);
 }
 
 // Close modal when clicking outside

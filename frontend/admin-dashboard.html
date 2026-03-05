@@ -124,8 +124,16 @@
         .header-sub { font-size:0.9rem; color:#64748b; margin-top:6px; }
         .header-controls { display:flex; align-items:center; gap:12px; }
         .search-wrapper { position:relative; display:flex; align-items:center; }
-        .search-wrapper input { width:320px; padding:10px 40px 10px 14px; border-radius:12px; border:1px solid #e2e8f0; background:white; box-shadow:0 6px 18px rgba(16,185,129,0.04); transition:0.18s; }
+        .search-wrapper input { width:320px; max-width:100%; min-width:0; padding:10px 40px 10px 14px; border-radius:12px; border:1px solid #e2e8f0; background:white; box-shadow:0 6px 18px rgba(16,185,129,0.04); transition:0.18s; box-sizing:border-box; }
         .search-wrapper input:focus { outline:none; transform:translateY(-2px); box-shadow:0 12px 30px rgba(16,185,129,0.08); }
+        .admin-header { width:100%; box-sizing:border-box; }
+        @media (max-width: 900px) {
+            .admin-header { flex-direction:column; align-items:flex-start; gap:12px; padding:12px 16px; }
+            .header-controls { width:100%; display:flex; flex-wrap:wrap; gap:8px; }
+            .search-wrapper { flex:1; width:100%; }
+            .search-wrapper input { width:100%; max-width:100%; }
+            .admin-main { padding:20px; }
+        }
         .search-wrapper button { position:absolute; right:6px; background:transparent; border:none; color:#64748b; cursor:pointer; font-size:0.95rem; }
         .date-range { display:flex; align-items:center; gap:8px; background:transparent; }
         .date-range input { border:1px solid #e2e8f0; padding:8px 10px; border-radius:8px; }
@@ -613,6 +621,113 @@
         .modal-content::-webkit-scrollbar-thumb:hover {
             background: rgba(16, 185, 129, 0.5);
         }
+
+        /* Enhanced Form Styling */
+        .modal-content form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .modal-content form input[type="text"],
+        .modal-content form input[type="email"],
+        .modal-content form input[type="tel"],
+        .modal-content form input[type="number"],
+        .modal-content form select {
+            padding: 12px 14px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-family: Inter, sans-serif;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .modal-content form input[type="text"]:focus,
+        .modal-content form input[type="email"]:focus,
+        .modal-content form input[type="tel"]:focus,
+        .modal-content form input[type="number"]:focus,
+        .modal-content form select:focus {
+            outline: none;
+            border-color: #10b981;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1);
+        }
+
+        .modal-content form input::placeholder {
+            color: #94a3b8;
+        }
+
+        .form-file-input {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .form-file-input input[type="file"] {
+            display: none;
+        }
+
+        .form-file-label {
+            display: inline-block;
+            padding: 12px 14px;
+            background: #f8fafc;
+            border: 2px dashed #cbd5e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            width: 100%;
+            text-align: center;
+            color: #64748b;
+            font-weight: 500;
+        }
+
+        .form-file-label:hover {
+            border-color: #10b981;
+            background: #f0fdf4;
+            color: #10b981;
+        }
+
+        .file-name-display {
+            font-size: 0.85rem;
+            color: #10b981;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+
+        .form-row-wrap {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        @media (max-width: 640px) {
+            .form-row-wrap {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal-content form button[type="submit"] {
+            padding: 12px 24px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+        }
+
+        .modal-content form button[type="submit"]:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.3);
+        }
+
+        .modal-content form button[type="submit"]:active {
+            transform: translateY(0);
+        }
+
     </style>
 </head>
 <body>
@@ -674,28 +789,8 @@
 
         <!-- DASHBOARD (active) with UGANDAN stats -->
         <div id="dashboard-section" class="section-content active">
-            <!-- STATS CARDS (Ugandan data) -->
-            <div class="stats-grid">
-                <div class="stat-card"><div class="stat-label">Schools</div><div class="stat-value" id="totalSchools">0</div><div class="stat-change"><i class="fas fa-arrow-up"></i> <span id="schoolGrowth">+3 districts</span></div></div>
-                <div class="stat-card"><div class="stat-label">Students (est)</div><div class="stat-value" id="totalStudents">0</div><div class="stat-change"><span id="studentGrowth">+7.2%</span></div></div>
-                <div class="stat-card"><div class="stat-label">Avg students / school</div><div class="stat-value" id="avgStudents">0</div><div class="stat-change"><span id="avgStudentsChange">—</span></div></div>
-                <div class="stat-card"><div class="stat-label">Upcoming events (30d)</div><div class="stat-value" id="upcomingEvents">0</div><div class="stat-change"><span id="upcomingDesc">Next 30 days</span></div></div>
-                <div class="stat-card"><div class="stat-label">Total events</div><div class="stat-value" id="totalEvents">0</div><div class="stat-change"><span id="eventGrowth">+2 this term</span></div></div>
-                <div class="stat-card"><div class="stat-label">Jobs</div><div class="stat-value" id="totalJobs">0</div><div class="stat-change"><span id="openJobs">open</span></div></div>
-                <div class="stat-card"><div class="stat-label">Active agents</div><div class="stat-value" id="activeAgents">0</div><div class="stat-change"><span id="agentGrowth">+3</span></div></div>
-                <div class="stat-card"><div class="stat-label">Bursaries</div><div class="stat-value" id="totalBursaries">0</div><div class="stat-change">UGX <span id="bursaryTotal">0</span></div></div>
-                <div class="stat-card"><div class="stat-label">Avg bursary (UGX)</div><div class="stat-value" id="avgBursary">0</div><div class="stat-change"><span id="bursaryChange">—</span></div></div>
-                <div class="stat-card"><div class="stat-label">Papers</div><div class="stat-value" id="totalPapers">0</div><div class="stat-change"><span id="paperGrowth">+8 resources</span></div></div>
-                <div class="stat-card"><div class="stat-label">Users</div><div class="stat-value" id="totalUsers">0</div><div class="stat-change"><span id="userGrowth">+1</span></div></div>
-                <div class="stat-card"><div class="stat-label">Suggestions (open)</div><div class="stat-value" id="suggestionsPending">0</div><div class="stat-change"><span id="suggestionChange">—</span></div></div>
-            </div>
-
-            <!-- GRAPHS SECTION (with Ugandan labels) -->
-            <div class="charts-grid">
-                <div class="chart-card">
-                    <h3><i class="fas fa-chart-pie"></i> Schools by district</h3>
-                    <div class="chart-container"><canvas id="categoryPieChart"></canvas></div>
-                </div>
+              <!-- GRAPHS SECTION (with Ugandan labels) -->
+            <div class="charts-grid" style="display:grid !important;">
                 <div class="chart-card">
                     <h3><i class="fas fa-chart-bar"></i> New schools per term</h3>
                     <div class="chart-container"><canvas id="growthBarChart"></canvas></div>
@@ -710,16 +805,6 @@
                 </div>
             </div>
 
-            <!-- category breakdown (Ugandan districts) -->
-            <h2 class="section-title">Schools by district (detail)</h2>
-            <div class="category-breakdown" id="categoryBreakdown"></div>
-
-            <!-- quick actions -->
-            <h2 class="section-title">Quick actions</h2>
-            <div class="quick-actions">
-                <button class="quick-action-btn" onclick="openModal('schoolModal')"><i class="fas fa-plus"></i> Add School</button>
-                <button class="quick-action-btn" onclick="refreshDashboard()"><i class="fas fa-sync-alt"></i> Refresh graphs</button>
-            </div>
 
             <!-- info box with live UGX calculations -->
             <div class="info-box" id="liveCalculations">
@@ -736,7 +821,7 @@
         <div id="schools-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Schools Management</h2>
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="document.getElementById('schoolModal').style.display='flex'; const f=document.getElementById('schoolForm'); if(f) f.reset();">
+                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="openSchoolModal()">
                     <i class="fas fa-plus"></i> Add School
                 </button>
             </div>
@@ -753,8 +838,7 @@
                                 <th>District</th>
                                 <th>Students</th>
                                 <th>Email</th>
-                                <th>Actions</th>
-                                <th></th>
+                                <th>Actions</
                                     
                             </tr>
                         </thead>
@@ -884,20 +968,14 @@
             </div>
         </div>
 
-        <footer>
-            <div class="footer-content">
-                <div class="footer-section"><h3>EduBridge Uganda</h3><p>Supporting Ugandan education</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
-                <div class="footer-section"><h3>Contact</h3><p>Kampala, Uganda</p><p>admin@edubridge.ug</p><p>Tel: +256 700 123456</p></div>
-                <div class="footer-section"><h3>UNEB resources</h3><p>UCE & UACE past papers</p></div>
-            </div>
-            <div class="footer-bottom"><p>© 2025 EduBridge Uganda · built for local schools</p></div>
-        </footer>
-    </div>
-</div>
 
-    <!-- School Modal -->
+
+  
+    <!-- Events Modal -->
+    <!-- Schools Modal -->
     <div id="schoolModal" class="modal">
         <div class="modal-content">
+<<<<<<< HEAD
             <div class="modal-header">
                 <h2 id="schoolModalTitle">Add New School</h2>
                 <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
@@ -911,102 +989,74 @@
                         <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" name="category" required><option value="">Select Category</option><option value="Kindergarten">Kindergarten</option><option value="Nursery">Nursery</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical/Vocational</option><option value="University">University</option></select></div>
                     </div>
                 </fieldset>
+=======
+            <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
+            <form id="schoolForm" method="POST" action="/add_school" enctype="multipart/form-data" onsubmit="handleSchoolSubmit(event)">
+                <!-- Basic Info Row -->
+                <div class="form-row-wrap">
+                    <input type="text" name="schoolName" id="schoolName" placeholder="School Name *" required>
+                    <select name="schoolCategory" id="schoolCategory" required>
+                        <option value="">Category</option>
+                        <option value="Primary">Primary</option>
+                        <option value="Secondary">Secondary</option>
+                        <option value="Mixed">Mixed</option>
+                        <option value="Technical">Technical</option>
+                    </select>
+                </div>
+>>>>>>> b1858a7447524f8fedd4672c8d374dc530d3bd8c
 
-                <!-- LOCATION INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Location</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolLocation">Location/District *</label><input type="text" id="schoolLocation" name="location" placeholder="e.g., Kampala" required></div>
-                        <div class="form-group"><label for="schoolCity">City</label><input type="text" id="schoolCity" name="city" placeholder="e.g., Kampala City"></div>
+                <!-- Location -->                <div class="form-row-wrap">
+                    <input type="text" name="schoolDistrict" id="schoolDistrict" placeholder="District *" required>
+                    <input type="number" name="schoolStudents" id="schoolStudents" placeholder="Est. Students">
+                </div>
+
+                <!-- Contact Info -->
+                <div class="form-row-wrap">
+                    <input type="email" name="schoolEmail" id="schoolEmail" placeholder="Email">
+                    <input type="tel" name="schoolPhone" id="schoolPhone" placeholder="Phone">
+                </div>
+
+                <!-- Address -->
+                <input type="text" name="schoolAddress" id="schoolAddress" placeholder="Address">
+
+                <!-- File Uploads -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <!-- Logo Upload -->
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Logo</label>
+                    <div class="form-file-input">
+                        <label for="schoolLogo" class="form-file-label"><i class="fas fa-image" style="margin-right: 8px;"></i> Click to upload logo</label>
+                        <input type="file" id="schoolLogo" name="schoolLogo" accept="image/*" onchange="handleFileInput(event, 'logoName')">
+                        <div id="logoName" class="file-name-display"></div>
                     </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolCountry">Country</label><input type="text" id="schoolCountry" name="country" value="Uganda" placeholder="Uganda"></div>
+                </div>
+
+                <!-- Images Upload -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Images (max 5)</label>
+                    <div class="form-file-input">
+                        <label for="schoolImages" class="form-file-label"><i class="fas fa-images" style="margin-right: 8px;"></i> Click or drag to upload images</label>
+                        <input type="file" id="schoolImages" name="schoolImages" accept="image/*" multiple onchange="handleFileInput(event, 'imagesName')">
+                        <div id="imagesName" class="file-name-display"></div>
                     </div>
-                </fieldset>
+                </div>
 
-                <!-- SCHOOL DETAILS -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">School Details</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolEstablished">Year Established</label><input type="number" id="schoolEstablished" name="established" placeholder="e.g., 1995" min="1900" max="2100"></div>
-                        <div class="form-group"><label for="schoolStudents">Number of Students</label><input type="number" id="schoolStudents" name="students" placeholder="0" min="0"></div>
-                        <div class="form-group"><label for="schoolFaculty">Number of Teachers/Faculty</label><input type="number" id="schoolFaculty" name="faculty" placeholder="0" min="0"></div>
+                <!-- Videos Upload -->
+                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
+                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Videos (max 3)</label>
+                    <div class="form-file-input">
+                        <label for="schoolVideos" class="form-file-label"><i class="fas fa-video" style="margin-right: 8px;"></i> Click or drag to upload videos</label>
+                        <input type="file" id="schoolVideos" name="schoolVideos" accept="video/*" multiple onchange="handleFileInput(event, 'videosName')">
+                        <div id="videosName" class="file-name-display"></div>
                     </div>
-                </fieldset>
+                </div>
 
-                <!-- CONTACT INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Contact Information</legend>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolEmail">Email</label><input type="email" id="schoolEmail" name="contact_email" placeholder="info@school.edu"></div>
-                        <div class="form-group"><label for="schoolPhone">Phone</label><input type="tel" id="schoolPhone" name="contact_phone" placeholder="+256 XXX XXX XXX"></div>
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group"><label for="schoolWebsite">Website</label><input type="url" id="schoolWebsite" name="website" placeholder="https://www.school.edu"></div>
-                    </div>
-                </fieldset>
-
-                <!-- DESCRIPTION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">About School</legend>
-                    <div class="form-group"><label for="schoolDescription">Short Description</label><textarea id="schoolDescription" name="description" style="resize: vertical; min-height: 80px; max-height: 200px;" placeholder="Brief overview of the school..."></textarea></div>
-                    <div class="form-group"><label for="schoolLongDescription">Detailed Description</label><textarea id="schoolLongDescription" name="long_description" style="resize: vertical; min-height: 120px; max-height: 300px;" placeholder="Detailed information about school facilities, achievements, programs, etc..."></textarea></div>
-                    <div class="form-group"><label for="schoolPrograms">Academic Programs (comma-separated)</label><input type="text" id="schoolPrograms" name="programs_text" placeholder="Mathematics, Science, Languages, Arts..."></div>
-                </fieldset>
-
-                <!-- META INFORMATION -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">SEO & Metadata</legend>
-                    <div class="form-group"><label for="schoolKeywords">Meta Keywords</label><input type="text" id="schoolKeywords" name="meta_keywords" placeholder="keywords, for, search, engines"></div>
-                    <div class="form-group"><label for="schoolMetaDesc">Meta Description</label><textarea id="schoolMetaDesc" name="meta_description" style="resize: vertical; min-height: 60px; max-height: 120px;" placeholder="Brief description for search engines and social media..."></textarea></div>
-                </fieldset>
-
-                <!-- MEDIA & BRANDING -->
-                <fieldset style="border: none; padding: 0;">
-                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">School Media</legend>
-                    
-                    <!-- School Logo Upload -->
-                    <div class="file-upload-group">
-                        <label class="file-upload-label"><i class="fas fa-image"></i> School Logo</label>
-                        <div class="file-upload-area" id="logoUploadArea" ondrop="handleDrop(event, 'schoolLogo')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                            <input type="file" id="schoolLogo" name="logo" accept="image/*" onchange="handleFileSelect(event, 'schoolLogo')">
-                            <div class="file-upload-placeholder">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <div class="file-upload-text">
-                                    Drag & drop logo or <span style="color: #10b981; font-weight: 700;">click to browse</span>
-                                    <small>PNG, JPG, GIF (Max 5MB)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="logo-preview empty" id="logoPreview"><i class="fas fa-image"></i></div>
-                    </div>
-
-                    <!-- School Images Upload -->
-                    <div class="file-upload-group">
-                        <label class="file-upload-label"><i class="fas fa-images"></i> School Images <span class="file-count-badge" id="imagesCount">0</span></label>
-                        <div class="file-upload-area" id="imagesUploadArea" ondrop="handleDrop(event, 'schoolImages')" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)">
-                            <input type="file" id="schoolImages" name="images" accept="image/*" multiple onchange="handleFileSelect(event, 'schoolImages')">
-                            <div class="file-upload-placeholder">
-                                <i class="fas fa-cloud-upload-alt"></i>
-                                <div class="file-upload-text">
-                                    Drag & drop images or <span style="color: #10b981; font-weight: 700;">click to browse</span>
-                                    <small>PNG, JPG, GIF (Max 10MB per file, up to 5 images)</small>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="file-preview-container" id="imagesPreview"></div>
-                    </div>
-                </fieldset>
-
-                <div class="modal-footer">
+                <div class="modal-footer" style="margin-top: 24px;">
                     <button type="button" class="btn-cancel" onclick="closeModal('schoolModal')">Cancel</button>
-                    <button type="submit" class="btn-submit"><i class="fas fa-save"></i> Save School</button>
+                    <button type="submit" class="btn-submit"><i class="fas fa-plus" style="margin-right: 8px;"></i>Add School</button>
                 </div>
             </form>
         </div>
     </div>
-
-    <!-- Events Modal -->
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
@@ -1134,9 +1184,138 @@
         initializeFileUploadAreas();
     });
 
+    // ===== GLOBAL MODAL & NOTIFICATION HELPERS =====
+    function closeModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'none';
+        }
+    }
+
+    function openModal(modalId) {
+        const modal = document.getElementById(modalId);
+        if (modal) {
+            modal.style.display = 'flex';
+            if (modalId === 'schoolModal') {
+                const form = document.getElementById('schoolForm');
+                if (form) form.reset();
+                // Clear file displays
+                document.getElementById('logoName').textContent = '';
+                document.getElementById('imagesName').textContent = '';
+                document.getElementById('videosName').textContent = '';
+            }
+        }
+    }
+
+    function openSchoolModal() {
+        openModal('schoolModal');
+    }
+
+    function showNotification(message, type = 'info') {
+        const toast = document.createElement('div');
+        toast.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-weight: 500;
+            z-index: 10000;
+            max-width: 400px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        `;
+        
+        if (type === 'success') {
+            toast.style.backgroundColor = '#10b981';
+            toast.style.color = 'white';
+        } else if (type === 'error') {
+            toast.style.backgroundColor = '#ef4444';
+            toast.style.color = 'white';
+        } else {
+            toast.style.backgroundColor = '#3b82f6';
+            toast.style.color = 'white';
+        }
+        
+        toast.innerHTML = message;
+        document.body.appendChild(toast);
+        
+        setTimeout(() => {
+            toast.style.opacity = '0';
+            toast.style.transition = 'opacity 0.3s';
+            setTimeout(() => toast.remove(), 300);
+        }, 4000);
+    }
+
     // ===== FILE UPLOAD HANDLERS =====
-    // Initialize file upload areas
-    function initializeFileUploadAreas() {
+    // Handle file input changes and display file names
+    function handleFileInput(event, displayId) {
+        const files = event.target.files;
+        const displayElement = document.getElementById(displayId);
+        
+        if (files.length === 0) {
+            displayElement.textContent = '';
+            return;
+        }
+
+        if (files.length === 1) {
+            displayElement.textContent = `✓ ${files[0].name} (${formatFileSize(files[0].size)})`;
+        } else {
+            displayElement.textContent = `✓ ${files.length} files selected`;
+        }
+    }
+
+    // Format file size for display
+    function formatFileSize(bytes) {
+        if (bytes === 0) return '0 Bytes';
+        const k = 1024;
+        const sizes = ['Bytes', 'KB', 'MB'];
+        const i = Math.floor(Math.log(bytes) / Math.log(k));
+        return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+    }
+
+    // Handle School Form Submission
+    function handleSchoolSubmit(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const schoolName = document.getElementById('schoolName').value.trim();
+        const schoolDistrict = document.getElementById('schoolDistrict').value.trim();
+        const schoolCategory = document.getElementById('schoolCategory').value;
+
+        // Validation
+        if (!schoolName) {\n            showNotification('Please enter school name', 'error');
+            return;
+        }
+
+        if (!schoolDistrict) {
+            showNotification('Please enter district', 'error');
+            return;
+        }
+
+        if (!schoolCategory) {
+            showNotification('Please select category', 'error');
+            return;
+        }
+
+        // Validate file counts
+        const imagesInput = document.getElementById('schoolImages');
+        const videosInput = document.getElementById('schoolVideos');
+
+        if (imagesInput.files.length > 5) {
+            showNotification('Maximum 5 images allowed', 'error');
+            return;
+        }
+
+        if (videosInput.files.length > 3) {
+            showNotification('Maximum 3 videos allowed', 'error');
+            return;
+        }
+
+        // Show loading state
+        const submitBtn = form.querySelector('button[type=\"submit\"]');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span class=\"loading\" style=\"display:inline-block; margin-right:8px;\"></span>Adding...';\n\n        // Submit form\n        setTimeout(() => {\n            form.submit();\n        }, 300);\n    }\n\n    // Initialize file upload areas\n    function initializeFileUploadAreas() {
         window.schoolLogoData = null;
         window.schoolImagesData = [];
         window.schoolVideosData = [];
@@ -1361,6 +1540,19 @@
         updateFilesPreview('schoolVideos', []);
     }
 
+    // Helper to open the School modal reliably and reset form/files
+    function openSchoolModal() {
+        const modal = document.getElementById('schoolModal');
+        if (!modal) return console.error('schoolModal not found');
+        // Use .show class where styles expect it
+        modal.classList.add('show');
+        const form = document.getElementById('schoolForm');
+        if (form) form.reset();
+        if (typeof resetFileUploads === 'function') resetFileUploads();
+        const titleEl = document.getElementById('schoolModalTitle');
+        if (titleEl) titleEl.textContent = 'Add New School';
+    }
+
     async function checkAdminAccess() {
         try {
             // First try to get user from API (backend authentication)
@@ -1531,6 +1723,16 @@
     function closeModal(modalId) {
         const modalEl = document.getElementById(modalId);
         if (modalEl) modalEl.classList.remove('show');
+
+        // If closing the school modal, ensure form and file previews are reset
+        if (modalId === 'schoolModal') {
+            const form = document.getElementById('schoolForm');
+            if (form) form.reset();
+            if (typeof resetFileUploads === 'function') resetFileUploads();
+            const titleEl = document.getElementById('schoolModalTitle');
+            if (titleEl) titleEl.textContent = 'Add New School';
+        }
+
         editingSectionType = null;
     }
 
@@ -1907,6 +2109,14 @@
             }
         });
 
+        // Also bind any element using data-modal-target attribute (safer than inline onclicks)
+        document.querySelectorAll('[data-modal-target]').forEach(el => {
+            el.addEventListener('click', (e) => {
+                const target = el.getAttribute('data-modal-target');
+                if (target) openModal(target);
+            });
+        });
+
         // Refresh
         if (document.getElementById('refreshBtn')) {
             document.getElementById('refreshBtn').addEventListener('click', () => {
@@ -2065,6 +2275,7 @@
 
         // PIE / DOUGHNUT: refined style with cutout and smooth hover
         const pieCtx = document.getElementById('categoryPieChart');
+        const extraPieCtx = document.getElementById('additionalPieChart');
         if (pieCtx) {
             const labels = Object.keys(districtCount);
             const values = Object.values(districtCount);
