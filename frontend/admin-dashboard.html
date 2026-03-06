@@ -1069,6 +1069,21 @@
     <!-- Schools Modal -->
     <div id="schoolModal" class="modal">
         <div class="modal-content">
+<<<<<<< HEAD
+            <div class="modal-header">
+                <h2 id="schoolModalTitle">Add New School</h2>
+                <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
+            </div>
+            <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')">
+                <!-- BASIC INFORMATION -->
+                <fieldset style="border: none; padding: 0;">
+                    <legend style="font-size: 1rem; font-weight: 700; color: #0d3b66; margin: 20px 0 16px 0; padding-bottom: 8px; border-bottom: 2px solid #10b981;">Basic Information</legend>
+                    <div class="form-row">
+                        <div class="form-group"><label for="schoolName">School Name *</label><input type="text" id="schoolName" name="name" required></div>
+                        <div class="form-group"><label for="schoolCategory">Category *</label><select id="schoolCategory" name="category" required><option value="">Select Category</option><option value="Kindergarten">Kindergarten</option><option value="Nursery">Nursery</option><option value="Primary">Primary</option><option value="Secondary">Secondary</option><option value="Technical">Technical/Vocational</option><option value="University">University</option></select></div>
+                    </div>
+                </fieldset>
+=======
             <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
             <form id="schoolForm" action="connect.php" method="POST" enctype="multipart/form-data">
                 <!-- Basic Info Row -->
@@ -1082,6 +1097,7 @@
                         <option value="Technical">Technical</option>
                     </select>
                 </div>
+>>>>>>> b1858a7447524f8fedd4672c8d374dc530d3bd8c
 
                 <!-- Location -->                <div class="form-row-wrap">
                     <input type="text" name="schoolDistrict" id="schoolDistrict" placeholder="District *" required>
@@ -2005,15 +2021,20 @@ function initializeFileUploadAreas() {
             schools: () => ({
                 name: document.getElementById('schoolName').value,
                 category: document.getElementById('schoolCategory').value,
-                city: document.getElementById('schoolDistrict').value,
-                location: document.getElementById('schoolDistrict').value + ', Uganda', // Full location
+                city: document.getElementById('schoolCity').value,
+                location: document.getElementById('schoolLocation').value,
                 students: parseInt(document.getElementById('schoolStudents').value) || 0,
+                faculty: parseInt(document.getElementById('schoolFaculty').value) || 0,
                 contact_email: document.getElementById('schoolEmail').value,
                 contact_phone: document.getElementById('schoolPhone').value,
-                country: 'Uganda',
-                established: new Date().getFullYear(),
-                programs: [],
-                description: ''
+                country: document.getElementById('schoolCountry').value || 'Uganda',
+                established: parseInt(document.getElementById('schoolEstablished').value) || new Date().getFullYear(),
+                programs: (document.getElementById('schoolPrograms').value || '').split(',').map(p => p.trim()).filter(p => p),
+                description: document.getElementById('schoolDescription').value,
+                long_description: document.getElementById('schoolLongDescription').value,
+                website: document.getElementById('schoolWebsite').value,
+                meta_keywords: document.getElementById('schoolKeywords').value,
+                meta_description: document.getElementById('schoolMetaDesc').value
             }),
             events: () => ({
                 name: document.getElementById('eventName').value,
@@ -2128,9 +2149,9 @@ function initializeFileUploadAreas() {
         try {
             // Use Broadcast Channel API if available (modern browsers)
             if (typeof BroadcastChannel !== 'undefined') {
-                const channel = new BroadcastChannel('edubridge_schools');
+                const channel = new BroadcastChannel('school-updates');
                 channel.postMessage({
-                    type: 'SCHOOL_ADDED',
+                    type: 'schoolAdded',
                     school: {
                         id: school.id,
                         name: school.name,
@@ -2139,7 +2160,8 @@ function initializeFileUploadAreas() {
                         location: school.location,
                         students: school.students,
                         contact_email: school.contact_email,
-                        contact_phone: school.contact_phone
+                        contact_phone: school.contact_phone,
+                        is_verified: school.is_verified || false
                     },
                     timestamp: Date.now()
                 });
@@ -2153,7 +2175,8 @@ function initializeFileUploadAreas() {
         document.dispatchEvent(new CustomEvent('schoolAdded', { detail: { school } }));
         
         // Trigger localStorage event for same-window listeners
-        localStorage.setItem('edubridge_last_school_added', JSON.stringify({
+        localStorage.setItem('edubridge_school_updated', JSON.stringify({
+            type: 'added',
             school: {
                 id: school.id,
                 name: school.name,
@@ -2162,7 +2185,8 @@ function initializeFileUploadAreas() {
                 location: school.location,
                 students: school.students,
                 contact_email: school.contact_email,
-                contact_phone: school.contact_phone
+                contact_phone: school.contact_phone,
+                is_verified: school.is_verified || false
             },
             timestamp: Date.now()
         }));

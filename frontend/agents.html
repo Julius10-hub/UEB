@@ -114,67 +114,25 @@
         <div class="container-fluid" style="margin-top: 40px;">
             <!-- Agent Registration Section -->
             <div class="registration-section">
-                <h2><i class="fas fa-user-plus me-3"></i>Become an Agent</h2>
-                <form id="agentRegistrationForm">
-                    <div class="form-grid">
-                        <div class="form-group">
-                            <label><i class="fas fa-user"></i> Full Name</label>
-                            <input type="text" class="form-control" placeholder="Enter your full name" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-envelope"></i> Email Address</label>
-                            <input type="email" class="form-control" placeholder="your@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-phone"></i> Phone Number</label>
-                            <input type="tel" class="form-control" placeholder="+256 XXX XXX XXX" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-id-card"></i> ID/Passport Number</label>
-                            <input type="text" class="form-control" placeholder="Enter your ID number" required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-map-marker-alt"></i> Region</label>
-                            <select class="form-control" required>
-                                <option value="">Select your region</option>
-                                <option>Kampala</option>
-                                <option>Jinja</option>
-                                <option>Mbarara</option>
-                                <option>Fort Portal</option>
-                                <option>Arua</option>
-                                <option>Lira</option>
-                                <option>Gulu</option>
-                                <option>Other</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-globe"></i> Area of Operation</label>
-                            <input type="text" class="form-control" placeholder="e.g., Westlands, CBD, etc." required>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-briefcase"></i> Experience (Years)</label>
-                            <select class="form-control" required>
-                                <option value="">Select</option>
-                                <option>Less than 1 year</option>
-                                <option>1-3 years</option>
-                                <option>3-5 years</option>
-                                <option>5-10 years</option>
-                                <option>10+ years</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label><i class="fas fa-school"></i> Preferred School Levels</label>
-                            <select class="form-control" multiple size="3">
-                                <option>Kindergarten</option>
-                                <option>Primary</option>
-                                <option>Secondary</option>
-                                <option>Technical</option>
-                                <option>University</option>
-                                <option>Tahfidh/Islamic</option>
-                            </select>
-                            <small class="text-muted">Hold Ctrl to select multiple</small>
-                        </div>
-                    </div>
+     
+    <div style="max-width: 880px; width: 100%; background: #113b64; border-radius: 28px; box-shadow: 0 25px 45px -12px #ffffff; overflow: hidden; margin: 0 auto;">
+        <div style="background: linear-gradient(145deg, #0a2f49, #0d2a47); color: white; padding: 2rem 2.5rem;">
+            <h1 style="font-weight: 600; font-size: 2rem; margin-bottom: 0.25rem;">📋 Agent Application Form</h1>
+            <p style="opacity: 0.8; color: white;">Please fill in your details accurately</p>
+        </div>
+        <div style="padding: 2rem;">
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdh3a1zoYP26Ed1NkzC_WgcSMBLPp2-Bl2TvTdQ0L8Fg6CMqg/viewform?usp=header" 
+                    width="100%" 
+                    height="1800" 
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    style="border-radius: 12px;">
+                Loading…
+            </iframe>
+        </div>
+    </div>
+                
 
                     <!-- Promo Code Generator -->
                     <div class="promo-generator">
@@ -184,28 +142,17 @@
                             <i class="fas fa-copy"></i>
                             <span id="promoCode">AGENT<span id="randomCode">JOHN25</span></span>
                         </div>
-                        <p class="text-center mt-3"><small>Click to copy • Share this code with students you
+                        <p class="text-center mt-3" style="color: white;"><small>Click to copy • Share this code with students you
                                 refer</small></p>
-                    </div>
-
-                    <div class="form-group">
-                        <label><i class="fas fa-file-alt"></i> Why do you want to become an agent?</label>
-                        <textarea class="form-control" rows="4"
-                            placeholder="Tell us about your experience and motivation..." required></textarea>
                     </div>
 
                     <div class="form-check mb-3">
                         <input type="checkbox" class="form-check-input" id="terms" required>
                         <label class="form-check-label" for="terms">
-                            I agree to the <a href="#" style="color: var(--orange);">Terms and Conditions</a> and
+                            I agree to the <a href="terms-and-conditions.html" style="color: var(--orange);">Terms and Conditions</a> and
                             confirm that all information provided is accurate.
                         </label>
                     </div>
-
-                    <button type="submit" class="btn-submit">
-                        <i class="fas fa-paper-plane me-2"></i>Register as Agent
-                    </button>
-                </form>
             </div>
 
                 <!-- Tracking Table -->
