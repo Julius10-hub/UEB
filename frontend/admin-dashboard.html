@@ -231,22 +231,117 @@
         .badge-success { background:#d1fae5; color:#065f46; }
 
         footer {
-            background:#0d3b66; color:white; border-radius:48px 48px 0 0; margin-top:48px;
-            padding:48px 40px 24px;
+            background: linear-gradient(135deg, #0d3b66 0%, #1a5a8f 100%);
+            color: white;
+            margin-top: 64px;
+            padding: 60px 40px 0;
+            border-top: 1px solid rgba(16, 185, 129, 0.1);
         }
         .footer-content {
-            max-width:1200px; margin:0 auto; display:grid;
-            grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); gap:40px;
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 48px;
+            padding-bottom: 48px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
-        .footer-section h3 { color:#fbbf24; margin-bottom:16px; }
-        .footer-section a, .footer-section p { color:#cbd5e0; font-size:0.9rem; text-decoration:none; }
+        .footer-section {
+            display: flex;
+            flex-direction: column;
+        }
+        .footer-section h3 {
+            color: #fbbf24;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+        .footer-section p {
+            color: #cbd5e0;
+            font-size: 0.9rem;
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+        .footer-section a {
+            color: #cbd5e0;
+            text-decoration: none;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            display: inline-block;
+            width: fit-content;
+        }
+        .footer-section a:hover {
+            color: #fbbf24;
+            transform: translateX(4px);
+        }
+        .social-links {
+            display: flex;
+            gap: 12px;
+            margin-top: 12px;
+        }
         .social-links a {
-            background:rgba(16,185,129,0.15); width:40px; height:40px; border-radius:50%;
-            display:inline-flex; align-items:center; justify-content:center; margin-right:8px;
-            color:#10b981; transition:0.2s;
+            background: rgba(16, 185, 129, 0.15);
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: #10b981;
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            margin: 0;
         }
-        .social-links a:hover { background:#10b981; color:white; }
-        .footer-bottom { text-align:center; padding-top:32px; color:#8da0b5; }
+        .social-links a:hover {
+            background: #10b981;
+            color: white;
+            transform: translateY(-4px);
+            box-shadow: 0 8px 16px rgba(16, 185, 129, 0.3);
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 24px 0;
+            color: #8da0b5;
+            font-size: 0.85rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .footer-bottom p {
+            margin: 0;
+        }
+        .footer-links-bottom {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .footer-links-bottom a {
+            color: #8da0b5;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: 0.2s;
+        }
+        .footer-links-bottom a:hover {
+            color: #fbbf24;
+        }
+        @media (max-width: 768px) {
+            footer {
+                padding: 40px 20px 0;
+            }
+            .footer-content {
+                gap: 32px;
+                padding-bottom: 32px;
+                grid-template-columns: 1fr;
+            }
+            .footer-bottom {
+                flex-direction: column;
+            }
+        }
 
         .section-content { display:none; }
         .section-content.active { display:block; }
@@ -838,8 +933,7 @@
                                 <th>District</th>
                                 <th>Students</th>
                                 <th>Email</th>
-                                <th>Actions</
-                                    
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody id="schoolsTableBody">
@@ -976,7 +1070,7 @@
     <div id="schoolModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
-            <form id="schoolForm" method="POST" action="/add_school" enctype="multipart/form-data" onsubmit="handleSchoolSubmit(event)">
+            <form id="schoolForm" action="connect.php" method="POST" enctype="multipart/form-data">
                 <!-- Basic Info Row -->
                 <div class="form-row-wrap">
                     <input type="text" name="schoolName" id="schoolName" placeholder="School Name *" required>
@@ -1041,6 +1135,8 @@
             </form>
         </div>
     </div>
+
+    <!-- Events Modal -->
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
@@ -1051,7 +1147,6 @@
                 <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('eventsModal')">Cancel</button><button type="submit" class="btn-submit">Add Event</button></div>
             </form>
         </div>
-    </div>
 
     <!-- Jobs Modal -->
     <div id="jobsModal" class="modal">
@@ -1133,11 +1228,52 @@
 
     <footer>
         <div class="footer-content">
-            <div class="footer-section"><h3>EduBridge Uganda</h3><p>Supporting Ugandan education</p><div class="social-links"><a href="#"><i class="fab fa-facebook-f"></i></a><a href="#"><i class="fab fa-twitter"></i></a></div></div>
-            <div class="footer-section"><h3>Contact</h3><p>Kampala, Uganda</p><p>admin@edubridge.ug</p><p>Tel: +256 700 123456</p></div>
-            <div class="footer-section"><h3>UNEB resources</h3><p>UCE & UACE past papers</p></div>
+            <div class="footer-section">
+                <h3><i class="fas fa-graduation-cap"></i> EduBridge Uganda</h3>
+                <p>Supporting quality education across Uganda by connecting students with schools, scholarships, and opportunities.</p>
+                <div class="social-links">
+                    <a href="https://facebook.com" title="Facebook" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://twitter.com" title="Twitter" target="_blank"><i class="fab fa-twitter"></i></a>
+                    <a href="https://linkedin.com" title="LinkedIn" target="_blank"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://instagram.com" title="Instagram" target="_blank"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <a href="#"><i class="fas fa-arrow-right"></i> About Us</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Browse Schools</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Find Jobs</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Scholarships</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Past Papers</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Resources</h3>
+                <a href="#"><i class="fas fa-arrow-right"></i> UCE Past Papers</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> UACE Past Papers</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Study Guides</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> Blog & News</a>
+                <a href="#"><i class="fas fa-arrow-right"></i> FAQs</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact & Support</h3>
+                <p><strong>Email:</strong><br><a href="mailto:admin@edubridge.ug">admin@edubridge.ug</a></p>
+                <p><strong>Phone:</strong><br><a href="tel:+256700123456">+256 700 123456</a></p>
+                <p><strong>Location:</strong><br>Kampala, Uganda</p>
+            </div>
         </div>
-        <div class="footer-bottom"><p>© 2025 EduBridge Uganda · built for local schools</p></div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2025 EduBridge Uganda. All rights reserved.</p>
+            <div class="footer-links-bottom">
+                <a href="#">Privacy Policy</a>
+                <a href="#">Terms of Service</a>
+                <a href="#">Cookie Policy</a>
+                <a href="#">Contact Us</a>
+            </div>
+        </div>
     </footer>
 </div>
 
@@ -1267,7 +1403,8 @@
         const schoolCategory = document.getElementById('schoolCategory').value;
 
         // Validation
-        if (!schoolName) {\n            showNotification('Please enter school name', 'error');
+        if (!schoolName) {
+            showNotification('Please enter school name', 'error');
             return;
         }
 
@@ -1299,11 +1436,15 @@
         const submitBtn = form.querySelector('button[type=\"submit\"]');
         const originalText = submitBtn.innerHTML;
         submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class=\"loading\" style=\"display:inline-block; margin-right:8px;\"></span>Adding...';\n\n        // Submit form\n        setTimeout(() => {\n            form.submit();\n        }, 300);\n    }\n\n    // Initialize file upload areas\n    function initializeFileUploadAreas() {
-        window.schoolLogoData = null;
-        window.schoolImagesData = [];
-        window.schoolVideosData = [];
-        
+      // Change button text to show loading state
+submitBtn.innerHTML = '<span class="loading" style="display:inline-block; margin-right:8px;"></span>Adding...';
+
+// Initialize file upload areas
+function initializeFileUploadAreas() {
+    window.schoolLogoData = null;
+    window.schoolImagesData = [];
+    window.schoolVideosData = [];
+}
         // Mapping of upload area IDs to file input IDs
         const areaToInputMap = {
             'logoUploadArea': 'schoolLogo',
@@ -2057,7 +2198,7 @@
         return `${singular}Form`;
     }
 
-    function setupEventListeners() {
+    function setupEventListeners(){
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
