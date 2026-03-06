@@ -1140,13 +1140,23 @@
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
-            <form id="eventsForm" onsubmit="handleSubmit(event, 'events')">
+            <form id="eventsForm" action="connect.php" onsubmit="handleSubmit(event, 'events')">
                 <div class="form-row"><div class="form-group"><label for="eventName">Event Name *</label><input type="text" id="eventName" required></div><div class="form-group"><label for="eventDate">Date *</label><input type="date" id="eventDate" required></div></div>
                 <div class="form-row"><div class="form-group"><label for="eventLocation">Location</label><input type="text" id="eventLocation"></div><div class="form-group"><label for="eventType">Type</label><input type="text" id="eventType"></div></div>
                 <div class="form-group"><label for="eventAttendees">Expected Attendees</label><input type="number" id="eventAttendees"></div>
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label for="eventImages">Event Images</label>
+                    <div class="form-file-input">
+                        <label for="eventImages" class="form-file-label"><i class="fas fa-image" style="margin-right: 8px;"></i> Click or drag to upload images</label>
+                        <input type="file" id="eventImages" name="eventImages" accept="image/*" multiple onchange="handleFileInput(event, 'eventImagesName')">
+                        <div id="eventImagesName" class="file-name-display"></div>
+                    </div>
+                </div>
                 <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('eventsModal')">Cancel</button><button type="submit" class="btn-submit">Add Event</button></div>
             </form>
         </div>
+    </div>
 
     <!-- Jobs Modal -->
     <div id="jobsModal" class="modal">
@@ -1156,6 +1166,15 @@
                 <div class="form-row"><div class="form-group"><label for="jobTitle">Job Title *</label><input type="text" id="jobTitle" required></div><div class="form-group"><label for="jobOrganization">Organization *</label><input type="text" id="jobOrganization" required></div></div>
                 <div class="form-row"><div class="form-group"><label for="jobLocation">Location</label><input type="text" id="jobLocation"></div><div class="form-group"><label for="jobSalary">Salary (UGX)</label><input type="text" id="jobSalary"></div></div>
                 <div class="form-group"><label for="jobDescription">Description</label><textarea id="jobDescription" style="resize: vertical; min-height: 100px;"></textarea></div>
+                <!-- Image Upload -->
+                <div class="form-group">
+                    <label for="jobImages">Job Images</label>
+                    <div class="form-file-input">
+                        <label for="jobImages" class="form-file-label"><i class="fas fa-image" style="margin-right: 8px;"></i> Click or drag to upload images</label>
+                        <input type="file" id="jobImages" name="jobImages" accept="image/*" multiple onchange="handleFileInput(event, 'jobImagesName')">
+                        <div id="jobImagesName" class="file-name-display"></div>
+                    </div>
+                </div>
                 <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('jobsModal')">Cancel</button><button type="submit" class="btn-submit">Add Job</button></div>
             </form>
         </div>
@@ -1323,6 +1342,13 @@
                 document.getElementById('logoName').textContent = '';
                 document.getElementById('imagesName').textContent = '';
                 document.getElementById('videosName').textContent = '';
+            }
+            if (modalId === 'jobsModal') {
+                const form = document.getElementById('jobsForm');
+                if (form) form.reset();
+                // clear any prior image filenames
+                const display = document.getElementById('jobImagesName');
+                if (display) display.textContent = '';
             }
         }
     }
@@ -2220,7 +2246,8 @@ function initializeFileUploadAreas() {
             const btnId = `add${singular.charAt(0).toUpperCase() + singular.slice(1)}Btn`;
             const btn = document.getElementById(btnId);
             if (btn) {
-                btn.addEventListener('click', () => openModal(type));
+                // use helper to resolve actual modal element id (e.g. 'jobs' -> 'jobsModal')
+                btn.addEventListener('click', () => openModal(getModalId(type)));
             } else {
                 console.warn(`Button not found: ${btnId}`);
             }
