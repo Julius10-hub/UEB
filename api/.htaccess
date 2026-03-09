@@ -1,0 +1,43 @@
+# Apache URL Routing for PHP API
+RewriteEngine On
+RewriteBase /api/
+
+# Handle auth requests
+RewriteRule ^auth$ auth.php [L]
+RewriteRule ^auth/(.*)$ auth.php?action=$1 [L,QSA]
+
+# Handle schools
+RewriteRule ^schools$ schools.php [L]
+RewriteRule ^schools/(.*)$ schools.php?id=$1 [L,QSA]
+
+# Handle bursaries
+RewriteRule ^bursaries$ bursaries.php [L]
+RewriteRule ^bursaries/(.*)$ bursaries.php?id=$1 [L,QSA]
+
+# Handle agents
+RewriteRule ^agents$ agents.php [L]
+RewriteRule ^agents/(.*)$ agents.php?id=$1 [L,QSA]
+
+# Handle events
+RewriteRule ^events$ events.php [L]
+RewriteRule ^events/(.*)$ events.php?id=$1 [L,QSA]
+
+# Handle jobs
+RewriteRule ^jobs$ jobs.php [L]
+RewriteRule ^jobs/(.*)$ jobs.php?id=$1 [L,QSA]
+
+# Handle past-papers
+RewriteRule ^past-papers$ past_papers.php [L]
+RewriteRule ^past-papers/(.*)$ past_papers.php?id=$1 [L,QSA]
+
+# Handle suggestions
+RewriteRule ^suggestions$ suggestions.php [L]
+RewriteRule ^suggestions/(.*)$ suggestions.php?id=$1 [L,QSA]
+
+# Handle stats
+RewriteRule ^stats$ stats.php [L]
+RewriteRule ^stats/(.*)$ stats.php?resource=$1 [L,QSA]
+
+# Default - 404
+RewriteRule ^(.*)$ - [R=404]
+
