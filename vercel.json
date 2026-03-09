@@ -1,0 +1,61 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "api/**/*.py",
+      "use": "@vercel/python"
+    },
+    {
+      "src": "frontend/**",
+      "use": "@vercel/static"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/api/index.py"
+    },
+    {
+      "src": "/admin-dashboard.html",
+      "dest": "/frontend/admin-dashboard.html"
+    },
+    {
+      "src": "/services-dashboard.html",
+      "dest": "/frontend/services-dashboard.html"
+    },
+    {
+      "src": "/((?:[^/]+\\.html)?)",
+      "dest": "/frontend/$1"
+    },
+    {
+      "src": "/gallery/(.*)",
+      "dest": "/frontend/gallery/$1"
+    },
+    {
+      "src": "/styles/(.*)",
+      "dest": "/frontend/styles/$1"
+    },
+    {
+      "src": "/js/(.*)",
+      "dest": "/frontend/js/$1"
+    },
+    {
+      "src": "/uploads/(.*)",
+      "dest": "/frontend/uploads/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/frontend/index.html"
+    }
+  ],
+  "env": {
+    "FLASK_APP": "backend/app.py",
+    "PYTHONPATH": "."
+  },
+  "framework": null,
+  "regions": ["iad1"]
+}
+
