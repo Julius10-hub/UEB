@@ -2082,7 +2082,7 @@
         if (type === 'schools') {
             const currentUser = await api.getCurrentUser();
             if (!currentUser) {
-                showAlert(type, `âœ— Authentication required. Please log in first.`, 'danger');
+                showAlert(type, `&#10007; Authentication required. Please log in first.`, 'danger');
                 // Redirect to login
                 setTimeout(() => {
                     window.location.href = 'login.html';
@@ -2091,7 +2091,7 @@
             }
             
             if (!currentUser.is_admin) {
-                showAlert(type, `âœ— Admin access required to add schools.`, 'danger');
+                showAlert(type, `&#10007; Admin access required to add schools.`, 'danger');
                 return;
             }
         }
@@ -2111,19 +2111,19 @@
                 }
             }
             try {
-                showAlert(type, `⌛ Creating school...`, 'info');
+                showAlert(type, `&#8987; Creating school...`, 'info');
                 const response = await api.createSchool(data);
                 
                 if (response.error) {
                     if (response.error.includes('Unauthorized') || response.error.includes('401')) {
-                        showAlert(type, `✗ Authentication failed. Please log in again.`, 'danger');
+                        showAlert(type, `&#10007; Authentication failed. Please log in again.`, 'danger');
                         setTimeout(() => {
                             window.location.href = 'login.html';
                         }, 1500);
                     } else if (response.error.includes('forbidden') || response.error.includes('403')) {
-                        showAlert(type, `✗ You don't have permission to add schools.`, 'danger');
+                        showAlert(type, `&#10007; You don't have permission to add schools.`, 'danger');
                     } else {
-                        showAlert(type, `✗ Error: ${response.error}`, 'danger');
+                        showAlert(type, `&#10007; Error: ${response.error}`, 'danger');
                     }
                     return;
                 }
@@ -2142,15 +2142,15 @@
                     window.schoolsData.push(normalized);
                     saveDataToStorage('schools');
                     renderTable('schools');
-                    showAlert(type, `✓ School added successfully!`, 'success');
+                    showAlert(type, `&#10003; School added successfully!`, 'success');
                     broadcastNewSchool(response.school);
                 } else {
-                    showAlert(type, `✗ Unexpected response from server.`, 'danger');
+                    showAlert(type, `&#10007; Unexpected response from server.`, 'danger');
                     return;
                 }
             } catch (error) {
                 console.error('Error creating school:', error);
-                showAlert(type, `✗ Network error: ${error.message}`, 'danger');
+                showAlert(type, `&#10007; Network error: ${error.message}`, 'danger');
                 return;
             }
         } else {
