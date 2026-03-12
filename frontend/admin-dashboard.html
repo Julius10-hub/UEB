@@ -1017,12 +1017,14 @@
 
      
     <!-- Events Modal -->
-    <!-- Schools Modal -->
+        <!-- Schools Modal -->
     <div id="schoolModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><h2 id="schoolModalTitle">Add School</h2><button class="modal-close" onclick="closeModal('schoolModal')">&times;</button></div>
-            <form id="schoolForm" method="POST" action="connect.php" enctype="multipart/form-data" onsubmit="handleSchoolSubmit(event)">
-                <!-- Basic Info Row -->
+            <div class="modal-header">
+                <h2 id="schoolModalTitle">Add New School</h2>
+                <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
+            </div>
+            <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')" enctype="multipart/form-data">
                 <div class="form-row-wrap">
                     <input type="text" name="name" id="schoolName" placeholder="School Name *" required>
                     <select name="category" id="schoolCategory" required>
@@ -1036,49 +1038,42 @@
                     </select>
                 </div>
 
-                <!-- Location -->                <div class="form-row-wrap">
+                <div class="form-row-wrap">
                     <input type="text" name="location" id="schoolDistrict" placeholder="District *" required>
                     <input type="number" name="students" id="schoolStudents" placeholder="Est. Students">
                 </div>
 
-                <!-- Contact Info -->
                 <div class="form-row-wrap">
                     <input type="email" name="contact_email" id="schoolEmail" placeholder="Email">
                     <input type="tel" name="contact_phone" id="schoolPhone" placeholder="Phone">
                 </div>
 
-                <!-- Address -->
                 <input type="text" name="description" id="schoolAddress" placeholder="Description">
 
-                <!-- File Uploads -->
                 <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                    <!-- Logo Upload -->
                     <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Logo</label>
                     <div class="form-file-input">
                         <label for="schoolLogo" class="form-file-label"><i class="fas fa-image" style="margin-right: 8px;"></i> Click to upload logo</label>
                         <input type="file" id="schoolLogo" name="schoolLogo" accept="image/*" onchange="handleFileInput(event, 'logoName')">
-                        <div id="logoName" class="file-name-display"></div>
                     </div>
-                </div>
+                    <div class="file-info"><i class="fas fa-info-circle"></i> PNG/JPG, max 2MB</div>
+                    <div id="logoName" style="margin-top: 6px; font-size: 0.9rem; color: #0d3b66;"></div>
 
-                <!-- Images Upload -->
-                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Images (max 5)</label>
+                    <label style="display: block; margin: 16px 0 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">Gallery Images</label>
                     <div class="form-file-input">
-                        <label for="schoolImages" class="form-file-label"><i class="fas fa-images" style="margin-right: 8px;"></i> Click or drag to upload images</label>
+                        <label for="schoolImages" class="form-file-label"><i class="fas fa-images" style="margin-right: 8px;"></i> Upload images</label>
                         <input type="file" id="schoolImages" name="schoolImages[]" accept="image/*" multiple onchange="handleFileInput(event, 'imagesName')">
-                        <div id="imagesName" class="file-name-display"></div>
                     </div>
-                </div>
+                    <div class="file-info"><i class="fas fa-info-circle"></i> Up to 10 images, PNG/JPG, max 2MB each</div>
+                    <div id="imagesName" style="margin-top: 6px; font-size: 0.9rem; color: #0d3b66;"></div>
 
-                <!-- Videos Upload -->
-                <div style="border-top: 1px solid #e2e8f0; padding-top: 20px;">
-                    <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">School Videos (max 3)</label>
+                    <label style="display: block; margin: 16px 0 8px; font-weight: 600; color: #0d3b66; font-size: 0.9rem;">Promo Videos (optional)</label>
                     <div class="form-file-input">
-                        <label for="schoolVideos" class="form-file-label"><i class="fas fa-video" style="margin-right: 8px;"></i> Click or drag to upload videos</label>
+                        <label for="schoolVideos" class="form-file-label"><i class="fas fa-video" style="margin-right: 8px;"></i> Upload videos</label>
                         <input type="file" id="schoolVideos" name="schoolVideos[]" accept="video/*" multiple onchange="handleFileInput(event, 'videosName')">
-                        <div id="videosName" class="file-name-display"></div>
                     </div>
+                    <div class="file-info"><i class="fas fa-info-circle"></i> Up to 3 videos, MP4/MOV, max 20MB each</div>
+                    <div id="videosName" style="margin-top: 6px; font-size: 0.9rem; color: #0d3b66;"></div>
                 </div>
 
                 <div class="modal-footer" style="margin-top: 24px;">
@@ -1090,6 +1085,7 @@
     </div>
 
     <!-- Events Modal -->
+<!-- Events Modal -->
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
