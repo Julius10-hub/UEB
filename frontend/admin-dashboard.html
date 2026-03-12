@@ -1305,9 +1305,9 @@
         }
 
         if (files.length === 1) {
-            displayElement.textContent = `âœ“ ${files[0].name} (${formatFileSize(files[0].size)})`;
+            displayElement.textContent = `&#10003; ${files[0].name} (${formatFileSize(files[0].size)})`;
         } else {
-            displayElement.textContent = `âœ“ ${files.length} files selected`;
+            displayElement.textContent = `&#10003; ${files.length} files selected`;
         }
     }
 
@@ -1390,7 +1390,7 @@
         try {
             const res = await fetch('connect.php', { method: 'POST', body: formData });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            showAlert(type, `âœ“ ${type.slice(0,-1)} saved`, 'success');
+            showAlert(type, `&#10003; ${type.slice(0,-1)} saved`, 'success');
 
             if (type === 'events') {
                 const newItem = {
@@ -1423,7 +1423,7 @@
             closeModal(getModalId(type));
         } catch (error) {
             console.error(`Error submitting ${type}:`, error);
-            showAlert(type, `âœ— Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
+            showAlert(type, `&#10007; Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
         }
     }
 
@@ -1637,12 +1637,12 @@
             const user = await api.getCurrentUser();
             
             if (user && (user.is_admin || user.role === 'admin')) {
-                console.log('âœ“ Admin authenticated:', user.name || user.email);
+                console.log('&#10003; Admin authenticated:', user.name || user.email);
                 return user;
             }
             
             // If no valid admin user, they must log in
-            console.log('âœ— Admin access denied or not authenticated');
+            console.log('&#10007; Admin access denied or not authenticated');
             return null;
         } catch (error) {
             console.error('Auth check error:', error);
@@ -2154,23 +2154,23 @@
                 return;
             }
         } else {
-                        showAlert(type, `âœ— Error: ${response.error}`, 'danger');
+                        showAlert(type, `&#10007; Error: ${response.error}`, 'danger');
                     }
                     return;
                 }
                 
                 if (response.school) {
-                    showAlert(type, `âœ“ School added successfully!`, 'success');
+                    showAlert(type, `&#10003; School added successfully!`, 'success');
                     broadcastNewSchool(response.school);
                 } else {
-                    showAlert(type, `âœ— Unexpected response from server.`, 'danger');
+                    showAlert(type, `&#10007; Unexpected response from server.`, 'danger');
                     return;
                 }
      
             
                 try{
                 console.error('Error creating school:', error);
-                showAlert(type, `âœ— Network error: ${error.message}`, 'danger');
+                showAlert(type, `&#10007; Network error: ${error.message}`, 'danger');
                 return;
             }
          
@@ -2179,14 +2179,14 @@
                 const idx = window[`${type}Data`].findIndex(i => i.id === id);
                 if (idx >= 0) {
                     window[`${type}Data`][idx] = { ...window[`${type}Data`][idx], ...data };
-                    showAlert(type, `âœ“ ${type.slice(0,-1)} updated!`, 'success');
+                    showAlert(type, `&#10003; ${type.slice(0,-1)} updated!`, 'success');
                 }
             } 
             else {
                 const newId = Math.max(...window[`${type}Data`].map(i => i.id || 0), 0) + 1;
                 const newItem = { id: newId, ...data };
                 window[`${type}Data`].push(newItem);
-                showAlert(type, `âœ“ ${type.slice(0,-1)} added!`, 'success');
+                showAlert(type, `&#10003; ${type.slice(0,-1)} added!`, 'success');
             }
             saveDataToStorage(type);
     
@@ -2245,7 +2245,7 @@
         if (!confirm(`Delete this ${type.slice(0,-1)}&#10003;`)) return;
         window[`${type}Data`] = window[`${type}Data`].filter(i => i.id !== id);
         saveDataToStorage(type);
-        showAlert(type, `âœ“ ${type.slice(0,-1)} deleted!`, 'success');
+        showAlert(type, `&#10003; ${type.slice(0,-1)} deleted!`, 'success');
         loadData(type);
     }
 
@@ -2337,7 +2337,7 @@
         if (document.getElementById('refreshBtn')) {
             document.getElementById('refreshBtn').addEventListener('click', () => {
                 updateStatsAndCalculations();
-                showAlert('schools', 'âœ“ Dashboard refreshed', 'success');
+                showAlert('schools', '&#10003; Dashboard refreshed', 'success');
             });
         }
 
