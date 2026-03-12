@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>EduBridge Uganda Â· Admin + analytics</title>
-    <meta name="description" content="Professional Admin Dashboard â€“ Ugandan school format (UGX, local districts)">
+    <meta name="description" content="Professional Admin Dashboard &ndash; Ugandan school format (UGX, local districts)">
     <!-- Fonts, Icons & Charts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -880,7 +880,7 @@
                 </div>
                 <div class="date-range">
                     <input id="dateStart" type="date" title="From">
-                    <span class="dash">â€”</span>
+                    <span class="dash">&mdash;</span>
                     <input id="dateEnd" type="date" title="To">
                 </div>
                 <div class="view-toggle" title="Toggle compact/expanded view">
@@ -1642,7 +1642,7 @@
             }
             
             // If no valid admin user, they must log in
-            console.log('&#10007; Admin access denied or not authenticated');
+            console.log('[DENIED] Admin access denied or not authenticated');
             return null;
         } catch (error) {
             console.error('Auth check error:', error);
@@ -1833,8 +1833,8 @@
         const columns = {
             schools: (item) => {
                 const safeId = JSON.stringify(item.id);
-                const district = item.district || item.city || item.location || 'â€”';
-                return `<tr><td><strong>${item.name}</strong></td><td>${item.category || 'â€”'}</td><td>${district}</td><td>${item.students || 0}</td><td>${item.contact_email || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'schools')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'schools')"><i class="fas fa-trash"></i></button></td></tr>`;
+                const district = item.district || item.city || item.location || '&mdash;';
+                return `<tr><td><strong>${item.name}</strong></td><td>${item.category || '&mdash;'}</td><td>${district}</td><td>${item.students || 0}</td><td>${item.contact_email || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'schools')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'schools')"><i class="fas fa-trash"></i></button></td></tr>`;
             },
             events: (item) => {
                 const safeId = JSON.stringify(item.id);
@@ -2242,7 +2242,7 @@
     }
 
     async function deleteItem(id, type) {
-        if (!confirm(`Delete this ${type.slice(0,-1)}&#10003;`)) return;
+        if (!confirm(`Delete this ${type.slice(0,-1)}?`)) return;
         window[`${type}Data`] = window[`${type}Data`].filter(i => i.id !== id);
         saveDataToStorage(type);
         showAlert(type, `&#10003; ${type.slice(0,-1)} deleted!`, 'success');
@@ -2344,7 +2344,7 @@
         // Logout
         if (document.getElementById('logoutBtn')) {
             document.getElementById('logoutBtn').addEventListener('click', async () => {
-                if (confirm('Logout&#10003;')) {
+                if (confirm('Logout?')) {
                     if (typeof api !== 'undefined' && api.logout) await api.logout();
                     else localStorage.removeItem('cpace_user');
                     window.location.href = 'login.html';
