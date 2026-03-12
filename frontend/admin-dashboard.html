@@ -495,9 +495,10 @@
             align-items: center;
             gap: 12px;
         }
-        .alert-success { background: #88ddb1; color: #065f46; border-left: 4px solid #10b981; }
-        .alert-error { background: #88ddb1; color: #7f1d1d; border-left: 4px solid #ef4444; }
-        .alert-info { background: #88ddb1; color: #0c2d6b; border-left: 4px solid #3b82f6; }
+        .alert-success { background: #d1fae5; color: #065f46; border-left: 4px solid #10b981; }
+        .alert-error { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
+        .alert-info { background: #dbeafe; color: #1e40af; border-left: 4px solid #3b82f6; }
+        .alert-danger { background: #fee2e2; color: #991b1b; border-left: 4px solid #ef4444; }
 
         /* File Upload Styles */
         .file-upload-group {
@@ -896,7 +897,7 @@
 
         <!-- DASHBOARD (active) with UGANDAN stats -->
         <div id="dashboard-section" class="section-content active">
-              <!-- GRAPHS SECTION (with Ugandan labels) -->
+            <!-- GRAPHS SECTION (with Ugandan labels) -->
             <div class="charts-grid" style="display:grid !important;">
                 <div class="chart-card">
                     <h3><i class="fas fa-chart-bar"></i> New schools per term</h3>
@@ -912,12 +913,11 @@
                 </div>
             </div>
 
-
             <!-- info box with live UGX calculations -->
             <div class="info-box" id="liveCalculations">
                 <h3><i class="fas fa-calculator"></i> Live platform calculations (Uganda)</h3>
-                <p><strong>Total schools (UGA):</strong> <span id="calcSchools">0</span> | <strong>Avg students per school:</strong> <span id="avgStudents">0</span></p>
-                <p><strong>Total estimated enrollment:</strong> <span id="totalEnrollment">0</span> students</p>
+                <p><strong>Total schools (UGA):</strong> <span id="totalSchools">0</span> | <strong>Avg students per school:</strong> <span id="avgStudents">0</span></p>
+                <p><strong>Total estimated enrollment:</strong> <span id="totalStudents">0</span> students</p>
                 <p><strong>Most common district:</strong> <span id="topCategory">Kampala</span> &middot; <strong>Term growth rate:</strong> <span id="growthRate">5.1%</span></p>
                 <p><strong>Bursary coverage (UGX):</strong> <span id="bursaryCoverage">42%</span> &middot; <strong>Active agents:</strong> <span id="activeAgents">14</span></p>
                 <p><strong>Total bursary fund:</strong> UGX <span id="totalBursaryUgx">126,500,000</span></p>
@@ -928,7 +928,7 @@
         <div id="schools-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Schools Management</h2>
-                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;" onclick="openSchoolModal()">
+                <button class="quick-action-btn" id="addSchoolBtn" style="margin: 0;">
                     <i class="fas fa-plus"></i> Add School
                 </button>
             </div>
@@ -955,6 +955,7 @@
                 </div>
             </div>
         </div>
+        
         <!-- EVENTS SECTION -->
         <div id="events-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
@@ -988,19 +989,7 @@
                 </div>
             </div>
         </div>
-
-       ction">
-                <div class="table-wrapper">
-                    <table class="table">
-                        <thead><tr><th>Subject</th><th>Exam Year</th><th>Exam Level</th><th>School</th><th>File</th><th>Actions</th></tr></thead>
-                        <tbody id="papersTableBody"><tr><td colspan="6" style="text-align: center; padding: 40px;"><span class="loading"></span> Loading papers...</td></tr></tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-
-        <!-- PAPERS SECTION -->
+ <!-- PAPERS SECTION -->
         <div id="papers-section" class="section-content">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px;">
                 <h2 style="color: #0d3b66; font-size: 24px; margin: 0;">Past Papers Management</h2>
@@ -1010,14 +999,14 @@
             <div class="data-section">
                 <div class="table-wrapper">
                     <table class="table">
-                        <thead><tr><th>From</th><th>Subject</th><th>Message</th><th>Date</th><th>Status</th><th>Actions</th></tr></thead>
-                        <tbody id="suggestionsTableBody"><tr><td colspan="6" style="text-align: center; padding: 40px;"><span class="loading"></span> Loading suggestions...</td></tr></tbody>
+                        <thead><tr><th>Subject</th><th>Exam Year</th><th>Exam Level</th><th>School</th><th>File</th><th>Actions</th></tr></thead>
+                        <tbody id="papersTableBody"><tr><td colspan="6" style="text-align: center; padding: 40px;"><span class="loading"></span> Loading papers...</td></tr></tbody>
                     </table>
                 </div>
             </div>
         </div>
 
-     
+       <!-- MODALS -->
     <!-- Schools Modal -->
     <div id="schoolModal" class="modal">
         <div class="modal-content">
@@ -1025,7 +1014,7 @@
                 <h2 id="schoolModalTitle">Add New School</h2>
                 <button class="modal-close" onclick="closeModal('schoolModal')">&times;</button>
             </div>
-            <form id="schoolForm" onsubmit="handleSubmit(event, 'schools')" enctype="multipart/form-data">
+            <form id="schoolForm" action="connect.php" method="post" enctype="multipart/form-data">
                 <div class="form-row-wrap">
                     <input type="text" name="name" id="schoolName" placeholder="School Name *" required>
                     <select name="category" id="schoolCategory" required>
@@ -1089,12 +1078,21 @@
     <div id="eventsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="eventModalTitle">Add Event</h2><button class="modal-close" onclick="closeModal('eventsModal')">&times;</button></div>
-            <form id="eventsForm" action="connect.php" method="POST" enctype="multipart/form-data">
-                <div class="form-row"><div class="form-group"><label for="eventName">Event Name *</label><input type="text" id="eventName" name="event_name" required></div><div class="form-group"><label for="eventDate">Date *</label><input type="date" id="eventDate" name="event_date" required></div></div>
-                <div class="form-row"><div class="form-group"><label for="eventLocation">Location</label><input type="text" id="eventLocation" name="event_location"></div><div class="form-group"><label for="eventType">Type</label><input type="text" id="eventType" name="event_type"></div></div>
+            <form id="eventsForm" action="connect.php" method="post" enctype="multipart/form-data">
+                <div class="form-row">
+                    <div class="form-group"><label for="eventName">Event Name *</label><input type="text" id="eventName" name="event_name" required></div>
+                    <div class="form-group"><label for="eventDate">Date *</label><input type="date" id="eventDate" name="event_date" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="eventLocation">Location</label><input type="text" id="eventLocation" name="event_location"></div>
+                    <div class="form-group"><label for="eventType">Type</label><input type="text" id="eventType" name="event_type"></div>
+                </div>
                 <div class="form-group"><label for="eventAttendees">Expected Attendees</label><input type="number" id="eventAttendees" name="event_attendees"></div>
                 <div class="form-group"><label for="eventImages">Event Images</label><input type="file" id="eventImages" name="eventImages[]" accept="image/*" multiple></div>
-                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('eventsModal')">Cancel</button><button type="submit" class="btn-submit">Add Event</button></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('eventsModal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add Event</button>
+                </div>
             </form>
         </div>
     </div>
@@ -1103,43 +1101,50 @@
     <div id="jobsModal" class="modal">
         <div class="modal-content">
             <div class="modal-header"><h2 id="jobModalTitle">Add Job</h2><button class="modal-close" onclick="closeModal('jobsModal')">&times;</button></div>
-            <form id="jobsForm" action="connect.php" method="POST" enctype="multipart/form-data">
-                <div class="form-row"><div class="form-group"><label for="jobTitle">Job Title *</label><input type="text" id="jobTitle" name="job_title" required></div><div class="form-group"><label for="jobOrganization">Organization *</label><input type="text" id="jobOrganization" name="job_organization" required></div></div>
-                <div class="form-row"><div class="form-group"><label for="jobLocation">Location</label><input type="text" id="jobLocation" name="job_location"></div><div class="form-group"><label for="jobSalary">Salary (UGX)</label><input type="text" id="jobSalary" name="job_salary"></div></div>
+            <form id="jobsForm" action="connect.php" method="post">
+                <div class="form-row">
+                    <div class="form-group"><label for="jobTitle">Job Title *</label><input type="text" id="jobTitle" name="job_title" required></div>
+                    <div class="form-group"><label for="jobOrganization">Organization *</label><input type="text" id="jobOrganization" name="job_organization" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="jobLocation">Location</label><input type="text" id="jobLocation" name="job_location"></div>
+                    <div class="form-group"><label for="jobSalary">Salary (UGX)</label><input type="text" id="jobSalary" name="job_salary"></div>
+                </div>
                 <div class="form-group"><label for="jobDescription">Description</label><textarea id="jobDescription" name="job_description" style="resize: vertical; min-height: 100px;"></textarea></div>
                 <div class="form-group"><label for="jobImages">Job Images</label><input type="file" id="jobImages" name="jobImages[]" accept="image/*" multiple></div>
-                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('jobsModal')">Cancel</button><button type="submit" class="btn-submit">Add Job</button></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('jobsModal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add Job</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Bursaries Modal -->
-    <div id="bursariesModal" class="modal">
+
+
+    <!-- Papers Modal -->
+    <div id="papersModal" class="modal">
         <div class="modal-content">
-            <div class="modal-header"><h2 id="bursaryModalTitle">Add Bursary</h2><button class="modal-close" onclick="closeModal('bursariesModal')">&times;</button></div>
-            <form id="bursariesForm" onsubmit="handleSubmit(event, 'bursaries')">
-                <div class="form-row"><div class="form-group"><label for="bursaryName">Program Name *</label><input type="text" id="bursaryName" required></div><div class="form-group"><label for="bursarySponsor">Sponsor *</label><input type="text" id="bursarySponsor" required></div></div>
-                <div class="form-row"><div class="form-group"><label for="bursaryAmount">Amount (UGX) *</label><input type="number" id="bursaryAmount" required></div><div class="form-group"><label for="bursaryCategory">Category</label><input type="text" id="bursaryCategory"></div></div>
-                <div class="form-row"><div class="form-group"><label for="bursaryDeadline">Deadline</label><input type="date" id="bursaryDeadline"></div></div>
-                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('bursariesModal')">Cancel</button><button type="submit" class="btn-submit">Add Bursary</button></div>
+            <div class="modal-header"><h2 id="paperModalTitle">Add Paper</h2><button class="modal-close" onclick="closeModal('papersModal')">&times;</button></div>
+            <form id="papersForm" onsubmit="handleSubmit(event, 'papers')">
+                <div class="form-row">
+                    <div class="form-group"><label for="paperSubject">Subject *</label><input type="text" id="paperSubject" required></div>
+                    <div class="form-group"><label for="paperYear">Year *</label><input type="number" id="paperYear" required></div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group"><label for="paperLevel">Level *</label><input type="text" id="paperLevel" required></div>
+                    <div class="form-group"><label for="paperSchool">School</label><input type="text" id="paperSchool"></div>
+                </div>
+                <div class="form-group"><label for="paperFile">File</label><input type="text" id="paperFile" placeholder="Filename"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn-cancel" onclick="closeModal('papersModal')">Cancel</button>
+                    <button type="submit" class="btn-submit">Add Paper</button>
+                </div>
             </form>
         </div>
     </div>
 
-    <!-- Agents Modal -->
-    <div id="agentsModal" class="modal">
-        <div class="modal-content">
-            <div class="modal-header"><h2 id="agentModalTitle">Add Agent</h2><button class="modal-close" onclick="closeModal('agentsModal')">&times;</button></div>
-            <form id="agentsForm" onsubmit="handleSubmit(event, 'agents')">
-                <div class="form-row"><div class="form-group"><label for="agentName">Name *</label><input type="text" id="agentName" required></div><div class="form-group"><label for="agentEmail">Email *</label><input type="email" id="agentEmail" required></div></div>
-                <div class="form-row"><div class="form-group"><label for="agentPhone">Phone *</label><input type="tel" id="agentPhone" required></div><div class="form-group"><label for="agentRegion">Region</label><input type="text" id="agentRegion"></div></div>
-                <div class="form-row"><div class="form-group"><label for="agentStatus">Status</label><select id="agentStatus"><option value="Active">Active</option><option value="Inactive">Inactive</option></select></div></div>
-                <div class="modal-footer"><button type="button" class="btn-cancel" onclick="closeModal('agentsModal')">Cancel</button><button type="submit" class="btn-submit">Add Agent</button></div>
-            </form>
-        </div>
-    </div>
 
-   
     <footer>
         <div class="footer-content">
             <div class="footer-section">
@@ -1191,24 +1196,47 @@
     </footer>
 </div>
 
-<script src="js/api.js"></script>
 <script>
     // ===== DATA ARRAYS =====
-    let schoolsData = [], eventsData = [], jobsData = [], bursariesData = [], agentsData = [], papersData = [], suggestionsData = [], usersData = [];
+    let schoolsData = [], eventsData = [], jobsData = [], papersData = [];
     let editingId = {}, editingSectionType = null;
+    let mainFilter = '', mainDateStart = null, mainDateEnd = null;
+
+    // Mock API object
+    const api = {
+        API_BASE_URL: 'http://localhost:5000/api',
+        async getCurrentUser() {
+            // Mock user for demo purposes
+            return { 
+                name: 'Admin User', 
+                email: 'admin@edubridge.ug', 
+                is_admin: true,
+                role: 'admin'
+            };
+        },
+        async createSchool(data) {
+            console.log('Creating school:', data);
+            // Mock success response
+            return {
+                success: true,
+                school: {
+                    id: Date.now(),
+                    ...data
+                }
+            };
+        },
+        async logout() {
+            console.log('Logging out');
+        }
+    };
 
     // ===== AUTHENTICATION & INITIALIZATION =====
     document.addEventListener('DOMContentLoaded', async () => {
-        const user = await checkAdminAccess();
-        if (!user) { window.location.href = 'login.html'; return; }
-        document.getElementById('sidebarUserName').innerText = user.name || user.email;
-        document.getElementById('sidebarUserEmail').innerText = user.email;
-        
         // Initialize all data
         initializeAllData();
         
         // Listen for all data changes
-        ['schools', 'events', 'jobs', 'bursaries', 'agents', 'papers', 'suggestions', 'users'].forEach(type => {
+        ['schools', 'events', 'jobs', 'papers'].forEach(type => {
             document.addEventListener(`${type}DataChanged`, () => updateStatsAndCalculations());
         });
         
@@ -1217,15 +1245,18 @@
         updateStatsAndCalculations();
         initializeFileUploadAreas();
 
-        // Hook direct form submits for events & jobs to stay on-page and still hit PHP endpoint
+        const schoolForm = document.getElementById('schoolForm');
+        if (schoolForm) schoolForm.addEventListener('submit', (e) => handleDirectSubmit(e, 'schools'));
         const eventsForm = document.getElementById('eventsForm');
-        if (eventsForm) {
-            eventsForm.addEventListener('submit', (e) => handleDirectSubmit(e, 'events'));
-        }
+        if (eventsForm) eventsForm.addEventListener('submit', (e) => handleDirectSubmit(e, 'events'));
         const jobsForm = document.getElementById('jobsForm');
-        if (jobsForm) {
-            jobsForm.addEventListener('submit', (e) => handleDirectSubmit(e, 'jobs'));
-        }
+        if (jobsForm) jobsForm.addEventListener('submit', (e) => handleDirectSubmit(e, 'jobs'));
+        
+        // Load initial data for all sections
+        ['schools', 'events', 'jobs', 'bursaries', 'agents', 'papers', 'suggestions', 'users'].forEach(type => {
+            const forceRemote = (type === 'schools' || type === 'events' || type === 'jobs');
+            loadData(type, forceRemote);
+        });
     });
 
     // ===== GLOBAL MODAL & NOTIFICATION HELPERS =====
@@ -1250,11 +1281,18 @@
             } else if (modalId === 'eventsModal') {
                 const form = document.getElementById('eventsForm');
                 if (form) form.reset();
+            } else if (modalId === 'jobsModal') {
+                const form = document.getElementById('jobsForm');
+                if (form) form.reset();
             }
         }
     }
 
     function openSchoolModal() {
+        editingId['schools'] = null;
+        editingSectionType = 'schools';
+        const titleEl = document.getElementById('schoolModalTitle');
+        if (titleEl) titleEl.textContent = 'Add New School';
         openModal('schoolModal');
     }
 
@@ -1294,7 +1332,6 @@
     }
 
     // ===== FILE UPLOAD HANDLERS =====
-    // Handle file input changes and display file names
     function handleFileInput(event, displayId) {
         const files = event.target.files;
         const displayElement = document.getElementById(displayId);
@@ -1305,13 +1342,12 @@
         }
 
         if (files.length === 1) {
-            displayElement.textContent = `&#10003; ${files[0].name} (${formatFileSize(files[0].size)})`;
+            displayElement.innerHTML = `✓ ${files[0].name} (${formatFileSize(files[0].size)})`;
         } else {
-            displayElement.textContent = `&#10003; ${files.length} files selected`;
+            displayElement.innerHTML = `✓ ${files.length} files selected`;
         }
     }
 
-    // Format file size for display
     function formatFileSize(bytes) {
         if (bytes === 0) return '0 Bytes';
         const k = 1024;
@@ -1320,7 +1356,21 @@
         return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
     }
 
-    // Handle School Form Submission (vanilla POST to PHP)
+    // Normalize school records from PHP/API to the structure the UI expects
+    function normalizeSchool(row, idx = 0) {
+        return {
+            id: Number(row.id || row.school_id || idx + 1),
+            name: row.name || row.school_name || '',
+            category: row.category || row.type || '',
+            district: row.district || row.location || row.city || '',
+            students: Number(row.students || row.student_count || 0),
+            contact_email: row.contact_email || row.email || '',
+            contact_phone: row.contact_phone || row.phone || '',
+            description: row.description || row.address || row.location || '',
+            logo: row.logo || null
+        };
+    }
+
     function handleSchoolSubmit(event) {
         event.preventDefault();
         
@@ -1338,324 +1388,114 @@
         if (imagesInput.files.length > 5) { showNotification('Maximum 5 images allowed', 'error'); return; }
         if (videosInput.files.length > 3) { showNotification('Maximum 3 videos allowed', 'error'); return; }
 
-        const submitBtn = form.querySelector('button[type=\"submit\"]');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span class=\"loading\" style=\"display:inline-block; margin-right:8px;\"></span>Adding...';
+        // Create school object
+        const data = {
+            name: schoolName,
+            category: schoolCategory,
+            district: schoolDistrict,
+            students: parseInt(document.getElementById('schoolStudents').value) || 0,
+            contact_email: document.getElementById('schoolEmail').value,
+            contact_phone: document.getElementById('schoolPhone').value,
+            description: document.getElementById('schoolAddress').value
+        };
 
-        setTimeout(() => { form.submit(); }, 300);
-        setTimeout(() => { submitBtn.disabled = false; submitBtn.innerHTML = originalText; }, 2000);
+        // Add to schoolsData
+        const id = editingId['schools'];
+        if (id) {
+            // Update existing
+            const idx = schoolsData.findIndex(i => i.id === id);
+            if (idx >= 0) {
+                schoolsData[idx] = { ...schoolsData[idx], ...data, id };
+                showAlert('schools', 'School updated!', 'success');
+            }
+        } else {
+            // Add new
+            const newId = Math.max(...schoolsData.map(i => i.id || 0), 0) + 1;
+            const newItem = { id: newId, ...data };
+            schoolsData.push(newItem);
+            showAlert('schools', 'School added!', 'success');
+        }
+        
+        saveDataToStorage('schools');
+        renderTable('schools');
+        closeModal('schoolModal');
     }
 
-    // Initialize file upload areas
     function initializeFileUploadAreas() {
-        window.schoolLogoData = null;
-        window.schoolImagesData = [];
-        window.schoolVideosData = [];
-        
-        // Mapping of upload area IDs to file input IDs
-        const areaToInputMap = {
-            'logoUploadArea': 'schoolLogo',
-            'imagesUploadArea': 'schoolImages',
-            'videosUploadArea': 'schoolVideos'
-        };
-        
-        // Add click handlers to upload areas
-        Object.entries(areaToInputMap).forEach(([areaId, inputId]) => {
-            const area = document.getElementById(areaId);
-            if (area) {
-                area.addEventListener('click', (e) => {
-                    // Don't trigger if clicking on the actual file input
-                    if (e.target.tagName === 'INPUT') return;
-                    document.getElementById(inputId).click();
-                });
-                // Add keyboard accessibility
-                area.setAttribute('role', 'button');
-                area.setAttribute('tabindex', '0');
-                area.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        document.getElementById(inputId).click();
-                    }
-                });
+        // Add click handlers for file upload areas
+        const fileInputs = ['schoolLogo', 'schoolImages', 'schoolVideos'];
+        fileInputs.forEach(id => {
+            const input = document.getElementById(id);
+            if (input) {
+                input.addEventListener('change', (e) => handleFileInput(e, id + 'Name'));
             }
         });
     }
 
-    // Direct submit handler for events/jobs to stay on-page and still post to PHP
     async function handleDirectSubmit(event, type) {
         event.preventDefault();
         const form = event.target;
         const formData = new FormData(form);
+
         try {
             const res = await fetch('connect.php', { method: 'POST', body: formData });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            showAlert(type, `&#10003; ${type.slice(0,-1)} saved`, 'success');
+            let payload = null;
+            try { payload = await res.json(); } catch (_) {}
 
-            if (type === 'events') {
+            if (type === 'schools') {
+                const schoolPayload = (payload && payload.school) ? payload.school : Object.fromEntries(formData.entries());
+                const newItem = normalizeSchool(schoolPayload, schoolsData.length);
+                schoolsData.push(newItem);
+                saveDataToStorage('schools');
+                renderTable('schools');
+                showAlert(type, 'School saved!', 'success');
+                loadData('schools', true); // refresh from DB with canonical IDs
+            } else if (type === 'events') {
                 const newItem = {
-                    id: Date.now(),
+                    id: (payload && payload.id) || Date.now(),
                     name: formData.get('event_name'),
                     date: formData.get('event_date'),
                     location: formData.get('event_location') || '',
                     type: formData.get('event_type') || '',
                     attendees: parseInt(formData.get('event_attendees')) || 0
                 };
-                window.eventsData.push(newItem);
+                eventsData.push(newItem);
                 saveDataToStorage('events');
                 renderTable('events');
-                loadData('events', true); // refresh from DB to pull assigned IDs
+                showAlert(type, 'Event saved!', 'success');
             } else if (type === 'jobs') {
                 const newItem = {
-                    id: Date.now(),
+                    id: (payload && payload.id) || Date.now(),
                     title: formData.get('job_title'),
                     organization: formData.get('job_organization'),
                     location: formData.get('job_location') || '',
                     salary: formData.get('job_salary') || '',
                     description: formData.get('job_description') || ''
                 };
-                window.jobsData.push(newItem);
+                jobsData.push(newItem);
                 saveDataToStorage('jobs');
                 renderTable('jobs');
+                showAlert(type, 'Job saved!', 'success');
             }
-
-            form.reset();
-            closeModal(getModalId(type));
         } catch (error) {
             console.error(`Error submitting ${type}:`, error);
-            showAlert(type, `&#10007; Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
-        }
-    }
-
-    function handleDragOver(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.currentTarget.classList.add('dragover');
-    }
-
-    function handleDragLeave(e) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.currentTarget.classList.remove('dragover');
-    }
-
-    function handleDrop(e, inputId) {
-        e.preventDefault();
-        e.stopPropagation();
-        e.currentTarget.classList.remove('dragover');
-        
-        const files = e.dataTransfer.files;
-        if (files.length > 0) {
-            const fileInput = document.getElementById(inputId);
-            fileInput.files = files;
-            handleFileSelect({ target: { files } }, inputId);
-        }
-    }
-
-    function handleFileSelect(e, inputId) {
-        const files = Array.from(e.target.files);
-        if (!files.length) return;
-
-        if (inputId === 'schoolLogo') {
-            handleLogoUpload(files[0]);
-        } else if (inputId === 'schoolImages') {
-            handleImagesUpload(files);
-        } else if (inputId === 'schoolVideos') {
-            handleVideosUpload(files);
-        }
-    }
-
-    function handleLogoUpload(file) {
-        if (!validateFileType(file, ['image'])) {
-            alert('Please upload a valid image file (PNG, JPG, GIF)');
-            return;
-        }
-        if (!validateFileSize(file, 5)) {
-            alert('Logo size must not exceed 5MB');
-            return;
+            showAlert(type, `Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
         }
 
-        const reader = new FileReader();
-        reader.onload = (e) => {
-            window.schoolLogoData = e.target.result;
-            updateFilePreview('schoolLogo', e.target.result);
-        };
-        reader.readAsDataURL(file);
-    }
-
-    function handleImagesUpload(files) {
-        const validFiles = [];
-        for (let file of files) {
-            if (!validateFileType(file, ['image'])) {
-                alert(`${file.name}: Invalid file type. Please upload images only.`);
-                continue;
-            }
-            if (!validateFileSize(file, 10)) {
-                alert(`${file.name}: Size exceeds 10MB limit`);
-                continue;
-            }
-            if (window.schoolImagesData.length + validFiles.length >= 5) {
-                alert('Maximum 5 images allowed');
-                break;
-            }
-            validFiles.push(file);
-        }
-
-        validFiles.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                window.schoolImagesData.push(e.target.result);
-                updateFilesPreview('schoolImages', window.schoolImagesData);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    function handleVideosUpload(files) {
-        const validFiles = [];
-        for (let file of files) {
-            if (!validateFileType(file, ['video'])) {
-                alert(`${file.name}: Invalid file type. Please upload videos only.`);
-                continue;
-            }
-            if (!validateFileSize(file, 50)) {
-                alert(`${file.name}: Size exceeds 50MB limit`);
-                continue;
-            }
-            if (window.schoolVideosData.length + validFiles.length >= 3) {
-                alert('Maximum 3 videos allowed');
-                break;
-            }
-            validFiles.push(file);
-        }
-
-        validFiles.forEach(file => {
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                window.schoolVideosData.push(e.target.result);
-                updateFilesPreview('schoolVideos', window.schoolVideosData);
-            };
-            reader.readAsDataURL(file);
-        });
-    }
-
-    function validateFileType(file, types) {
-        return types.some(type => file.type.startsWith(type));
-    }
-
-    function validateFileSize(file, maxMB) {
-        return file.size <= maxMB * 1024 * 1024;
-    }
-
-    function updateFilePreview(inputId, data) {
-        const previews = {
-            'schoolLogo': 'logoPreview'
-        };
-        const previewId = previews[inputId];
-        if (!previewId) return;
-
-        const preview = document.getElementById(previewId);
-        if (data) {
-            preview.innerHTML = `<img src="${data}" alt="Logo preview">`;
-            preview.classList.remove('empty');
-        } else {
-            preview.innerHTML = '<i class="fas fa-image"></i>';
-            preview.classList.add('empty');
-        }
-    }
-
-    function updateFilesPreview(inputId, dataArray) {
-        const previews = {
-            'schoolImages': 'imagesPreview',
-            'schoolVideos': 'videosPreview'
-        };
-        const previewContainerId = previews[inputId];
-        if (!previewContainerId) return;
-
-        const container = document.getElementById(previewContainerId);
-        const countBadgeId = inputId === 'schoolImages' ? 'imagesCount' : 'videosCount';
-        const countBadge = document.getElementById(countBadgeId);
-        
-        if (countBadge) countBadge.textContent = dataArray.length;
-
-        if (dataArray.length === 0) {
-            container.innerHTML = '';
-            return;
-        }
-
-        container.innerHTML = dataArray.map((data, idx) => {
-            const isVideo = inputId === 'schoolVideos';
-            return `
-                <div class="file-preview-item">
-                    ${isVideo ? `<video src="${data}" controls></video>` : `<img src="${data}" alt="Preview ${idx + 1}">`}
-                    <button type="button" class="file-remove-btn" onclick="removeFile('${inputId}', ${idx})" title="Remove"><i class="fas fa-times"></i></button>
-                </div>
-            `;
-        }).join('');
-    }
-
-    function removeFile(inputId, index) {
-        if (inputId === 'schoolImages') {
-            window.schoolImagesData.splice(index, 1);
-            updateFilesPreview('schoolImages', window.schoolImagesData);
-        } else if (inputId === 'schoolVideos') {
-            window.schoolVideosData.splice(index, 1);
-            updateFilesPreview('schoolVideos', window.schoolVideosData);
-        }
-    }
-
-    function resetFileUploads() {
-        window.schoolLogoData = null;
-        window.schoolImagesData = [];
-        window.schoolVideosData = [];
-        
-        document.getElementById('schoolLogo').value = '';
-        document.getElementById('schoolImages').value = '';
-        document.getElementById('schoolVideos').value = '';
-        
-        updateFilePreview('schoolLogo', null);
-        updateFilesPreview('schoolImages', []);
-        updateFilesPreview('schoolVideos', []);
-    }
-
-    // Helper to open the School modal reliably and reset form/files
-    function openSchoolModal() {
-        const modal = document.getElementById('schoolModal');
-        if (!modal) return console.error('schoolModal not found');
-        // Use .show class where styles expect it
-        modal.classList.add('show');
-        const form = document.getElementById('schoolForm');
-        if (form) form.reset();
-        if (typeof resetFileUploads === 'function') resetFileUploads();
-        const titleEl = document.getElementById('schoolModalTitle');
-        if (titleEl) titleEl.textContent = 'Add New School';
-    }
-
-    async function checkAdminAccess() {
-        try {
-            // First try to get user from API (backend authentication)
-            const user = await api.getCurrentUser();
-            
-            if (user && (user.is_admin || user.role === 'admin')) {
-                console.log('[OK] Admin authenticated:', user.name || user.email);
-                return user;
-            }
-            
-            // If no valid admin user, they must log in
-            console.log('[DENIED] Admin access denied or not authenticated');
-            return null;
-        } catch (error) {
-            console.error('Auth check error:', error);
-            return null;
-        }
+        form.reset();
+        if (type === 'schools' && typeof resetFileUploads === 'function') resetFileUploads();
+        if (type === 'schools') closeModal('schoolModal');
+        if (type === 'events') closeModal('eventsModal');
+        if (type === 'jobs') closeModal('jobsModal');
     }
 
     // ===== UNIVERSAL INITIALIZATION =====
     function initializeAllData() {
         initializeData('schools', [
-            { id:1, name:"Kampala High School", district:"Kampala", category:"Secondary", students:1250, contact_email:"khs@school.ug", contact_phone:"+256 700 111111", address:"Kampala, Uganda" },
-            { id:2, name:"Jinja College", district:"Jinja", category:"Secondary", students:980, contact_email:"jinja@college.ug", contact_phone:"+256 700 222222", address:"Jinja, Uganda" },
-            { id:3, name:"Gulu Public School", district:"Gulu", category:"Primary", students:720, contact_email:"gulu@school.ug", contact_phone:"+256 700 333333", address:"Gulu, Uganda" }
+            { id:1, name:"Kampala High School", district:"Kampala", category:"Secondary", students:1250, contact_email:"khs@school.ug", contact_phone:"+256 700 111111", description:"Kampala, Uganda" },
+            { id:2, name:"Jinja College", district:"Jinja", category:"Secondary", students:980, contact_email:"jinja@college.ug", contact_phone:"+256 700 222222", description:"Jinja, Uganda" },
+            { id:3, name:"Gulu Public School", district:"Gulu", category:"Primary", students:720, contact_email:"gulu@school.ug", contact_phone:"+256 700 333333", description:"Gulu, Uganda" }
         ]);
         initializeData('events', [
             { id:1, name:"Education Summit 2025", date:"2025-03-15", location:"Kampala", type:"Conference", attendees:200 },
@@ -1694,13 +1534,13 @@
             saveDataToStorage(type);
         } catch (error) {
             console.error(`Error initializing ${type}:`, error);
-            window[`${type}Data`] = [];
+            window[`${type}Data`] = defaults || [];
         }
     }
 
     function saveDataToStorage(type) {
         try {
-            const data = window[`${type}Data`];
+            const data = window[`${type}Data`] || [];
             localStorage.setItem(`edubridge_${type}`, JSON.stringify(data));
             document.dispatchEvent(new CustomEvent(`${type}DataChanged`, { detail: { data } }));
         } catch (error) {
@@ -1710,24 +1550,26 @@
 
     // ===== UNIVERSAL CRUD FUNCTIONS =====
     async function loadData(type, forceRemote = false) {
-        // Use PHP endpoints for events and jobs when requested
-        if (type === 'events' || type === 'jobs') {
+        // Pull fresh data from PHP for DB-backed types
+        if (['schools', 'events', 'jobs'].includes(type)) {
             try {
-                const response = await fetch(`connect.php?type=${type}`);
-                if (response.ok) {
-                    const result = await response.json();
-                    const records = result[type] || [];
-                    if (type === 'events') {
-                        window.eventsData = records.map(r => ({
+                const res = await fetch(`connect.php?type=${type}`);
+                if (res.ok) {
+                    const payload = await res.json();
+                    const records = payload[type] || [];
+                    if (type === 'schools') {
+                        schoolsData = records.map((r, idx) => normalizeSchool(r, idx));
+                    } else if (type === 'events') {
+                        eventsData = records.map(r => ({
                             id: Number(r.id),
                             name: r.event_name || r.name || '',
                             date: r.event_date || '',
                             location: r.event_location || '',
                             type: r.event_type || '',
-                            attendees: Number(r.event_attendees) || 0
+                            attendees: Number(r.event_attendees || 0)
                         }));
                     } else if (type === 'jobs') {
-                        window.jobsData = records.map(r => ({
+                        jobsData = records.map(r => ({
                             id: Number(r.id),
                             title: r.job_title || r.title || '',
                             organization: r.job_organization || '',
@@ -1739,90 +1581,37 @@
                     saveDataToStorage(type);
                 }
             } catch (error) {
-                console.warn(`Falling back to local data for ${type}`, error);
-                const stored = localStorage.getItem(`edubridge_${type}`);
-                window[`${type}Data`] = stored ? JSON.parse(stored) : window[`${type}Data`];
-            }
-            renderTable(type);
-            return;
-        }
-
-        // Normalize and fetch schools from API when available
-        if (type === 'schools') {
-            try {
-                const API_URL = api.API_BASE_URL || 'http://localhost:5000/api';
-                const response = await fetch(`${API_URL}/schools`);
-                if (response.ok) {
-                    const result = await response.json();
-                    const records = result.schools || result.data || result || [];
-                    window.schoolsData = (Array.isArray(records) ? records : []).map((r, idx) => ({
-                        id: r.id || r._id || r.school_id || idx + 1,
-                        name: r.name || r.school_name || '',
-                        category: r.category || r.type || '',
-                        district: r.district || r.city || r.location || '',
-                        students: Number(r.students || r.student_count || 0),
-                        contact_email: r.contact_email || r.email || '',
-                        contact_phone: r.contact_phone || r.phone || '',
-                        address: r.address || r.location || '',
-                        logo: r.logo || null,
-                        images: r.images || [],
-                        videos: r.videos || []
-                    }));
-                    saveDataToStorage(type);
-                    renderTable(type);
-                    return;
-                }
-            } catch (error) {
-                console.log('Using local data for schools', error);
+                console.warn(`Using cached data for ${type}:`, error);
             }
         }
 
         if (!forceRemote) {
-            const stored = localStorage.getItem(`edubridge_${type}`);
-            if (stored) {
-                window[`${type}Data`] = JSON.parse(stored);
-                renderTable(type);
-                return;
+            const cached = localStorage.getItem(`edubridge_${type}`);
+            if (cached) {
+                window[`${type}Data`] = JSON.parse(cached);
             }
         }
-        // Try API if no local data
-        try {
-            const API_URL = api.API_BASE_URL || 'http://localhost:5000/api';
-            const response = await fetch(`${API_URL}/${type}`);
-            if (response.ok) {
-                const result = await response.json();
-                window[`${type}Data`] = result[type] || [];
-                saveDataToStorage(type);
-            }
-        } catch (error) {
-            console.log(`Using local data for ${type}`);
-        }
+
         renderTable(type);
     }
 
     function renderTable(type) {
         const tbody = document.getElementById(`${type}TableBody`);
-        const data = window[`${type}Data`];
         if (!tbody) return;
-        // Apply global filters (search text and date range)
-        const filterText = (window.mainFilter || '').toLowerCase().trim();
-        const startDate = window.mainDateStart ? new Date(window.mainDateStart) : null;
-        const endDate = window.mainDateEnd ? new Date(window.mainDateEnd) : null;
+        
+        let data;
+        if (type === 'schools') data = schoolsData;
+        else if (type === 'events') data = eventsData;
+        else if (type === 'jobs') data = jobsData;
+       else if (type === 'papers') data = papersData;
+       
+        
+        // Apply global filters (search text)
+        const filterText = (mainFilter || '').toLowerCase().trim();
 
         let filtered = Array.isArray(data) ? data.slice() : [];
         if (filterText) {
             filtered = filtered.filter(item => JSON.stringify(item).toLowerCase().includes(filterText));
-        }
-        if ((startDate || endDate) && (type === 'events' || type === 'bursaries' || type === 'jobs')) {
-            filtered = filtered.filter(item => {
-                const possibleDate = item.date || item.deadline || item.posted || null;
-                if (!possibleDate) return true;
-                const d = new Date(possibleDate);
-                if (isNaN(d)) return true;
-                if (startDate && d < startDate) return false;
-                if (endDate && d > endDate) return false;
-                return true;
-            });
         }
 
         if (filtered.length === 0) {
@@ -1830,86 +1619,56 @@
             return;
         }
 
-        const columns = {
-            schools: (item) => {
+        if (type === 'schools') {
+            tbody.innerHTML = filtered.map(item => {
                 const safeId = JSON.stringify(item.id);
-                const district = item.district || item.city || item.location || '&mdash;';
+                const district = item.district || item.location || '&mdash;';
                 return `<tr><td><strong>${item.name}</strong></td><td>${item.category || '&mdash;'}</td><td>${district}</td><td>${item.students || 0}</td><td>${item.contact_email || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'schools')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'schools')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            events: (item) => {
+            }).join('');
+        } else if (type === 'events') {
+            tbody.innerHTML = filtered.map(item => {
                 const safeId = JSON.stringify(item.id);
                 return `<tr><td><strong>${item.name}</strong></td><td>${item.date}</td><td>${item.location}</td><td>${item.type}</td><td>${item.attendees || 0}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'events')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'events')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            jobs: (item) => {
+            }).join('');
+        } else if (type === 'jobs') {
+            tbody.innerHTML = filtered.map(item => {
                 const safeId = JSON.stringify(item.id);
                 return `<tr><td><strong>${item.title}</strong></td><td>${item.organization}</td><td>${item.location}</td><td>${item.salary}</td><td>${new Date().toLocaleDateString()}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'jobs')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'jobs')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            bursaries: (item) => {
-                const safeId = JSON.stringify(item.id);
-                return `<tr><td><strong>${item.name}</strong></td><td>${item.sponsor}</td><td>UGX ${(item.amount/1000000).toFixed(1)}M</td><td>${item.category}</td><td>${item.deadline}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'bursaries')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'bursaries')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            agents: (item) => {
-                const safeId = JSON.stringify(item.id);
-                return `<tr><td><strong>${item.name}</strong></td><td>${item.email}</td><td>${item.phone}</td><td>${item.region}</td><td><span style="padding: 4px 12px; background: #d1fae5; color: #065f46; border-radius: 4px; font-size: 12px;">${item.status}</span></td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'agents')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'agents')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            papers: (item) => {
+            }).join('');
+        
+        } else if (type === 'papers') {
+            tbody.innerHTML = filtered.map(item => {
                 const safeId = JSON.stringify(item.id);
                 return `<tr><td>${item.subject}</td><td>${item.year}</td><td>${item.level}</td><td>${item.school || 'N/A'}</td><td>${item.file || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'papers')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'papers')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            suggestions: (item) => {
-                const safeId = JSON.stringify(item.id);
-                return `<tr><td>${item.from}</td><td><strong>${item.subject}</strong></td><td>${item.message.substring(0, 40)}...</td><td>${item.date}</td><td><span style="padding: 4px 12px; background: #dbeafe; color: #0c2d6b; border-radius: 4px; font-size: 12px;">${item.status}</span></td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'suggestions')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'suggestions')"><i class="fas fa-trash"></i></button></td></tr>`;
-            },
-            users: (item) => {
-                const safeId = JSON.stringify(item.id);
-                return `<tr><td><strong>${item.name}</strong></td><td>${item.email}</td><td>${item.role}</td><td>${item.joined}</td><td><span style="padding: 4px 12px; background: #d1fae5; color: #065f46; border-radius: 4px; font-size: 12px;">${item.status}</span></td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'users')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'users')"><i class="fas fa-trash"></i></button></td></tr>`;
-            }
-        };
-
-        tbody.innerHTML = filtered.map(columns[type] || (() => '<tr><td>Error</td></tr>')).join('');
+            }).join('');
+        } 
     }
-
     function openSectionModal(type) {
         editingId[type] = null;
         editingSectionType = type;
-        const formId = getFormId(type);
-        const modalId = getModalId(type);
-        const form = document.getElementById(formId);
-        if (form) form.reset();
         
-        // Reset file uploads for schools
         if (type === 'schools') {
-            if (typeof resetFileUploads === 'function') resetFileUploads();
-            const titleEl = document.getElementById('schoolModalTitle');
-            if (titleEl) titleEl.textContent = 'Add New School';
-        }
-        
-        const modalEl = document.getElementById(modalId);
-        if (modalEl) {
-            modalEl.classList.add('show');
-        } else {
-            console.error(`Modal not found: ${modalId}`);
-        }
-    }
-
-    function closeModal(modalId) {
-        const modalEl = document.getElementById(modalId);
-        if (modalEl) modalEl.classList.remove('show');
-
-        // If closing the school modal, ensure form and file previews are reset
-        if (modalId === 'schoolModal') {
-            const form = document.getElementById('schoolForm');
-            if (form) form.reset();
-            if (typeof resetFileUploads === 'function') resetFileUploads();
-            const titleEl = document.getElementById('schoolModalTitle');
-            if (titleEl) titleEl.textContent = 'Add New School';
-        }
-
-        editingSectionType = null;
+            openSchoolModal();
+        } else if (type === 'events') {
+            openModal('eventsModal');
+            document.getElementById('eventsForm').reset();
+        } else if (type === 'jobs') {
+            openModal('jobsModal');
+            document.getElementById('jobsForm').reset();
+        } else if (type === 'papers') {
+            openModal('papersModal');
+            document.getElementById('papersForm').reset();
+        } 
     }
 
     function editItem(id, type) {
-        const item = window[`${type}Data`].find(i => i.id === id);
+        let item;
+        if (type === 'schools') item = schoolsData.find(i => i.id === id);
+        else if (type === 'events') item = eventsData.find(i => i.id === id);
+        else if (type === 'jobs') item = jobsData.find(i => i.id === id);
+        else if (type === 'papers') item = papersData.find(i => i.id === id);
+       
+        
         if (!item) return;
         editingId[type] = id;
         editingSectionType = type;
@@ -1918,15 +1677,18 @@
         if (type === 'schools') {
             const titleEl = document.getElementById('schoolModalTitle');
             if (titleEl) titleEl.textContent = 'Edit School';
-        }
+            populateForm(type, item);
+            openModal('schoolModal');
+        } else if (type === 'events') {
+            populateForm(type, item);
+            openModal('eventsModal');
+        } else if (type === 'jobs') {
+            populateForm(type, item);
+            openModal('jobsModal');
         
-        populateForm(type, item);
-        const modalId = getModalId(type);
-        const modalEl = document.getElementById(modalId);
-        if (modalEl) {
-            modalEl.classList.add('show');
-        } else {
-            console.error(`Modal not found: ${modalId}`);
+        } else if (type === 'papers') {
+            populateForm(type, item);
+            openModal('papersModal');
         }
     }
 
@@ -1936,317 +1698,119 @@
             const match = Array.from(el.options).find(opt => opt.value.toLowerCase() === String(value || '').toLowerCase());
             el.value = match ? match.value : '';
         };
-        const mappings = {
-            schools: () => {
-                document.getElementById('schoolName').value = item.name;
-                setSelectValue(document.getElementById('schoolCategory'), item.category);
-                document.getElementById('schoolDistrict').value = item.district || item.city || item.location || '';
-                document.getElementById('schoolStudents').value = item.students || '';
-                document.getElementById('schoolEmail').value = item.contact_email || '';
-                document.getElementById('schoolPhone').value = item.contact_phone || '';
-                document.getElementById('schoolAddress').value = item.address || '';
-                
-                // Restore file previews
-                window.schoolLogoData = item.logo || null;
-                window.schoolImagesData = item.images || [];
-                window.schoolVideosData = item.videos || [];
-                
-                updateFilePreview('schoolLogo', window.schoolLogoData);
-                updateFilesPreview('schoolImages', window.schoolImagesData);
-                updateFilesPreview('schoolVideos', window.schoolVideosData);
-            },
-            events: () => {
-                document.getElementById('eventName').value = item.name;
-                document.getElementById('eventDate').value = item.date;
-                document.getElementById('eventLocation').value = item.location;
-                document.getElementById('eventType').value = item.type;
-                document.getElementById('eventAttendees').value = item.attendees || '';
-            },
-            jobs: () => {
-                document.getElementById('jobTitle').value = item.title;
-                document.getElementById('jobOrganization').value = item.organization;
-                document.getElementById('jobLocation').value = item.location;
-                document.getElementById('jobSalary').value = item.salary;
-                document.getElementById('jobDescription').value = item.description || '';
-            },
-            bursaries: () => {
-                document.getElementById('bursaryName').value = item.name;
-                document.getElementById('bursarySponsor').value = item.sponsor;
-                document.getElementById('bursaryAmount').value = item.amount;
-                document.getElementById('bursaryCategory').value = item.category;
-                document.getElementById('bursaryDeadline').value = item.deadline;
-            },
-            agents: () => {
-                document.getElementById('agentName').value = item.name;
-                document.getElementById('agentEmail').value = item.email;
-                document.getElementById('agentPhone').value = item.phone;
-                document.getElementById('agentRegion').value = item.region;
-                document.getElementById('agentStatus').value = item.status;
-            },
-            papers: () => {
-                document.getElementById('paperSubject').value = item.subject;
-                document.getElementById('paperYear').value = item.year;
-                document.getElementById('paperLevel').value = item.level;
-                document.getElementById('paperSchool').value = item.school || '';
-                document.getElementById('paperFile').value = item.file || '';
-            },
-            suggestions: () => {
-                document.getElementById('suggestionFrom').value = item.from;
-                document.getElementById('suggestionSubject').value = item.subject;
-                document.getElementById('suggestionMessage').value = item.message;
-                document.getElementById('suggestionStatus').value = item.status;
-            },
-            users: () => {
-                document.getElementById('userName').value = item.name;
-                document.getElementById('userEmail').value = item.email;
-                document.getElementById('userRole').value = item.role;
-                document.getElementById('userStatus').value = item.status;
-            }
-        };
-        (mappings[type] || (() => {}))();
+        
+        if (type === 'schools') {
+            document.getElementById('schoolName').value = item.name || '';
+            setSelectValue(document.getElementById('schoolCategory'), item.category);
+            document.getElementById('schoolDistrict').value = item.district || item.location || '';
+            document.getElementById('schoolStudents').value = item.students || '';
+            document.getElementById('schoolEmail').value = item.contact_email || '';
+            document.getElementById('schoolPhone').value = item.contact_phone || '';
+            document.getElementById('schoolAddress').value = item.description || '';
+        } else if (type === 'events') {
+            document.getElementById('eventName').value = item.name || '';
+            document.getElementById('eventDate').value = item.date || '';
+            document.getElementById('eventLocation').value = item.location || '';
+            document.getElementById('eventType').value = item.type || '';
+            document.getElementById('eventAttendees').value = item.attendees || '';
+        } else if (type === 'jobs') {
+            document.getElementById('jobTitle').value = item.title || '';
+            document.getElementById('jobOrganization').value = item.organization || '';
+            document.getElementById('jobLocation').value = item.location || '';
+            document.getElementById('jobSalary').value = item.salary || '';
+            document.getElementById('jobDescription').value = item.description || '';
+        
+        } else if (type === 'papers') {
+            document.getElementById('paperSubject').value = item.subject || '';
+            document.getElementById('paperYear').value = item.year || '';
+            document.getElementById('paperLevel').value = item.level || '';
+            document.getElementById('paperSchool').value = item.school || '';
+            document.getElementById('paperFile').value = item.file || '';
+        }
     }
 
     async function handleSubmit(event, type) {
         event.preventDefault();
         
-        const extractors = {
-            schools: () => ({
-                name: document.getElementById('schoolName').value,
-                category: document.getElementById('schoolCategory').value,
-                district: document.getElementById('schoolDistrict').value,
-                city: document.getElementById('schoolDistrict').value,
-                location: document.getElementById('schoolDistrict').value + ', Uganda', // Full location
-                students: parseInt(document.getElementById('schoolStudents').value) || 0,
-                contact_email: document.getElementById('schoolEmail').value,
-                contact_phone: document.getElementById('schoolPhone').value,
-                country: 'Uganda',
-                established: new Date().getFullYear(),
-                programs: [],
-                description: ''
-            }),
-            events: () => ({
-                name: document.getElementById('eventName').value,
-                date: document.getElementById('eventDate').value,
-                location: document.getElementById('eventLocation').value,
-                type: document.getElementById('eventType').value,
-                attendees: parseInt(document.getElementById('eventAttendees').value) || 0
-            }),
-            jobs: () => ({
-                title: document.getElementById('jobTitle').value,
-                organization: document.getElementById('jobOrganization').value,
-                location: document.getElementById('jobLocation').value,
-                salary: document.getElementById('jobSalary').value,
-                description: document.getElementById('jobDescription').value
-            }),
-            bursaries: () => ({
-                name: document.getElementById('bursaryName').value,
-                sponsor: document.getElementById('bursarySponsor').value,
-                amount: parseInt(document.getElementById('bursaryAmount').value),
-                category: document.getElementById('bursaryCategory').value,
-                deadline: document.getElementById('bursaryDeadline').value
-            }),
-            agents: () => ({
-                name: document.getElementById('agentName').value,
-                email: document.getElementById('agentEmail').value,
-                phone: document.getElementById('agentPhone').value,
-                region: document.getElementById('agentRegion').value,
-                status: document.getElementById('agentStatus').value
-            }),
-            papers: () => ({
-                subject: document.getElementById('paperSubject').value,
-                year: parseInt(document.getElementById('paperYear').value),
-                level: document.getElementById('paperLevel').value,
-                school: document.getElementById('paperSchool').value,
-                file: document.getElementById('paperFile').value
-            }),
-            suggestions: () => ({
-                from: document.getElementById('suggestionFrom').value,
-                subject: document.getElementById('suggestionSubject').value,
-                message: document.getElementById('suggestionMessage').value,
-                date: new Date().toISOString().split('T')[0],
-                status: document.getElementById('suggestionStatus').value
-            }),
-            users: () => ({
-                name: document.getElementById('userName').value,
-                email: document.getElementById('userEmail').value,
-                role: document.getElementById('userRole').value,
-                joined: new Date().toISOString().split('T')[0],
-                status: document.getElementById('userStatus').value
-            })
-        };
-
-        const data = (extractors[type] || (() => ({})))();
-        const id = editingId[type];
+        const data = {};
         
-        // For schools, check authentication first
-        if (type === 'schools') {
-            const currentUser = await api.getCurrentUser();
-            if (!currentUser) {
-                showAlert(type, `&#10007; Authentication required. Please log in first.`, 'danger');
-                // Redirect to login
-                setTimeout(() => {
-                    window.location.href = 'login.html';
-                }, 1500);
-                return;
-            }
-            
-            if (!currentUser.is_admin) {
-                showAlert(type, `&#10007; Admin access required to add schools.`, 'danger');
-                return;
-            }
+      if (type === 'papers') {
+            data.subject = document.getElementById('paperSubject').value;
+            data.year = parseInt(document.getElementById('paperYear').value) || new Date().getFullYear();
+            data.level = document.getElementById('paperLevel').value;
+            data.school = document.getElementById('paperSchool').value;
+            data.file = document.getElementById('paperFile').value;
+       
         }
+
+        const id = editingId[type];
+        let dataArray;
+         if (type === 'agents') dataArray = agentsData;
+        else if (type === 'papers') dataArray = papersData;
+
         
-        // For schools, save to backend API with authentication
-        if (type === 'schools') {
-            // Update locally when editing
-            if (id) {
-                const idx = window.schoolsData.findIndex(i => i.id === id);
-                if (idx >= 0) {
-                    window.schoolsData[idx] = { ...window.schoolsData[idx], ...data, id };
-                    saveDataToStorage('schools');
-                    renderTable('schools');
-                    showAlert(type, `School updated!`, 'success');
-                    closeModal(getModalId(type));
-                    return;
-                }
-            }
-            try {
-                showAlert(type, `&#8987; Creating school...`, 'info');
-                const response = await api.createSchool(data);
-                
-                if (response.error) {
-                    if (response.error.includes('Unauthorized') || response.error.includes('401')) {
-                        showAlert(type, `&#10007; Authentication failed. Please log in again.`, 'danger');
-                        setTimeout(() => {
-                            window.location.href = 'login.html';
-                        }, 1500);
-                    } else if (response.error.includes('forbidden') || response.error.includes('403')) {
-                        showAlert(type, `&#10007; You don't have permission to add schools.`, 'danger');
-                    } else {
-                        showAlert(type, `&#10007; Error: ${response.error}`, 'danger');
-                    }
-                    return;
-                }
-                
-                if (response.school) {
-                    const normalized = {
-                        id: response.school.id || response.school._id || Date.now(),
-                        name: response.school.name,
-                        category: response.school.category,
-                        district: response.school.district || response.school.city || response.school.location,
-                        students: response.school.students || 0,
-                        contact_email: response.school.contact_email || '',
-                        contact_phone: response.school.contact_phone || '',
-                        address: response.school.address || response.school.location || ''
-                    };
-                    window.schoolsData.push(normalized);
-                    saveDataToStorage('schools');
-                    renderTable('schools');
-                    showAlert(type, `&#10003; School added successfully!`, 'success');
-                    broadcastNewSchool(response.school);
-                } else {
-                    showAlert(type, `&#10007; Unexpected response from server.`, 'danger');
-                    return;
-                }
-            } catch (error) {
-                console.error('Error creating school:', error);
-                showAlert(type, `&#10007; Network error: ${error.message}`, 'danger');
-                return;
+        if (id) {
+            const idx = dataArray.findIndex(i => i.id === id);
+            if (idx >= 0) {
+                dataArray[idx] = { ...dataArray[idx], ...data, id };
+                showAlert(type, `${type.slice(0,-1)} updated!`, 'success');
             }
         } else {
-                        showAlert(type, `&#10007; Error: ${response.error}`, 'danger');
-                    }
-                    return;
-                }
-                
-                if (response.school) {
-                    showAlert(type, `&#10003; School added successfully!`, 'success');
-                    broadcastNewSchool(response.school);
-                } else {
-                    showAlert(type, `&#10007; Unexpected response from server.`, 'danger');
-                    return;
-                }
-     
-            
-                try{
-                console.error('Error creating school:', error);
-                showAlert(type, `&#10007; Network error: ${error.message}`, 'danger');
-                return;
-            }
-         
-            // For other types, use localStorage
-            if(id){
-                const idx = window[`${type}Data`].findIndex(i => i.id === id);
-                if (idx >= 0) {
-                    window[`${type}Data`][idx] = { ...window[`${type}Data`][idx], ...data };
-                    showAlert(type, `&#10003; ${type.slice(0,-1)} updated!`, 'success');
-                }
-            } 
-            else {
-                const newId = Math.max(...window[`${type}Data`].map(i => i.id || 0), 0) + 1;
-                const newItem = { id: newId, ...data };
-                window[`${type}Data`].push(newItem);
-                showAlert(type, `&#10003; ${type.slice(0,-1)} added!`, 'success');
-            }
-            saveDataToStorage(type);
-    
-
-        if (type === 'schools') resetFileUploads();
-        closeModal(getModalId(type));
-        if (type !== 'schools') loadData(type);
-    
-
-    // Broadcast new school to other pages using Broadcast Channel API
-    function broadcastNewSchool(school) {
-        try {
-            // Use Broadcast Channel API if available (modern browsers)
-            if (typeof BroadcastChannel !== 'undefined') {
-                const channel = new BroadcastChannel('edubridge_schools');
-                channel.postMessage({
-                    type: 'SCHOOL_ADDED',
-                    school: {
-                        id: school.id,
-                        name: school.name,
-                        category: school.category,
-                        city: school.city,
-                        location: school.location,
-                        students: school.students,
-                        contact_email: school.contact_email,
-                        contact_phone: school.contact_phone
-                    },
-                    timestamp: Date.now()
-                });
-                channel.close();
-            }
-        } catch (error) {
-            console.log('Broadcast Channel not available, using localStorage fallback');
+            const newId = Math.max(...dataArray.map(i => i.id || 0), 0) + 1;
+            const newItem = { id: newId, ...data };
+            dataArray.push(newItem);
+            showAlert(type, `${type.slice(0,-1)} added!`, 'success');
         }
         
-        // Also dispatch a custom event for internal listeners
-        document.dispatchEvent(new CustomEvent('schoolAdded', { detail: { school } }));
+        saveDataToStorage(type);
+        renderTable(type);
         
-        // Trigger localStorage event for same-window listeners
-        localStorage.setItem('edubridge_last_school_added', JSON.stringify({
-            school: {
-                id: school.id,
-                name: school.name,
-                category: school.category,
-                city: school.city,
-                location: school.location,
-                students: school.students,
-                contact_email: school.contact_email,
-                contact_phone: school.contact_phone
-            },
-            timestamp: Date.now()
-        }));
+        let modalId;
+
+         if (type === 'papers') modalId = 'papersModal';
+       
+        
+        closeModal(modalId);
     }
 
     async function deleteItem(id, type) {
         if (!confirm(`Delete this ${type.slice(0,-1)}?`)) return;
-        window[`${type}Data`] = window[`${type}Data`].filter(i => i.id !== id);
-        saveDataToStorage(type);
-        showAlert(type, `&#10003; ${type.slice(0,-1)} deleted!`, 'success');
-        loadData(type);
+        
+        if (type === 'schools') {
+            schoolsData = schoolsData.filter(i => i.id !== id);
+            saveDataToStorage('schools');
+            renderTable('schools');
+        } else if (type === 'events') {
+            eventsData = eventsData.filter(i => i.id !== id);
+            saveDataToStorage('events');
+            renderTable('events');
+        } else if (type === 'jobs') {
+            jobsData = jobsData.filter(i => i.id !== id);
+            saveDataToStorage('jobs');
+            renderTable('jobs');
+        } else if (type === 'bursaries') {
+            bursariesData = bursariesData.filter(i => i.id !== id);
+            saveDataToStorage('bursaries');
+            renderTable('bursaries');
+        } else if (type === 'agents') {
+            agentsData = agentsData.filter(i => i.id !== id);
+            saveDataToStorage('agents');
+            renderTable('agents');
+        } else if (type === 'papers') {
+            papersData = papersData.filter(i => i.id !== id);
+            saveDataToStorage('papers');
+            renderTable('papers');
+        } else if (type === 'suggestions') {
+            suggestionsData = suggestionsData.filter(i => i.id !== id);
+            saveDataToStorage('suggestions');
+            renderTable('suggestions');
+        } else if (type === 'users') {
+            usersData = usersData.filter(i => i.id !== id);
+            saveDataToStorage('users');
+            renderTable('users');
+        }
+        
+        showAlert(type, `${type.slice(0,-1)} deleted!`, 'success');
     }
 
     function showAlert(section, message, type) {
@@ -2254,50 +1818,14 @@
         if (!alertDiv) return;
         const alert = document.createElement('div');
         alert.className = `alert alert-${type}`;
-        alert.textContent = message;
+        alert.innerHTML = message;
         alertDiv.innerHTML = '';
         alertDiv.appendChild(alert);
         setTimeout(() => alert.remove(), 4000);
     }
 
     // ===== EVENT LISTENERS & UI =====
-    // Singular/Plural mapping for button and modal IDs
-    const singularMap = {
-        'schools': 'school',
-        'events': 'event',
-        'jobs': 'job',
-        'bursaries': 'bursary',
-        'agents': 'agent',
-        'papers': 'paper',
-        'suggestions': 'suggestion',
-        'users': 'user'
-    };
-
-    const modalIdMap = {
-        'schools': 'schoolModal',      // singular
-        'events': 'eventsModal',       // plural
-        'jobs': 'jobsModal',           // plural
-        'bursaries': 'bursariesModal', // plural
-        'agents': 'agentsModal',       // plural
-        'papers': 'papersModal',       // plural
-        'suggestions': 'suggestionsModal', // plural
-        'users': 'usersModal'          // plural
-    };
-
-    function getSingular(plural) {
-        return singularMap[plural] || plural.slice(0, -1);
-    }
-
-    function getModalId(type) {
-        return modalIdMap[type] || `${type}Modal`;
-    }
-
-    function getFormId(type) {
-        const singular = getSingular(type);
-        return `${singular}Form`;
-    }
-
-    function setupEventListeners(){
+    function setupEventListeners() {
         // Navigation
         document.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', (e) => {
@@ -2309,44 +1837,48 @@
                 const target = document.getElementById(`${section}-section`);
                 if (target) target.classList.add('active');
                 document.getElementById('headerTitle').textContent = section.charAt(0).toUpperCase() + section.slice(1);
-                if (section !== 'dashboard') loadData(section);
             });
         });
 
-        // Add buttons - use correct singular form for IDs
-        ['schools', 'events', 'jobs', 'bursaries', 'agents', 'papers', 'suggestions', 'users'].forEach(type => {
-            const singular = getSingular(type);
-            const btnId = `add${singular.charAt(0).toUpperCase() + singular.slice(1)}Btn`;
-            const btn = document.getElementById(btnId);
-            if (btn) {
-                btn.addEventListener('click', () => openSectionModal(type));
-            } else {
-                console.warn(`Button not found: ${btnId}`);
-            }
-        });
-
-        // Also bind any element using data-modal-target attribute (safer than inline onclicks)
-        document.querySelectorAll('[data-modal-target]').forEach(el => {
-            el.addEventListener('click', (e) => {
-                const target = el.getAttribute('data-modal-target');
-                if (target) openModal(target);
-            });
-        });
+        // Add buttons
+        const addSchoolBtn = document.getElementById('addSchoolBtn');
+        if (addSchoolBtn) addSchoolBtn.addEventListener('click', () => openSectionModal('schools'));
+        
+        const addEventBtn = document.getElementById('addEventBtn');
+        if (addEventBtn) addEventBtn.addEventListener('click', () => openSectionModal('events'));
+        
+        const addJobBtn = document.getElementById('addJobBtn');
+        if (addJobBtn) addJobBtn.addEventListener('click', () => openSectionModal('jobs'));
+        
+        const addBursaryBtn = document.getElementById('addBursaryBtn');
+        if (addBursaryBtn) addBursaryBtn.addEventListener('click', () => openSectionModal('bursaries'));
+        
+        const addAgentBtn = document.getElementById('addAgentBtn');
+        if (addAgentBtn) addAgentBtn.addEventListener('click', () => openSectionModal('agents'));
+        
+        const addPaperBtn = document.getElementById('addPaperBtn');
+        if (addPaperBtn) addPaperBtn.addEventListener('click', () => openSectionModal('papers'));
+        
+        const addSuggestionBtn = document.getElementById('addSuggestionBtn');
+        if (addSuggestionBtn) addSuggestionBtn.addEventListener('click', () => openSectionModal('suggestions'));
+        
+        const addUserBtn = document.getElementById('addUserBtn');
+        if (addUserBtn) addUserBtn.addEventListener('click', () => openSectionModal('users'));
 
         // Refresh
-        if (document.getElementById('refreshBtn')) {
-            document.getElementById('refreshBtn').addEventListener('click', () => {
+        const refreshBtn = document.getElementById('refreshBtn');
+        if (refreshBtn) {
+            refreshBtn.addEventListener('click', () => {
                 updateStatsAndCalculations();
-                showAlert('schools', '&#10003; Dashboard refreshed', 'success');
+                showAlert('schools', 'Dashboard refreshed', 'success');
             });
         }
 
         // Logout
-        if (document.getElementById('logoutBtn')) {
-            document.getElementById('logoutBtn').addEventListener('click', async () => {
+        const logoutBtn = document.getElementById('logoutBtn');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', async () => {
                 if (confirm('Logout?')) {
-                    if (typeof api !== 'undefined' && api.logout) await api.logout();
-                    else localStorage.removeItem('cpace_user');
                     window.location.href = 'login.html';
                 }
             });
@@ -2355,9 +1887,9 @@
 
     // Header interactions: search, date filters, view toggle
     function attachHeaderInteractions() {
-        window.mainFilter = '';
-        window.mainDateStart = null;
-        window.mainDateEnd = null;
+        mainFilter = '';
+        mainDateStart = null;
+        mainDateEnd = null;
 
         const search = document.getElementById('globalSearch');
         const clear = document.getElementById('clearSearch');
@@ -2369,36 +1901,46 @@
         if (search) {
             let t;
             search.addEventListener('input', (e) => {
-                clear.style.display = e.target.value ? 'block' : 'none';
-                clear.title = e.target.value ? 'Clear' : '';
-                clear.disabled = !e.target.value;
-                clear.classList.toggle('has-text', !!e.target.value);
-                clear.classList.toggle('hidden', !e.target.value);
-                clear.style.opacity = e.target.value ? '1' : '0.5';
-                window.mainFilter = e.target.value;
+                if (clear) {
+                    clear.style.display = e.target.value ? 'block' : 'none';
+                }
+                mainFilter = e.target.value;
                 clearTimeout(t);
                 t = setTimeout(() => applyMainFilters(), 300);
             });
         }
-        if (clear) clear.addEventListener('click', () => { if (search) search.value=''; window.mainFilter=''; applyMainFilters(); });
+        
+        if (clear) {
+            clear.addEventListener('click', () => { 
+                if (search) search.value = ''; 
+                mainFilter = ''; 
+                applyMainFilters(); 
+            });
+        }
 
-        if (dateStart) dateStart.addEventListener('change', (e) => { window.mainDateStart = e.target.value || null; applyMainFilters(); });
-        if (dateEnd) dateEnd.addEventListener('change', (e) => { window.mainDateEnd = e.target.value || null; applyMainFilters(); });
+        if (dateStart) dateStart.addEventListener('change', (e) => { mainDateStart = e.target.value || null; applyMainFilters(); });
+        if (dateEnd) dateEnd.addEventListener('change', (e) => { mainDateEnd = e.target.value || null; applyMainFilters(); });
 
         if (viewCompact && viewExpanded) {
-            viewCompact.addEventListener('click', () => { viewCompact.classList.add('active'); viewExpanded.classList.remove('active'); document.body.classList.add('compact'); });
-            viewExpanded.addEventListener('click', () => { viewExpanded.classList.add('active'); viewCompact.classList.remove('active'); document.body.classList.remove('compact'); });
+            viewCompact.addEventListener('click', () => { 
+                viewCompact.classList.add('active'); 
+                viewExpanded.classList.remove('active'); 
+                document.body.classList.add('compact'); 
+            });
+            viewExpanded.addEventListener('click', () => { 
+                viewExpanded.classList.add('active'); 
+                viewCompact.classList.remove('active'); 
+                document.body.classList.remove('compact'); 
+            });
         }
     }
 
     function applyMainFilters() {
-        // Re-render the currently visible section to show filtered results
         const active = document.querySelector('.section-content.active');
         if (!active) return;
         const id = active.id;
         const type = id ? id.replace('-section','') : null;
         if (type) renderTable(type);
-        // small stat card pulse to draw attention
         animateStatCards();
     }
 
@@ -2410,78 +1952,68 @@
     }
 
     // ===== DASHBOARD STATS =====
-    async function updateStatsAndCalculations() {
-        try {
-            // Ensure all datasets are loaded
-            await Promise.all([
-                loadData('schools'), loadData('events'), loadData('jobs'), loadData('bursaries'),
-                loadData('agents'), loadData('papers'), loadData('suggestions'), loadData('users')
-            ]);
+    function updateStatsAndCalculations() {
+        // Compute core metrics
+        const totalSchools = (schoolsData || []).length;
+        const totalStudents = (schoolsData || []).reduce((a,s) => a + (s.students || 0), 0);
+        const avgStudents = totalSchools > 0 ? Math.round(totalStudents / totalSchools) : 0;
 
-            // Compute core metrics
-            const totalSchools = (schoolsData || []).length;
-            const totalStudents = (schoolsData || []).reduce((a,s) => a + (s.students || 0), 0);
-            const avgStudents = totalSchools > 0 ? Math.round(totalStudents / totalSchools) : 0;
+        // Upcoming events within 30 days
+        const now = new Date();
+        const in30 = new Date(); 
+        in30.setDate(now.getDate() + 30);
+        const upcomingEvents = (eventsData || []).filter(ev => {
+            if (!ev || !ev.date) return false;
+            const d = new Date(ev.date);
+            return d >= now && d <= in30;
+        }).length;
 
-            // Upcoming events within 30 days
-            const now = new Date();
-            const in30 = new Date(); in30.setDate(now.getDate() + 30);
-            const upcomingEvents = (eventsData || []).filter(ev => {
-                if (!ev || !ev.date) return false;
-                const d = new Date(ev.date);
-                return d >= now && d <= in30;
-            }).length;
+        // Jobs and agents
+        const totalJobs = (jobsData || []).length;
+        const activeAgents = (agentsData || []).filter(a => (a.status || '').toLowerCase() === 'active').length;
 
-            // Jobs and agents
-            const totalJobs = (jobsData || []).length;
-            const activeAgents = (agentsData || []).filter(a => (a.status || '').toLowerCase() === 'active').length;
+        // Bursary stats
+        const totalBursaries = (bursariesData || []).length;
+        const bursarySum = (bursariesData || []).reduce((a,b) => a + (b.amount || 0), 0);
+        const avgBursary = totalBursaries > 0 ? Math.round(bursarySum / totalBursaries) : 0;
 
-            // Bursary stats
-            const totalBursaries = (bursariesData || []).length;
-            const bursarySum = (bursariesData || []).reduce((a,b) => a + (b.amount || 0), 0);
-            const avgBursary = totalBursaries > 0 ? Math.round(bursarySum / totalBursaries) : 0;
+        // Other counts
+        const totalPapers = (papersData || []).length;
+        const totalUsers = (usersData || []).length;
+        const suggestionsPending = (suggestionsData || []).filter(s => (s.status || '').toLowerCase() !== 'resolved').length;
 
-            // Other counts
-            const totalPapers = (papersData || []).length;
-            const totalUsers = (usersData || []).length;
-            const suggestionsPending = (suggestionsData || []).filter(s => (s.status || '').toLowerCase() !== 'resolved').length;
+        // Update DOM elements
+        const totalSchoolsEl = document.getElementById('totalSchools');
+        if (totalSchoolsEl) totalSchoolsEl.innerText = totalSchools;
+        
+        const totalStudentsEl = document.getElementById('totalStudents');
+        if (totalStudentsEl) totalStudentsEl.innerText = totalStudents.toLocaleString();
+        
+        const avgStudentsEl = document.getElementById('avgStudents');
+        if (avgStudentsEl) avgStudentsEl.innerText = avgStudents.toLocaleString();
+        
+        const upcomingEventsEl = document.getElementById('upcomingEvents');
+        if (upcomingEventsEl) upcomingEventsEl.innerText = upcomingEvents;
+        
+        const activeAgentsEl = document.getElementById('activeAgents');
+        if (activeAgentsEl) activeAgentsEl.innerText = activeAgents;
 
-            // Update DOM elements (guarded)
-            if (document.getElementById('totalSchools')) document.getElementById('totalSchools').innerText = totalSchools;
-            if (document.getElementById('totalStudents')) document.getElementById('totalStudents').innerText = totalStudents.toLocaleString();
-            if (document.getElementById('avgStudents')) document.getElementById('avgStudents').innerText = avgStudents.toLocaleString();
-            if (document.getElementById('upcomingEvents')) document.getElementById('upcomingEvents').innerText = upcomingEvents;
-            if (document.getElementById('totalEvents')) document.getElementById('totalEvents').innerText = (eventsData || []).length;
-            if (document.getElementById('totalJobs')) document.getElementById('totalJobs').innerText = totalJobs;
-            if (document.getElementById('openJobs')) document.getElementById('openJobs').innerText = totalJobs + ' total';
-            if (document.getElementById('activeAgents')) document.getElementById('activeAgents').innerText = activeAgents;
-            if (document.getElementById('totalBursaries')) document.getElementById('totalBursaries').innerText = totalBursaries;
-            if (document.getElementById('bursaryTotal')) document.getElementById('bursaryTotal').innerText = bursarySum.toLocaleString();
-            if (document.getElementById('avgBursary')) document.getElementById('avgBursary').innerText = avgBursary.toLocaleString();
-            if (document.getElementById('totalPapers')) document.getElementById('totalPapers').innerText = totalPapers;
-            if (document.getElementById('totalUsers')) document.getElementById('totalUsers').innerText = totalUsers;
-            if (document.getElementById('suggestionsPending')) document.getElementById('suggestionsPending').innerText = suggestionsPending;
-
-            // Refresh visualizations
-            initializeCharts();
-        } catch (error) {
-            console.error('Error updating stats:', error);
-        }
+        // Refresh visualizations
+        initializeCharts();
     }
 
     function initializeCharts() {
-        if (window.categoryPie) window.categoryPie.destroy();
+        // Destroy existing charts if they exist
         if (window.growthBar) window.growthBar.destroy();
         if (window.appLine) window.appLine.destroy();
         if (window.resRadar) window.resRadar.destroy();
+        
         // Set nicer global defaults
         Chart.defaults.font.family = "Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial";
         Chart.defaults.font.size = 12;
         Chart.defaults.color = '#334155';
 
-        const districtCount = {};
-        schoolsData.forEach(s => { districtCount[s.district || 'Unknown'] = (districtCount[s.district || 'Unknown'] || 0) + 1; });
-
+        // Helper function for gradients
         function createGradient(ctx, w, h, c1, c2) {
             const g = ctx.createLinearGradient(0, 0, w, h);
             g.addColorStop(0, c1);
@@ -2489,93 +2021,121 @@
             return g;
         }
 
-        // PIE / DOUGHNUT: refined style with cutout and smooth hover
-        const pieCtx = document.getElementById('categoryPieChart');
-        const extraPieCtx = document.getElementById('additionalPieChart');
-        if (pieCtx) {
-            const labels = Object.keys(districtCount);
-            const values = Object.values(districtCount);
-            const baseColors = ['#10b981','#f59e0b','#06b6d4','#0891b2','#0e7490','#059669','#fbbf24','#d4af37'];
-            const bg = labels.map((l,i) => baseColors[i % baseColors.length]);
-            window.categoryPie = new Chart(pieCtx, {
-                type: 'doughnut',
-                data: { labels, datasets: [{ data: values, backgroundColor: bg, hoverOffset: 12, borderWidth: 2, borderColor: '#fff' }] },
-                options: {
-                    responsive: true, maintainAspectRatio: false,
-                    cutout: '55%',
-                    plugins: {
-                        legend: { position: 'bottom', labels: { padding: 12, boxWidth: 12 } },
-                        tooltip: { padding:10, bodySpacing:6, cornerRadius:8 }
-                    },
-                    animation: { duration: 700, easing: 'cubicBezier(.2,.8,.2,1)' }
-                }
-            });
-        }
-
-        // BAR: counts with gradient and rounded corners
+        // BAR CHART
         const barCtx = document.getElementById('growthBarChart');
         if (barCtx) {
-            const w = barCtx.width || 400; const h = barCtx.height || 300;
+            const w = barCtx.width || 400; 
+            const h = barCtx.height || 300;
             const g = createGradient(barCtx.getContext('2d'), 0, h, 'rgba(16,185,129,0.95)', 'rgba(6,182,212,0.25)');
             window.growthBar = new Chart(barCtx, {
                 type: 'bar',
                 data: {
                     labels: ['Schools', 'Events', 'Jobs', 'Bursaries'],
-                    datasets: [{ label: 'Count', data: [schoolsData.length, eventsData.length, jobsData.length, bursariesData.length], backgroundColor: g, borderRadius: 8, maxBarThickness: 48 }]
+                    datasets: [{ 
+                        label: 'Count', 
+                        data: [schoolsData.length, eventsData.length, jobsData.length, bursariesData.length], 
+                        backgroundColor: g, 
+                        borderRadius: 8, 
+                        maxBarThickness: 48 
+                    }]
                 },
                 options: {
-                    responsive:true, maintainAspectRatio:false,
-                    plugins: { legend: { display:false }, tooltip: { mode:'index', intersect:false } },
-                    interaction: { mode:'nearest', intersect:false },
-                    scales: {
-                        x: { grid: { display:false }, ticks: { color:'#64748b' } },
-                        y: { beginAtZero:true, grid: { color:'rgba(15,23,42,0.06)' }, ticks: { color:'#64748b' } }
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { display: false }, 
+                        tooltip: { mode: 'index', intersect: false } 
                     },
-                    animation: { duration:800, easing:'cubicBezier(.2,.8,.2,1)' }
+                    interaction: { mode: 'nearest', intersect: false },
+                    scales: {
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } },
+                        y: { beginAtZero: true, grid: { color: 'rgba(15,23,42,0.06)' }, ticks: { color: '#64748b' } }
+                    },
+                    animation: { duration: 800, easing: 'easeInOutQuart' }
                 }
             });
         }
 
-        // LINE: smooth, area gradient and clear points
+        // LINE CHART
         const lineCtx = document.getElementById('applicationsLineChart');
         if (lineCtx) {
             const lw = lineCtx.getContext('2d');
             const h = lineCtx.height || 300;
             const gradA = createGradient(lw, 0, h, 'rgba(16,185,129,0.18)', 'rgba(16,185,129,0.02)');
-            const gradB = createGradient(lw, 0, h, 'rgba(245,158,11,0.14)', 'rgba(245,158,11,0.02)');
             window.appLine = new Chart(lineCtx, {
                 type: 'line',
                 data: {
-                    labels: ['Week1','Week2','Week3','Week4','Week5'],
+                    labels: ['Week1', 'Week2', 'Week3', 'Week4', 'Week5'],
                     datasets: [
-                        { label:'Schools', data:[3,5,7,9,Math.max(5, schoolsData.length)], borderColor:'#059669', backgroundColor:gradA, fill:true, tension:0.36, pointRadius:3, pointHoverRadius:6 },
-                        { label:'Users', data:[5,8,12,15,Math.max(8, usersData.length)], borderColor:'#d97706', backgroundColor:gradB, fill:true, tension:0.36, pointRadius:3, pointHoverRadius:6 }
+                        { 
+                            label: 'Schools', 
+                            data: [3, 5, 7, 9, Math.max(5, schoolsData.length)], 
+                            borderColor: '#059669', 
+                            backgroundColor: gradA, 
+                            fill: true, 
+                            tension: 0.36, 
+                            pointRadius: 3, 
+                            pointHoverRadius: 6 
+                        },
+                        { 
+                            label: 'Users', 
+                            data: [5, 8, 12, 15, Math.max(8, usersData.length)], 
+                            borderColor: '#d97706', 
+                            backgroundColor: 'rgba(245,158,11,0.14)', 
+                            fill: true, 
+                            tension: 0.36, 
+                            pointRadius: 3, 
+                            pointHoverRadius: 6 
+                        }
                     ]
                 },
                 options: {
-                    responsive:true, maintainAspectRatio:false,
-                    plugins: { legend: { position:'bottom' }, tooltip: { mode:'index', intersect:false } },
-                    scales: { x:{ grid:{ display:false }, ticks:{ color:'#64748b' } }, y:{ grid:{ color:'rgba(15,23,42,0.06)' }, ticks:{ color:'#64748b' } } },
-                    animation: { duration:900, easing:'cubicBezier(.2,.8,.2,1)' }
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    plugins: { 
+                        legend: { position: 'bottom' }, 
+                        tooltip: { mode: 'index', intersect: false } 
+                    },
+                    scales: { 
+                        x: { grid: { display: false }, ticks: { color: '#64748b' } }, 
+                        y: { grid: { color: 'rgba(15,23,42,0.06)' }, ticks: { color: '#64748b' } } 
+                    },
+                    animation: { duration: 900, easing: 'easeInOutQuart' }
                 }
             });
         }
 
-        // RADAR: cleaner colors and point emphasis
+        // RADAR CHART
         const radarCtx = document.getElementById('resourceRadarChart');
         if (radarCtx) {
             window.resRadar = new Chart(radarCtx, {
                 type: 'radar',
                 data: {
-                    labels: ['Schools','Events','Jobs','Bursaries','Users'],
-                    datasets: [{ label:'Platform Status', data:[schoolsData.length, eventsData.length, jobsData.length, bursariesData.length, usersData.length], backgroundColor:'rgba(16,185,129,0.12)', borderColor:'#10b981', pointBackgroundColor:'#10b981', pointBorderColor:'#fff', pointHoverRadius:6 }]
+                    labels: ['Schools', 'Events', 'Jobs', 'Bursaries', 'Users'],
+                    datasets: [{ 
+                        label: 'Platform Status', 
+                        data: [schoolsData.length, eventsData.length, jobsData.length, bursariesData.length, usersData.length], 
+                        backgroundColor: 'rgba(16,185,129,0.12)', 
+                        borderColor: '#10b981', 
+                        pointBackgroundColor: '#10b981', 
+                        pointBorderColor: '#fff', 
+                        pointHoverRadius: 6 
+                    }]
                 },
                 options: {
-                    responsive:true, maintainAspectRatio:false,
-                    scales: { r: { beginAtZero:true, grid: { color:'rgba(15,23,42,0.06)' }, angleLines:{ color:'rgba(15,23,42,0.04)' }, pointLabels:{ color:'#64748b' } } },
-                    plugins: { legend:{ display:false } },
-                    elements: { line: { borderWidth:2 } },
-                    animation: { duration:700 }
+                    responsive: true, 
+                    maintainAspectRatio: false,
+                    scales: { 
+                        r: { 
+                            beginAtZero: true, 
+                            grid: { color: 'rgba(15,23,42,0.06)' }, 
+                            angleLines: { color: 'rgba(15,23,42,0.04)' }, 
+                            pointLabels: { color: '#64748b' } 
+                        } 
+                    },
+                    plugins: { legend: { display: false } },
+                    elements: { line: { borderWidth: 2 } },
+                    animation: { duration: 700 }
                 }
             });
         }
@@ -2583,8 +2143,3 @@
 </script>
 </body>
 </html>
-
-
-
-
-
