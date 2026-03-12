@@ -289,14 +289,7 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 
     // --- Agents page behaviors (migrated from inline agents.html script) ---
-    function debounce(fn, wait) {
-        let t;
-        return function (...args) {
-            clearTimeout(t);
-            t = setTimeout(() => fn.apply(this, args), wait);
-        };
-    }
-
+    
     function generatePromoCode() {
         const names = ['JOHN', 'MARY', 'PETER', 'SUSAN', 'JAMES', 'SARAH', 'DAVID', 'GRACE', 'MICHAEL', 'LUCY'];
         const numbers = Math.floor(Math.random() * 90 + 10).toString();

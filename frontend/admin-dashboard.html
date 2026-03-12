@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>EduBridge Uganda &middot; Admin + analytics</title>
-    <meta name="description" content="Professional Admin Dashboard &ndash; Ugandan school format (UGX, local districts)">
+    <title>EduBridge Uganda Â· Admin + analytics</title>
+    <meta name="description" content="Professional Admin Dashboard â€“ Ugandan school format (UGX, local districts)">
     <!-- Fonts, Icons & Charts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,400..700;1,14..32,400..700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -880,7 +880,7 @@
                 </div>
                 <div class="date-range">
                     <input id="dateStart" type="date" title="From">
-                    <span class="dash">&mdash;</span>
+                    <span class="dash">â€”</span>
                     <input id="dateEnd" type="date" title="To">
                 </div>
                 <div class="view-toggle" title="Toggle compact/expanded view">
@@ -918,8 +918,8 @@
                 <h3><i class="fas fa-calculator"></i> Live platform calculations (Uganda)</h3>
                 <p><strong>Total schools (UGA):</strong> <span id="calcSchools">0</span> | <strong>Avg students per school:</strong> <span id="avgStudents">0</span></p>
                 <p><strong>Total estimated enrollment:</strong> <span id="totalEnrollment">0</span> students</p>
-                <p><strong>Most common district:</strong> <span id="topCategory">Kampala</span> &middot; <strong>Term growth rate:</strong> <span id="growthRate">5.1%</span></p>
-                <p><strong>Bursary coverage (UGX):</strong> <span id="bursaryCoverage">42%</span> &middot; <strong>Active agents:</strong> <span id="activeAgents">14</span></p>
+                <p><strong>Most common district:</strong> <span id="topCategory">Kampala</span> Â· <strong>Term growth rate:</strong> <span id="growthRate">5.1%</span></p>
+                <p><strong>Bursary coverage (UGX):</strong> <span id="bursaryCoverage">42%</span> Â· <strong>Active agents:</strong> <span id="activeAgents">14</span></p>
                 <p><strong>Total bursary fund:</strong> UGX <span id="totalBursaryUgx">126,500,000</span></p>
             </div>
         </div>
@@ -1258,6 +1258,10 @@
         }
     }
 
+    function openSchoolModal() {
+        openModal('schoolModal');
+    }
+
     function showNotification(message, type = 'info') {
         const toast = document.createElement('div');
         toast.style.cssText = `
@@ -1305,9 +1309,9 @@
         }
 
         if (files.length === 1) {
-            displayElement.textContent = `&#10003; ${files[0].name} (${formatFileSize(files[0].size)})`;
+            displayElement.textContent = `âœ“ ${files[0].name} (${formatFileSize(files[0].size)})`;
         } else {
-            displayElement.textContent = `&#10003; ${files.length} files selected`;
+            displayElement.textContent = `âœ“ ${files.length} files selected`;
         }
     }
 
@@ -1390,7 +1394,7 @@
         try {
             const res = await fetch('connect.php', { method: 'POST', body: formData });
             if (!res.ok) throw new Error(`HTTP ${res.status}`);
-            showAlert(type, `&#10003; ${type.slice(0,-1)} saved`, 'success');
+            showAlert(type, `âœ“ ${type.slice(0,-1)} saved`, 'success');
 
             if (type === 'events') {
                 const newItem = {
@@ -1423,7 +1427,7 @@
             closeModal(getModalId(type));
         } catch (error) {
             console.error(`Error submitting ${type}:`, error);
-            showAlert(type, `&#10007; Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
+            showAlert(type, `âœ— Failed to save ${type.slice(0,-1)}. ${error.message}`, 'danger');
         }
     }
 
@@ -1637,12 +1641,12 @@
             const user = await api.getCurrentUser();
             
             if (user && (user.is_admin || user.role === 'admin')) {
-                console.log('[OK] Admin authenticated:', user.name || user.email);
+                console.log('âœ“ Admin authenticated:', user.name || user.email);
                 return user;
             }
             
             // If no valid admin user, they must log in
-            console.log('[DENIED] Admin access denied or not authenticated');
+            console.log('âœ— Admin access denied or not authenticated');
             return null;
         } catch (error) {
             console.error('Auth check error:', error);
@@ -1833,8 +1837,8 @@
         const columns = {
             schools: (item) => {
                 const safeId = JSON.stringify(item.id);
-                const district = item.district || item.city || item.location || '&mdash;';
-                return `<tr><td><strong>${item.name}</strong></td><td>${item.category || '&mdash;'}</td><td>${district}</td><td>${item.students || 0}</td><td>${item.contact_email || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'schools')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'schools')"><i class="fas fa-trash"></i></button></td></tr>`;
+                const district = item.district || item.city || item.location || 'â€”';
+                return `<tr><td><strong>${item.name}</strong></td><td>${item.category || 'â€”'}</td><td>${district}</td><td>${item.students || 0}</td><td>${item.contact_email || 'N/A'}</td><td><button class="btn-edit-table" onclick="editItem(${safeId}, 'schools')"><i class="fas fa-edit"></i></button><button class="btn-delete-table" onclick="deleteItem(${safeId}, 'schools')"><i class="fas fa-trash"></i></button></td></tr>`;
             },
             events: (item) => {
                 const safeId = JSON.stringify(item.id);
@@ -2082,7 +2086,7 @@
         if (type === 'schools') {
             const currentUser = await api.getCurrentUser();
             if (!currentUser) {
-                showAlert(type, `&#10007; Authentication required. Please log in first.`, 'danger');
+                showAlert(type, `âœ— Authentication required. Please log in first.`, 'danger');
                 // Redirect to login
                 setTimeout(() => {
                     window.location.href = 'login.html';
@@ -2091,7 +2095,7 @@
             }
             
             if (!currentUser.is_admin) {
-                showAlert(type, `&#10007; Admin access required to add schools.`, 'danger');
+                showAlert(type, `âœ— Admin access required to add schools.`, 'danger');
                 return;
             }
         }
@@ -2111,19 +2115,19 @@
                 }
             }
             try {
-                showAlert(type, `&#8987; Creating school...`, 'info');
+                showAlert(type, `⌛ Creating school...`, 'info');
                 const response = await api.createSchool(data);
                 
                 if (response.error) {
                     if (response.error.includes('Unauthorized') || response.error.includes('401')) {
-                        showAlert(type, `&#10007; Authentication failed. Please log in again.`, 'danger');
+                        showAlert(type, `✗ Authentication failed. Please log in again.`, 'danger');
                         setTimeout(() => {
                             window.location.href = 'login.html';
                         }, 1500);
                     } else if (response.error.includes('forbidden') || response.error.includes('403')) {
-                        showAlert(type, `&#10007; You don't have permission to add schools.`, 'danger');
+                        showAlert(type, `✗ You don't have permission to add schools.`, 'danger');
                     } else {
-                        showAlert(type, `&#10007; Error: ${response.error}`, 'danger');
+                        showAlert(type, `✗ Error: ${response.error}`, 'danger');
                     }
                     return;
                 }
@@ -2142,38 +2146,59 @@
                     window.schoolsData.push(normalized);
                     saveDataToStorage('schools');
                     renderTable('schools');
-                    showAlert(type, `&#10003; School added successfully!`, 'success');
+                    showAlert(type, `✓ School added successfully!`, 'success');
                     broadcastNewSchool(response.school);
                 } else {
-                    showAlert(type, `&#10007; Unexpected response from server.`, 'danger');
+                    showAlert(type, `✗ Unexpected response from server.`, 'danger');
                     return;
                 }
             } catch (error) {
                 console.error('Error creating school:', error);
-                showAlert(type, `&#10007; Network error: ${error.message}`, 'danger');
+                showAlert(type, `✗ Network error: ${error.message}`, 'danger');
                 return;
             }
         } else {
+                        showAlert(type, `âœ— Error: ${response.error}`, 'danger');
+                    }
+                    return;
+                }
+                
+                if (response.school) {
+                    showAlert(type, `âœ“ School added successfully!`, 'success');
+                    broadcastNewSchool(response.school);
+                } else {
+                    showAlert(type, `âœ— Unexpected response from server.`, 'danger');
+                    return;
+                }
+     
+            
+                try{
+                console.error('Error creating school:', error);
+                showAlert(type, `âœ— Network error: ${error.message}`, 'danger');
+                return;
+            }
+         
             // For other types, use localStorage
-            if (id) {
+            if(id){
                 const idx = window[`${type}Data`].findIndex(i => i.id === id);
                 if (idx >= 0) {
                     window[`${type}Data`][idx] = { ...window[`${type}Data`][idx], ...data };
-                    showAlert(type, `&#10003; ${type.slice(0,-1)} updated!`, 'success');
+                    showAlert(type, `âœ“ ${type.slice(0,-1)} updated!`, 'success');
                 }
-            } else {
+            } 
+            else {
                 const newId = Math.max(...window[`${type}Data`].map(i => i.id || 0), 0) + 1;
                 const newItem = { id: newId, ...data };
                 window[`${type}Data`].push(newItem);
-                showAlert(type, `&#10003; ${type.slice(0,-1)} added!`, 'success');
+                showAlert(type, `âœ“ ${type.slice(0,-1)} added!`, 'success');
             }
             saveDataToStorage(type);
-        }
+    
 
         if (type === 'schools') resetFileUploads();
         closeModal(getModalId(type));
         if (type !== 'schools') loadData(type);
-    }
+    
 
     // Broadcast new school to other pages using Broadcast Channel API
     function broadcastNewSchool(school) {
@@ -2222,16 +2247,10 @@
 
     async function deleteItem(id, type) {
         if (!confirm(`Delete this ${type.slice(0,-1)}?`)) return;
-        const idStr = String(id);
-
-        if (type === 'schools' && api && api.deleteSchool) {
-            try { await api.deleteSchool(id); } catch (e) { console.warn('Backend delete failed, removing locally', e); }
-        }
-
-        window[`${type}Data`] = window[`${type}Data`].filter(i => String(i.id) !== idStr);
+        window[`${type}Data`] = window[`${type}Data`].filter(i => i.id !== id);
         saveDataToStorage(type);
-        showAlert(type, `?? ${type.slice(0,-1)} deleted!`, 'success');
-        renderTable(type);
+        showAlert(type, `âœ“ ${type.slice(0,-1)} deleted!`, 'success');
+        loadData(type);
     }
 
     function showAlert(section, message, type) {
@@ -2322,7 +2341,7 @@
         if (document.getElementById('refreshBtn')) {
             document.getElementById('refreshBtn').addEventListener('click', () => {
                 updateStatsAndCalculations();
-                showAlert('schools', '&#10003; Dashboard refreshed', 'success');
+                showAlert('schools', 'âœ“ Dashboard refreshed', 'success');
             });
         }
 
