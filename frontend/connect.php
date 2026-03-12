@@ -36,7 +36,7 @@ if ($method === 'GET') {
 
     if ($type === 'schools') {
         $schools = [];
-        $sql = "SELECT id, name, category, location, students, contact_email, contact_phone FROM schools ORDER BY id DESC";
+        $sql = "SELECT id,schoolName, category, location, students, contact_email, contact_phone, description, logo FROM schools ORDER BY id DESC";
         if ($result = $conn->query($sql)) {
             while ($row = $result->fetch_assoc()) {
                 $schools[] = $row;
@@ -85,19 +85,11 @@ if ($method === 'POST') {
         $email       = $conn->real_escape_string($_POST['contact_email'] ?? '');
         $phone       = $conn->real_escape_string($_POST['contact_phone'] ?? '');
         $description = $conn->real_escape_string($_POST['description'] ?? '');
+
         $logoPath = move_upload($_FILES['schoolLogo'] ?? [], "uploads/schools");
 
-        // Match minimal schema if description/logo columns are missing
-        $hasDescLogo = $conn->query("SHOW COLUMNS FROM schools LIKE 'description'")->num_rows > 0
-                        && $conn->query("SHOW COLUMNS FROM schools LIKE 'logo'")->num_rows > 0;
-
-        if ($hasDescLogo) {
-            $sql = "INSERT INTO schools (name, category, location, students, contact_email, contact_phone, description, logo)
-                    VALUES ('$name', '$category', '$location', '$students', '$email', '$phone', '$description', '$logoPath')";
-        } else {
-            $sql = "INSERT INTO schools (name, category, location, students, contact_email, contact_phone)
-                    VALUES ('$name', '$category', '$location', '$students', '$email', '$phone')";
-        }
+        $sql = "INSERT INTO schools (name, category, location, students, contact_email, contact_phone, description, logo)
+                VALUES ('$name', '$category', '$location', '$students', '$email', '$phone', '$description', '$logoPath')";
 
         if (!$conn->query($sql)) {
             json_success(['error' => 'Failed to save school: ' . $conn->error], 500);
@@ -105,60 +97,39 @@ if ($method === 'POST') {
 
         $school_id = $conn->insert_id;
 
-        // School Images (optional table)
+        // School Images
         if (isset($_FILES['schoolImages']['name'][0]) && $_FILES['schoolImages']['name'][0] !== '') {
-            $hasImagesTable = $conn->query("SHOW TABLES LIKE 'school_images'")->num_rows > 0;
-            if ($hasImagesTable) {
-                foreach ($_FILES['schoolImages']['tmp_name'] as $key => $tmp_name) {
-                    $imagePath = move_upload(
-                        [
-                            'name' => $_FILES['schoolImages']['name'][$key],
-                            'tmp_name' => $tmp_name
-                        ],
-                        "uploads/schools"
-                    );
-                    if ($imagePath) {
-                        $conn->query("INSERT INTO school_images (school_id, image_path) VALUES ('$school_id', '$imagePath')");
-                    }
+            foreach ($_FILES['schoolImages']['tmp_name'] as $key => $tmp_name) {
+                $imagePath = move_upload(
+                    [
+                        'name' => $_FILES['schoolImages']['name'][$key],
+                        'tmp_name' => $tmp_name
+                    ],
+                    "uploads/schools"
+                );
+                if ($imagePath) {
+                    $conn->query("INSERT INTO school_images (school_id, image_path) VALUES ('$school_id', '$imagePath')");
                 }
             }
         }
 
-        // School Videos (optional table)
+        // School Videos
         if (isset($_FILES['schoolVideos']['name'][0]) && $_FILES['schoolVideos']['name'][0] !== '') {
-            $hasVideosTable = $conn->query("SHOW TABLES LIKE 'school_videos'")->num_rows > 0;
-            if ($hasVideosTable) {
-                foreach ($_FILES['schoolVideos']['tmp_name'] as $key => $tmp_name) {
-                    $videoPath = move_upload(
-                        [
-                            'name' => $_FILES['schoolVideos']['name'][$key],
-                            'tmp_name' => $tmp_name
-                        ],
-                        "uploads/videos"
-                    );
-                    if ($videoPath) {
-                        $conn->query("INSERT INTO school_videos (school_id, video_path) VALUES ('$school_id', '$videoPath')");
-                    }
+            foreach ($_FILES['schoolVideos']['tmp_name'] as $key => $tmp_name) {
+                $videoPath = move_upload(
+                    [
+                        'name' => $_FILES['schoolVideos']['name'][$key],
+                        'tmp_name' => $tmp_name
+                    ],
+                    "uploads/videos"
+                );
+                if ($videoPath) {
+                    $conn->query("INSERT INTO school_videos (school_id, video_path) VALUES ('$school_id', '$videoPath')");
                 }
             }
         }
 
-        json_success([
-            'success' => true,
-            'id' => $school_id,
-            'logo' => $logoPath,
-            'school' => [
-                'id' => $school_id,
-                'name' => $name,
-                'category' => $category,
-                'location' => $location,
-                'students' => $students,
-                'contact_email' => $email,
-                'contact_phone' => $phone,
-                'description' => $description,
-                'logo' => $logoPath
-            ]
-        ]);
+        json_success(['success' => true, 'id' => $school_id, 'logo' => $logoPath]);
     }
 
     /* =========================
