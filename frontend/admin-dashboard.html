@@ -1637,7 +1637,7 @@
             const user = await api.getCurrentUser();
             
             if (user && (user.is_admin || user.role === 'admin')) {
-                console.log('&#10003; Admin authenticated:', user.name || user.email);
+                console.log('[OK] Admin authenticated:', user.name || user.email);
                 return user;
             }
             
@@ -1690,7 +1690,7 @@
     function initializeData(type, defaults) {
         try {
             const stored = localStorage.getItem(`edubridge_${type}`);
-            window[`${type}Data`] = stored &#10003; JSON.parse(stored) : defaults;
+            window[`${type}Data`] = stored ? JSON.parse(stored) : defaults;
             saveDataToStorage(type);
         } catch (error) {
             console.error(`Error initializing ${type}:`, error);
@@ -1713,7 +1713,7 @@
         // Use PHP endpoints for events and jobs when requested
         if (type === 'events' || type === 'jobs') {
             try {
-                const response = await fetch(`connect.php&#10003;type=${type}`);
+                const response = await fetch(`connect.php?type=${type}`);
                 if (response.ok) {
                     const result = await response.json();
                     const records = result[type] || [];
@@ -1741,7 +1741,7 @@
             } catch (error) {
                 console.warn(`Falling back to local data for ${type}`, error);
                 const stored = localStorage.getItem(`edubridge_${type}`);
-                window[`${type}Data`] = stored &#10003; JSON.parse(stored) : window[`${type}Data`];
+                window[`${type}Data`] = stored ? JSON.parse(stored) : window[`${type}Data`];
             }
             renderTable(type);
             return;
@@ -1755,7 +1755,7 @@
                 if (response.ok) {
                     const result = await response.json();
                     const records = result.schools || result.data || result || [];
-                    window.schoolsData = (Array.isArray(records) &#10003; records : []).map((r, idx) => ({
+                    window.schoolsData = (Array.isArray(records) ? records : []).map((r, idx) => ({
                         id: r.id || r._id || r.school_id || idx + 1,
                         name: r.name || r.school_name || '',
                         category: r.category || r.type || '',
@@ -1806,10 +1806,10 @@
         if (!tbody) return;
         // Apply global filters (search text and date range)
         const filterText = (window.mainFilter || '').toLowerCase().trim();
-        const startDate = window.mainDateStart &#10003; new Date(window.mainDateStart) : null;
-        const endDate = window.mainDateEnd &#10003; new Date(window.mainDateEnd) : null;
+        const startDate = window.mainDateStart ? new Date(window.mainDateStart) : null;
+        const endDate = window.mainDateEnd ? new Date(window.mainDateEnd) : null;
 
-        let filtered = Array.isArray(data) &#10003; data.slice() : [];
+        let filtered = Array.isArray(data) ? data.slice() : [];
         if (filterText) {
             filtered = filtered.filter(item => JSON.stringify(item).toLowerCase().includes(filterText));
         }
@@ -1934,7 +1934,7 @@
         const setSelectValue = (el, value) => {
             if (!el) return;
             const match = Array.from(el.options).find(opt => opt.value.toLowerCase() === String(value || '').toLowerCase());
-            el.value = match &#10003; match.value : '';
+            el.value = match ? match.value : '';
         };
         const mappings = {
             schools: () => {
@@ -2369,12 +2369,12 @@
         if (search) {
             let t;
             search.addEventListener('input', (e) => {
-                clear.style.display = e.target.value &#10003; 'block' : 'none';
-                clear.title = e.target.value &#10003; 'Clear' : '';
+                clear.style.display = e.target.value ? 'block' : 'none';
+                clear.title = e.target.value ? 'Clear' : '';
                 clear.disabled = !e.target.value;
                 clear.classList.toggle('has-text', !!e.target.value);
                 clear.classList.toggle('hidden', !e.target.value);
-                clear.style.opacity = e.target.value &#10003; '1' : '0.5';
+                clear.style.opacity = e.target.value ? '1' : '0.5';
                 window.mainFilter = e.target.value;
                 clearTimeout(t);
                 t = setTimeout(() => applyMainFilters(), 300);
@@ -2396,7 +2396,7 @@
         const active = document.querySelector('.section-content.active');
         if (!active) return;
         const id = active.id;
-        const type = id &#10003; id.replace('-section','') : null;
+        const type = id ? id.replace('-section','') : null;
         if (type) renderTable(type);
         // small stat card pulse to draw attention
         animateStatCards();
@@ -2421,7 +2421,7 @@
             // Compute core metrics
             const totalSchools = (schoolsData || []).length;
             const totalStudents = (schoolsData || []).reduce((a,s) => a + (s.students || 0), 0);
-            const avgStudents = totalSchools > 0 &#10003; Math.round(totalStudents / totalSchools) : 0;
+            const avgStudents = totalSchools > 0 ? Math.round(totalStudents / totalSchools) : 0;
 
             // Upcoming events within 30 days
             const now = new Date();
@@ -2439,7 +2439,7 @@
             // Bursary stats
             const totalBursaries = (bursariesData || []).length;
             const bursarySum = (bursariesData || []).reduce((a,b) => a + (b.amount || 0), 0);
-            const avgBursary = totalBursaries > 0 &#10003; Math.round(bursarySum / totalBursaries) : 0;
+            const avgBursary = totalBursaries > 0 ? Math.round(bursarySum / totalBursaries) : 0;
 
             // Other counts
             const totalPapers = (papersData || []).length;
